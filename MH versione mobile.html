@@ -1,0 +1,519 @@
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.3.0/firebase-database.js"></script>
+<html>
+<head>
+  <title>Marco Hairdresser v. mobile</title>
+  <script src='hai.js'></script>
+  <link href="hai.css" rel="stylesheet" type="text/css">
+  <link rel='icon' type='image/ico”' href='https://lh3.googleusercontent.com/pw/ACtC-3cFbCvriNqSu6xT_IGM3iqwgsV7D0CZxY2_oWzWIr7ZIytDnTKMmOm6BsrbUDd5IsXveQ8jnZ0-541A6Z69xNj6YRUDkGNI-Ew3wFG2r0UBsk8FO5jjyunT5ZpW1L5JAFSLJAZyPmFfq1_Ev47L1vvm=s150-no?authuser=0'>
+
+  </head>
+  <body>
+
+
+
+<br>
+    <div class='box' id='boxi'>
+    <br><center>&nbsp;<img src="https://lh3.googleusercontent.com/pw/ACtC-3fwVDJJIrFU8UAWr9OLYjAkm90A_mJSYegoQTtKhafkrOEbAL51q8NprhMnBID28Ztfm3aF2iFGn2x3m8LaJNTPKXKFndyiYsx8zvOj-AldsD0fo54xgB7hSLWoAdrJw3Ctfw-suoRvfeKm1jpjt49-=s512-no?authuser=0" id="imi2"></img>
+    <br><h2 id='giornof'></h2>
+    <br><h3 id='pres'>&nbsp;Prenota ora un servizio</h3></center><br>
+
+    <div class="flex-split">
+      <div class="ease">
+  <div id="hormenu">
+<!--qui il menu-->
+<div id="hormenu"><!-- div che contiene il menu -->
+<ul> <!-- lista principale: definisce il menu nella sua interezza -->
+<li>
+<a href="#" class="btn" oclick = "salve()">Home page</a> <!-- primo list-item, prima voce del menu -->
+<ul>
+  <li><a href="https://docs.google.com/forms/d/e/1FAIpQLSc4q7mI9QEuW800XRjZunzPbCzEPS_2rpX9mrK1Cqv4Ei-PHQ/viewform?usp=sf_link" class="btn" oclick = "salve()">Valuta questo sito!</a></li>
+
+</ul> <!-- Fine del sotto-menu -->
+</li> <!-- Chiudo il list-item -->
+<!--qui altri list-item -->
+
+</div>
+
+</div>
+</div>
+</div>
+
+
+
+    </div>
+    <br><br><br><br><br><br><br><br><center><img src="https://lh3.googleusercontent.com/pw/ACtC-3fwVDJJIrFU8UAWr9OLYjAkm90A_mJSYegoQTtKhafkrOEbAL51q8NprhMnBID28Ztfm3aF2iFGn2x3m8LaJNTPKXKFndyiYsx8zvOj-AldsD0fo54xgB7hSLWoAdrJw3Ctfw-suoRvfeKm1jpjt49-=s512-no?authuser=0" id="imi"></img></center>
+
+    <br>
+    <center><input type="time" id='ora'></input>
+    <input type="date" id='data' onkeyup="conto()"></input>
+    <button onclick='conf()' id='conf'>Conferma e prenota</button><br>
+    <span id='modulo'></span>
+      <span id='moduloo'></span>
+
+    <h3 id="promozionale">Il codice promozionale non &egrave; disponibile con questa versione. Utilizza la versione PC per la prenotazione di questo servizio. </h3>
+    <center>
+
+    <h3 id='rise'></h3>
+    <h3 id='ris'></h3></center>
+    <br>
+    <span id='sostituisci'></span>
+    <button id='elimina' onclick='elimina()'>TI INFASTIDISCE IL MENU? TOGLILO!</BUTTON>
+    <h2 id='totale'>Come funziona?</h2>
+    <h3 id='totale'>Prenota ora dei massaggi Marco Hairdresser, &egrave; <b>SEMPLICE</b>. Ecco tutte le tue prenotazioni.</h3><br>
+    <center><h2 id='totale'>Sconti o stato delle prenotazioni:</h2></center>
+    <h2 id='me'></h2>
+    <h3 id='messages'></h3>
+    <div class='box' id='feed'>
+      <button onclick='vaif()'>
+        <img src='https://lh3.googleusercontent.com/pw/ACtC-3dseXw0rsFtQD3XIvj0A0_pyXImsXG51oWcZZlR6Ji9HYFYXg3JZgiPj0arG4FltPmvvA9uLQxTtWZXUJh1vWAsRuxkUi77OGv4ZAyHX94XkQw69GNEkMOOuSLMYTyvSf8tysUBtLsZYsRx89cb1Mvn=s820-no?authuser=0' width='25px'></img>
+        </button>
+        <h4>V.2.0.mhMV</h4>
+      </div>
+
+
+    <script>
+      var firebaseConfig = {
+         apiKey: "AIzaSyCIw0-w1C3zDjoGgVpLKsFYm2TFXqJr9yw",
+         authDomain: "marco-express-d30c8.firebaseapp.com",
+         databaseURL: "https://marco-express-d30c8-default-rtdb.firebaseio.com",
+         projectId: "marco-express-d30c8",
+         storageBucket: "marco-express-d30c8.appspot.com",
+         messagingSenderId: "764621319758",
+         appId: "1:764621319758:web:9390a4a994df27cda4dd1f",
+         measurementId: "G-3ZK6NW0G3F"
+       };
+       // Initialize Firebase
+       firebase.initializeApp(firebaseConfig);
+
+
+
+      console.log('funzionajs');
+
+
+function elimina() {
+  console.log('elimina il blocco');
+
+  document.getElementById("boxi").style.display="none";
+document.getElementById("elimina").style.display="none";
+document.getElementById('sostituisci').innerHTML="<button id='crea' onclick='crea()'>Aggiungi menu</button>"
+}
+
+function crea() {
+    document.getElementById("boxi").style.display="block";
+
+    document.getElementById("sostituisci").style.display="none";
+    document.getElementById("el").style.display="block";
+}
+function modulo() {
+  var data = document.getElementById('data').value
+  console.log(data);
+  var ora = document.getElementById('ora').value
+  console.log(ora);
+  console.log('ouu');
+  var datadue = new Date();
+  orad = datadue.getHours();
+  min = datadue.getMinutes();
+  dataduen = datadue.getDate();
+  mesed = datadue.getMonth();
+  annodue = datadue.getFullYear();
+
+  oraa = 'il' + ' ' + dataduen + '/' + mesed + '/' + annodue + ' ' + 'alle ore' + ' ' + orad + ':' + min
+  document.getElementById('rise').innerHTML = 'Elaborazione... Se questo avviso non scompare, controllare la connessione ad Internet. Se il problema persiste, chiamare un tecnico Marco Express.'
+firebase.database().ref("Marco Hairdresser").push().set({
+    "sender": data,
+    "message": ora,
+    "message2": oraa,
+});
+ document.getElementById('rise').innerHTML = ''
+document.getElementById('ris').innerHTML = 'Prenotazione riuscita per le ore' + ' ' + ora + ' ' + 'del giorno' + ' ' + data + '.'
+window.location.reload()
+// prevent form from submitting
+return false;
+
+
+}
+
+
+
+function aggiorna() {
+      if(navigator.onLine){
+        console.log('internet yess')
+
+        document.getElementById('statoinizio').innerHTML = 'Connessione al server riuscita!'
+
+      }else{
+        document.getElementById('statoinizio').innerHTML = 'Verificare la connessione ad Internet...'
+      }
+}
+
+
+function ciao(){
+  console.log('no')
+}
+      function conf() {
+
+        if(navigator.onLine){
+          console.log('internet yess')
+        }else{
+          document.getElementById('ris').innerHTML = ''
+          document.getElementById('rise').innerHTML = ''
+        	alert('Nessuna connsessione ad internet.')
+          document.getElementById('rise').innerHTML = 'Nessuna connessione ad Internet: tentativo di riconnessione tra: 5 secondi...'
+          location.assign('offlineerror.html');
+
+
+        }
+
+      
+
+
+
+
+        if(data=='' || ora==''){
+          console.log('Not valid');
+          document.getElementById('rise').innerHTML = 'Inserire una data / ora'
+        }else{
+
+          document.getElementById('modulo').innerHTML = '<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSefv0o8EvdKrWKrBosvJdXzs4HGhrytnSObiuU3oyF9gjMqvg/viewform?embedded=true" width="640" height="406" frameborder="0" marginheight="0" marginwidth="0">Caricamento…</iframe>'
+          window.setTimeout("fine()", 5000);
+
+
+
+
+
+      }
+
+      }
+
+      firebase.database().ref("Marco Hairdresser").on("child_added", function (snapshot) {
+          var ora = snapshot.val().sender;
+          var data = snapshot.val().message;
+          var datap = snapshot.val().message2;
+
+          var tabella = "<table id='tab'><tr><th></th><th scope='p' id='orad'>Ora</th><th scope='p' id='datad'>Data</th><th scope='p' id='messaggiood'>Data di prenotazione</th><th scope='p' id='statod'>Stato</th></tr><tr><th scope='m'></th><td id='datao'>"
+          tabella += data + "</td><td id='orao'>"
+          tabella += ora + "</td><td id='datp'>"
+          tabella += datap + "</td></tr></table><br>"
+
+
+      document.getElementById("messages").innerHTML += tabella;
+      });
+
+
+
+
+
+      firebase.database().ref("Marco Hairdresser Risp").on("child_added", function (snapshot) {
+          var messaggiopr = snapshot.val().message;
+
+      document.getElementById("me").innerHTML = messaggiopr;
+      });
+
+
+
+
+      function ver() {
+
+
+        var v = document.getElementById('verifican').value
+        console.log(v);
+        if(v=='') {
+          document.getElementById('stato').innerHTML = 'Inserire un codice'
+        }
+      }
+
+        function verifica() {
+          var data = document.getElementById('data').value
+          console.log(data);
+          var ora = document.getElementById('ora').value
+          console.log(ora);
+          var datadue = new Date();
+          orad = datadue.getHours();
+          min = datadue.getMinutes();
+          dataduen = datadue.getDate();
+          mesed = datadue.getMonth();
+          annodue = datadue.getFullYear();
+
+
+
+          var giorno = new Date();
+          oregg = giorno.getHours();
+          console.log(oregg)
+
+
+          var valore = document.getElementById('verifican').value
+          console.log(valore);
+
+          firebase.database().ref("Riscatta codice").on("child_added", function (snapshot) {
+              var codice = snapshot.val().message;
+
+              if(valore==codice) {
+                var data = document.getElementById('datas').value
+                console.log(data);
+                var ora = document.getElementById('oras').value
+                console.log(ora);
+                oraa = 'il' + ' ' + dataduen + '/' + mesed + '/' + annodue + ' ' + 'alle ore' + ' ' + orad + ':' + min + '. Riscattato con un codice promozionale:' + ' ' + codice
+                firebase.database().ref("Marco Hairdresser").push().set({
+                    "sender": data,
+                    "message": ora,
+                    "message2": oraa,
+
+                });
+
+                firebase.database().ref("Riscatta codice").push().set({
+                    "sender": "error",
+                    "message": "utilizzato"
+
+                });
+                document.getElementById('rise').innerHTML = ''
+                document.getElementById('ris').innerHTML = 'Prenotazione confermata: codice promozionale utilizzato con successo.'
+
+                console.log('ok')
+              }else{
+                console.log('non ok');
+                document.getElementById('ris').innerHTML = ''
+                document.getElementById('rise').innerHTML = 'Codice promozionale errato.'
+              }
+          });
+
+        }
+
+      //
+
+
+      function vaif() {
+        console.log('Feedback')
+        location.assign('https://docs.google.com/forms/d/e/1FAIpQLSc4q7mI9QEuW800XRjZunzPbCzEPS_2rpX9mrK1Cqv4Ei-PHQ/viewform?usp=sf_link');
+      }
+
+
+      function doRedirect() {
+        if(navigator.onLine){
+          console.log('internet yess')
+          document.getElementById('rise').innerHTML = ''
+          document.getElementById('statoinizio').innerHTML = 'c'
+
+
+        }else{
+          alert('Nessuna connsessione ad internet.')
+          document.getElementById('ris').innerHTML = ''
+
+          document.getElementById('rise').innerHTML = 'Nessuna connessione ad Internet: tentativo di riconnessione tra: 5 secondi...'
+          location.assign('offlineerror.html');
+        }
+  }
+
+  function fine() {
+    document.getElementById('moduloo').innerHTML = '<center><button id="finec" onclick="modulo()">Chiudi</button></center>'
+
+  }
+
+
+
+
+      </script>
+
+
+      <style>
+
+        body{
+          width: 85%;
+          margin: 0 auto;
+        }
+
+        #promozionale, #totale {
+          font-size:15px;
+        }
+
+
+        #agg {
+          margin-right: 1em;
+        }
+        .flex-split {
+
+          display:flex;
+        flex-direction:row;
+        height: 100vh;
+
+        div{
+
+          text-align: center;
+          width: 50vw;
+        }
+
+        }
+        .btn{
+          margin-right: 1em;
+        border: 1px solid #000000;
+        border-radius: 6px;
+        color: black;
+        display: block;
+        font-family: sans-serif;
+        margin: 10px auto;
+        max-width: 200px;
+        padding: 10px;
+        text-decoration: none;
+        }
+
+        .ease .btn{
+        transition: all .6s ease;
+        }
+
+        .ease-in-out-back .btn{
+        transition: all .6s cubic-bezier(0.68, -0.55, 0.265, 1.55)
+        }
+
+        .ease .btn:hover, .ease-in-out-back .btn:hover{
+        box-shadow: 10vw 0 0 #ffe600 inset;
+        color: black;
+        }
+
+
+        #imi2 {
+
+          float: left;
+          margin-right: 1em;
+          width:3cm;
+
+
+        }
+
+        #feed {
+          position: fixed;
+          top: 1600px;
+        }
+        #boxi {
+          float: left;
+          width: 250px;
+          height:300px;
+          top:0px;
+          background-image: linear-gradient(#f5e02a, #e6da7a, #878573, #7d7b68);
+          position: fixed;
+          border: 2px;
+          border-style:dotted;
+          border-width: 2px 2px 1px 2px
+          margin: 1%;
+
+        }
+
+        #pres{
+
+        }
+
+        #rise {
+          color: #ff0000
+        }
+
+        #ris {
+          color: #1cb01f
+        }
+        #imi {
+            width:200px;
+            top:10px;
+            -moz-border-radius: 8px;
+            -webkit-border-radius: 8px;
+            border-radius: 8px;
+        }
+
+        #imim {
+            width:50px;
+            -moz-border-radius: 8px;
+            -webkit-border-radius: 8px;
+            border-radius: 8px;
+        }
+
+        #datao {
+          border:2px solid #464741;
+          width:300px;
+        }
+
+        #orao {
+          border:2px solid #464741;
+          width:150px;
+        }
+
+        #datp {
+          border:2px solid #464741;
+          width:500px;
+          height: 25px;
+        }
+        #tab {
+          border:2px solid yellow;
+        }
+        #datad,#orad,#messaggiood,#statod,#elimina,#crea {
+          border:2px solid #464741;
+        }
+
+
+
+
+        body {
+          background-image: linear-gradient(#f5e02a, #e6da7a, #878573, #7d7b68);
+        }
+
+
+        #conf,#ora,#data,#verifican,#oras,#datas,#verificap, #finec, #elimina,#crea {
+            width: 200px;
+            border: 2px solid black;
+
+            letter-spacing: 2px;
+            -webkit-animation: colorchange 30s infinite;
+           animation: colorchange 30s infinite;}
+        @-webkit-keyframes colorchange {
+            0%  {background: #ff0000;}
+           10%  {background: #ff8400;}
+           20%  {background: #fbff00;}
+           30%  {background: #4dff00;}
+           40%  {background: #00ffff;}
+           50%  {background: #0004ff;}
+           60%  {background: #a200ff;}
+           70%  {background: #ff00f2;}
+           100%  {background: #ff0000;}
+
+        @keyframes colorchange {
+         0%  {background: #ff0000;}
+        10%  {background: #ff8400;}
+        20%  {background: #fbff00;}
+        30%  {background: #4dff00;}
+        40%  {background: #00ffff;}
+        50%  {background: #0004ff;}
+        60%  {background: #a200ff;}
+        70%  {background: #ff00f2;}
+        100%  {background: #ff0000;}
+
+        }
+        }
+
+        #verifican{
+          cursor: pointer;
+          -moz-border-radius: 8px;
+          -webkit-border-radius: 8px;
+          border-radius: 8px;
+        }
+
+        #ora,#data,#verifican,#oras,#datas{
+          cursor: text;
+          -moz-border-radius: 8px;
+          -webkit-border-radius: 8px;
+          border-radius: 8px;
+        }
+
+        #verificap, #conf{
+          cursor: pointer;
+          -moz-border-radius: 4px;
+          -webkit-border-radius: 4px;
+          border-radius: 4px;
+        }
+
+        .h2{
+          font-family: ComicSansMS;
+        }
+
+        </style>
+
+
+
+    </body>
+    </html>
