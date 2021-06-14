@@ -1,0 +1,684 @@
+<html>
+<head>
+    <link rel='icon' type='image/ico”' href='https://lh3.googleusercontent.com/pw/ACtC-3efjJgaQUddJ_VcHyhOJG2rReAo2QYbyWFw7f8iueqxyqGuKZT8ub3k8d9Gk7iCrJaokmWOVRmmRzc8uKHlIEfO7oFFN0qxlv7Ki207U1kYCyEfEd92pzkcHWW38cl-rfXRb6yApcHkBa1uus1swscO=s150-no?authuser=0'>
+    <title>Meteo Marco v 1.0</title>
+    <link rel = "preconnect" href = "https://fonts.gstatic.com">
+    <link href = "https://fonts.googleapis.com/css2? family = Josefin + Sans: wght @ 300 & display = swap "rel =" stylesheet ">
+
+<style>
+
+#loading_screen{
+  position: absolute;
+  top:0px;
+  right:0px;
+  height: 100%;
+  width: 100%;
+  background-color: gray;
+  z-index: 1000;
+  opacity: .75;
+  filter: alpha(opacity=75);
+  -moz-opacity: .75;
+
+}
+
+#primoacc{
+  position: absolute;
+  top:0px;
+  right:0px;
+  height: 100%;
+  width: 100%;
+  background-color: gray;
+  z-index: 1000;
+  opacity: .90;
+  filter: alpha(opacity=75);
+  -moz-opacity: .75;
+}
+
+#casella{
+  width: 80%;
+  background: white;
+  opacity: .95;
+  border-radius: 15px;
+  box-shadow: 10px 10px 5px #dedede;
+}
+#cb{
+  ms-transform: scale(3); /* IE */
+    -moz-transform: scale(3); /* FF */
+    -webkit-transform: scale(3); /* Safari and Chrome */
+    -o-transform: scale(3); /* Opera */
+    transform: scale(3);
+    padding: 10px;
+}
+
+#btn{
+  background: red;
+  font-size: 30px;
+  height: 60px;
+  width: 65%;
+  opacity: .99;
+
+}
+
+#d{
+    float: left; padding: 15px 15px 15px 15px;
+}
+
+#pp{
+  width: 98%;
+  height: auto;
+border: 5px double black;
+border-radius: 15px;
+box-shadow: 10px 10px 5px #dedede;
+}
+
+#ppabbn{
+  width: 100%;
+  height: 75px;
+
+}
+
+#selezionaabb{
+  width: 90%;
+  height: 100px;
+}
+</style>
+  </head>
+  <body>
+    <script>
+
+
+    </script>
+    <div id="loading_screen">
+      <center><h1>Caricamento...</h1>
+      <img src='https://lh3.googleusercontent.com/4C_-jJfQzD8FECrYDyvi34N8spXBHIr26IPH-9njn7dYmImreD3zfIFm-4bDSwxYJJrWFPgA3nCgGhHj82Q8orUE_Iqh2dpaYRqg14HGi_QRJZ03f8-MzgfGbDo0zxDbLXMRnKCxe1Z8s4x9c1Rg0m6MTqgS3wh70_fRa9BfiimsFXbKVuOb5x0i9SDOvm7qUZdkhEghP9wHXNi70knLwEh-1LiXGLNV2mSqd-wcamtpgNXfoHJB_Xr4Obn_zb7vqCke4pO7MF9lWMBkFz3vhncIsiBgdbmWytphchLc_I9Z9pE76tmFcyXazY8pSOcRdWSnxdR2rX67GddqbfcQQCLTEDgdLOP2K8zk1LGYfC3y_ZdRUI81TmP46zWTPRzl1CNuROo7sPkk6dV_wGorS1RN9f56qGz-gwuoNh6E1fIO_oHVO6HOuZ0oWldGFeZ-gZ9yn6Iacq2pqM7Vqxp--Bq_PT-uqHUwCxYlMTJ4YaU-oL8l-ZLIB5-jsFdfCvKD91PPNdZWC-Qm67EXbG5kg4_BiPN0EEDgtNz0Ob4JfEhXQPT40MO18e5lKS9D8wljuqi1Ir1XE_NBpuVxisiA3HdqKg4PXkLMgM0qj9Sy_y4aG-kzA26mN9wNXZSwK8CX27J7WfSxqNqBjHLDtTW0IX-hVovPWVIlntsF0UR-CAgS7FTAvw-aw5DgUbFpJbp2VN-pvAafKFUYC3OCcNETNDg=s400-no?authuser=0'></img>
+    </center>
+    </div>
+
+
+    <div id='accessoc'>
+      <span id='acc'></span>
+    </div>
+    <br><br><br><br><br><br>
+    <center><img src='https://lh3.googleusercontent.com/pw/ACtC-3feCXNzBXp8fgwtEvLUBNqCLo7MI0qIPssGzXoDgtcb1NnGYXP1tFLPfvYvkgbV0-ncIHOq4AQowDalu8ojunyP9IOlzjO3SJuibFIqI6tsdiIPNh27_yWwIlpoJ_KbFUQnLhXtff_XvgxJ-ME2XOYS=s512-no?authuser=0' id='inizio'></img></center>
+
+    <center><h1 id='textuno'>Accedi col tuo account Marco Express per visualizzare dati, prevsioni e altro ancora! Se hai gi&agrave; effettuato l'accesso in questo dispositivo senza disconnetterlo, attendi qualche istante....</h1>
+
+    <br>
+
+      <input type="text" placeholder="Email" id="email"></input><br><br>
+    <input type="password" placeholder="Password" id="password"/>
+    <button id="button" type="button" onclick="showPwd()">
+
+
+    <img src='https://lh3.googleusercontent.com/pw/ACtC-3fsiPnrtt4QsQITPf6bt7DuGpEJAp2jiVi9HDAMd9lfL2n_zRkioGhq3ON7kNKTkDYH0U-Cg1He3jzivqsRC87hgNx3bZoE9QOE4cnWiTqKElk_I5CvicwuHro24wXBohZhEmOWC5OTgUBiULJGhc55=s24-no?authuser=0' height='40px'></img>
+  </button><br><br>
+    <button onclick="signIn()" id="signIn"><h1><b>Login</b></h1></button><br><br>
+    <button onclick='reimposta()' id='reiu'><h1>Password dimenticata? Reimpostala ora.</h1></button></center>
+
+    <span id='display'></span>
+
+<script>
+(function(){
+if (window.addEventListener)
+{
+window.addEventListener("load", nascondi_loading_screen, false);
+
+}else{
+window.attachEvent("onload", nascondi_loading_screen);
+}
+})();
+function nascondi_loading_screen()
+{
+document.getElementById("loading_screen").style.display = 'none';
+}
+
+
+</script>
+
+    <script src="https://www.gstatic.com/firebasejs/8.6.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.3/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.3/firebase-database.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
+
+    <script>
+      var firebaseConfig = {
+        apiKey: "AIzaSyCIw0-w1C3zDjoGgVpLKsFYm2TFXqJr9yw",
+        authDomain: "marco-express-d30c8.firebaseapp.com",
+        projectId: "marco-express-d30c8",
+        storageBucket: "marco-express-d30c8.appspot.com",
+        messagingSenderId: "764621319758",
+        appId: "1:764621319758:web:9390a4a994df27cda4dd1f",
+        measurementId: "G-3ZK6NW0G3F"
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+
+     const auth = firebase.auth();
+
+  document.addEventListener('contextmenu', event => event.preventDefault(
+
+       document.getElementById('display').innerHTML = "<div id='hh'><center><h1>EHI! NON CERCARE D'IMBROGLIARE!</h1><h2>Secondo la politica sul corretto utilizzo dei siti Marco Express, &egrave; severamente vietato l'utilizzo della console ai non autorizzati. <br> Abbiamo segnalato il fatto che tu hai provato a barare. Nonostante ci&ograve; potrebbe essere che tu l'abbia fatto involontariamente. <b>Ora sai che non devi farlo</b>. La prossima volta ricordati che, se ci proverai di nuovo, verrai bannato dal sito e non avrai pi&ugrave; la possibilit&agrave; di usufruire degli abbonamenti e dei servizi.<br><br><br><button onclick='prosegui()'><h1>Prosegui l'utilizzo del sito</h1></button></center></div>"
+
+   ));
+
+     function prosegui() {
+       document.getElementById("hh").style.display="none";
+     }
+
+     function reimposta() {
+       document.title = "Reimposta nuova password";
+       document.getElementById('display').innerHTML = '<center><input type="text" id="rei" placeholder="Inserisci email"></input><br><br><button onclick="inviaemail()" id="confi"><h1>Invia email</h1></button></center>'
+       document.getElementById('display').innerHTML += '<center><h1 id="avviso"></h1></center>'
+       document.getElementById("password").style.display="none";
+       document.getElementById("email").style.display="none";
+       document.getElementById("signIn").style.display="none";
+       document.getElementById("button").style.display="none";
+       document.getElementById("textuno").style.display="none";
+       document.getElementById("reiu").style.display="none";
+     }
+
+     function inviaemail() {
+       if(navigator.onLine){
+       var auth = firebase.auth();
+       var emailAddress = document.getElementById('rei').value
+
+       auth.sendPasswordResetEmail(emailAddress).then(function() {
+         console.log('vai')
+         document.getElementById('avviso').innerHTML = 'EMAIL INVIATA'
+         document.getElementById('avviso').innerHTML += '<br><br><button id="rlogin" onclick="rlogin()">Effettua nuovamente il login</button>'
+
+       }).catch(function(error) {
+         console.log('no')
+         document.getElementById('avviso').innerHTML = 'ERRORE: EMAIL NON DISPONIBILE'
+         document.getElementById('avviso').innerHTML += '<br><br><button id="rlogin" onclick="rlogin()">Effettua nuovamente il login</button>'
+
+  });}else{
+    document.getElementById('avviso').innerHTML = 'ERRORE: IMPOSSIBILE CONNETTERSI AL SERVER'
+  }
+     }
+
+function rlogin() {
+location.reload()
+
+}
+
+function vai() {
+  console.log('vai')
+}
+
+   	function signIn(){
+      if(navigator.onLine){
+
+   		var email = document.getElementById("email");
+   		var password = document.getElementById("password");
+
+   		const promise = auth.signInWithEmailAndPassword(email.value, password.value);
+   		promise.catch(e => alert('Combinazione utente/password errata'));
+
+   	}else{
+      document.getElementById('display').innerHTML = '<h1>Impossibile connetersi al server</h1>'
+    }}
+
+
+   	function signOut(){
+   		auth.signOut();
+   		alert("Disconnessione completata!");
+      window.location.reload()
+
+   	}
+
+     auth.onAuthStateChanged(function(user){
+        document.title = "Meteo Marco";
+         var email = user.email;
+         alert("Uttente attivo:" + " " + email);
+         console.warn('Utente attivo.')
+
+         var user = firebase.auth().currentUser;
+         user.providerData.forEach(function (profile) {
+           if(profile.photoURL === 'Meteo Marco Premium Plus') {
+             console.log('Premium Plus')
+             premiumplus()
+           }else if(profile.photoURL === 'Meteo Marco Premium'){
+             premium()
+
+           }else{
+
+                 document.getElementById("password").style.display="none";
+                 document.getElementById("email").style.display="none";
+                 document.getElementById("signIn").style.display="none";
+                 document.getElementById("button").style.display="none";
+                 document.getElementById("textuno").style.display="none";
+                 document.getElementById("reiu").style.display="none";
+                 document.getElementById('display').innerHTML = "<center><h1>Non hai nessun abbonamento Meteo Marco attivo ora.<br> Per attivarlo cliccare il pulsante sotto.</h1><br><button onclick='selezionaabb()' id='selezionaabb'><h1>Seleziona l'abbonamento</h1></button></center>"
+                 document.getElementById('display').innerHTML += '<br><br><center><button onclick="signOut()" id="signOut"><h1>Logout</h1><img src="https://lh3.googleusercontent.com/pw/ACtC-3fxEqyRV4Kgd6Zq9ZYJSi8aBG4TOp5qqBYOGl7OnRZUogm68jgxH4UIwV2rIi1pIUDv62xzfK4Cwbj_xIQyKVdqMtGtecPJa3t36jMGNe4bS_7_5h8QrdJH6lMSlc-9vmqzvKUcR5tGcj7zNqJpY_la=s24-no?authuser=0" height="50px"></img></button></center>'
+               }
+
+        });
+
+
+           })
+
+           function selezionaabb() {
+             document.getElementById('display').innerHTML = "<h1>Attendi... il sistema Marco Express sta verificando i tuoi dati."
+             if(navigator.onLine){
+               window.setTimeout("document.getElementById('display').innerHTML = '<h1>Ci siamo quasi...'", 4000);
+             }else{
+               document.getElementById('display').innerHTML = '<h1>Connessione al server interrotta</h1>'
+             }
+             window.setTimeout("document.getElementById('display').innerHTML = '<h1>Accesso al Marco Express Account in corso...'", 3000);
+
+              window.setTimeout("abbonamenti()", 8000);
+
+           }
+
+           function abbonamenti() {
+             document.getElementById('display').innerHTML = "<p id='ttext'>Seleziona l'abbonamento</p>"
+             document.getElementById('display').innerHTML += "<div id='pp'><img id='d'src='https://lh3.googleusercontent.com/pw/ACtC-3ewGkmZZ30k6iDxKDgGt5cgES97Y5KNQrhgOOfFOCNYWGkj7JmaFDOtUtVMACuKMqIyLNS8hHa9c64zyMD6ECTUlHWb3eNp_XSKQn_xcPl_umIklzhBnC6xaXwQgu57TIQ9yQ5_X7uQzaTx_HsNPyqJ=s512-no?authuser=0' width='20%' alt='Errore imprevisto'></img><p id='ntext' float='right'><b>METEO MARCO PREMIUM PLUS</b></p><br><hr align='left' size='1' width='70%' color='#919191' noshade><br><b><h1>Per maggiori dettagli <a href='https://docs.google.com/document/d/1DrbbrGEtBorAOli-Fq33CSgMW5Nu0mTTAfba0eot8cQ/preview'>clicca qui</a></h1><button onClick='ppabbn()' id='ppabbn'><h1>Acquista ora (€ 1,00/settimana)</h1></button></div>"
+             document.getElementById('display').innerHTML += "<p id='ntext'>Si ricorda che l'abbonamento automatico &egrave; sempre attivo. Ci&ograve; significa che ogni settimana verr&agrave; addebitata la somma, finche non si annuller&agrave; l'abbonamento. Per farlo, recarsi sulla sezione \"Gestisci account\" e cliccare su \"Elimina abbonamento\". Tale oparazione non potr&agrave; rimborsare alcuna cifra.</p>"
+           }
+
+           function ppabbn(){
+             var user = firebase.auth().currentUser;
+             var datadue = new Date();
+             orad = datadue.getHours();
+             min = datadue.getMinutes();
+             dataduen = datadue.getDate();
+             mesed = datadue.getMonth();
+             annodue = datadue.getFullYear();
+             mesed++
+             var aa = "Ha acquistato Premium Plus " +  dataduen + "/" + mesed + "/" + annodue
+             user.updateProfile({
+               photoURL: "Meteo Marco Premium Plus"
+             }).then(function() {
+               firebase.database().ref("MMPPacqtt").push().set({
+                   "sender": user.email,
+                   "message": aa,
+               });
+               document.getElementById('display').innerHTML = '<h1>Grazie! Acquisto effettuato!<br>Aggiorna la pagina e accedi, potrai visualizzare le info destinate agli utenti PP.</h1>'
+
+               return false;
+             }).catch(function(error) {
+               document.getElementById('display').innerHTML = '<h1>Si &egrave; verificato un\'errore, riprova tra qualche minuto</h1>'
+          });
+           }
+
+       function premiumplus() {
+       console.log('PremiumPlus')
+       document.getElementById("password").style.display="none";
+       document.getElementById("email").style.display="none";
+       document.getElementById("signIn").style.display="none";
+       document.getElementById("button").style.display="none";
+       document.getElementById("textuno").style.display="none";
+       document.getElementById("reiu").style.display="none";
+       //document.getElementById("acc").innerHTML +=  "Accesso effettuato: <img src='https://lh3.googleusercontent.com/pw/ACtC-3fqnF8o5zre3yx3bYDCzP_ZMDFWLfY8tUWB821vwBcDuDzoeRBakbd5D-cXbkSGnG_-oNrP-JWM8VpbJLl1_PNfjz6YsyaRdUy5b88XT42g-KjI2deUPvkaW-UAjL2t7Vq02-zJQBTBOJ_Qx6y_otHB=s24-no?authuser=0'></img> Marco Scortegagna"
+       document.getElementById("acc").innerHTML += "<button id='previsioni' onclick='previsionipp()'><h1>Previsioni</h1><img src='https://lh3.googleusercontent.com/pw/ACtC-3cLkionUiv3xtdP-4kmN-FG5QlhsM-42OvQmh9iTzMY6I741J5755CwlmsDLVVuVt0qA1fsrODz3LoDrma9BFr-EiUzGiDXOJp3IvtVhwhc3u6LWfZb3arU4DXOAqjNXScK5hn6LpLdOvULAzMexN13=s24-no?authuser=0' height='50px'></img></button> <button id='dati' onclick='datipp()'><h1>Dati</h1><img src='https://lh3.googleusercontent.com/pw/ACtC-3c9TuUjBRQbuGEAnY9mcbpqp9BcsfsFhnt1EjeGwbpICAhiJ6Hov-PnkzSnNv0aBravVxPomEu8HALbnkzeC6sXRirtzHCiQKd-CryzqzS3Uf2YGNj4c1sz6E1wuscNZaRWEobXs7qN9SZpwBRzIWwb=s24-no?authuser=0' height='50px'></img></button>"
+
+        document.getElementById("acc").innerHTML += "<button onclick='tuoacc()' id='tuoacc'><h1>Gestisci account</h1><img src='https://lh3.googleusercontent.com/pw/ACtC-3dJoh0N46z2acGjddlrQJ0C9pfjWoRp328LI1Z6fVvtvy2tqbRJtHhdqM_dqwczy-eLsPYrTDX-YR96k9pwzRqWAwC--KCJ91RpscpvyRjaorNoa7dA4CmJ_GJwm3NVeWNv1VXMwD2Y1mnoLVLkTEuS=s24-no?authuser=0' height='60px'></img></button>"
+
+         firebase.database().ref("Meteo Marco Premium Plus").on("child_added", function (snapshot) {
+           var testo = snapshot.val().message;
+           var titolo = snapshot.val().sender;
+
+           document.getElementById('display').innerHTML = '<p id="ttext">' + titolo + '</h1>' + '<hr align="left" size="1" width="750" color="#919191" noshade><button onclick="ascolta()" id="ascolta"><img src="https://lh3.googleusercontent.com/pw/ACtC-3fUB_LXWYYOOLYD8sp07_c1AVbIbD4yuQ4lSuf0fqeLNxWIZTRq_1oMp4vOty24HL7A_4gTZqwZpWLljZzpcvtRh3Z9URrxzfgqnA67oxSP5JJu5cAZF1A2gsuVWhwD1uXY6BIOS2FnvL28onR7hEPc=s48-no?authuser=0"></img></button>' + '<p id="ntext">' + testo + '</p>'
+
+         });
+
+     }
+
+     function tuoacc(){
+       document.getElementById("display").innerHTML =" ";
+
+       document.getElementById('display').innerHTML = "<p id='ttext'>Informazioni Account</p>" + '<hr align="left" size="1" width="600" color="#919191" noshade>'
+
+       var user = firebase.auth().currentUser;
+       if (user != null) {
+         user.providerData.forEach(function (profile) {
+          console.log("Sign-in provider: " + profile.providerId);
+          console.log("  Provider-specific UID: " + profile.uid);
+
+          console.log("  Name: " + profile.displayName);
+          document.getElementById('display').innerHTML += "<p id='ntext'>" + "Nome: <span id='nome'>" + profile.displayName + "</span>&nbsp;&nbsp;&nbsp;&nbsp;<button onclick='modnome()' id='modnome'><img src='https://lh3.googleusercontent.com/pw/ACtC-3da3hW4dsZX5PbU-tHhQjjutzLdZalnhafSWjPTYDusOcQpV3Q0GM7lXsa2wmAomFEv0RBE500H8EbisBrcBCTUZ3lO5ZtkKWkdc95ZEYTHvIR_gKFKkrk0EfPacCbUN10t1_bkr11qZ5A-kSep27Yf=s24-no?authuser=0' width='40px'/></button>"
+          console.log("  Email: " + profile.email);
+          document.getElementById('display').innerHTML += "<p id='ntext'>" + "Email: " + profile.email
+          console.log("  Photo URL: " + profile.photoURL);
+          document.getElementById('display').innerHTML += "<p id='ntext'>" + "Password: <span id='passwordo'>" + "**************" + "</span>&nbsp;&nbsp;&nbsp;&nbsp;<button onclick='modpw()' id='modnome'><img src='https://lh3.googleusercontent.com/pw/ACtC-3da3hW4dsZX5PbU-tHhQjjutzLdZalnhafSWjPTYDusOcQpV3Q0GM7lXsa2wmAomFEv0RBE500H8EbisBrcBCTUZ3lO5ZtkKWkdc95ZEYTHvIR_gKFKkrk0EfPacCbUN10t1_bkr11qZ5A-kSep27Yf=s24-no?authuser=0' width='40px'/></button>"
+          document.getElementById('display').innerHTML += "<p id='ntext'>" + "Abbonamento attivo:  " + profile.photoURL
+          document.getElementById('display').innerHTML += '<br>' + '<button onclick="signOut()" id="signOut"><h1>Logout</h1><img src="https://lh3.googleusercontent.com/pw/ACtC-3fxEqyRV4Kgd6Zq9ZYJSi8aBG4TOp5qqBYOGl7OnRZUogm68jgxH4UIwV2rIi1pIUDv62xzfK4Cwbj_xIQyKVdqMtGtecPJa3t36jMGNe4bS_7_5h8QrdJH6lMSlc-9vmqzvKUcR5tGcj7zNqJpY_la=s24-no?authuser=0" height="50px"></img></button>'
+          document.getElementById('display').innerHTML +='&nbsp;&nbsp;&nbsp;<button onclick="elimabb()" id="signOut"><h1>Elimina l\'abbonamento*</h1><h2><br>Attenzione! L\'eliminazione dell\'abbonamento non comporta NESSUN rimborso.</h2></button>'
+        });
+      }
+
+     }
+
+     function prova() {
+       var user = firebase.auth().currentUser;
+
+user.updateProfile({
+    photoURL: "Meteo Marco Premium Plus"
+    }).then(function() {
+      console.log('ok')
+    }).catch(function(error) {
+
+    });
+     }
+
+     function elimabb() {
+       var user = firebase.auth().currentUser;
+
+user.updateProfile({
+    photoURL: " "
+    }).then(function() {
+      alert('Abbonamento Eliminato!')
+      window.location.reload()
+    }).catch(function(error) {
+      alert('Errore, riprova tra qualche istante')
+    });
+     }
+
+
+
+
+     function modnome() {
+       document.getElementById("modnome").style.display="none";
+       document.getElementById('nome').innerHTML = " "
+       document.getElementById('nome').innerHTML = "<input type='text' id='nuovonome' placeholder='Inserisci nuovo nome'></input>" + "<button onclick='confermanome()' id='confermanome'><h1>Conferma</h1></button>"
+
+     }
+
+     function modpw() {
+       document.getElementById('display').innerHTML = "<p id='ttext'>Per maggiore sicurezza, abbiamo inviato un'email al tuo indirizzo email</p><span id='infooo'></span>"
+       document.getElementById('display').innerHTML += "<h2>Non &egrave; arrivata nessuna email? Prova a controllare la spam.</h2>"
+       var user = firebase.auth().currentUser;
+       var auth = firebase.auth();
+       var emailAddress = user.email;
+
+       auth.sendPasswordResetEmail(emailAddress).then(function() {
+         console.log('fatto')
+         document.getElementById('infooo').innerHTML = '<h1>Fatto, abbiamo inviato un\'email a ' + emailAddress + '</h1><br><button onclick="window.reload()" id="home"><h1>Torna alla home</h1></button>'
+       }).catch(function(error) {
+          document.getElementById('infooo').innerHTML = '<h1>Spiacenti. Si &egrave; verificato un errore imprevisto</h1><br><button onclick="window.reload()" id="home"><h1>Torna alla home</h1></button>'
+       });
+
+     }
+
+     function modpassword() {
+
+
+     }
+
+     function confermanome() {
+       var user = firebase.auth().currentUser;
+       var newnome = document.getElementById('nuovonome').value
+       user.updateProfile({
+      displayName: newnome
+
+    }).then(function() {
+      tuoacc();
+    }).catch(function(error) {
+      console.log('errore')
+    });
+     }
+
+     function ascolta() {
+
+              firebase.database().ref("Meteo Marco Premium Plus").on("child_added", function (snapshot) {
+                var testopo = snapshot.val().message;
+                var titolopo = snapshot.val().sender;
+
+                var msg = new SpeechSynthesisUtterance(testopo);
+                var voices = window.speechSynthesis.getVoices();
+                msg.voice = voices[10];
+                msg.voiceURI = 'native';
+                msg.volume = 1; // 0 to 1
+                msg.rate = 1; // 0.1 to 10
+                msg.pitch = 1; //0 to 2
+
+                msg.lang = 'it-IT';
+
+                speechSynthesis.speak(msg);
+              });
+     }
+
+     function previsionipp() {
+       console.log('Previsioni PP');
+       firebase.database().ref("Meteo Marco Premium Plus").on("child_added", function (snapshot) {
+         var testo = snapshot.val().message;
+         var titolo = snapshot.val().sender;
+
+         document.getElementById('display').innerHTML = '<p id="ttext">' + titolo + '</p>' + '<hr align="left" size="1" width="750" color="#919191" noshade><button onclick="ascolta()" id="ascolta"><img src="https://lh3.googleusercontent.com/pw/ACtC-3fUB_LXWYYOOLYD8sp07_c1AVbIbD4yuQ4lSuf0fqeLNxWIZTRq_1oMp4vOty24HL7A_4gTZqwZpWLljZzpcvtRh3Z9URrxzfgqnA67oxSP5JJu5cAZF1A2gsuVWhwD1uXY6BIOS2FnvL28onR7hEPc=s48-no?authuser=0"></img></button>' + '<p id="ntext">' + testo + '</p>'
+         document.getElementById('display').innerHTML += '' + '<br><br>'
+
+
+       });
+     }
+
+     function datipp() {
+       console.log('datipp');
+       document.getElementById('display').innerHTML = '<button onclick="datireal()" id="datidue"><h1>Richiedi dati real time</h1></button>';
+       document.getElementById('display').innerHTML += '<br><button onclick="datiipp()" id="datidue"><h1>Visualizza documento intero</h1></button>';
+       document.getElementById('display').innerHTML += '<br><br><center><iframe height="90%" src="https://drive.google.com/file/d/1DCtSum9FyM9JTNZ00ONTRVuhGo5ro1Jp/preview" width="90%"><h1>Caricamento...</h1></iframe></center>'
+
+
+     }
+
+     function datiipp() {
+       location.assign('https://drive.google.com/file/d/1DCtSum9FyM9JTNZ00ONTRVuhGo5ro1Jp/preview');
+     }
+
+     function datireal() {
+       document.getElementById('display').innerHTML = '<p id="ntext"> Per la richiesta dei dati real time, non &egrave; disponibile riceverli in questo sito. Attendi la prossima versione per averli disponibili. Naturalmente, visto il tuo abbonamento attivo, &egrave; disponibile ricevere i dati tramite WhatsApp o Gmail.</p>'
+     }
+
+
+     function premium() {
+       console.log('Premium')
+
+         firebase.database().ref("Meteo Marco Premium").on("child_added", function (snapshot) {
+           var testoo = snapshot.val().message;
+
+           console.log(testoo);
+
+         });
+
+     }
+
+     function showPwd() {
+       var input = document.getElementById('password');
+       if (input.type === "password") {
+         input.type = "text";
+       } else {
+         input.type = "password";
+
+       }
+     }
+
+
+
+
+
+     //verifica
+
+
+      </script>
+
+
+      <style>
+
+      body{
+        font-family:"Josefin Sans", sans-serif;
+
+      }
+
+
+
+      #hh{
+      position: absolute;
+      top:0px;
+      right:0px;
+      height: 100%;
+      width: 100%;
+      background-color: gray;
+      z-index: 1000;
+      opacity: .90;
+      filter: alpha(opacity=90);
+      -moz-opacity: .90;
+      }
+
+      #reiu{
+        width: 65%;
+        height: 75px;
+       background: #d5dbd6;
+       border-radius: 7px;
+      }
+
+      #rei{
+        width: 90%;
+        border: 3px solid black;
+        background: #d5dbd6;
+        font-size: 250%;
+        border-radius: 15px;
+        box-shadow: 10px 10px 5px #dedede;
+      }
+
+      #rlogin{
+        height: 75px;
+        width: 65%;
+        background: #d5dbd6;
+      }
+      #confi{
+        height: 75px;
+        width: 65%;
+        background: #d5dbd6;
+      }
+
+      #rlogin{
+        width: 60%;
+        font-size: 35px;
+      }
+      #home{
+        width: 60%;
+
+      }
+
+      #tuoacc{
+        width: 38%;
+        height: 35%;
+        background: #f6ff00;
+        letter-spacing: 2px;
+        border-radius: 15px;
+        box-shadow: 10px 10px 5px #dedede;
+        border: 3px solid #ffb700;
+      }
+
+
+      #ttext,#tttext{
+        font-size: 50px;
+      }
+      #ntext{
+        font-size: 40px;
+      }
+
+      #accessoc {
+        width: 98%;
+        height: 25%;
+        position: fixed;
+
+      }
+      #ace{
+        font-size: 100%;
+      }
+
+      #dati{
+        width: 30%;
+        height: 35%;
+        background-color: #9d9ff2;
+        border: 3px solid #0004de;
+        letter-spacing: 2px;
+        border-radius: 15px;
+        box-shadow: 10px 10px 5px #dedede;
+      }
+
+      #previsioni{
+        width: 30%;
+        height: 35%;
+        background-color: #afff9c;
+        border: 3px solid #33ff00;
+        letter-spacing: 2px;
+        border-radius: 15px;
+        box-shadow: 10px 10px 5px #dedede;
+      }
+
+        #inizio{
+          height:350px;
+        }
+        #signOut {
+          height: 15%;
+          background: #f0cccc;
+          width: 38%;
+          border: 3px solid red;
+          letter-spacing: 2px;
+          border-radius: 15px;
+          box-shadow: 10px 10px 5px #dedede;
+        }
+        #signIn {
+          background: #b2f7bc;
+          width: 200px;
+          border: 3px solid #0af52c;
+          letter-spacing: 2px;
+          border-radius: 40px;
+        }
+        #password,#email {
+          width:80%;
+          background: #d5dbd6;
+          border: 3px solid black;
+          font-size: 250%;
+          border-radius: 20px;
+          box-shadow: 15px 10px 5px #dedede;
+
+        }
+        #button {
+          background: #d5dbd6;
+          border: 3px solid black;
+          font-size: 120%;
+        box-shadow: 15px 10px 5px #dedede;
+        }
+
+        #datidue {
+
+          width: 98%;
+          height: 10%;
+          border: 2px solid #00c3ff;
+          letter-spacing: 2px;
+          background-color: #73ebe1;
+          border-radius: 15px;
+          box-shadow: 10px 10px 5px #dedede;
+
+        }
+
+        #modnome{
+
+          width: 50px;
+          height: 50px;
+
+        }
+
+        #nuovonome{
+          font-size: 100%;
+          width: 70%
+
+        }
+
+        #confermanome{
+          width: auto;
+          height: 75px;
+        }
+
+        #ascolta{
+          width: 750px;
+          height: 75px;
+        }
+        </style>
+
+        <br>
+      </body>
+      </html>
