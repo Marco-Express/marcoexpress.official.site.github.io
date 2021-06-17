@@ -538,6 +538,21 @@ user.updateProfile({
 
          })
 
+         firebase.database().ref("preci").on("child_added", function (snapshot) {
+           var pome = snapshot.val().message;
+
+           document.getElementById('display').innerHTML += '<p id="ntext"><img src="https://lh3.googleusercontent.com/pw/ACtC-3d-e1lrslZMYcP5mrG6IQHetKKI1_KlUPUtB9WVlbf4AR0Qqh0zDKRBv013hWAs8V0b3tJyBR0xQa3o29fFR1Dyr8nLlSkznTxYA4GPZyqWsU8FopHH1T9IKU-9VP9dTE_FUznASMU_VLgNJZPdqE7I=s24-no?authuser=0" width="50px"></img><b>Precipitazioni</b></p><hr align="left" size="1" width="750" color="#919191" noshade>' + '<h1>' + pome + '</h1>'
+
+         })
+
+
+         firebase.database().ref("dataagg").on("child_added", function (snapshot) {
+           var pome = snapshot.val().message;
+
+           document.getElementById('display').innerHTML += '<p id="ntext"><img src="https://lh3.googleusercontent.com/pw/ACtC-3c9bVz9xN7URkoOA57wP40FlAmyu6S0rfiA8B_IqE1fl9-redq6Yf0astMr1wBMCtZiJOsOya_xilLtlT4z87bGo7tn3IYF0kll0RR0OukUYq6BmB0R5fFBwacko0F2bq2LfDBMo24znnS563sUUgcQ=s24-no?authuser=0" width="50px"></img><b>Data pubblicazione delle previsioni</b></p><hr align="left" size="1" width="750" color="#919191" noshade>' + '<h1>' + pome + '</h1>'
+
+         })
+
 
        });
      }
