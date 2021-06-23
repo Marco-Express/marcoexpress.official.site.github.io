@@ -134,6 +134,7 @@ document.getElementById("loading_screen").style.display = 'none';
 }
 
 
+
 </script>
 
     <script src="https://www.gstatic.com/firebasejs/8.6.3/firebase-app.js" onload="document.getElementById('lo').innerHTML = 'Caricamento libreria Firebase app in corso...'"></script>
@@ -157,11 +158,11 @@ document.getElementById("loading_screen").style.display = 'none';
 
      const auth = firebase.auth();
 
-  document.addEventListener('contextmenu', event => event.preventDefault(
+/*  document.addEventListener('contextmenu', event => event.preventDefault(
 
       document.getElementById('display').innerHTML = "<div id='hh'><center><h1>EHI! NON CERCARE D'IMBROGLIARE!</h1><h2>Secondo la politica sul corretto utilizzo dei siti Marco Express, &egrave; severamente vietato l'utilizzo della console ai non autorizzati. <br> Abbiamo segnalato il fatto che tu hai provato a barare. Nonostante ci&ograve; potrebbe essere che tu l'abbia fatto involontariamente. <b>Ora sai che non devi farlo</b>. La prossima volta ricordati che, se ci proverai di nuovo, verrai bannato dal sito e non avrai pi&ugrave; la possibilit&agrave; di usufruire degli abbonamenti e dei servizi.<br><br><br><button onclick='prosegui()'><h1>Prosegui l'utilizzo del sito</h1></button></center></div>"
 
-   ));
+   ));*/
 
      function prosegui() {
        document.getElementById("hh").style.display="none";
@@ -314,13 +315,24 @@ function vai() {
        document.getElementById("button").style.display="none";
        document.getElementById("textuno").style.display="none";
        document.getElementById("reiu").style.display="none";
-       //document.getElementById("acc").innerHTML +=  "Accesso effettuato: <img src='https://lh3.googleusercontent.com/pw/ACtC-3fqnF8o5zre3yx3bYDCzP_ZMDFWLfY8tUWB821vwBcDuDzoeRBakbd5D-cXbkSGnG_-oNrP-JWM8VpbJLl1_PNfjz6YsyaRdUy5b88XT42g-KjI2deUPvkaW-UAjL2t7Vq02-zJQBTBOJ_Qx6y_otHB=s24-no?authuser=0'></img> Marco Scortegagna"
-       document.getElementById("acc").innerHTML += "<button id='previsioni' onclick='previsionipp()'><h1>Previsioni</h1><img src='https://lh3.googleusercontent.com/pw/ACtC-3cLkionUiv3xtdP-4kmN-FG5QlhsM-42OvQmh9iTzMY6I741J5755CwlmsDLVVuVt0qA1fsrODz3LoDrma9BFr-EiUzGiDXOJp3IvtVhwhc3u6LWfZb3arU4DXOAqjNXScK5hn6LpLdOvULAzMexN13=s24-no?authuser=0' height='50px'></img></button> <button id='dati' onclick='datipp()'><h1>Dati</h1><img src='https://lh3.googleusercontent.com/pw/ACtC-3c9TuUjBRQbuGEAnY9mcbpqp9BcsfsFhnt1EjeGwbpICAhiJ6Hov-PnkzSnNv0aBravVxPomEu8HALbnkzeC6sXRirtzHCiQKd-CryzqzS3Uf2YGNj4c1sz6E1wuscNZaRWEobXs7qN9SZpwBRzIWwb=s24-no?authuser=0' height='50px'></img></button>"
+       if(window.innerWidth > 1000){
+         console.log('Computer')
+         document.getElementById("acc").innerHTML += "<button id='previsioni' onclick='previsionipp()'><h1>Previsioni</h1></button> <button id='dati' onclick='datipp()'><h1>Dati</h1></button>"
+         document.getElementById("acc").innerHTML += "<button onclick='tuoacc()' id='tuoacc'><h1>Gestisci account</h1></button>"
 
-        document.getElementById("acc").innerHTML += "<button onclick='tuoacc()' id='tuoacc'><h1>Gestisci account</h1><img src='https://lh3.googleusercontent.com/pw/ACtC-3dJoh0N46z2acGjddlrQJ0C9pfjWoRp328LI1Z6fVvtvy2tqbRJtHhdqM_dqwczy-eLsPYrTDX-YR96k9pwzRqWAwC--KCJ91RpscpvyRjaorNoa7dA4CmJ_GJwm3NVeWNv1VXMwD2Y1mnoLVLkTEuS=s24-no?authuser=0' height='60px'></img></button>"
+       }else{
+         document.getElementById("acc").innerHTML += "<button id='previsioni' onclick='previsionipp()'><h1>Previsioni</h1><img src='https://lh3.googleusercontent.com/pw/ACtC-3cLkionUiv3xtdP-4kmN-FG5QlhsM-42OvQmh9iTzMY6I741J5755CwlmsDLVVuVt0qA1fsrODz3LoDrma9BFr-EiUzGiDXOJp3IvtVhwhc3u6LWfZb3arU4DXOAqjNXScK5hn6LpLdOvULAzMexN13=s24-no?authuser=0' height='50px' id='pimg'></img></button> <button id='dati' onclick='datipp()'><h1>Dati</h1><img id='dimg'src='https://lh3.googleusercontent.com/pw/ACtC-3c9TuUjBRQbuGEAnY9mcbpqp9BcsfsFhnt1EjeGwbpICAhiJ6Hov-PnkzSnNv0aBravVxPomEu8HALbnkzeC6sXRirtzHCiQKd-CryzqzS3Uf2YGNj4c1sz6E1wuscNZaRWEobXs7qN9SZpwBRzIWwb=s24-no?authuser=0' height='50px' id='taimg'></img></button>"
+         document.getElementById("acc").innerHTML += "<button onclick='tuoacc()' id='tuoacc'><h1>Gestisci account</h1><img src='https://lh3.googleusercontent.com/pw/ACtC-3dJoh0N46z2acGjddlrQJ0C9pfjWoRp328LI1Z6fVvtvy2tqbRJtHhdqM_dqwczy-eLsPYrTDX-YR96k9pwzRqWAwC--KCJ91RpscpvyRjaorNoa7dA4CmJ_GJwm3NVeWNv1VXMwD2Y1mnoLVLkTEuS=s24-no?authuser=0' height='60px'></img></button>"
+
+         console.log('Dispositivo mobile')
+       }
+
+
         document.getElementById("display").innerHTML = "<center><h2>Caricamento delle previsioni...</h2></center>"
         document.getElementById("display").innerHTML += "<center><h3>Connessione al server...</h3></center>"
         document.getElementById("display").innerHTML += "<center><br><img width='150px' src='https://lh3.googleusercontent.com/pw/ACtC-3cqK5HaPD1DJzuJsNl1G2Pa-1hWvH87lpVYGv2BL5Wz8rpuBN4f-L9lTwFVE0VdgL5FjpEumgkfOMAyutTQu2--Sjd_5xfj1ir-qLu3EKoqsZb-WJS5N3SH21wUyd2e1MoQW6YjVkh0IgFfuYrmTt8R=w64-h22-no?authuser=0'></img></center>"
+
+
          firebase.database().ref("Meteo Marco Premium Plus").on("child_added", function (snapshot) {
            var testo = snapshot.val().message;
            var titolo = snapshot.val().sender;
@@ -372,6 +384,8 @@ function vai() {
         })
 
    }
+
+
 
      function tuoacc(){
        document.getElementById("display").innerHTML =" ";
@@ -612,8 +626,12 @@ user.updateProfile({
       body{
         font-family:"Josefin Sans", sans-serif;
 
+
       }
 
+      button{
+        cursor: pointer;
+      }
 
 
       #hh{
@@ -717,7 +735,7 @@ user.updateProfile({
           height:350px;
         }
         #signOut {
-          height: 15%;
+          height: 25%;
           background: #f0cccc;
           width: 38%;
           border: 3px solid red;
@@ -782,6 +800,8 @@ user.updateProfile({
           width: 750px;
           height: 75px;
         }
+
+
         </style>
 
         <br>
