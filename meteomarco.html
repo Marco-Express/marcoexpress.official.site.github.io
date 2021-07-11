@@ -83,11 +83,8 @@ box-shadow: 10px 10px 5px #dedede;
 }
 </style>
   </head>
-  <body>
-    <script>
+  <body onload="iniziobody()">
 
-
-    </script>
     <div id="loading_screen">
       <center><h1>Caricamento...</h1>
         <h1 id='lo'></h1>
@@ -117,6 +114,8 @@ box-shadow: 10px 10px 5px #dedede;
     <button onclick='reimposta()' id='reiu'><h1>Password dimenticata? Reimpostala ora.</h1></button></center>
 
     <span id='display'></span>
+    <button onclick='feed()' id='feed'><h2 id='fte'>Lascia un Feedback!</h2></button>
+
 
 <script>
 (function(){
@@ -137,9 +136,9 @@ document.getElementById("loading_screen").style.display = 'none';
 
 </script>
 
-    <script src="https://www.gstatic.com/firebasejs/8.6.3/firebase-app.js" onload="document.getElementById('lo').innerHTML = 'Caricamento libreria Firebase app in corso...'"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.6.3/firebase-auth.js" onload="document.getElementById('lo').innerHTML = 'Caricamento libreria Firebase auth in corso...'"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.6.3/firebase-database.js" onload="document.getElementById('lo').innerHTML = 'Caricamento libreria Firebase DB in corso...'"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-app.js" onload="document.getElementById('lo').innerHTML = 'Caricamento libreria Firebase app in corso...'"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-auth.js" onload="document.getElementById('lo').innerHTML = 'Caricamento libreria Firebase auth in corso...'"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-database.js" onload="document.getElementById('lo').innerHTML = 'Caricamento libreria Firebase DB in corso...'"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"onload="document.getElementById('lo').innerHTML = 'Caricamento libreria pdf creator in corso...'"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" onload="document.getElementById('lo').innerHTML = 'Caricamento libreria jQuery in corso...'"></script>
 
@@ -158,15 +157,36 @@ document.getElementById("loading_screen").style.display = 'none';
 
      const auth = firebase.auth();
 
- document.addEventListener('contextmenu', event => event.preventDefault(
+ /*document.addEventListener('contextmenu', event => event.preventDefault(
 
       document.getElementById('display').innerHTML = "<div id='hh'><center><h1>EHI! NON CERCARE D'IMBROGLIARE!</h1><h2>Secondo la politica sul corretto utilizzo dei siti Marco Express, &egrave; severamente vietato l'utilizzo della console ai non autorizzati. <br> Abbiamo segnalato il fatto che tu hai provato a barare. Nonostante ci&ograve; potrebbe essere che tu l'abbia fatto involontariamente. <b>Ora sai che non devi farlo</b>. La prossima volta ricordati che, se ci proverai di nuovo, verrai bannato dal sito e non avrai pi&ugrave; la possibilit&agrave; di usufruire degli abbonamenti e dei servizi.<br><br><br><button onclick='prosegui()'><h1>Prosegui l'utilizzo del sito</h1></button></center></div>"
 
-   ));
+   ));*/
 
      function prosegui() {
        document.getElementById("hh").style.display="none";
      }
+
+     function jj() {
+       var ok = $("#feed")
+       ok.animate({
+         height: "80px",
+         width: "80px"
+       }, 900)
+       document.getElementById('fte').innerHTML = '<img src="https://lh3.googleusercontent.com/pw/AM-JKLVbVOJs-bg9c5p-4RMYN1rU3WwYceo4sCH6vFdmujR1tz3xxcOHHNGecU4GVq8PFT8uDJ7hmTkmfHnxNOzGdLVcLT39HE-ptKkf0kkNM1SOgezDTYY5TyBPUPYkN4i0jXdn2yoAPrSNVdoS8N2o6S2z=s24-no?authuser=0" height= "39px" width="39px"></img>'
+       $('#feed').css('border-radius', '40px');
+
+     }
+
+     function iniziobody() {
+       setTimeout(jj, 7000)
+      // var audio = new Audio('meteomarco.mp3');
+    //  audio.play();
+    }
+
+    function feed() {
+      location.href = 'https://docs.google.com/forms/d/e/1FAIpQLSdtuUKjayKMK4yypsgnN0ftwQNLXYO_SGX-yTO4ocf4reLPBA/viewform?usp=sf_link'
+    }
 
 
 
@@ -213,10 +233,8 @@ function vai() {
 
    	function signIn(){
       if(navigator.onLine){
-
    		var email = document.getElementById("email");
    		var password = document.getElementById("password");
-
    		const promise = auth.signInWithEmailAndPassword(email.value, password.value);
    		promise.catch(e => alert('Combinazione utente/password errata'));
 
@@ -237,6 +255,7 @@ function vai() {
          var email = user.email;
          alert("Uttente attivo:" + " " + email);
          console.warn('Utente attivo.')
+
 
          var user = firebase.auth().currentUser;
          user.providerData.forEach(function (profile) {
@@ -264,15 +283,7 @@ function vai() {
            })
 
            function selezionaabb() {
-             document.getElementById('display').innerHTML = "<h1>Attendi... il sistema Marco Express sta verificando i tuoi dati."
-             if(navigator.onLine){
-               window.setTimeout("document.getElementById('display').innerHTML = '<h1>Ci siamo quasi...'", 4000);
-             }else{
-               document.getElementById('display').innerHTML = '<h1>Connessione al server interrotta</h1>'
-             }
-             window.setTimeout("document.getElementById('display').innerHTML = '<h1>Accesso al Marco Express Account in corso...'", 3000);
-
-              window.setTimeout("abbonamenti()", 8000);
+             abbonamenti();
 
            }
 
@@ -281,6 +292,7 @@ function vai() {
              document.getElementById('display').innerHTML += "<div id='pp'><img id='d'src='https://lh3.googleusercontent.com/pw/ACtC-3ewGkmZZ30k6iDxKDgGt5cgES97Y5KNQrhgOOfFOCNYWGkj7JmaFDOtUtVMACuKMqIyLNS8hHa9c64zyMD6ECTUlHWb3eNp_XSKQn_xcPl_umIklzhBnC6xaXwQgu57TIQ9yQ5_X7uQzaTx_HsNPyqJ=s512-no?authuser=0' width='20%' alt='Errore imprevisto'></img><p id='ntext' float='right'><b>METEO MARCO PREMIUM PLUS</b></p><br><hr align='left' size='1' width='70%' color='#919191' noshade><br><b><h1>Per maggiori dettagli <a href='https://docs.google.com/document/d/1DrbbrGEtBorAOli-Fq33CSgMW5Nu0mTTAfba0eot8cQ/preview'>clicca qui</a></h1><button onClick='ppabbn()' id='ppabbn'><h1>Acquista ora (€ 1,00/settimana)</h1></button></div>"
              document.getElementById('display').innerHTML += "<p id='ntext'>Si ricorda che l'abbonamento automatico &egrave; sempre attivo. Ci&ograve; significa che ogni settimana verr&agrave; addebitata la somma, finche non si annuller&agrave; l'abbonamento. Per farlo, recarsi sulla sezione \"Gestisci account\" e cliccare su \"Elimina abbonamento\". Tale oparazione non potr&agrave; rimborsare alcuna cifra.</p>"
            }
+
 
            function ppabbn(){
              var user = firebase.auth().currentUser;
@@ -470,15 +482,10 @@ user.updateProfile({
 
        auth.sendPasswordResetEmail(emailAddress).then(function() {
          console.log('fatto')
-         document.getElementById('infooo').innerHTML = '<h1>Fatto, abbiamo inviato un\'email a ' + emailAddress + '</h1><br><button onclick="window.reload()" id="home"><h1>Torna alla home</h1></button>'
+         document.getElementById('infooo').innerHTML = '<h1>Fatto, abbiamo inviato un\'email a ' + emailAddress + '</h1>'
        }).catch(function(error) {
           document.getElementById('infooo').innerHTML = '<h1>Spiacenti. Si &egrave; verificato un errore imprevisto</h1><br><button onclick="window.reload()" id="home"><h1>Torna alla home</h1></button>'
        });
-
-     }
-
-     function modpassword() {
-
 
      }
 
@@ -495,25 +502,7 @@ user.updateProfile({
     });
      }
 
-     function ascolta() {
 
-              firebase.database().ref("Meteo Marco Premium Plus").on("child_added", function (snapshot) {
-                var testopo = snapshot.val().message;
-                var titolopo = snapshot.val().sender;
-
-                var msg = new SpeechSynthesisUtterance(testopo);
-                var voices = window.speechSynthesis.getVoices();
-                msg.voice = voices[10];
-                msg.voiceURI = 'native';
-                msg.volume = 1; // 0 to 1
-                msg.rate = 1; // 0.1 to 10
-                msg.pitch = 1; //0 to 2
-
-                msg.lang = 'it-IT';
-
-                speechSynthesis.speak(msg);
-              });
-     }
 
      function previsionipp() {
        console.log('Previsioni PP');
@@ -610,6 +599,24 @@ user.updateProfile({
 
        }
      }
+
+     function ascolta() {
+       var audio = new Audio('meteomarco.mp3');
+      audio.play();
+
+      window.setTimeout('asc()', 2000)
+
+    }
+
+    function asc() {
+      firebase.database().ref("Meteo Marco Premium Plus").on("child_added", function (snapshot) {
+        var testopo = snapshot.val().message;
+        var titolopo = snapshot.val().sender;
+
+        var msg = new SpeechSynthesisUtterance(testopo);
+        window.speechSynthesis.speak(msg);
+      });
+    }
 
 
 
@@ -799,6 +806,15 @@ user.updateProfile({
         #ascolta{
           width: 750px;
           height: 75px;
+        }
+
+        #feed{
+          position: fixed;
+          bottom: 10px;
+          height: 50px;
+          width: 300px;
+          border-radius: 25px;
+          right: 5px;
         }
 
 
