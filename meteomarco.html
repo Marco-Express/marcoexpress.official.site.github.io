@@ -90,8 +90,9 @@ box-shadow: 10px 10px 5px #dedede;
       <img src='https://lh3.googleusercontent.com/4C_-jJfQzD8FECrYDyvi34N8spXBHIr26IPH-9njn7dYmImreD3zfIFm-4bDSwxYJJrWFPgA3nCgGhHj82Q8orUE_Iqh2dpaYRqg14HGi_QRJZ03f8-MzgfGbDo0zxDbLXMRnKCxe1Z8s4x9c1Rg0m6MTqgS3wh70_fRa9BfiimsFXbKVuOb5x0i9SDOvm7qUZdkhEghP9wHXNi70knLwEh-1LiXGLNV2mSqd-wcamtpgNXfoHJB_Xr4Obn_zb7vqCke4pO7MF9lWMBkFz3vhncIsiBgdbmWytphchLc_I9Z9pE76tmFcyXazY8pSOcRdWSnxdR2rX67GddqbfcQQCLTEDgdLOP2K8zk1LGYfC3y_ZdRUI81TmP46zWTPRzl1CNuROo7sPkk6dV_wGorS1RN9f56qGz-gwuoNh6E1fIO_oHVO6HOuZ0oWldGFeZ-gZ9yn6Iacq2pqM7Vqxp--Bq_PT-uqHUwCxYlMTJ4YaU-oL8l-ZLIB5-jsFdfCvKD91PPNdZWC-Qm67EXbG5kg4_BiPN0EEDgtNz0Ob4JfEhXQPT40MO18e5lKS9D8wljuqi1Ir1XE_NBpuVxisiA3HdqKg4PXkLMgM0qj9Sy_y4aG-kzA26mN9wNXZSwK8CX27J7WfSxqNqBjHLDtTW0IX-hVovPWVIlntsF0UR-CAgS7FTAvw-aw5DgUbFpJbp2VN-pvAafKFUYC3OCcNETNDg=s400-no?authuser=0'></img>
     </center>
     </div>
-
-
+    <center>
+      <h1>Ultime novit&agrave;: presto sar&agrave; obbligatorio utilizzare un nuovo sistema di pagamento per pagare l'abbonamento Meteo Marco</h1>
+    <iframe frameborder="0" width="400" height="200" src="https://drive.google.com/file/d/1WymlX6xywLhG_14oP9MmC97L09NCvn6H/preview"> </iframe></center>
     <div id='accessoc'>
       <span id='acc'></span>
     </div>
@@ -156,11 +157,11 @@ document.getElementById("loading_screen").style.display = 'none';
 
      const auth = firebase.auth();
 
- /*document.addEventListener('contextmenu', event => event.preventDefault(
+ document.addEventListener('contextmenu', event => event.preventDefault(
 
       document.getElementById('display').innerHTML = "<div id='hh'><center><h1>EHI! NON CERCARE D'IMBROGLIARE!</h1><h2>Secondo la politica sul corretto utilizzo dei siti Marco Express, &egrave; severamente vietato l'utilizzo della console ai non autorizzati. <br> Abbiamo segnalato il fatto che tu hai provato a barare. Nonostante ci&ograve; potrebbe essere che tu l'abbia fatto involontariamente. <b>Ora sai che non devi farlo</b>. La prossima volta ricordati che, se ci proverai di nuovo, verrai bannato dal sito e non avrai pi&ugrave; la possibilit&agrave; di usufruire degli abbonamenti e dei servizi.<br><br><br><button onclick='prosegui()'><h1>Prosegui l'utilizzo del sito</h1></button></center></div>"
 
-   ));*/
+   ));
 
      function prosegui() {
        document.getElementById("hh").style.display="none";
@@ -410,7 +411,7 @@ function vai() {
           console.log("  Provider-specific UID: " + profile.uid);
 
           console.log("  Name: " + profile.displayName);
-          document.getElementById('display').innerHTML += "<p id='ntext'>" + "Nome: <span id='nome'>" + profile.displayName + "</span>&nbsp;&nbsp;&nbsp;&nbsp;<button onclick='modnome()' id='modnome'><img src='https://lh3.googleusercontent.com/pw/ACtC-3da3hW4dsZX5PbU-tHhQjjutzLdZalnhafSWjPTYDusOcQpV3Q0GM7lXsa2wmAomFEv0RBE500H8EbisBrcBCTUZ3lO5ZtkKWkdc95ZEYTHvIR_gKFKkrk0EfPacCbUN10t1_bkr11qZ5A-kSep27Yf=s24-no?authuser=0' width='40px'/></button>"
+          //document.getElementById('display').innerHTML += "<p id='ntext'>" + "Nome: <span id='nome'>" + profile.displayName + "</span>&nbsp;&nbsp;&nbsp;&nbsp;<button onclick='modnome()' id='modnome'><img src='https://lh3.googleusercontent.com/pw/ACtC-3da3hW4dsZX5PbU-tHhQjjutzLdZalnhafSWjPTYDusOcQpV3Q0GM7lXsa2wmAomFEv0RBE500H8EbisBrcBCTUZ3lO5ZtkKWkdc95ZEYTHvIR_gKFKkrk0EfPacCbUN10t1_bkr11qZ5A-kSep27Yf=s24-no?authuser=0' width='40px'/></button>"
           console.log("  Email: " + profile.email);
           document.getElementById('display').innerHTML += "<p id='ntext'>" + "Email: " + profile.email
           console.log("  Photo URL: " + profile.photoURL);
