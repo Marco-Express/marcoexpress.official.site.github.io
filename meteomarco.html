@@ -90,9 +90,8 @@ box-shadow: 10px 10px 5px #dedede;
       <img src='https://lh3.googleusercontent.com/4C_-jJfQzD8FECrYDyvi34N8spXBHIr26IPH-9njn7dYmImreD3zfIFm-4bDSwxYJJrWFPgA3nCgGhHj82Q8orUE_Iqh2dpaYRqg14HGi_QRJZ03f8-MzgfGbDo0zxDbLXMRnKCxe1Z8s4x9c1Rg0m6MTqgS3wh70_fRa9BfiimsFXbKVuOb5x0i9SDOvm7qUZdkhEghP9wHXNi70knLwEh-1LiXGLNV2mSqd-wcamtpgNXfoHJB_Xr4Obn_zb7vqCke4pO7MF9lWMBkFz3vhncIsiBgdbmWytphchLc_I9Z9pE76tmFcyXazY8pSOcRdWSnxdR2rX67GddqbfcQQCLTEDgdLOP2K8zk1LGYfC3y_ZdRUI81TmP46zWTPRzl1CNuROo7sPkk6dV_wGorS1RN9f56qGz-gwuoNh6E1fIO_oHVO6HOuZ0oWldGFeZ-gZ9yn6Iacq2pqM7Vqxp--Bq_PT-uqHUwCxYlMTJ4YaU-oL8l-ZLIB5-jsFdfCvKD91PPNdZWC-Qm67EXbG5kg4_BiPN0EEDgtNz0Ob4JfEhXQPT40MO18e5lKS9D8wljuqi1Ir1XE_NBpuVxisiA3HdqKg4PXkLMgM0qj9Sy_y4aG-kzA26mN9wNXZSwK8CX27J7WfSxqNqBjHLDtTW0IX-hVovPWVIlntsF0UR-CAgS7FTAvw-aw5DgUbFpJbp2VN-pvAafKFUYC3OCcNETNDg=s400-no?authuser=0'></img>
     </center>
     </div>
-    <center>
-      <h1>Ultime novit&agrave;: presto sar&agrave; obbligatorio utilizzare un nuovo sistema di pagamento per pagare l'abbonamento Meteo Marco</h1>
-    <iframe frameborder="0" width="400" height="200" src="https://drive.google.com/file/d/1WymlX6xywLhG_14oP9MmC97L09NCvn6H/preview"> </iframe></center>
+
+
     <div id='accessoc'>
       <span id='acc'></span>
     </div>
@@ -157,7 +156,7 @@ document.getElementById("loading_screen").style.display = 'none';
 
      const auth = firebase.auth();
 
- document.addEventListener('contextmenu', event => event.preventDefault(
+document.addEventListener('contextmenu', event => event.preventDefault(
 
       document.getElementById('display').innerHTML = "<div id='hh'><center><h1>EHI! NON CERCARE D'IMBROGLIARE!</h1><h2>Secondo la politica sul corretto utilizzo dei siti Marco Express, &egrave; severamente vietato l'utilizzo della console ai non autorizzati. <br> Abbiamo segnalato il fatto che tu hai provato a barare. Nonostante ci&ograve; potrebbe essere che tu l'abbia fatto involontariamente. <b>Ora sai che non devi farlo</b>. La prossima volta ricordati che, se ci proverai di nuovo, verrai bannato dal sito e non avrai pi&ugrave; la possibilit&agrave; di usufruire degli abbonamenti e dei servizi.<br><br><br><button onclick='prosegui()'><h1>Prosegui l'utilizzo del sito</h1></button></center></div>"
 
@@ -180,8 +179,7 @@ document.getElementById("loading_screen").style.display = 'none';
 
      function iniziobody() {
        setTimeout(jj, 7000)
-      // var audio = new Audio('meteomarco.mp3');
-    //  audio.play();
+      controllaabb()
     }
 
     function feed() {
@@ -259,12 +257,9 @@ function vai() {
 
          var user = firebase.auth().currentUser;
          user.providerData.forEach(function (profile) {
-           if(profile.photoURL === 'Meteo Marco Premium Plus') {
+           if(profile.photoURL != ' ') {
              console.log('Premium Plus')
              premiumplus()
-           }else if(profile.photoURL === 'Meteo Marco Premium'){
-             premium()
-
            }else{
 
                  document.getElementById("password").style.display="none";
@@ -273,7 +268,7 @@ function vai() {
                  document.getElementById("button").style.display="none";
                  document.getElementById("textuno").style.display="none";
                  document.getElementById("reiu").style.display="none";
-                 document.getElementById('display').innerHTML = "<center><h1>Non hai nessun abbonamento Meteo Marco attivo ora.<br> Per attivarlo cliccare il pulsante sotto.</h1><br><button onclick='selezionaabb()' id='selezionaabb'><h1>Seleziona l'abbonamento</h1></button></center>"
+                 document.getElementById('display').innerHTML = "<center><h1>Non hai nessun abbonamento Meteo Marco attivo ora.<br> <h1>Per acquistare Meteo Marco Premium Plus, <a href=''>clicca qui</a> e accedi. Poi vai sulla sezione \"Nuova spesa\" e seleziona \"Meteo Marco Premium Plus\". </h1></center>"
                  document.getElementById('display').innerHTML += '<br><br><center><button onclick="signOut()" id="signOut"><h1>Logout</h1><img src="https://lh3.googleusercontent.com/pw/ACtC-3fxEqyRV4Kgd6Zq9ZYJSi8aBG4TOp5qqBYOGl7OnRZUogm68jgxH4UIwV2rIi1pIUDv62xzfK4Cwbj_xIQyKVdqMtGtecPJa3t36jMGNe4bS_7_5h8QrdJH6lMSlc-9vmqzvKUcR5tGcj7zNqJpY_la=s24-no?authuser=0" height="50px"></img></button></center>'
                }
 
@@ -283,15 +278,9 @@ function vai() {
            })
 
            function selezionaabb() {
-             abbonamenti();
+             document.getElementById('display').innerHTML = ""
 
-           }
-
-           function abbonamenti() {
-             document.getElementById('display').innerHTML = "<p id='ttext'>Seleziona l'abbonamento</p>"
-             document.getElementById('display').innerHTML += "<div id='pp'><img id='d'src='https://lh3.googleusercontent.com/pw/ACtC-3ewGkmZZ30k6iDxKDgGt5cgES97Y5KNQrhgOOfFOCNYWGkj7JmaFDOtUtVMACuKMqIyLNS8hHa9c64zyMD6ECTUlHWb3eNp_XSKQn_xcPl_umIklzhBnC6xaXwQgu57TIQ9yQ5_X7uQzaTx_HsNPyqJ=s512-no?authuser=0' width='20%' alt='Errore imprevisto'></img><p id='ntext' float='right'><b>METEO MARCO PREMIUM PLUS</b></p><br><hr align='left' size='1' width='70%' color='#919191' noshade><br><b><h1>Per maggiori dettagli <a href='https://docs.google.com/document/d/1DrbbrGEtBorAOli-Fq33CSgMW5Nu0mTTAfba0eot8cQ/preview'>clicca qui</a></h1><button onClick='ppabbn()' id='ppabbn'><h1>Acquista ora (€ 1,00/settimana)</h1></button></div>"
-             document.getElementById('display').innerHTML += "<p id='ntext'>Si ricorda che l'abbonamento automatico &egrave; sempre attivo. Ci&ograve; significa che ogni settimana verr&agrave; addebitata la somma, finche non si annuller&agrave; l'abbonamento. Per farlo, recarsi sulla sezione \"Gestisci account\" e cliccare su \"Elimina abbonamento\". Tale oparazione non potr&agrave; rimborsare alcuna cifra.</p>"
-           }
+          }
 
 
            function ppabbn(){
@@ -303,6 +292,9 @@ function vai() {
              mesed = datadue.getMonth();
              annodue = datadue.getFullYear();
              mesed++
+
+
+
              var aa = "Ha acquistato Premium Plus " +  dataduen + "/" + mesed + "/" + annodue  + " alle ore " + orad + ":" + min
              user.updateProfile({
                photoURL: "Meteo Marco Premium Plus"
@@ -416,24 +408,12 @@ function vai() {
           document.getElementById('display').innerHTML += "<p id='ntext'>" + "Email: " + profile.email
           console.log("  Photo URL: " + profile.photoURL);
           document.getElementById('display').innerHTML += "<p id='ntext'>" + "Password: <span id='passwordo'>" + "**************" + "</span>&nbsp;&nbsp;&nbsp;&nbsp;<button onclick='modpw()' id='modnome'><img src='https://lh3.googleusercontent.com/pw/ACtC-3da3hW4dsZX5PbU-tHhQjjutzLdZalnhafSWjPTYDusOcQpV3Q0GM7lXsa2wmAomFEv0RBE500H8EbisBrcBCTUZ3lO5ZtkKWkdc95ZEYTHvIR_gKFKkrk0EfPacCbUN10t1_bkr11qZ5A-kSep27Yf=s24-no?authuser=0' width='40px'/></button>"
-          document.getElementById('display').innerHTML += "<p id='ntext'>" + "Abbonamento attivo:  " + profile.photoURL
+          document.getElementById('display').innerHTML += "<p id='ntext'>" + "Scadenza dell'abbonamento:  " + profile.photoURL
           document.getElementById('display').innerHTML += '<br>' + '<button onclick="signOut()" id="signOut"><h1>Logout</h1><img src="https://lh3.googleusercontent.com/pw/ACtC-3fxEqyRV4Kgd6Zq9ZYJSi8aBG4TOp5qqBYOGl7OnRZUogm68jgxH4UIwV2rIi1pIUDv62xzfK4Cwbj_xIQyKVdqMtGtecPJa3t36jMGNe4bS_7_5h8QrdJH6lMSlc-9vmqzvKUcR5tGcj7zNqJpY_la=s24-no?authuser=0" height="50px"></img></button>'
           document.getElementById('display').innerHTML +='&nbsp;&nbsp;&nbsp;<button onclick="elimabb()" id="signOut"><h1>Elimina l\'abbonamento*</h1><h2><br>Attenzione! L\'eliminazione dell\'abbonamento non comporta NESSUN rimborso.</h2></button><br><h2>Quando hai creato il tuo account, hai accettato le <a href="https://docs.google.com/document/d/19Mgx9IHb-IxL0nMT4j_Le_YNjQQFHJBy2KwLtY4yCa8/preview"  target="_blank">Condizioni d\'uso</a>. Per visualizzarle, <a href="https://docs.google.com/document/d/19Mgx9IHb-IxL0nMT4j_Le_YNjQQFHJBy2KwLtY4yCa8/preview" target="_blank">CLICCA QUI</a>'
         });
       }
 
-     }
-
-     function prova() {
-       var user = firebase.auth().currentUser;
-
-user.updateProfile({
-    photoURL: "Meteo Marco Premium Plus"
-    }).then(function() {
-      console.log('ok')
-    }).catch(function(error) {
-
-    });
      }
 
      function elimabb() {
@@ -620,11 +600,45 @@ user.updateProfile({
 
 
 
+    //Annullamento dell'abbonamento
+
+    function controllaabb() {
+      var user = firebase.auth().currentUser;
+ user.providerData.forEach(function (profile) {
+   var piusett = profile.photoURL
+   console.log(piusett)
+   const second = 1000,
+         minute = second * 60,
+         hour = minute * 60,
+         day = hour * 24;
+
+   let birthday = piusett,
+       countDown = new Date(birthday).getTime(),
+       x = setInterval(function() {
+
+         let now = new Date().getTime(),
+             distance = countDown - now;
+
+         //do something later when date is reached
+         if (distance < 0) {
+           console.log('ALLARME')
+           user.updateProfile({
+               photoURL: " "
+               }).then(function() {
+                 window.location.reload()
+               }).catch(function(error) {
+                 alert('Errore: ' + error)
+               });
+           clearInterval(x);
+         }
+         //seconds
+       }, 0)
+ })
 
 
-     //verifica
 
 
+    }
       </script>
 
 
