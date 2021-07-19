@@ -82,7 +82,7 @@ var disp = document.getElementById('display')
      disp.innerHTML += "<p class='ntext'>1) Imposta il numero di soldi</p>"
      disp.innerHTML += "<input type='number' id='euroc' style='width: 10%'></input><h1>&nbsp;&nbsp;&nbsp;&euro;</h1>"
      disp.innerHTML += "<p class='ntext'>2) Recati alla sede centrale Marco Express</p>"
-     disp.innerHTML += "<p class='ntext'>3) Chiedi la ricarica del portafoglio, mostrandogli il seguente QR code</p><center><button onclick='creaq()' id='creaq' style='width:20%'><h1>Crea il QRcode</h1></button></center><canvas id='q'></canvas><br><br><br><br><br><br><button onclick='ritornadap()' id='ann'><h1>Esci</h1></button>"
+     disp.innerHTML += "<p class='ntext'>3) Chiedi la ricarica del portafoglio ad un adetto, poi mostragli il seguente QR code</p><center><button onclick='creaq()' id='creaq' style='width:20%'><h1>Crea il QRcode</h1></button></center><canvas id='q'></canvas><br><br><br><br><br><br><button onclick='ritornadap()' id='ann'><h1>Esci</h1></button>"
     //
 
 
@@ -107,7 +107,7 @@ var disp = document.getElementById('display')
    function nspesa(){
      var disp = document.getElementById('display')
     disp.innerHTML = "<center><p class='ltext'>Nuova spesa</p></center>"
-    disp.innerHTML += '<select name="nuovaspesa" id="nn" style="width: 90%"><option value="mmppu"><h1>Abbonamento Meteo Marco Premium Plus - 1 Settimana</h1></option><option value="mmppd"><h1>Abbonamento Meteo Marco Premium Plus - 2 Settimane</h1></option></select><span id="costo"></span><span id="push"></span>'
+    disp.innerHTML += '<select name="nuovaspesa" id="nn" style="width: 90%"><option value="mmppu"><h1>Abbonamento Meteo Marco Premium Plus - 1 Settimana</h1></option><option value="mmppd"><h1>Abbonamento Meteo Marco Premium Plus - 2 Settimane</h1></option><option value="prmh"><h1>Pagamento rapido Marco Hairdresser</h1></option></select><span id="costo"></span><span id="push"></span>'
     setTimeout('ripeti()', 100)
    }
 
@@ -118,7 +118,9 @@ var disp = document.getElementById('display')
       if(tipo==="mmppu"){
         mmppu();
       }else if(tipo==="mmppd"){
-        mmppd()
+        mmppd();
+      }else if(tipo === "prmh"){
+        prmh();
       }
       setTimeout('ripeti()', 500)
    }
@@ -259,6 +261,49 @@ function acquistammppd(){
   });
 }
 
+function prmh(){
+  document.getElementById('costo').innerHTML = " "
+  var disp = document.getElementById('display')
+  disp.innerHTML = "<p class='ltext'>Pagamento rapido Marco Hairdresser</p><p class='ntext'>Inserisci importo</p><input type='number' id='prmhuno'></input><p class='ntext'>&euro;</p><button onclick='confmhp()' style='width: 30%'><h1>Conferma</h1></button>"
+
+}
+
+function confmhp() {
+    var user = firebase.auth().currentUser;
+  var importo = document.getElementById('prmhuno').value
+    user.providerData.forEach(function (profile) {
+    var disp = document.getElementById('display')
+    disp.innerHTML = "<p class='ltext'>Effettuare il pagamento?</p><p class='ntext'>Importo: &euro;" + importo + "<br> Email mittente: " +  profile.email + "</p><br>"
+    disp.innerHTML += "<button id='ann' onclick='ritornadap()'><h1>Annulla</h1></button><button id='acq' onclick='pagamhp()'><h1>Paga</h1></button>"
+    localStorage.setItem("importomh", importo);
+  })
+
+}
+
+function pagamhp() {
+  var letcok = localStorage.getItem("importomh");
+  console.log(letcok)
+  var user = firebase.auth().currentUser;
+  user.providerData.forEach(function (profile) {
+  var soldiad = Number(profile.displayName)
+  var numimp = Number(letcok)
+  var sottrai = soldiad - numimp
+  var invia = "" + sottrai
+  user.updateProfile({
+ displayName: invia
+}).then(function() {
+ document.getElementById('display').innerHTML = "<p class='ltext'>Pagemento effettuato correttemente.</p><p class='ntext'>Se lo staff richiede il certificato di pagamento, Mostrare il seguente QR Code.</p><canvas id='qq'></canavas><br><button id='ann' onclick='ritornadap()'><h1>Annulla</h1></button>"
+ var testoqr = "Pagamento effettuato. Valore: euro " + letcok + ". Da parte di " + profile.email + ". Tipo richiesta: Marco Hairdresser PagoFast" ;
+
+   new QRious({element: document.getElementById("qq"), value: testoqr, size: 300});
+}).catch(function(error) {
+ document.write("<p class='ltext'>Errore</p><br><h1>Si &egrave; verificato un errore imprevisto. Tipo di errore: errore nel pagamento</h1>")
+});
+})
+}
+
+
+
 function esci() {
   document.getElementById('display').innerHTML = "<button onclick='ritornadap()' id='acq'>Esci</button>"
 }
@@ -388,6 +433,12 @@ button{
   background-size: contain;
   border-radius: 20px;
   border: 3px solid #d10000;
+}
+
+#prmhuno{
+  float: left;
+  width: 50%;
+  height: 45px;
 }
 </style>
 
