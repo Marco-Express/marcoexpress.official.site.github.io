@@ -3,6 +3,11 @@
     <link rel='icon' type='image/ico”' href='https://lh3.googleusercontent.com/pw/ACtC-3efjJgaQUddJ_VcHyhOJG2rReAo2QYbyWFw7f8iueqxyqGuKZT8ub3k8d9Gk7iCrJaokmWOVRmmRzc8uKHlIEfO7oFFN0qxlv7Ki207U1kYCyEfEd92pzkcHWW38cl-rfXRb6yApcHkBa1uus1swscO=s150-no?authuser=0'>
     <title>Meteo Marco v 1.0</title>
     <link rel = "preconnect" href = "https://fonts.gstatic.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https: //fonts.googleapis.com/css2? family= Raleway & display=swap" rel="stylesheet">
+
+<link href="https: //fonts.googleapis.com/css2? family= Source+Code+Pro:wght@300 & display=swap" rel="stylesheet">
 
 <style>
 
@@ -347,35 +352,35 @@ function vai() {
         firebase.database().ref("Temperature").on("child_added", function (snapshot) {
           var temp = snapshot.val().message;
 
-          document.getElementById('display').innerHTML += '<p id="ntext"><img src="https://lh3.googleusercontent.com/pw/ACtC-3dpf4LCxgRUQfjL0Q3eJ1IigoY61w9yqr5kNUkaP7DaTfbYlehKN7CCvJxwlCj_1_Leo-N1YYieTaLcDVGxMapYtlNnPDBlNqN5BIsrPaIMOPZo9cmtuiBLJNIfwT8G3wHKdhr647Ao2zbBIoW_pSka=s24-no?authuser=0" width="50px"></img><b>Temperature</b></p><hr align="left" size="1" width="750" color="#919191" noshade>' + '<h1>' + temp + '</h1>'
+          document.getElementById('display').innerHTML += '<p class="dettgli"><img src="https://lh3.googleusercontent.com/pw/ACtC-3dpf4LCxgRUQfjL0Q3eJ1IigoY61w9yqr5kNUkaP7DaTfbYlehKN7CCvJxwlCj_1_Leo-N1YYieTaLcDVGxMapYtlNnPDBlNqN5BIsrPaIMOPZo9cmtuiBLJNIfwT8G3wHKdhr647Ao2zbBIoW_pSka=s24-no?authuser=0" width="50px"></img><b>Temperature</b></p><hr align="left" size="1" width="750" color="#919191" noshade>' + '<p class="valriassunto">' + temp + '</p>'
 
         })
 
         firebase.database().ref("Venti").on("child_added", function (snapshot) {
           var venti = snapshot.val().message;
 
-          document.getElementById('display').innerHTML += '<p id="ntext"><img src="https://lh3.googleusercontent.com/pw/ACtC-3dmyiHZFNoCjJisGcXy8-PCdbaPv6oaoO4eneS7RxP5KBLv9t0WkwTUSEBmuG9kI751M9vBhPbsvwkXjX-b92aIFUjgt0oQYT4NH_cqBb_tys6cz2KyiioGs4mHZbCBm-7RmH6VtWn8XPrA1Evbn02N=s24-no?authuser=0" width="50px"></img><b>&nbsp;Venti</b></p><hr align="left" size="1" width="750" color="#919191" noshade>' + '<h1>' + venti + '</h1>'
+          document.getElementById('display').innerHTML += '<p class="dettgli"><img src="https://lh3.googleusercontent.com/pw/ACtC-3dmyiHZFNoCjJisGcXy8-PCdbaPv6oaoO4eneS7RxP5KBLv9t0WkwTUSEBmuG9kI751M9vBhPbsvwkXjX-b92aIFUjgt0oQYT4NH_cqBb_tys6cz2KyiioGs4mHZbCBm-7RmH6VtWn8XPrA1Evbn02N=s24-no?authuser=0" width="50px"></img><b>&nbsp;Venti</b></p><hr align="left" size="1" width="750" color="#919191" noshade>' + '<p class="valriassunto">' + venti + '</p>'
 
         })
 
         firebase.database().ref("mattina").on("child_added", function (snapshot) {
           var mattina = snapshot.val().message;
 
-          document.getElementById('display').innerHTML += '<p id="ntext"><img src="https://lh3.googleusercontent.com/pw/ACtC-3dWbwSAMuexk_DuAPzFrDRmGOQCzTDtf4DEOWPk55JYWh3ZXe-xnOEdP5DDBie57X_4TZgmEzuEjgZMWbThPnRM_KPGwY7CUH0_UUWehkG9Y-3YxLeiXX2GvkGgoU2gVn7bUgC8qmt_lHVQtEcs_9ik=s24-no?authuser=0" width="50px"></img><b>Condizioni generali mattina</b></p><hr align="left" size="1" width="750" color="#919191" noshade>' + '<h1>' + mattina + '</h1>'
+          document.getElementById('display').innerHTML += '<p class="dettgli"><img src="https://lh3.googleusercontent.com/pw/ACtC-3dWbwSAMuexk_DuAPzFrDRmGOQCzTDtf4DEOWPk55JYWh3ZXe-xnOEdP5DDBie57X_4TZgmEzuEjgZMWbThPnRM_KPGwY7CUH0_UUWehkG9Y-3YxLeiXX2GvkGgoU2gVn7bUgC8qmt_lHVQtEcs_9ik=s24-no?authuser=0" width="50px"></img><b>Condizioni generali mattina</b></p><hr align="left" size="1" width="750" color="#919191" noshade>' + '<p class="valriassunto">' + mattina + '</p>'
 
         })
 
         firebase.database().ref("pomeriggio").on("child_added", function (snapshot) {
           var pome = snapshot.val().message;
 
-          document.getElementById('display').innerHTML += '<p id="ntext"><img src="https://lh3.googleusercontent.com/pw/ACtC-3dWbwSAMuexk_DuAPzFrDRmGOQCzTDtf4DEOWPk55JYWh3ZXe-xnOEdP5DDBie57X_4TZgmEzuEjgZMWbThPnRM_KPGwY7CUH0_UUWehkG9Y-3YxLeiXX2GvkGgoU2gVn7bUgC8qmt_lHVQtEcs_9ik=s24-no?authuser=0" width="50px"></img><b>Condizioni generali pomeriggio</b></p><hr align="left" size="1" width="750" color="#919191" noshade>' + '<h1>' + pome + '</h1>'
+          document.getElementById('display').innerHTML += '<p class="dettgli"><img src="https://lh3.googleusercontent.com/pw/ACtC-3dWbwSAMuexk_DuAPzFrDRmGOQCzTDtf4DEOWPk55JYWh3ZXe-xnOEdP5DDBie57X_4TZgmEzuEjgZMWbThPnRM_KPGwY7CUH0_UUWehkG9Y-3YxLeiXX2GvkGgoU2gVn7bUgC8qmt_lHVQtEcs_9ik=s24-no?authuser=0" width="50px"></img><b>Condizioni generali pomeriggio</b></p><hr align="left" size="1" width="750" color="#919191" noshade>' + '<p class="valriassunto">' + pome + '</p>'
 
         })
 
         firebase.database().ref("preci").on("child_added", function (snapshot) {
           var pome = snapshot.val().message;
 
-          document.getElementById('display').innerHTML += '<p id="ntext"><img src="https://lh3.googleusercontent.com/pw/ACtC-3d-e1lrslZMYcP5mrG6IQHetKKI1_KlUPUtB9WVlbf4AR0Qqh0zDKRBv013hWAs8V0b3tJyBR0xQa3o29fFR1Dyr8nLlSkznTxYA4GPZyqWsU8FopHH1T9IKU-9VP9dTE_FUznASMU_VLgNJZPdqE7I=s24-no?authuser=0" width="50px"></img><b>Precipitazioni</b></p><hr align="left" size="1" width="750" color="#919191" noshade>' + '<h1>' + pome + '</h1>'
+          document.getElementById('display').innerHTML += '<p class="dettgli"><img src="https://lh3.googleusercontent.com/pw/ACtC-3d-e1lrslZMYcP5mrG6IQHetKKI1_KlUPUtB9WVlbf4AR0Qqh0zDKRBv013hWAs8V0b3tJyBR0xQa3o29fFR1Dyr8nLlSkznTxYA4GPZyqWsU8FopHH1T9IKU-9VP9dTE_FUznASMU_VLgNJZPdqE7I=s24-no?authuser=0" width="50px"></img><b>Precipitazioni</b></p><hr align="left" size="1" width="750" color="#919191" noshade>' + '<p class="valriassunto">' + pome + '</p>'
 
         })
 
@@ -383,7 +388,7 @@ function vai() {
         firebase.database().ref("dataagg").on("child_added", function (snapshot) {
           var pome = snapshot.val().message;
 
-          document.getElementById('display').innerHTML += '<p id="ntext"><img src="https://lh3.googleusercontent.com/pw/ACtC-3c9bVz9xN7URkoOA57wP40FlAmyu6S0rfiA8B_IqE1fl9-redq6Yf0astMr1wBMCtZiJOsOya_xilLtlT4z87bGo7tn3IYF0kll0RR0OukUYq6BmB0R5fFBwacko0F2bq2LfDBMo24znnS563sUUgcQ=s24-no?authuser=0" width="50px"></img><b>Data pubblicazione delle previsioni</b></p><hr align="left" size="1" width="750" color="#919191" noshade>' + '<h1>' + pome + '</h1>'
+          document.getElementById('display').innerHTML += '<p class="dettgli"><img src="https://lh3.googleusercontent.com/pw/ACtC-3c9bVz9xN7URkoOA57wP40FlAmyu6S0rfiA8B_IqE1fl9-redq6Yf0astMr1wBMCtZiJOsOya_xilLtlT4z87bGo7tn3IYF0kll0RR0OukUYq6BmB0R5fFBwacko0F2bq2LfDBMo24znnS563sUUgcQ=s24-no?authuser=0" width="50px"></img><b>Data pubblicazione delle previsioni</b></p><hr align="left" size="1" width="750" color="#919191" noshade>' + '<p class="valriassunto">' + pome + '</p>'
 
         })
 
@@ -496,35 +501,35 @@ user.updateProfile({
          firebase.database().ref("Temperature").on("child_added", function (snapshot) {
            var temp = snapshot.val().message;
 
-           document.getElementById('display').innerHTML += '<p id="ntext"><img src="https://lh3.googleusercontent.com/pw/ACtC-3dpf4LCxgRUQfjL0Q3eJ1IigoY61w9yqr5kNUkaP7DaTfbYlehKN7CCvJxwlCj_1_Leo-N1YYieTaLcDVGxMapYtlNnPDBlNqN5BIsrPaIMOPZo9cmtuiBLJNIfwT8G3wHKdhr647Ao2zbBIoW_pSka=s24-no?authuser=0" width="50px"></img><b>Temperature</b></p><hr align="left" size="1" width="750" color="#919191" noshade>' + '<h1>' + temp + '</h1>'
+           document.getElementById('display').innerHTML += '<p class="dettgli"><img src="https://lh3.googleusercontent.com/pw/ACtC-3dpf4LCxgRUQfjL0Q3eJ1IigoY61w9yqr5kNUkaP7DaTfbYlehKN7CCvJxwlCj_1_Leo-N1YYieTaLcDVGxMapYtlNnPDBlNqN5BIsrPaIMOPZo9cmtuiBLJNIfwT8G3wHKdhr647Ao2zbBIoW_pSka=s24-no?authuser=0" width="50px"></img><b>Temperature</b></p><hr align="left" size="1" width="750" color="#919191" noshade>' + '<p class="valriassunto">' + temp + '</p>'
 
          })
 
          firebase.database().ref("Venti").on("child_added", function (snapshot) {
            var venti = snapshot.val().message;
 
-           document.getElementById('display').innerHTML += '<p id="ntext"><img src="https://lh3.googleusercontent.com/pw/ACtC-3dmyiHZFNoCjJisGcXy8-PCdbaPv6oaoO4eneS7RxP5KBLv9t0WkwTUSEBmuG9kI751M9vBhPbsvwkXjX-b92aIFUjgt0oQYT4NH_cqBb_tys6cz2KyiioGs4mHZbCBm-7RmH6VtWn8XPrA1Evbn02N=s24-no?authuser=0" width="50px"></img><b>&nbsp;Venti</b></p><hr align="left" size="1" width="750" color="#919191" noshade>' + '<h1>' + venti + '</h1>'
+           document.getElementById('display').innerHTML += '<p class="dettgli"><img src="https://lh3.googleusercontent.com/pw/ACtC-3dmyiHZFNoCjJisGcXy8-PCdbaPv6oaoO4eneS7RxP5KBLv9t0WkwTUSEBmuG9kI751M9vBhPbsvwkXjX-b92aIFUjgt0oQYT4NH_cqBb_tys6cz2KyiioGs4mHZbCBm-7RmH6VtWn8XPrA1Evbn02N=s24-no?authuser=0" width="50px"></img><b>&nbsp;Venti</b></p><hr align="left" size="1" width="750" color="#919191" noshade>' + '<p class="valriassunto">' + venti + '</p>'
 
          })
 
          firebase.database().ref("mattina").on("child_added", function (snapshot) {
            var mattina = snapshot.val().message;
 
-           document.getElementById('display').innerHTML += '<p id="ntext"><img src="https://lh3.googleusercontent.com/pw/ACtC-3dWbwSAMuexk_DuAPzFrDRmGOQCzTDtf4DEOWPk55JYWh3ZXe-xnOEdP5DDBie57X_4TZgmEzuEjgZMWbThPnRM_KPGwY7CUH0_UUWehkG9Y-3YxLeiXX2GvkGgoU2gVn7bUgC8qmt_lHVQtEcs_9ik=s24-no?authuser=0" width="50px"></img><b>Condizioni generali mattina</b></p><hr align="left" size="1" width="750" color="#919191" noshade>' + '<h1>' + mattina + '</h1>'
+           document.getElementById('display').innerHTML += '<p class="dettgli"><img src="https://lh3.googleusercontent.com/pw/ACtC-3dWbwSAMuexk_DuAPzFrDRmGOQCzTDtf4DEOWPk55JYWh3ZXe-xnOEdP5DDBie57X_4TZgmEzuEjgZMWbThPnRM_KPGwY7CUH0_UUWehkG9Y-3YxLeiXX2GvkGgoU2gVn7bUgC8qmt_lHVQtEcs_9ik=s24-no?authuser=0" width="50px"></img><b>Condizioni generali mattina</b></p><hr align="left" size="1" width="750" color="#919191" noshade>' + '<p class="valriassunto">' + mattina + '</p>'
 
          })
 
          firebase.database().ref("pomeriggio").on("child_added", function (snapshot) {
            var pome = snapshot.val().message;
 
-           document.getElementById('display').innerHTML += '<p id="ntext"><img src="https://lh3.googleusercontent.com/pw/ACtC-3dWbwSAMuexk_DuAPzFrDRmGOQCzTDtf4DEOWPk55JYWh3ZXe-xnOEdP5DDBie57X_4TZgmEzuEjgZMWbThPnRM_KPGwY7CUH0_UUWehkG9Y-3YxLeiXX2GvkGgoU2gVn7bUgC8qmt_lHVQtEcs_9ik=s24-no?authuser=0" width="50px"></img><b>Condizioni generali pomeriggio</b></p><hr align="left" size="1" width="750" color="#919191" noshade>' + '<h1>' + pome + '</h1>'
+           document.getElementById('display').innerHTML += '<p class="dettgli"><img src="https://lh3.googleusercontent.com/pw/ACtC-3dWbwSAMuexk_DuAPzFrDRmGOQCzTDtf4DEOWPk55JYWh3ZXe-xnOEdP5DDBie57X_4TZgmEzuEjgZMWbThPnRM_KPGwY7CUH0_UUWehkG9Y-3YxLeiXX2GvkGgoU2gVn7bUgC8qmt_lHVQtEcs_9ik=s24-no?authuser=0" width="50px"></img><b>Condizioni generali pomeriggio</b></p><hr align="left" size="1" width="750" color="#919191" noshade>' + '<p class="valriassunto">' + pome + '</p>'
 
          })
 
          firebase.database().ref("preci").on("child_added", function (snapshot) {
            var pome = snapshot.val().message;
 
-           document.getElementById('display').innerHTML += '<p id="ntext"><img src="https://lh3.googleusercontent.com/pw/ACtC-3d-e1lrslZMYcP5mrG6IQHetKKI1_KlUPUtB9WVlbf4AR0Qqh0zDKRBv013hWAs8V0b3tJyBR0xQa3o29fFR1Dyr8nLlSkznTxYA4GPZyqWsU8FopHH1T9IKU-9VP9dTE_FUznASMU_VLgNJZPdqE7I=s24-no?authuser=0" width="50px"></img><b>Precipitazioni</b></p><hr align="left" size="1" width="750" color="#919191" noshade>' + '<h1>' + pome + '</h1>'
+           document.getElementById('display').innerHTML += '<p class="dettgli"><img src="https://lh3.googleusercontent.com/pw/ACtC-3d-e1lrslZMYcP5mrG6IQHetKKI1_KlUPUtB9WVlbf4AR0Qqh0zDKRBv013hWAs8V0b3tJyBR0xQa3o29fFR1Dyr8nLlSkznTxYA4GPZyqWsU8FopHH1T9IKU-9VP9dTE_FUznASMU_VLgNJZPdqE7I=s24-no?authuser=0" width="50px"></img><b>Precipitazioni</b></p><hr align="left" size="1" width="750" color="#919191" noshade>' + '<p class="valriassunto">' + pome + '</p>'
 
          })
 
@@ -532,9 +537,10 @@ user.updateProfile({
          firebase.database().ref("dataagg").on("child_added", function (snapshot) {
            var pome = snapshot.val().message;
 
-           document.getElementById('display').innerHTML += '<p id="ntext"><img src="https://lh3.googleusercontent.com/pw/ACtC-3c9bVz9xN7URkoOA57wP40FlAmyu6S0rfiA8B_IqE1fl9-redq6Yf0astMr1wBMCtZiJOsOya_xilLtlT4z87bGo7tn3IYF0kll0RR0OukUYq6BmB0R5fFBwacko0F2bq2LfDBMo24znnS563sUUgcQ=s24-no?authuser=0" width="50px"></img><b>Data pubblicazione delle previsioni</b></p><hr align="left" size="1" width="750" color="#919191" noshade>' + '<h1>' + pome + '</h1>'
+           document.getElementById('display').innerHTML += '<p class="dettgli"><img src="https://lh3.googleusercontent.com/pw/ACtC-3c9bVz9xN7URkoOA57wP40FlAmyu6S0rfiA8B_IqE1fl9-redq6Yf0astMr1wBMCtZiJOsOya_xilLtlT4z87bGo7tn3IYF0kll0RR0OukUYq6BmB0R5fFBwacko0F2bq2LfDBMo24znnS563sUUgcQ=s24-no?authuser=0" width="50px"></img><b>Data pubblicazione delle previsioni</b></p><hr align="left" size="1" width="750" color="#919191" noshade>' + '<p class="valriassunto">' + pome + '</p>'
 
          })
+
 
 
        });
@@ -830,10 +836,31 @@ user.updateProfile({
           border-radius: 25px;
           right: 5px;
         }
-
+        .dettgli{
+          font-family: 'Raleway', sans-serif;
+          font-size: 40px;
+        }
+        .valriassunto{
+          font-family: 'Raleway', sans-serif;
+          font-size: 30px;
+        }
+        #ultim{
+          font-family: 'Source Code Pro', monospazio;
+          top: 90px;
+        }
+        #ultima{
+          width: 100%;
+          height: 200px;
+          background-image: url("https://lh3.googleusercontent.com/pw/AM-JKLUFiD_dbz-alodAMi71i9dIIXbArYEs8gioAhyVM1psrn4qh0qg1hBo7QWfY5h7Tcc8q7d8vOm4VjvoZt8oTGj23hZCgt1mzN8-g7lWdLzn_JpTM5HQ0jK8IRF_aCGIcak36Q6eVEV95TzsyH3_vi5f=s512-no?authuser=0");
+          background-repeat: no-repeat;
+          background-position: left;
+          background-size: contain;
+          background-color: #bfbaba;
+        }
 
         </style>
 
-        <br>
+        <br><br><br><br>
+        <center><img src='copyright.jpg' height='150px' width='70%'></img></center>
       </body>
       </html>
