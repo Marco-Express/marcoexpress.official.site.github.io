@@ -119,6 +119,7 @@ box-shadow: 10px 10px 5px #dedede;
 
     <span id='display'></span>
     <button onclick='feed()' id='feed'><h2 id='fte'>Lascia un Feedback!</h2></button>
+    <button onclick='due()' id='due'><h2 id='tdue'>Esegui una donazione!</h2></button>
 
 
 <script>
@@ -166,7 +167,6 @@ document.addEventListener('contextmenu', event => event.preventDefault(
       document.getElementById('display').innerHTML = "<div id='hh'><center><h1>EHI! NON CERCARE D'IMBROGLIARE!</h1><h2>Secondo la politica sul corretto utilizzo dei siti Marco Express, &egrave; severamente vietato l'utilizzo della console ai non autorizzati. <br> Abbiamo segnalato il fatto che tu hai provato a barare. Nonostante ci&ograve; potrebbe essere che tu l'abbia fatto involontariamente. <b>Ora sai che non devi farlo</b>. La prossima volta ricordati che, se ci proverai di nuovo, verrai bannato dal sito e non avrai pi&ugrave; la possibilit&agrave; di usufruire degli abbonamenti e dei servizi.<br><br><br><button onclick='prosegui()'><h1>Prosegui l'utilizzo del sito</h1></button></center></div>"
 
    ));
-
      function prosegui() {
        document.getElementById("hh").style.display="none";
      }
@@ -180,6 +180,21 @@ document.addEventListener('contextmenu', event => event.preventDefault(
        document.getElementById('fte').innerHTML = '<img src="https://lh3.googleusercontent.com/pw/AM-JKLVbVOJs-bg9c5p-4RMYN1rU3WwYceo4sCH6vFdmujR1tz3xxcOHHNGecU4GVq8PFT8uDJ7hmTkmfHnxNOzGdLVcLT39HE-ptKkf0kkNM1SOgezDTYY5TyBPUPYkN4i0jXdn2yoAPrSNVdoS8N2o6S2z=s24-no?authuser=0" height= "39px" width="39px"></img>'
        $('#feed').css('border-radius', '40px');
 
+
+       var ook = $("#due")
+       ook.animate({
+         height: "80px",
+         width: "80px"
+       }, 900)
+       document.getElementById('tdue').innerHTML = '<img src="donazione.png" height= "39px" width="39px"></img>'
+       $('#due').css('border-radius', '40px');
+       setTimeout(jjj, 100)
+     }
+
+     function jjj() {
+        $('#due').animate({
+          right: "100px"
+        }, 750)
      }
 
      function iniziobody() {
@@ -189,6 +204,12 @@ document.addEventListener('contextmenu', event => event.preventDefault(
 
     function feed() {
       location.href = 'https://docs.google.com/forms/d/e/1FAIpQLSdtuUKjayKMK4yypsgnN0ftwQNLXYO_SGX-yTO4ocf4reLPBA/viewform?usp=sf_link'
+    }
+
+    function due(){
+      alert('Ora ti reindrizzeremo sulla pagina dei pagamenti. Cliccare "Nuova Spesa", selezionare "Donazione", scrivere l\'importo e cliccare nuovamente su "Acquista". Ti ringraziamo di cuore dell\'aiuto che ci darai donando una qualsiasi cifra. (Clicca su "ok" per continuare)')
+      location.href = 'gestionepagamenti.html'
+
     }
 
 
@@ -266,7 +287,6 @@ function vai() {
              console.log('Premium Plus')
              premiumplus()
            }else{
-
                  document.getElementById("password").style.display="none";
                  document.getElementById("email").style.display="none";
                  document.getElementById("signIn").style.display="none";
@@ -346,7 +366,9 @@ function vai() {
            var testo = snapshot.val().message;
            var titolo = snapshot.val().sender;
 
-           document.getElementById('display').innerHTML = '<div id="sc"><p id="ttext">' + titolo + '</h1>' + '<hr align="left" size="1" width="750" color="#919191" noshade><button onclick="ascolta()" id="ascolta"><img src="https://lh3.googleusercontent.com/pw/ACtC-3fUB_LXWYYOOLYD8sp07_c1AVbIbD4yuQ4lSuf0fqeLNxWIZTRq_1oMp4vOty24HL7A_4gTZqwZpWLljZzpcvtRh3Z9URrxzfgqnA67oxSP5JJu5cAZF1A2gsuVWhwD1uXY6BIOS2FnvL28onR7hEPc=s48-no?authuser=0"></img></button>' + '<p id="ntext">' + testo + '</p>'
+           document.getElementById('display').innerHTML = '<p id="ttext" class="anime">' + titolo + '</p>' + '<hr align="left" size="1" width="750" color="#919191" noshade><button onclick="ascolta()" id="ascolta"><img src="https://lh3.googleusercontent.com/pw/ACtC-3fUB_LXWYYOOLYD8sp07_c1AVbIbD4yuQ4lSuf0fqeLNxWIZTRq_1oMp4vOty24HL7A_4gTZqwZpWLljZzpcvtRh3Z9URrxzfgqnA67oxSP5JJu5cAZF1A2gsuVWhwD1uXY6BIOS2FnvL28onR7hEPc=s48-no?authuser=0"></img></button>' + '<p id="ntext">' + testo + '</p>'
+
+
      })
 
         firebase.database().ref("Temperature").on("child_added", function (snapshot) {
@@ -394,8 +416,6 @@ function vai() {
 
    }
 
-
-
      function tuoacc(){
        document.getElementById("display").innerHTML =" ";
 
@@ -415,7 +435,7 @@ function vai() {
           document.getElementById('display').innerHTML += "<p id='ntext'>" + "Password: <span id='passwordo'>" + "**************" + "</span>&nbsp;&nbsp;&nbsp;&nbsp;<button onclick='modpw()' id='modnome'><img src='https://lh3.googleusercontent.com/pw/ACtC-3da3hW4dsZX5PbU-tHhQjjutzLdZalnhafSWjPTYDusOcQpV3Q0GM7lXsa2wmAomFEv0RBE500H8EbisBrcBCTUZ3lO5ZtkKWkdc95ZEYTHvIR_gKFKkrk0EfPacCbUN10t1_bkr11qZ5A-kSep27Yf=s24-no?authuser=0' width='40px'/></button>"
           document.getElementById('display').innerHTML += "<p id='ntext'>" + "Scadenza dell'abbonamento:  " + profile.photoURL
           document.getElementById('display').innerHTML += '<br>' + '<button onclick="signOut()" id="signOut"><h1>Logout</h1><img src="https://lh3.googleusercontent.com/pw/ACtC-3fxEqyRV4Kgd6Zq9ZYJSi8aBG4TOp5qqBYOGl7OnRZUogm68jgxH4UIwV2rIi1pIUDv62xzfK4Cwbj_xIQyKVdqMtGtecPJa3t36jMGNe4bS_7_5h8QrdJH6lMSlc-9vmqzvKUcR5tGcj7zNqJpY_la=s24-no?authuser=0" height="50px"></img></button>'
-          document.getElementById('display').innerHTML +='&nbsp;&nbsp;&nbsp;<button onclick="elimabb()" id="signOut"><h1>Elimina l\'abbonamento*</h1><h2><br>Attenzione! L\'eliminazione dell\'abbonamento non comporta NESSUN rimborso.</h2></button><br><h2>Quando hai creato il tuo account, hai accettato le <a href="https://docs.google.com/document/d/19Mgx9IHb-IxL0nMT4j_Le_YNjQQFHJBy2KwLtY4yCa8/preview"  target="_blank">Condizioni d\'uso</a>. Per visualizzarle, <a href="https://docs.google.com/document/d/19Mgx9IHb-IxL0nMT4j_Le_YNjQQFHJBy2KwLtY4yCa8/preview" target="_blank">CLICCA QUI</a>'
+          document.getElementById('display').innerHTML +='&nbsp;&nbsp;&nbsp;<button onclick="elimabb()" id="signOut"><h1>Elimina l\'abbonamento*</h1><h2><br>Attenzione! L\'eliminazione dell\'abbonamento non comporta NESSUN rimborso.</h2></button><br><p id="ntext">Gestisci i tuoi pagamenti accedentdo al portale ufficiale <a href="gestionepagamenti.html">cliccando qui</a>.</p><h2>Quando hai creato il tuo account, hai accettato le <a href="https://docs.google.com/document/d/19Mgx9IHb-IxL0nMT4j_Le_YNjQQFHJBy2KwLtY4yCa8/preview"  target="_blank">Condizioni d\'uso</a>. Per visualizzarle, <a href="https://docs.google.com/document/d/19Mgx9IHb-IxL0nMT4j_Le_YNjQQFHJBy2KwLtY4yCa8/preview" target="_blank">CLICCA QUI</a>'
         });
       }
 
@@ -836,6 +856,14 @@ user.updateProfile({
           border-radius: 25px;
           right: 5px;
         }
+        #due{
+          position: fixed;
+          bottom: 10px;
+          height: 50px;
+          width: 300px;
+          border-radius: 25px;
+          right: 320px;
+        }
         .dettgli{
           font-family: 'Raleway', sans-serif;
           font-size: 40px;
@@ -861,6 +889,6 @@ user.updateProfile({
         </style>
 
         <br><br><br><br>
-        <center><img src='copyright.jpg' height='150px' width='70%'></img></center>
+        <center><img src='Copyright.jpg' height='150px' width='70%'></img></center>
       </body>
       </html>

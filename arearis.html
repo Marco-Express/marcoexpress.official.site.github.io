@@ -29,8 +29,8 @@ firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 
 
-document.addEventListener('contextmenu', event => event.preventDefault(
-  ));
+//document.addEventListener('contextmenu', event => event.preventDefault(
+  //));
 function signIn(){
   if(navigator.onLine){
   var email = document.getElementById("email");
@@ -43,9 +43,10 @@ function signIn(){
 }}
 
 auth.onAuthStateChanged(function(user){
-   alert('Login effettuato user:' + user );
+
    user.providerData.forEach(function (profile) {
      var soldiora = profile.displayName
+     alert('Login effettuato user:' + profile.email );
      alert('Soldi attuali: ' + soldiora)
 
    })
@@ -64,18 +65,28 @@ auth.onAuthStateChanged(function(user){
      if(pp === '009'){
        var eu = document.getElementById('euro').value
        user.providerData.forEach(function (profile) {
-         var soldiora = Number(profile.displayName)
+       //var soldiora = profile.displayName
+       var ehe = Number(profile.displayName)
+        // var altro = Number(soldiora)
+        //console.log(typeof soldiora)
+        //console.log(soldiora)
+        //var ok = Number(soldiora)
          var euu = Number(eu)
-         var piu = soldiora+euu
+         console.log(typeof ok)
+         console.log(typeof euu)
+         var piu = ehe+euu
+         var inv = "" + piu
+         console.log(typeof inv);
+         console.log(inv);
          user.updateProfile({
-        displayName: piu
+        displayName: inv
       }).then(function() {
-        console.log('primo ok')
+        alert('Fatto!')
       }).catch(function(error) {
-        document.write("Errore")
+        alert('Errore: '+ error)
       });
 
-       })
+    })
      }else{
        document.write('Password non accettata')
      }
