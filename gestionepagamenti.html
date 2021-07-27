@@ -91,7 +91,12 @@ auth.onAuthStateChanged(function(user){
 
     var user = firebase.auth().currentUser;
     user.providerData.forEach(function (profile) {
-      disp.innerHTML += "<p class='ntext'>Denaro totale prepagato memorizzato nell'account: " + "</p><p class='ltext'>&euro;"+ profile.displayName + "</p>"
+      var soldiora = Number(profile.displayName);
+      console.log(soldiora)
+      var soldiarr = Math.round((soldiora + Number.EPSILON) * 100)
+      var soldi = soldiarr / 100
+      disp.innerHTML += "<p class='ntext'>Denaro totale prepagato memorizzato nell'account: " + "</p><p class='ltext'>&euro;"+ soldi + "</p><h2>(Il sistema arrotonda il numero per l'output)</h2>"
+
     });
     var nomespesa = localStorage.getItem("nomespesa");
     var costospesa = localStorage.getItem("costospesa");
