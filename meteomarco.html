@@ -6,86 +6,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https: //fonts.googleapis.com/css2? family= Raleway & display=swap" rel="stylesheet">
-
 <link href="https: //fonts.googleapis.com/css2? family= Source+Code+Pro:wght@300 & display=swap" rel="stylesheet">
+<link href="meteostile.css" rel="stylesheet" type="text/css">
 
-<style>
-
-#loading_screen{
-  position: absolute;
-  top:0px;
-  right:0px;
-  height: 100%;
-  width: 100%;
-  background-color: gray;
-  z-index: 1000;
-  opacity: .75;
-  filter: alpha(opacity=75);
-  -moz-opacity: .75;
-
-}
-
-#primoacc{
-  position: absolute;
-  top:0px;
-  right:0px;
-  height: 100%;
-  width: 100%;
-  background-color: gray;
-  z-index: 1000;
-  opacity: .90;
-  filter: alpha(opacity=75);
-  -moz-opacity: .75;
-}
-
-#casella{
-  width: 80%;
-  background: white;
-  opacity: .95;
-  border-radius: 15px;
-  box-shadow: 10px 10px 5px #dedede;
-}
-#cb{
-  ms-transform: scale(3); /* IE */
-    -moz-transform: scale(3); /* FF */
-    -webkit-transform: scale(3); /* Safari and Chrome */
-    -o-transform: scale(3); /* Opera */
-    transform: scale(3);
-    padding: 10px;
-}
-
-#btn{
-  background: red;
-  font-size: 30px;
-  height: 60px;
-  width: 65%;
-  opacity: .99;
-
-}
-
-#d{
-    float: left; padding: 15px 15px 15px 15px;
-}
-
-#pp{
-  width: 98%;
-  height: auto;
-border: 5px double black;
-border-radius: 15px;
-box-shadow: 10px 10px 5px #dedede;
-}
-
-#ppabbn{
-  width: 100%;
-  height: 75px;
-
-}
-
-#selezionaabb{
-  width: 90%;
-  height: 100px;
-}
-</style>
   </head>
   <body onload="iniziobody()">
 
@@ -365,9 +288,9 @@ function vai() {
            var testo = snapshot.val().message;
            var titolo = snapshot.val().sender;
            var disp = document.getElementById('display')
-           disp.innerHTML = '<p id="ttext" class="anime"><img id="simboloo"style="float:left; width: 100px; padding: 15px;" src="imgnot.png"></img>' + titolo + '</p>' + '<hr align="left" size="1" width="750" color="#919191" noshade><button onclick="ascolta()" id="ascolta"><img src="https://lh3.googleusercontent.com/pw/ACtC-3fUB_LXWYYOOLYD8sp07_c1AVbIbD4yuQ4lSuf0fqeLNxWIZTRq_1oMp4vOty24HL7A_4gTZqwZpWLljZzpcvtRh3Z9URrxzfgqnA67oxSP5JJu5cAZF1A2gsuVWhwD1uXY6BIOS2FnvL28onR7hEPc=s48-no?authuser=0"></img></button>' + '<p id="ntext">' + testo + '</p><br>'
-           disp.innerHTML += '<div class="dettaglipre" style="float: left;"><img id="mattinaa"style="float: left;"></img><center><p id="ntext">Mattina</p></center><br><p class="dettore" id="descrivimattina"></p></div>'
-           disp.innerHTML += '<div id="pomeriggio"><img id="pomeriggioo" style="float: left;"></img><center><p id="ntext">Pomeriggio</p></center><br><p class="dettore" id="descrivipomeriggio"></p></div><br><br><br><br><br>'
+           disp.innerHTML = '<div id="prova"><p id="ttext" class="anime"><img id="simboloo"style="float:left; width: 100px; padding: 15px;" src="imgnot.png"></img>' + titolo + '</p>' + '<hr align="left" size="1" width="750" color="#919191" noshade><button onclick="ascolta()" id="ascolta"><img src="https://lh3.googleusercontent.com/pw/ACtC-3fUB_LXWYYOOLYD8sp07_c1AVbIbD4yuQ4lSuf0fqeLNxWIZTRq_1oMp4vOty24HL7A_4gTZqwZpWLljZzpcvtRh3Z9URrxzfgqnA67oxSP5JJu5cAZF1A2gsuVWhwD1uXY6BIOS2FnvL28onR7hEPc=s48-no?authuser=0"></img></button>' + '<p id="ntext">' + testo + '</p><br></div>'
+           disp.innerHTML += '<div class="dettaglipre" id="matt" style="float: left;"><img id="mattinaa"style="float: left;"></img><center><p id="mattt">Mattina</p></center><br><p class="dettore" id="descrivimattina"></p></div>'
+           disp.innerHTML += '<div id="pomeriggio"><img id="pomeriggioo" style="float: left;"></img><center><p id="pomet" class="cambia">Pomeriggio</p></center><br><p class="dettore" id="descrivipomeriggio"></p></div><br><br><br><br><br>'
 
            var matt = $("#mattinaa")
            matt.attr("src","https://ssl.gstatic.com/onebox/weather/48/partly_cloudy.png");
@@ -381,14 +304,28 @@ firebase.database().ref("Pom").on("child_added", function (snapshot) {
   if(logo === "Soleggiato"){
     console.log('Soleggiatoooo!')
     $("#pomeriggioo").attr("src","https://ssl.gstatic.com/onebox/weather/48/sunny.png");
+   document.getElementById('pomeriggio').style.backgroundImage = "url(https://laprovinciadibiella.it/wp-content/uploads/2020/04/meteo-soleggiato.jpg)";
   }else if(logo === "Parzialmente soleggiato"){
+    document.getElementById('pomeriggio').style.backgroundImage = "url(https://script.meteolive.it/admin/immaginiNotizie/SRC/__070003___parziale.jpg)";
     $("#pomeriggioo").attr("src","https://ssl.gstatic.com/onebox/weather/48/partly_cloudy.png");
+    document.getElementById('descrivipomeriggio').style.background = "#8fffea"
   }else if(logo === "Piovoso"){
+    document.getElementById('pomeriggio').style.backgroundImage = "url(https://trani.news24.city/wp-content/uploads/sites/14/2019/04/PIOGGIA-MALTEMPO-METEO.jpg)";
+      document.getElementById('descrivipomeriggio').style.color = "white"
+      document.getElementById('pomet').style.color = "white"
     $("#pomeriggioo").attr("src","https://ssl.gstatic.com/onebox/weather/48/rain_s_cloudy.png");
   }else if(logo === "Temporali"){
+    document.getElementById('pomeriggio').style.backgroundImage = "url(https://www.malpensa24.it/wp-content/uploads/2020/08/temporali-grandine-calo-termico.jpg)";
     $("#pomeriggioo").attr("src","https://ssl.gstatic.com/onebox/weather/48/thunderstorms.png");
+document.getElementById('descrivipomeriggio').style.background = "#141C2F"
+document.getElementById('descrivipomeriggio').style.color = "white"
   }else if(logo === "Nuvoloso"){
+    document.getElementById('pomeriggio').style.backgroundImage = "url(https://www.malpensa24.it/wp-content/uploads/2018/11/nuvole-cielo-coperto.jpg)";
     $("#pomeriggioo").attr("src","https://ssl.gstatic.com/onebox/weather/64/cloudy.png")
+    document.getElementById('pomet').style.color = "white"
+    document.getElementById('descrivipomeriggio').style.color = "white"
+    document.getElementById('descrivipomeriggio').style.background = "#626363"
+
   }
   document.getElementById('descrivipomeriggio').innerHTML = descrivi
   setTimeout(animatutto , 1000)
@@ -400,14 +337,28 @@ firebase.database().ref("Matt").on("child_added", function (snapshot) {
   if(logo === "Soleggiato"){
     console.log('Soleggiatoooo!')
     $("#mattinaa").attr("src","https://ssl.gstatic.com/onebox/weather/48/sunny.png");
+    document.getElementById('matt').style.backgroundImage = "url(https://laprovinciadibiella.it/wp-content/uploads/2020/04/meteo-soleggiato.jpg)";
   }else if(logo === "Parzialmente soleggiato"){
     $("#mattinaa").attr("src","https://ssl.gstatic.com/onebox/weather/48/partly_cloudy.png");
+    document.getElementById('descrivimattina').style.background = "#8fffea"
   }else if(logo === "Piovoso"){
+    document.getElementById('matt').style.backgroundImage = "url(https://trani.news24.city/wp-content/uploads/sites/14/2019/04/PIOGGIA-MALTEMPO-METEO.jpg)";
+      document.getElementById('descrivimattina').style.color = "white"
+      document.getElementById('mattt').style.color = "white"
     $("#mattinaa").attr("src","https://ssl.gstatic.com/onebox/weather/48/rain_s_cloudy.png");
   }else if(logo === "Temporali"){
+    document.getElementById('matt').style.backgroundImage = "url(https://www.malpensa24.it/wp-content/uploads/2020/08/temporali-grandine-calo-termico.jpg)";
+      document.getElementById('descrivimattina').style.background = "#141C2F"
+      document.getElementById('descrivimattina').style.color = "white"
     $("#mattinaa").attr("src","https://ssl.gstatic.com/onebox/weather/48/thunderstorms.png");
   }else if(logo === "Nuvoloso"){
     $("#mattinaa").attr("src","https://ssl.gstatic.com/onebox/weather/64/cloudy.png")
+    document.getElementById('mattt').style.color = "white"
+    document.getElementById('descrivimattina').style.color = "white"
+    document.getElementById('descrivimattina').style.background = "#626363"
+    document.getElementById('matt').style.backgroundImage = "url(https://www.malpensa24.it/wp-content/uploads/2018/11/nuvole-cielo-coperto.jpg)";
+
+
   }
   document.getElementById('descrivimattina').innerHTML = descrivi
 
@@ -669,246 +620,6 @@ user.updateProfile({
 
     }
       </script>
-
-
-      <style>
-
-      body{
-        font-family:"Josefin Sans", sans-serif;
-      }
-
-      button{
-        cursor: pointer;
-      }
-
-
-      #hh{
-      position: absolute;
-      top:0px;
-      right:0px;
-      height: 100%;
-      width: 100%;
-      background-color: gray;
-      z-index: 1000;
-      opacity: .90;
-      filter: alpha(opacity=90);
-      -moz-opacity: .90;
-      }
-
-      #reiu{
-        width: 65%;
-        height: 75px;
-       background: #d5dbd6;
-       border-radius: 7px;
-      }
-
-      #rei{
-        width: 90%;
-        border: 3px solid black;
-        background: #d5dbd6;
-        font-size: 250%;
-        border-radius: 15px;
-        box-shadow: 10px 10px 5px #dedede;
-      }
-
-      #rlogin{
-        height: 75px;
-        width: 65%;
-        background: #d5dbd6;
-      }
-      #confi{
-        height: 75px;
-        width: 65%;
-        background: #d5dbd6;
-      }
-
-      #rlogin{
-        width: 60%;
-        font-size: 35px;
-      }
-      #home{
-        width: 60%;
-
-      }
-
-      #tuoacc{
-        width: 38%;
-        height: 35%;
-        background: #f6ff00;
-        letter-spacing: 2px;
-        border-radius: 15px;
-        box-shadow: 10px 10px 5px #dedede;
-        border: 3px solid #ffb700;
-      }
-
-
-      #ttext,#tttext{
-        font-size: 50px;
-      }
-      #ntext{
-        font-size: 40px;
-      }
-
-      #accessoc {
-        width: 98%;
-        height: 25%;
-        position: fixed;
-
-      }
-      #ace{
-        font-size: 100%;
-      }
-
-      #dati{
-        width: 30%;
-        height: 35%;
-        background-color: #9d9ff2;
-        border: 3px solid #0004de;
-        letter-spacing: 2px;
-        border-radius: 15px;
-        box-shadow: 10px 10px 5px #dedede;
-      }
-
-      #previsioni{
-        width: 30%;
-        height: 35%;
-        background-color: #afff9c;
-        border: 3px solid #33ff00;
-        letter-spacing: 2px;
-        border-radius: 15px;
-        box-shadow: 10px 10px 5px #dedede;
-      }
-
-        #inizio{
-          height:350px;
-        }
-        #signOut {
-          height: 25%;
-          background: #f0cccc;
-          width: 38%;
-          border: 3px solid red;
-          letter-spacing: 2px;
-          border-radius: 15px;
-          box-shadow: 10px 10px 5px #dedede;
-        }
-        #signIn {
-          background: #b2f7bc;
-          width: 200px;
-          border: 3px solid #0af52c;
-          letter-spacing: 2px;
-          border-radius: 40px;
-        }
-        #password,#email {
-          width:80%;
-          background: #d5dbd6;
-          border: 3px solid black;
-          font-size: 250%;
-          border-radius: 20px;
-          box-shadow: 15px 10px 5px #dedede;
-
-        }
-        #button {
-          background: #d5dbd6;
-          border: 3px solid black;
-          font-size: 120%;
-        box-shadow: 15px 10px 5px #dedede;
-        }
-
-        #datidue {
-
-          width: 98%;
-          height: 10%;
-          border: 2px solid #00c3ff;
-          letter-spacing: 2px;
-          background-color: #73ebe1;
-          border-radius: 15px;
-          box-shadow: 10px 10px 5px #dedede;
-
-        }
-
-        #modnome{
-
-          width: 50px;
-          height: 50px;
-
-        }
-
-        #nuovonome{
-          font-size: 100%;
-          width: 70%
-
-        }
-
-        #confermanome{
-          width: auto;
-          height: 75px;
-        }
-
-        #ascolta{
-          width: 750px;
-          height: 75px;
-        }
-
-        #feed{
-          position: fixed;
-          bottom: 10px;
-          height: 50px;
-          width: 300px;
-          border-radius: 25px;
-          right: 5px;
-        }
-        #due{
-          position: fixed;
-          bottom: 10px;
-          height: 50px;
-          width: 300px;
-          border-radius: 25px;
-          right: 320px;
-        }
-        .dettgli{
-          font-family: 'Raleway', sans-serif;
-          font-size: 40px;
-        }
-        .valriassunto{
-          font-family: 'Raleway', sans-serif;
-          font-size: 30px;
-        }
-        #ultim{
-          font-family: 'Source Code Pro', monospazio;
-          top: 90px;
-        }
-        #ultima{
-          width: 100%;
-          height: 200px;
-          background-image: url("https://lh3.googleusercontent.com/pw/AM-JKLUFiD_dbz-alodAMi71i9dIIXbArYEs8gioAhyVM1psrn4qh0qg1hBo7QWfY5h7Tcc8q7d8vOm4VjvoZt8oTGj23hZCgt1mzN8-g7lWdLzn_JpTM5HQ0jK8IRF_aCGIcak36Q6eVEV95TzsyH3_vi5f=s512-no?authuser=0");
-          background-repeat: no-repeat;
-          background-position: left;
-          background-size: contain;
-          background-color: #bfbaba;
-        }
-        .dettaglipre{
-          padding: 15px;
-          width: 45%;
-          height: 350px;
-          border: 1px solid #615c5c;
-          border-radius: 15px;
-          left: 25px;
-        }
-        .dettore{
-          font-family: 'Raleway', sans-serif;
-          font-size: 30px;
-        }
-        #pomeriggio{
-          padding: 15px;
-          float: right;
-          width: 45%;
-          right: 25px;
-          height: 350px;
-          border: 1px solid #615c5c;
-          border-radius: 15px;
-        }
-
-        </style>
 
         <br><br><br><br>
         <center><img src='Copyright.jpg' height='150px' width='70%'></img></center>
