@@ -8,6 +8,8 @@
 <link href="https: //fonts.googleapis.com/css2? family= Raleway & display=swap" rel="stylesheet">
 <link href="https: //fonts.googleapis.com/css2? family= Source+Code+Pro:wght@300 & display=swap" rel="stylesheet">
 <link href="meteostile.css" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
 
   </head>
   <body onload="iniziobody()">
@@ -69,6 +71,7 @@ document.getElementById("loading_screen").style.display = 'none';
     <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-database.js" onload="document.getElementById('lo').innerHTML = 'Caricamento libreria Firebase DB in corso...'"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"onload="document.getElementById('lo').innerHTML = 'Caricamento libreria pdf creator in corso...'"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js" onload="document.getElementById('lo').innerHTML = 'Caricamento libreria jQuery in corso...'"></script>
+    <script src="meteomarco.js"></script>
 
     <script>
       var firebaseConfig = {
@@ -90,8 +93,10 @@ document.addEventListener('contextmenu', event => event.preventDefault(
       document.getElementById('display').innerHTML = "<div id='hh'><center><h1>EHI! NON CERCARE D'IMBROGLIARE!</h1><h2>Secondo la politica sul corretto utilizzo dei siti Marco Express, &egrave; severamente vietato l'utilizzo della console ai non autorizzati. <br> Abbiamo segnalato il fatto che tu hai provato a barare. Nonostante ci&ograve; potrebbe essere che tu l'abbia fatto involontariamente. <b>Ora sai che non devi farlo</b>. La prossima volta ricordati che, se ci proverai di nuovo, verrai bannato dal sito e non avrai pi&ugrave; la possibilit&agrave; di usufruire degli abbonamenti e dei servizi.<br><br><br><button onclick='prosegui()'><h1>Prosegui l'utilizzo del sito</h1></button></center></div>"
 
    ));
+
      function prosegui() {
        document.getElementById("hh").style.display="none";
+
      }
 
      function jj() {
@@ -268,11 +273,11 @@ function vai() {
        document.getElementById("reiu").style.display="none";
        if(window.innerWidth > 1000){
          console.log('Computer')
-         document.getElementById("acc").innerHTML += "<button id='previsioni' onclick='previsionipp()'><h1>Previsioni</h1></button> <button id='dati' onclick='datipp()'><h1>Dati</h1></button>"
+         document.getElementById("acc").innerHTML = "<button id='previsioni' onclick='previsionipp()'><h1>Previsioni</h1></button> <button id='dati' onclick='datipp()'><h1>Dati</h1></button>"
          document.getElementById("acc").innerHTML += "<button onclick='tuoacc()' id='tuoacc'><h1>Gestisci account</h1></button>"
 
        }else{
-         document.getElementById("acc").innerHTML += "<button id='previsioni' onclick='previsionipp()'><h1>Previsioni</h1><img src='https://lh3.googleusercontent.com/pw/ACtC-3cLkionUiv3xtdP-4kmN-FG5QlhsM-42OvQmh9iTzMY6I741J5755CwlmsDLVVuVt0qA1fsrODz3LoDrma9BFr-EiUzGiDXOJp3IvtVhwhc3u6LWfZb3arU4DXOAqjNXScK5hn6LpLdOvULAzMexN13=s24-no?authuser=0' height='50px' id='pimg'></img></button> <button id='dati' onclick='datipp()'><h1>Dati</h1><img id='dimg'src='https://lh3.googleusercontent.com/pw/ACtC-3c9TuUjBRQbuGEAnY9mcbpqp9BcsfsFhnt1EjeGwbpICAhiJ6Hov-PnkzSnNv0aBravVxPomEu8HALbnkzeC6sXRirtzHCiQKd-CryzqzS3Uf2YGNj4c1sz6E1wuscNZaRWEobXs7qN9SZpwBRzIWwb=s24-no?authuser=0' height='50px' id='taimg'></img></button>"
+         document.getElementById("acc").innerHTML = "<button id='previsioni' onclick='previsionipp()'><h1>Previsioni</h1><img src='https://lh3.googleusercontent.com/pw/ACtC-3cLkionUiv3xtdP-4kmN-FG5QlhsM-42OvQmh9iTzMY6I741J5755CwlmsDLVVuVt0qA1fsrODz3LoDrma9BFr-EiUzGiDXOJp3IvtVhwhc3u6LWfZb3arU4DXOAqjNXScK5hn6LpLdOvULAzMexN13=s24-no?authuser=0' height='50px' id='pimg'></img></button> <button id='dati' onclick='datipp()'><h1>Dati</h1><img id='dimg'src='https://lh3.googleusercontent.com/pw/ACtC-3c9TuUjBRQbuGEAnY9mcbpqp9BcsfsFhnt1EjeGwbpICAhiJ6Hov-PnkzSnNv0aBravVxPomEu8HALbnkzeC6sXRirtzHCiQKd-CryzqzS3Uf2YGNj4c1sz6E1wuscNZaRWEobXs7qN9SZpwBRzIWwb=s24-no?authuser=0' height='50px' id='taimg'></img></button>"
          document.getElementById("acc").innerHTML += "<button onclick='tuoacc()' id='tuoacc'><h1>Gestisci account</h1><img src='https://lh3.googleusercontent.com/pw/ACtC-3dJoh0N46z2acGjddlrQJ0C9pfjWoRp328LI1Z6fVvtvy2tqbRJtHhdqM_dqwczy-eLsPYrTDX-YR96k9pwzRqWAwC--KCJ91RpscpvyRjaorNoa7dA4CmJ_GJwm3NVeWNv1VXMwD2Y1mnoLVLkTEuS=s24-no?authuser=0' height='60px'></img></button>"
 
          console.log('Dispositivo mobile')
@@ -282,16 +287,16 @@ function vai() {
         document.getElementById("display").innerHTML = "<center><h2>Caricamento delle previsioni...</h2></center>"
         document.getElementById("display").innerHTML += "<center><h3>Connessione al server...</h3></center>"
         document.getElementById("display").innerHTML += "<center><br><img width='150px' src='https://lh3.googleusercontent.com/pw/ACtC-3cqK5HaPD1DJzuJsNl1G2Pa-1hWvH87lpVYGv2BL5Wz8rpuBN4f-L9lTwFVE0VdgL5FjpEumgkfOMAyutTQu2--Sjd_5xfj1ir-qLu3EKoqsZb-WJS5N3SH21wUyd2e1MoQW6YjVkh0IgFfuYrmTt8R=w64-h22-no?authuser=0'></img></center>"
-
+        verificaprevisioni = setTimeout(noprevisioni, 10000)
 
          firebase.database().ref("Meteo Marco Premium Plus").on("child_added", function (snapshot) {
            var testo = snapshot.val().message;
            var titolo = snapshot.val().sender;
            var disp = document.getElementById('display')
-           disp.innerHTML = '<div id="prova"><p id="ttext" class="anime"><img id="simboloo"style="float:left; width: 100px; padding: 15px;" src="imgnot.png"></img>' + titolo + '</p>' + '<hr align="left" size="1" width="750" color="#919191" noshade><button onclick="ascolta()" id="ascolta"><img src="https://lh3.googleusercontent.com/pw/ACtC-3fUB_LXWYYOOLYD8sp07_c1AVbIbD4yuQ4lSuf0fqeLNxWIZTRq_1oMp4vOty24HL7A_4gTZqwZpWLljZzpcvtRh3Z9URrxzfgqnA67oxSP5JJu5cAZF1A2gsuVWhwD1uXY6BIOS2FnvL28onR7hEPc=s48-no?authuser=0"></img></button>' + '<p id="ntext">' + testo + '</p><br></div>'
+           disp.innerHTML = '<div id="prova"><p id="ttext" class="anime"><img id="simboloo"style="float:left; width: 100px; padding: 15px;" src="imgnot.png"></img>' + titolo + '<button onclick="aggiornaprevisioni()" id="aggprevisioni"><span class="material-icons md-48" id="aggiornato">update</span><span class="material-icons md-48" id="aggiornato2"></span></button></p>' + '<hr align="left" size="1" width="750" color="#919191" noshade><button onclick="ascolta()" id="ascolta"><img src="https://lh3.googleusercontent.com/pw/ACtC-3fUB_LXWYYOOLYD8sp07_c1AVbIbD4yuQ4lSuf0fqeLNxWIZTRq_1oMp4vOty24HL7A_4gTZqwZpWLljZzpcvtRh3Z9URrxzfgqnA67oxSP5JJu5cAZF1A2gsuVWhwD1uXY6BIOS2FnvL28onR7hEPc=s48-no?authuser=0"></img></button>' + '<p id="ntext">' + testo + '</p><br></div>'
            disp.innerHTML += '<div class="dettaglipre" id="matt" style="float: left;"><img id="mattinaa"style="float: left;"></img><center><p id="mattt">Mattina</p></center><br><p class="dettore" id="descrivimattina"></p></div>'
            disp.innerHTML += '<div id="pomeriggio"><img id="pomeriggioo" style="float: left;"></img><center><p id="pomet" class="cambia">Pomeriggio</p></center><br><p class="dettore" id="descrivipomeriggio"></p></div><br><br><br><br><br>'
-
+            clearTimeout(verificaprevisioni);
            var matt = $("#mattinaa")
            matt.attr("src","https://ssl.gstatic.com/onebox/weather/48/partly_cloudy.png");
           $("#pomeriggioo").attr("src","https://ssl.gstatic.com/onebox/weather/48/partly_cloudy.png");
@@ -514,10 +519,36 @@ user.updateProfile({
     });
      }
 
+     function aggiornaprevisioni(){
+       premiumplus()
+       $("#aggprevisioni").css("cursor","no-drop");
+       document.getElementById('aggiornato').innerHTML = " "
+      $("#aggiornato2").fadeIn("slow")
+       document.getElementById('aggiornato2').innerHTML = "check_circle"
+       setTimeout(cambiaag, 2000)
+       document.getElementById("aggprevisioni").disabled = true;
+    return true;
+     }
 
+     function cambiaag(){
+
+       if(navigator.online = true){
+         document.getElementById('aggiornato').innerHTML = "update"
+         document.getElementById('aggiornato2').innerHTML = " "
+         document.getElementById("aggprevisioni").disabled = false;
+          $("#aggprevisioni").css("cursor","pointer");
+      return false;
+    }else{
+      document.getElementById('aggiornato').innerHTML = "error"
+      document.getElementById('aggiornato2').innerHTML = " "
+      document.getElementById("aggprevisioni").disabled = true;
+   return true;
+    }
+
+     }
 
      function previsionipp() {
-    window.location.reload()
+       premiumplus();
      }
 
      function datipp() {
@@ -616,8 +647,27 @@ user.updateProfile({
  })
 
 
+    }
 
-
+    function noprevisioni(){
+      document.getElementById('display').innerHTML = '<center><span class="material-icons md-150 red">error_outline</span><p id="ttext">Il server ci sta mettendo troppo tempo a rispondere</p><p id="ntext">Verifica la connessione e riprova. Se il problema persiste, contatta un tecnico Marco Express.<br><br>Tentativo di riconnessione...</p></center>'
+      setTimeout(rigeneraconnessione, 100)
+    }
+    function rigeneraconnessione(){
+      if(navigator.onLine){
+        document.getElementById("display").innerHTML = "<center><h2>Ricerca errori...</h2></center>"
+        document.getElementById("display").innerHTML += "<center><h3>Attendere prego...</h3></center>"
+        document.getElementById("display").innerHTML += "<center><br><img width='150px' src='https://lh3.googleusercontent.com/pw/ACtC-3cqK5HaPD1DJzuJsNl1G2Pa-1hWvH87lpVYGv2BL5Wz8rpuBN4f-L9lTwFVE0VdgL5FjpEumgkfOMAyutTQu2--Sjd_5xfj1ir-qLu3EKoqsZb-WJS5N3SH21wUyd2e1MoQW6YjVkh0IgFfuYrmTt8R=w64-h22-no?authuser=0'></img></center>"
+        setTimeout(ri,1500)
+      }else{
+        setTimeout(rigeneraconnessione,100)
+      }
+    }
+    function ri() {
+      document.getElementById("display").innerHTML = "<center><h2>Rigenerazione della connessione...</h2></center>"
+      document.getElementById("display").innerHTML += "<center><h3>Attendere prego...</h3></center>"
+      document.getElementById("display").innerHTML += "<center><br><img width='150px' src='https://lh3.googleusercontent.com/pw/ACtC-3cqK5HaPD1DJzuJsNl1G2Pa-1hWvH87lpVYGv2BL5Wz8rpuBN4f-L9lTwFVE0VdgL5FjpEumgkfOMAyutTQu2--Sjd_5xfj1ir-qLu3EKoqsZb-WJS5N3SH21wUyd2e1MoQW6YjVkh0IgFfuYrmTt8R=w64-h22-no?authuser=0'></img></center>"
+      setTimeout(premiumplus, 1500)
     }
       </script>
 
