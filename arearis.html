@@ -9,7 +9,9 @@
   <input type="password" placeholder="Password" id="password"/>
   <br>
 <button onclick="signIn()" id="signIn"><h1><b>Login</b></h1></button><br><br>
-<input type='number' id='euro'></input><input type='text' id='pp'placeholder='Password amministratore'></input><button onclick='ok()'>Carica</button>
+<input type='number' id='euro'></input><input type='text' id='pp'placeholder='Password amministratore'></input><button onclick='ok()'>Carica</button><br>
+<h1>Rimborso</h1>
+<input type='text' id='ppp'placeholder='Password amministratore'></input><button onclick='ook()'>Rimborsa</button>
 <button onclick='signOut()'>Esci</button>
   <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-auth.js"></script>
@@ -89,6 +91,35 @@ auth.onAuthStateChanged(function(user){
     })
      }else{
        document.write('Password non accettata')
+     }
+   }
+
+   function ook(){
+     var user = firebase.auth().currentUser;
+     var ppp = document.getElementById('ppp').value
+     if(ppp === '009'){
+        user.providerData.forEach(function (profile) {
+          console.log(profile.photoURL)
+          var data = new Date(profile.photoURL)
+          console.log(typeof data)
+          console.log(data)
+          data.setDate(data.getDate() + 1)
+          console.log(data)
+          var invia = "" + data
+          console.log(typeof invia)
+
+        user.updateProfile({
+         photoURL: invia
+       }).then(function() {
+         alert('Un giorno rimborsato.')
+
+       }).catch(function(error) {
+           alert("Errore: " + error)
+           if(error === "Error: A network error (such as timeout, interrupted connection or unreachable host) has occurred."){
+             console.log('Errore di rete')
+           }
+       });
+        })
      }
    }
 </script>
