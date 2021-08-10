@@ -4,6 +4,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
 <title>Pagamenti Marco Express Ac</title>
 </head>
 <body onload='iniziobody()'>
@@ -18,6 +19,7 @@
 <span id='display'></span>
 <h1 id='reip'>Hai dimenticato la password? Reimpostala sul sito Meteo Marco o sul sito "Il mio Account Marco Express"</h1></center>
 <button onclick='feed()' id='feed'><h2 id='fte'>Lascia un Feedback!</h2></button>
+<span id='barrastato'></span>
   <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-auth.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-database.js"></script>
@@ -85,37 +87,47 @@ auth.onAuthStateChanged(function(user){
     document.getElementById("button").style.display="none";
     document.getElementById("intro").style.display="none";
     document.getElementById("reip").style.display="none";
+     rielabora();
+});
 
-    var disp = document.getElementById('display')
-    disp.innerHTML = "<p class='ltext'>Gestisci i tuoi pagamenti</p>"
+function rielabora(){
 
-    var user = firebase.auth().currentUser;
-    user.providerData.forEach(function (profile) {
-      var soldiora = Number(profile.displayName);
-      console.log(soldiora)
-      var soldiarr = Math.round((soldiora + Number.EPSILON) * 100)
-      var soldi = soldiarr / 100
-      disp.innerHTML += "<p class='ntext'>Denaro totale prepagato memorizzato nell'account: " + "</p><p class='ltext'>&euro;"+ soldi + "</p><h2>(Il sistema arrotonda il numero per l'output)</h2>"
+      var disp = document.getElementById('display')
+      disp.innerHTML = "<p class='ltext'>Gestisci i tuoi pagamenti</p>"
 
-    });
-    var nomespesa = localStorage.getItem("nomespesa");
-    var costospesa = localStorage.getItem("costospesa");
-    var statospesa = localStorage.getItem("statospesa");
-    if(nomespesa === null){
-      nomespesa = 'Nessuna spesa registrata di recente'
-    }
-    if(costospesa === null){
-      costospesa = 'N/D'
-    }
-    if(statospesa === null){
-      statospesa = 'N/D'
-    }
-    disp.innerHTML += "<button id='nuovop' onclick='prepagato()'><h1>Aggiungi denaro</h1></button><br><br>"
-    disp.innerHTML += "<button onclick='nspesa()' id='nuovos'><h1>Nuova spesa</h1></button>"
-    disp.innerHTML += "<p class='ltext'>Ultima spesa</p>"
-    disp.innerHTML += "<table><tr><td><p class='ntext'><strong>Nome Spesa</strong></p></td><td><p class='ntext'><strong>Importo</strong></p></td></tr><tr><td><p class='ntext'>" + nomespesa + "</p></td><td><p class='ntext'>&euro;" + costospesa + "</p></td><td><p class='ntext'>Stato: " + statospesa + "</p></td></tr></table><br>"
-    disp.innerHTML += "<br><center><button onclick='signOut()' id='signOut'><h1>Logout</h1><img src='https://lh3.googleusercontent.com/pw/ACtC-3fxEqyRV4Kgd6Zq9ZYJSi8aBG4TOp5qqBYOGl7OnRZUogm68jgxH4UIwV2rIi1pIUDv62xzfK4Cwbj_xIQyKVdqMtGtecPJa3t36jMGNe4bS_7_5h8QrdJH6lMSlc-9vmqzvKUcR5tGcj7zNqJpY_la=s24-no?authuser=0' height='50px'></button></center>"
-   });
+      var user = firebase.auth().currentUser;
+      user.providerData.forEach(function (profile) {
+        var soldiora = Number(profile.displayName);
+        console.log(soldiora)
+        var soldiarr = Math.round((soldiora + Number.EPSILON) * 100)
+        var soldi = soldiarr / 100
+        if(soldi >= 0){
+          disp.innerHTML += "<p class='ntext'>Denaro totale prepagato memorizzato nell'account: " + "</p><p class='ltext'>&euro;"+ soldi + "</p><h2>(Il sistema arrotonda il numero per l'output)</h2>"
+        }else{
+          disp.innerHTML += "<p class='ntext'>Denaro totale prepagato memorizzato nell'account: " + "</p><p class='ltext red'>Attenzione! Hai dei debiti, con un importo totale da pagare di<br>&euro;"+ soldi + "</p><h2>(Il sistema arrotonda il numero per l'output)</h2>"
+          console.log("Debito!")
+        }
+
+      });
+      var nomespesa = localStorage.getItem("nomespesa");
+      var costospesa = localStorage.getItem("costospesa");
+      var statospesa = localStorage.getItem("statospesa");
+      if(nomespesa === null){
+        nomespesa = 'Nessuna spesa registrata di recente'
+      }
+      if(costospesa === null){
+        costospesa = 'N/D'
+      }
+      if(statospesa === null){
+        statospesa = 'N/D'
+      }
+      disp.innerHTML += "<button id='nuovop' onclick='prepagato()'><h1>Aggiungi denaro</h1></button><br><br>"
+      disp.innerHTML += "<button onclick='nspesa()' id='nuovos'><h1>Nuova spesa</h1></button>"
+      disp.innerHTML += "<p class='ltext'>Ultima spesa</p>"
+      disp.innerHTML += "<table><tr><td><p class='ntext'><strong>Nome Spesa</strong></p></td><td><p class='ntext'><strong>Importo</strong></p></td></tr><tr><td><p class='ntext'>" + nomespesa + "</p></td><td><p class='ntext'>&euro;" + costospesa + "</p></td><td><p class='ntext'>Stato: " + statospesa + "</p></td></tr></table><br>"
+      disp.innerHTML += "<br><center><button onclick='signOut()' id='signOut'><h1>Logout</h1><img src='https://lh3.googleusercontent.com/pw/ACtC-3fxEqyRV4Kgd6Zq9ZYJSi8aBG4TOp5qqBYOGl7OnRZUogm68jgxH4UIwV2rIi1pIUDv62xzfK4Cwbj_xIQyKVdqMtGtecPJa3t36jMGNe4bS_7_5h8QrdJH6lMSlc-9vmqzvKUcR5tGcj7zNqJpY_la=s24-no?authuser=0' height='50px'></button></center>"
+      document.getElementById("barrastato").innerHTML = "<button onclick='rielabora()' id='ritornaacasa'><h1><span class='material-icons'>home</span> Ritorna alla home</h1></button>"
+}
 
 
    function prepagato() {
@@ -175,7 +187,7 @@ function mmppu() {
     if(profile.photoURL != ' ') {
       document.getElementById('costo').innerHTML = "<p class='ntext' style='background: red'>Hai gi&agrave; un abbonamento Meteo Marco Premium Plus Attivo.</p>"
     }else{
-        document.getElementById('costo').innerHTML = "<p class='ntext'>Costo: &euro; 0,65</p>"
+        document.getElementById('costo').innerHTML = "<p class='ntext'>Costo: &euro; 0,50</p>"
         document.getElementById('push').innerHTML = "<button onclick='comprammpp()' class='comprap'><h1>Acquista ora!</h1></button>"
 
     }
@@ -189,7 +201,7 @@ function mmppd(){
     if(profile.photoURL != ' ') {
       document.getElementById('costo').innerHTML = "<p class='ntext' style='background: red'>Hai gi&agrave; un abbonamento Meteo Marco Premium Plus Attivo.</p>"
     }else{
-        document.getElementById('costo').innerHTML = "<p class='ntext'>Costo: &euro; 1,30</p>"
+        document.getElementById('costo').innerHTML = "<p class='ntext'>Costo: &euro; 1,00</p>"
         document.getElementById('push').innerHTML = "<button onclick='comprammppd()' class='comprap'><h1>Acquista ora!</h1></button>"
 
     }
@@ -199,31 +211,34 @@ function mmppd(){
 
 function comprammpp() {
   var disp = document.getElementById('display')
-  disp.innerHTML = "<p class='ltext'>Vuoi effettuare l'acquisto?</p><p class='ntext'>Importo: &euro; 0,65<br>Nome articolo: Meteo Marco Premium Plus<br>Durata: 1 Settimana</p>"
-  disp.innerHTML += "<button id='ann' onclick='ritornadap()'><h1>Annulla</h1></button><button id='acq' onclick='acquistammpp()'><h1>Acquista</h1></button>"
+  disp.innerHTML = "<p class='ltext'>Vuoi effettuare l'acquisto?</p><p class='ntext'>Importo: &euro; 0,50<br>Nome articolo: Meteo Marco Premium Plus<br>Durata: 1 Settimana</p>"
+  disp.innerHTML += "<button id='ann' onclick='ritornadap()'><h1>Annulla</h1></button><button id='acq' onclick='mmppp()'><h1>Acquista</h1></button>"
 
 }
 
 function comprammppd() {
   var disp = document.getElementById('display')
-  disp.innerHTML = "<p class='ltext'>Vuoi effettuare l'acquisto?</p><p class='ntext'>Importo: &euro; 1,30<br>Nome articolo: Meteo Marco Premium Plus<br>Durata: 2 Settimane</p>"
-  disp.innerHTML += "<button id='ann' onclick='ritornadap()'><h1>Annulla</h1></button><button id='acq' onclick='acquistammppd()'><h1>Acquista</h1></button>"
+  disp.innerHTML = "<p class='ltext'>Vuoi effettuare l'acquisto?</p><p class='ntext'>Importo: &euro; 1,00<br>Nome articolo: Meteo Marco Premium Plus<br>Durata: 2 Settimane</p>"
+  disp.innerHTML += "<button id='ann' onclick='ritornadap()'><h1>Annulla</h1></button><button id='acq' onclick='mmppdd()'><h1>Acquista</h1></button>"
 
 }
 
-function acquistammpp(){
+function prepagatommpp(){
   var user = firebase.auth().currentUser;
   user.providerData.forEach(function (profile) {
-    if(profile.displayName <= 0.65){
+    var soldia = Number(profile.displayName)
+    var soldiarr = Math.round((soldia + Number.EPSILON) * 100)
+    var soldi = soldiarr / 100
+    if(soldi <= 0.50){
       console.log('non hai soldi, POVERO!')
       localStorage.setItem("nomespesa", "Meteo Marco Premium Plus - 1 Settimana");
-      localStorage.setItem("costospesa", "0,65");
+      localStorage.setItem("costospesa", "0,50");
       localStorage.setItem("statospesa", "Non eseguita: denaro insufficente");
       document.getElementById('display').innerHTML = "<p class='ltext'>Denaro insufficente</p><p class='ntext'>Sembra che nel tuo account non ci siano i soldi necessari per l'acquisto. Se vuoi ricaricare il portafoglio <a onclick='prepagato()'>CLICCA QUI</a>. "
     }else{
       var soldiad = profile.displayName
       var numsoldiad = Number(soldiad);
-      var fine = numsoldiad - 0.65
+      var fine = numsoldiad - 0.50
       var invia = "" + fine
       console.log(typeof invia)
       user.updateProfile({
@@ -251,13 +266,13 @@ function acquistammpp(){
 }).then(function() {
   alert('Acquisto effettuato, ora puoi accedere ai servizi offerti da Meteo Marco Premium Plus')
   localStorage.setItem("nomespesa", "Meteo Marco Premium Plus - 1 Settimana");
-  localStorage.setItem("costospesa", "0,65");
+  localStorage.setItem("costospesa", "0,50");
   localStorage.setItem("statospesa", "Spesa effettuata correttamente");
   ritornadap()
 }).catch(function(error) {
     document.write("Errore, contatta un tecnico Marco Express. <br>Dettagli: <br> Pagamento riuscito: true <br> Memorizzazione dati nell'account: false<br>Error type: " + error)
     localStorage.setItem("nomespesa", "Meteo Marco Premium Plus - 1 Settimana");
-  localStorage.setItem("costospesa", "0,65");
+  localStorage.setItem("costospesa", "0,50");
   localStorage.setItem("statospesa", "Spesa non effettuata causa errore");
 });
 
@@ -268,20 +283,27 @@ function acquistammpp(){
 
 
 
-function acquistammppd(){
+function mmppp(){
+  console.log("Ricezione not")
+  localStorage.setItem("tipos", "mmpp");
+  tipopagamento();
+}
+function mmppdd(){
+  localStorage.setItem("tipos", "mmppdd");
+  tipopagamento();
+}
+
+function addebitommppd(){
   var user = firebase.auth().currentUser;
   user.providerData.forEach(function (profile) {
-    if(profile.displayName <= 1.3){
-      console.log('non hai soldi, POVERO!')
-      localStorage.setItem("nomespesa", "Meteo Marco Premium Plus - 2 Settimane");
-      localStorage.setItem("costospesa", "1,50");
-      localStorage.setItem("statospesa", "Non eseguita: denaro insufficente");
-      document.getElementById('display').innerHTML = "<p class='ltext'>Denaro insufficente</p><p class='ntext'>Sembra che nel tuo account non ci siano i soldi necessari per l'acquisto. Se vuoi ricaricare il portafoglio <a onclick='prepagato()'>CLICCA QUI</a>. "
+    var dispname = Number(profile.displayName)
+    if(dispname > 0.98){
+      document.getElementById('display').innerHTML = "<p class='ltext'>Questa cifra &egrave; pagabile con i soldi gi&agrave; memorizzati nell'account</p><p class='ntext'>Sembra che nel tuo account ci siano i soldi necessari per l'acquisto. Per effettuare il pagamento con i soldi gi&agrave; memorizzati nell'account, <a onclick='prepagatommpp()'>CLICCA QUI</a> "
     }else{
       var soldiad = profile.displayName
       var numsoldiad = Number(soldiad);
-      var fine = numsoldiad - 1.3
-      var invia = "" + fine
+      var okkkk = numsoldiad - 1.48
+      var invia = "" + okkkk
       console.log(typeof invia)
       user.updateProfile({
      displayName: invia
@@ -308,13 +330,13 @@ function acquistammppd(){
 }).then(function() {
   alert('Acquisto effettuato, ora puoi accedere ai servizi offerti da Meteo Marco Premium Plus')
   localStorage.setItem("nomespesa", "Meteo Marco Premium Plus - 2 Settimane");
-  localStorage.setItem("costospesa", "1,30");
+  localStorage.setItem("costospesa", "1,00");
   localStorage.setItem("statospesa", "Spesa eseguita correttamente");
   ritornadap()
 }).catch(function(error) {
     document.write("Errore, contatta un tecnico Marco Express. <br>Dettagli: <br> Pagamento riuscito: true <br> Memorizzazione dati nell'account: false<br>Error type: " + error)
     localStorage.setItem("nomespesa", "Meteo Marco Premium Plus - 2 Settimane");
-    localStorage.setItem("costospesa", "1,30");
+    localStorage.setItem("costospesa", "1,00");
     localStorage.setItem("statospesa", "Pagamento effettuato. Memorizzazione dei dati non riuscita. Contattare un tecnico");
 });
 
@@ -336,13 +358,18 @@ function confmhp() {
     user.providerData.forEach(function (profile) {
     var disp = document.getElementById('display')
     disp.innerHTML = "<p class='ltext'>Effettuare il pagamento?</p><p class='ntext'>Importo: &euro;" + importo + "<br> Email mittente: " +  profile.email + "</p><br>"
-    disp.innerHTML += "<button id='ann' onclick='ritornadap()'><h1>Annulla</h1></button><button id='acq' onclick='pagamhp()'><h1>Paga</h1></button>"
+    disp.innerHTML += "<button id='ann' onclick='ritornadap()'><h1>Annulla</h1></button><button id='acq' onclick='mhpsave()'><h1>Paga</h1></button>"
     localStorage.setItem("importomh", importo);
   })
 
 }
 
-function pagamhp() {
+function mhpsave(){
+  localStorage.setItem("tipos", "mhp");
+  tipopagamento();
+}
+
+function prepagatomhp() {
   var letcok = localStorage.getItem("importomh");
   console.log(letcok)
   localStorage.setItem("nomespesa", "Pagemento Rapido Marco Hairdresser");
@@ -372,9 +399,72 @@ function pagamhp() {
   document.getElementById('display').innerHTML = "<p class='ltext'>Denaro insufficente</p><p class='ntext'>Sembra che nel tuo account non ci siano i soldi necessari per la spesa. Se vuoi ricaricare il portafoglio <a onclick='prepagato()'>CLICCA QUI</a>. "
   localStorage.setItem("nomespesa", "Pagemento Rapido Marco Hairdresser");
   localStorage.setItem("costospesa", letcok);
-  localStorage.setItem("statospesa", "None eseguita: denaro insufficente");
+  localStorage.setItem("statospesa", "Non eseguita: denaro insufficente");
 }
 })
+
+}
+
+function prepagatommppd() {
+
+  localStorage.setItem("nomespesa", "Meteo Marco Premium Plus - 2 Settimane");
+  localStorage.setItem("costospesa", "1,00");
+  localStorage.setItem("statospesa", "Non eseguita");
+  var user = firebase.auth().currentUser;
+  user.providerData.forEach(function (profile) {
+  var soldiad = Number(profile.displayName)
+  var soldiarr = Math.round((soldiad + Number.EPSILON) * 100)
+  var soldi = soldiarr / 100
+  if(soldi >= 1){
+
+  var sottrai = soldiad - 1
+  var invia = "" + sottrai
+  user.updateProfile({
+ displayName: invia
+}).then(function() {
+  alert('Acquisto effettuato, ora puoi accedere ai servizi offerti da Meteo Marco Premium Plus')
+  localStorage.setItem("nomespesa", "Meteo Marco Premium Plus - 2 Settimane");
+  localStorage.setItem("costospesa", "1,00");
+  localStorage.setItem("statospesa", "Spesa effettuata correttamente");
+}).catch(function(error) {
+ document.write("<p class='ltext'>Errore</p><br><h1>Si &egrave; verificato un errore imprevisto. Tipo di errore: errore nel pagamento</h1>")
+ alert(error)
+});
+}else{
+  document.getElementById('display').innerHTML = "<p class='ltext'>Denaro insufficente</p><p class='ntext'>Sembra che nel tuo account non ci siano i soldi necessari per la spesa. Se vuoi ricaricare il portafoglio <a onclick='prepagato()'>CLICCA QUI</a>. "
+  localStorage.setItem("nomespesa", "Pagemento Rapido Marco Hairdresser");
+  localStorage.setItem("costospesa", letcok);
+  localStorage.setItem("statospesa", "Non eseguita: denaro insufficente");
+}
+})
+
+var d = new Date();
+orad = d.getHours();
+min = d.getMinutes();
+dataduen = d.getDate();
+mesed = d.getMonth();
+annodue = d.getFullYear();
+mesed++
+
+var piusett = new Date()
+piusett.setDate(dataduen + 14)
+console.log(piusett)
+var invia = ""+piusett
+user.updateProfile({
+photoURL: invia
+}).then(function() {
+alert('Acquisto effettuato, ora puoi accedere ai servizi offerti da Meteo Marco Premium Plus')
+localStorage.setItem("nomespesa", "Meteo Marco Premium Plus - 2 Settimane");
+localStorage.setItem("costospesa", "1,00");
+localStorage.setItem("statospesa", "Spesa effettuata correttamente");
+ritornadap()
+}).catch(function(error) {
+document.write("Errore, contatta un tecnico Marco Express. <br>Dettagli: <br> Pagamento riuscito: true <br> Memorizzazione dati nell'account: false<br>Error type: " + error)
+localStorage.setItem("nomespesa", "Meteo Marco Premium Plus - 2 Settimane");
+localStorage.setItem("costospesa", "1,00");
+localStorage.setItem("statospesa", "Spesa non effettuata causa errore");
+});
+
 
 }
 
@@ -438,16 +528,7 @@ function esci() {
 }
 
 function ritornadap(){
-  var disp = document.getElementById('display')
-  disp.innerHTML = "<p class='ltext'>Gestisci i tuoi pagamenti</p>"
-
-  var user = firebase.auth().currentUser;
-  user.providerData.forEach(function (profile) {
-    disp.innerHTML += "<p class='ntext'>Denaro totale prepagato memorizzato nell'account: " + "</p><p class='ltext'>&euro;"+ profile.displayName + "</p>"
-  });
-
-  disp.innerHTML += "<button id='nuovop' onclick='prepagato()'><h1>Aggiungi denaro</h1></button><br><br>"
-  disp.innerHTML += "<button onclick='nspesa()' id='nuovos'><h1>Nuova spesa</h1></button>"
+   rielabora()
  }
 
 function showPwd() {
@@ -471,13 +552,274 @@ function feed() {
   location.href = 'https://docs.google.com/forms/d/e/1FAIpQLSdtuUKjayKMK4yypsgnN0ftwQNLXYO_SGX-yTO4ocf4reLPBA/viewform?usp=sf_link'
 }
 
+function tipopagamento(){
+  var disp = document.getElementById("display")
+  var rigauno = "<center><button style='width: 75%; height: auto; border: 1px solid gray; border-radius: 7px; background-color: white;' onclick='prepa()' id='prepa'><p class='modpagaa'><span class='material-icons md-36 green' id='pdp'>credit_score</span> <strong>Pagamento con denaro prepagato</strong></p></button></center>"
+  var rigadue = "<center><button style='width: 75%; height: auto; border: 1px solid gray; border-radius: 7px; background-color: white;' onclick='addebito()' id='debit'><p class='modpagaa'><span class='material-icons md-36 red' id='pa'>paid</span> <strong>Pagamento con addebito</strong></p></button></center>"
+
+  disp.innerHTML = "<center><div id='selezionamod'><p class='modpaga'><strong>Seleziona la modalit&agrave; di pagamento</strong><br>Per <span id='spanimp'></span></p>" + rigauno + "<br>" + rigadue + "<br><br><br><button onclick='pagaaa()' id='pagaaaa'><h1>Paga</h1></button><br><br><br><br><p class='ntext'>La modalit&agrave; \"Pagamento con addebito\" &egrave; soggetta ad interessi. <a href='https://docs.google.com/document/d/1c3iw9YvXpmN7Hro3a1s9N3w5qUl6JYoK3AUsrSiB0ak/preview'>Ulteriori informazioni</a></p></div><center>"
+
+  document.getElementById("pagaaaa").disabled = true;
+  return true;
+}
+
+function prepa(){
+  localStorage.setItem("tipodipagamento", "prepagato");
+  $("#pdp").css({
+    color: "black"
+  })
+  $("#prepa").css({
+    backgroundColor: "#02d935"
+  })
+  $("#pa").css({
+    color: "red"
+  })
+  $("#debit").css({
+    backgroundColor: "white"
+  })
+
+  var tiposp = localStorage.getItem("tipos");
+  var mhimp= localStorage.getItem("importomh");
+  var costo
+  if(tiposp === "mmpp"){
+    costo = "<p class='ltext'>&euro; 0,50</p>"
+  }else if(tiposp === "mmppdd"){
+    costo = "<p class='ltext'>&euro; 1,00</p>"
+  }else if(tiposp === "mhp"){
+    costo = "<p class='ltext'>&euro; " + mhimp + "</p>"
+  }
+  document.getElementById("spanimp").innerHTML = costo
+  document.getElementById("pagaaaa").disabled = false;
+  return false;
+}
+function addebito(){
+    localStorage.setItem("tipodipagamento", "addebito");
+  $("#pa").css({
+    color: "black"
+  })
+  $("#debit").css({
+    backgroundColor: "red"
+  })
+  $("#pdp").css({
+    color: "#02d93"
+  })
+  $("#prepa").css({
+    backgroundColor: "white"
+  })
+
+
+  var tiposp = localStorage.getItem("tipos");
+  var mhimpp= localStorage.getItem("importomh");
+  var mhimp= Number(mhimpp)
+  var costo
+  if(tiposp === "mmpp"){
+    var importo = 0.50 * 45
+    var importouno = importo / 100
+    var impfin = importouno + 0.50
+    var imp = Number(impfin)
+    var ok = imp * 2
+    var okk = ok / 100
+    var ultimo = imp + okk
+    var soldiarr = Math.round((ultimo + Number.EPSILON) * 100)
+    var soldi = soldiarr / 100
+    costo = "<p class='ltext'>&euro; " + soldi + "</p>"
+  }else if(tiposp === "mmppdd"){
+    var importo = 1 * 45
+    var importouno = importo / 100
+    var impfin = importouno + 1
+    var imp = Number(impfin)
+    var ok = imp * 2
+    var okk = ok / 100
+    var ultimo = imp + okk
+    var soldiarr = Math.round((ultimo + Number.EPSILON) * 100)
+    var soldi = soldiarr / 100
+    costo = "<p class='ltext'>&euro; " + soldi + "</p>"
+  }else if(tiposp === "mhp"){
+    var importo = mhimp * 45
+    var importouno = importo / 100
+    var impfin = importouno + mhimp
+    var imp = Number(impfin)
+    var ok = imp * 2
+    var okk = ok / 100
+    var ultimo = imp + okk
+    var soldiarr = Math.round((ultimo + Number.EPSILON) * 100)
+    var soldi = soldiarr / 100
+    costo = "<p class='ntext'>Richiesti &euro; " + localStorage.getItem("importomh") + " </p><p class='ltext'>&euro; " + soldi + "</p>"
+  }
+  document.getElementById("spanimp").innerHTML = costo
+  document.getElementById("pagaaaa").disabled = false;
+  return false;
+}
+
+function pagaaa(){
+  var tipopa = localStorage.getItem("tipodipagamento");
+  if(tipopa === "prepagato"){
+    var tiposp = localStorage.getItem("tipos");
+    console.log(tiposp)
+    if(tiposp === "mmpp"){
+      //abbonamento prepagato a Meteo Marco, una settimana
+      prepagatommpp();
+    }else if(tiposp === "mmppdd"){
+      //abbonamento prepagato a Meteo Marco, due settimane
+      prepagatommppd();
+    }else if(tiposp === "mhp"){
+      prepagatomhp();
+    }
+  }
+  if(tipopa === "addebito"){
+    var tiposp = localStorage.getItem("tipos");
+    if(tiposp === "mmpp"){
+      console.log("mmpp")
+      addebitommpp();
+    }else if(tiposp === "mmppdd"){
+      addebitommppd();
+    }else if(tiposp === "mhp"){
+      addebitomhp();
+    }
+  }
+}
+
+
+function addebitommpp(){
+  console.log("AAA")
+  var user = firebase.auth().currentUser;
+  user.providerData.forEach(function (profile) {
+    var soldiora = Number(profile.displayName);
+    console.log(soldiora)
+    var soldiarr = Math.round((soldiora + Number.EPSILON) * 100)
+    var soldi = soldiarr / 100
+    if(soldiora > 0.5){
+        console.log("0")
+      document.getElementById('display').innerHTML = "<p class='ltext'>Questa cifra &egrave; pagabile con i soldi gi&agrave; memorizzati nell'account</p><p class='ntext'>Sembra che nel tuo account ci siano i soldi necessari per l'acquisto. Per effettuare il pagamento con i soldi gi&agrave; memorizzati nell'account, <a onclick='prepagatommpp()'>CLICCA QUI</a> "
+    }else{
+      var soldiad = profile.displayName
+      var numsoldiad = Number(soldiad);
+      var importo = 0.50 * 45
+      var importouno = importo / 100
+      var impfin = importouno + 0.50
+
+      var imp = Number(impfin)
+      var ok = imp * 2
+      var okk = ok / 100
+      var ultimo = imp + okk
+
+      var fine = numsoldiad - ultimo
+      var invia = "" + fine
+      console.log(typeof invia)
+      user.updateProfile({
+     displayName: invia
+   }).then(function() {
+     console.log('primo ok')
+   }).catch(function(error) {
+     document.write("<p class='ltext'>Errore</p><br><h1>Si &egrave; verificato un errore imprevisto. Tipo di errore: errore nel pagamento</h1>")
+   });
+
+                var d = new Date();
+                orad = d.getHours();
+                min = d.getMinutes();
+                dataduen = d.getDate();
+                mesed = d.getMonth();
+                annodue = d.getFullYear();
+                mesed++
+
+                var piusett = new Date()
+                piusett.setDate(dataduen + 7)
+                console.log(piusett)
+                var invia = ""+piusett
+   user.updateProfile({
+  photoURL: invia
+}).then(function() {
+  alert('Acquisto effettuato, ora puoi accedere ai servizi offerti da Meteo Marco Premium Plus')
+  localStorage.setItem("nomespesa", "Meteo Marco Premium Plus - 1 Settimana");
+  localStorage.setItem("costospesa", "0,50");
+  localStorage.setItem("statospesa", "Spesa effettuata correttamente");
+  ritornadap()
+}).catch(function(error) {
+    document.write("Errore, contatta un tecnico Marco Express. <br>Dettagli: <br> Pagamento riuscito: true <br> Memorizzazione dati nell'account: false<br>Error type: " + error)
+    localStorage.setItem("nomespesa", "Meteo Marco Premium Plus - 1 Settimana");
+  localStorage.setItem("costospesa", "0,50");
+  localStorage.setItem("statospesa", "Spesa non effettuata causa errore");
+});
+
+
+    }
+  });
+}
+
+function addebitomhp(){
+  var letcok = localStorage.getItem("importomh");
+  var numerosoldi = Number(letcok);
+  console.log(letcok)
+  localStorage.setItem("nomespesa", "Pagemento Rapido Marco Hairdresser");
+  localStorage.setItem("costospesa", letcok);
+  localStorage.setItem("statospesa", "Non eseguita");
+  var user = firebase.auth().currentUser;
+  user.providerData.forEach(function (profile) {
+  var soldiad = Number(profile.displayName)
+  var numimp = Number(letcok)
+  if(profile.displayName >= numimp){
+    document.getElementById('display').innerHTML = "<p class='ltext'>Questa cifra &egrave; pagabile con i soldi gi&agrave; memorizzati nell'account</p><p class='ntext'>Sembra che nel tuo account ci siano i soldi necessari per l'acquisto. Per effettuare il pagamento con i soldi gi&agrave; memorizzati nell'account, <a onclick='prepagatommpp()'>CLICCA QUI</a> "
+  }else{
+    var soldiad = profile.displayName
+    var numsoldiad = Number(soldiad);
+
+    var importo = numerosoldi * 45
+    var importouno = importo / 100
+    var impfin = importouno + numerosoldi
+    var imp = Number(impfin)
+
+    var ok = imp * 2
+    var okk = ok / 100
+    var ultimo = imp + okk
+    var fine = numsoldiad - ultimo
+    var invia = "" + fine
+    console.log(invia)
+  user.updateProfile({
+ displayName: invia
+}).then(function() {
+ document.getElementById('display').innerHTML = "<p class='ltext'>Pagemento effettuato correttemente.</p><p class='ntext'>Se lo staff richiede il certificato di pagamento, Mostrare il seguente QR Code.</p><canvas id='qq'></canavas><br><button id='ann' onclick='ritornadap()'><h1>Annulla</h1></button>"
+ var testoqr = "Pagamento effettuato. Valore: euro " + letcok + ". Da parte di " + profile.email + ". Tipo richiesta: Marco Hairdresser PagoFast" ;
+ localStorage.setItem("nomespesa", "Pagemento Rapido Marco Hairdresser");
+ localStorage.setItem("costospesa", letcok);
+ localStorage.setItem("statospesa", "Eseguita");
+   new QRious({element: document.getElementById("qq"), value: testoqr, size: 300});
+}).catch(function(error) {
+ document.write("<p class='ltext'>Errore</p><br><h1>Si &egrave; verificato un errore imprevisto. Tipo di errore: errore nel pagamento</h1>")
+});
+}
+
+})
+}
+
 </script>
 
 
 <style>
+.material-icons.md-18 { font-size: 18px; }
+.material-icons.md-24 { font-size: 24px; }
+.material-icons.md-36 { font-size: 36px; }
+.material-icons.md-48 { font-size: 48px; }
+.material-icons.md-150 { font-size: 150px; }
+.material-icons.red { color: red; }
+.material-icons.green { color: #02d935; }
 button{
   cursor: pointer;
 }
+#selezionamod{
+  width: 75%;
+  height: 45%;
+  border: 1px solid gray;
+  border-radius: 15px;
+
+}
+.modpaga{
+    font-family: 'Roboto', sans-serif;
+    font-size: 40px;
+}
+.modpagaa{
+    font-family: 'Roboto', sans-serif;
+    font-size: 35px;
+  }
 #signOut {
   height: 25%;
   background: #f0cccc;
@@ -494,6 +836,14 @@ button{
   letter-spacing: 2px;
   border-radius: 40px;
 }
+#pagaaaa{
+  background: #b2f7bc;
+  width: 200px;
+  border: 3px solid #0af52c;
+  letter-spacing: 2px;
+  border-radius: 40px;
+}
+
 #ann {
   background: #ff4040;
   width: 200px;
@@ -527,6 +877,11 @@ button{
 .ltext{
   font-family: 'Lato', sans-serif;
   font-size: 50px
+}
+.ltext.red{
+  font-family: 'Lato', sans-serif;
+  font-size: 50px;
+  color: red;
 }
 .ntext{
   font-family: 'Lato', sans-serif;
@@ -596,6 +951,17 @@ padding:8px;
   letter-spacing: 2px;
   border-radius: 15px;
   box-shadow: 10px 10px 5px #dedede;
+}
+#ritornaacasa{
+  letter-spacing: 2px;
+  background-color: #fc9292;
+  border: 2px solid red;
+  border-radius: 30px;
+}
+#barrastato{
+  position: fixed;
+  bottom: 10px;
+  left: 5px;
 }
 </style>
 
