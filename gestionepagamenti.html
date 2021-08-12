@@ -6,6 +6,15 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
 <title>Pagamenti Marco Express Ac</title>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-204455590-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-204455590-1');
+</script>
 </head>
 <body onload='iniziobody()'></center>
   <center><div id="loading_screen">
@@ -49,8 +58,7 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 const auth = firebase.auth();
-alert('Abbiamo riscontrato dei problemi su questo sito. Tuttavia, non tutte le funzioni di quest\'ultimo sono compromesse. Ti chiediamo, quindi, di segnalare qualsiasi bug del sito nella sezione "feedback" e di attendere qualche giorno affinché Marco Express possa risolvere i problemi. Ci scusiamo del disagio.')
-  
+
 
 
 function jj() {
@@ -129,7 +137,7 @@ auth.onAuthStateChanged(function(user){
 });
 
 function rielabora(){
-
+  document.title = "Gestione pagamenti - Home";
       var disp = document.getElementById('display')
       disp.innerHTML = "<p class='ltext'>Gestisci i tuoi pagamenti</p>"
 
@@ -169,6 +177,7 @@ function rielabora(){
 
 
    function prepagato() {
+     document.title = "Gestione pagamenti - Aggiungi denaro";
 var disp = document.getElementById('display')
      disp.innerHTML = "<p class='ltext'>Passaggi per la ricarica del portafoglio:</p>"
      disp.innerHTML += "<p class='ntext'>1) Imposta il numero di soldi</p>"
@@ -197,6 +206,7 @@ var disp = document.getElementById('display')
    }
 
    function nspesa(){
+     document.title = "Gestione pagamenti - Nuova spesa";
      var disp = document.getElementById('display')
     disp.innerHTML = "<center><p class='ltext'>Nuova spesa</p></center>"
     disp.innerHTML += '<select name="nuovaspesa" id="nn" style="width: 90%"><option value="mmppu"><h1>Abbonamento Meteo Marco Premium Plus - 1 Settimana</h1></option><option value="mmppd"><h1>Abbonamento Meteo Marco Premium Plus - 2 Settimane</h1></option><option value="prmh"><h1>Pagamento rapido Marco Hairdresser</h1></option><option value="donazione"><h1>Donazione per sostenere Marco Express</h1></option></select><span id="costo"></span><span id="push"></span>'
