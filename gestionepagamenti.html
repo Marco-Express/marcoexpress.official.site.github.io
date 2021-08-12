@@ -7,8 +7,16 @@
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
 <title>Pagamenti Marco Express Ac</title>
 </head>
-<body onload='iniziobody()'>
-
+<body onload='iniziobody()'></center>
+  <center><div id="loading_screen">
+    <center><p class="ltext">Errori trovati</p>
+      <p class="ntext">Col nuvovo aggiornamento, abbiamo trovato dei nuovi bug. Tutti quelli trovati, li abbiamo risolti. Nonostante questo, potrebbero presentarsi altri errori gravi.<br> Se trovi qualche problema, ti chiediamo di premere il pulsante in basso a destra, ed inviare un feedback.<br>Grazie per la collaborazione.</p>
+  </center>
+  <br>
+  <button onclick="chiudiavv()" style="width: 50%" id="chiud"><h1 id="count">Chiudi (5)</h1></button>
+  <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+  <p style="font-size: 150px">&#8664;</p>
+</div>
   <p class='ltext' id='intro'>Gestisci qui i tuoi pagamenti Marco Express. <br>Per maggiore sicurezza, accedi nuovamente.</p>
   <input type="text" placeholder="Email" id="email"></input><br><br>
   <input type="password" placeholder="Password" id="password"/>
@@ -43,6 +51,7 @@ firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 
 
+
 function jj() {
   var ok = $("#feed")
   ok.animate({
@@ -55,9 +64,37 @@ function jj() {
 }
 
 function iniziobody() {
+  document.getElementById("chiud").disabled = true;
   setTimeout(jj, 7000)
-
+  setTimeout(uno, 1000)
+  setTimeout(due, 2000)
+  setTimeout(tre, 3000)
+  setTimeout(quattro, 4000)
+  setTimeout(fine, 5000)
+  return true;
 }
+  function uno(){
+    document.getElementById("count").innerHTML = "Chiudi (4)"
+}
+function due(){
+  document.getElementById("count").innerHTML = "Chiudi (3)"
+}
+function tre(){
+  document.getElementById("count").innerHTML = "Chiudi (2)"
+}
+function quattro(){
+  document.getElementById("count").innerHTML = "Chiudi (1)"
+}
+function fine(){
+  document.getElementById("count").innerHTML = "Chiudi"
+  document.getElementById("chiud").disabled = false;
+  return false;
+}
+function chiudiavv(){
+  console.log("ok?")
+  document.getElementById("loading_screen").style.display = "none"
+}
+
 function signIn(){
   if(navigator.onLine){
   var email = document.getElementById("email");
@@ -296,8 +333,11 @@ function mmppdd(){
 function addebitommppd(){
   var user = firebase.auth().currentUser;
   user.providerData.forEach(function (profile) {
-    var dispname = Number(profile.displayName)
-    if(dispname > 0.98){
+    var soldiora = Number(profile.displayName);
+    console.log(soldiora)
+    var soldiarr = Math.round((soldiora + Number.EPSILON) * 100)
+    var soldi = soldiarr / 100
+    if(soldi > 1){
       document.getElementById('display').innerHTML = "<p class='ltext'>Questa cifra &egrave; pagabile con i soldi gi&agrave; memorizzati nell'account</p><p class='ntext'>Sembra che nel tuo account ci siano i soldi necessari per l'acquisto. Per effettuare il pagamento con i soldi gi&agrave; memorizzati nell'account, <a onclick='prepagatommpp()'>CLICCA QUI</a> "
     }else{
       var soldiad = profile.displayName
@@ -377,11 +417,14 @@ function prepagatomhp() {
   localStorage.setItem("statospesa", "Non eseguita");
   var user = firebase.auth().currentUser;
   user.providerData.forEach(function (profile) {
-  var soldiad = Number(profile.displayName)
+    var soldiora = Number(profile.displayName);
+    console.log(soldiora)
+    var soldiarr = Math.round((soldiora + Number.EPSILON) * 100)
+    var soldi = soldiarr / 100
   var numimp = Number(letcok)
-  if(profile.displayName >= numimp){
+  if(soldi >= numimp){
 
-  var sottrai = soldiad - numimp
+  var sottrai = soldi - numimp
   var invia = "" + sottrai
   user.updateProfile({
  displayName: invia
@@ -493,9 +536,12 @@ function pagadona(){
   localStorage.setItem("statospesa", "Non eseguita");
   var user = firebase.auth().currentUser;
   user.providerData.forEach(function (profile) {
-  var soldiad = Number(profile.displayName)
+    var soldiora = Number(profile.displayName);
+    console.log(soldiora)
+    var soldiarr = Math.round((soldiora + Number.EPSILON) * 100)
+    var soldi = soldiarr / 100
   var numimp = Number(letcok)
-  if(profile.displayName >= numimp){
+  if(soldi >= numimp){
 
   var sottrai = soldiad - numimp
   var invia = "" + sottrai
@@ -688,7 +734,10 @@ function addebitommpp(){
     console.log(soldiora)
     var soldiarr = Math.round((soldiora + Number.EPSILON) * 100)
     var soldi = soldiarr / 100
-    if(soldiora > 0.5){
+    console.log(soldiora)
+    var soldiarr = Math.round((soldiora + Number.EPSILON) * 100)
+    var soldi = soldiarr / 100
+    if(soldi > 0.5){
         console.log("0")
       document.getElementById('display').innerHTML = "<p class='ltext'>Questa cifra &egrave; pagabile con i soldi gi&agrave; memorizzati nell'account</p><p class='ntext'>Sembra che nel tuo account ci siano i soldi necessari per l'acquisto. Per effettuare il pagamento con i soldi gi&agrave; memorizzati nell'account, <a onclick='prepagatommpp()'>CLICCA QUI</a> "
     }else{
@@ -755,9 +804,12 @@ function addebitomhp(){
   localStorage.setItem("statospesa", "Non eseguita");
   var user = firebase.auth().currentUser;
   user.providerData.forEach(function (profile) {
-  var soldiad = Number(profile.displayName)
+    var soldiora = Number(profile.displayName);
+    console.log(soldiora)
+    var soldiarr = Math.round((soldiora + Number.EPSILON) * 100)
+    var soldi = soldiarr / 100
   var numimp = Number(letcok)
-  if(profile.displayName >= numimp){
+  if(profile.displayName >= soldi){
     document.getElementById('display').innerHTML = "<p class='ltext'>Questa cifra &egrave; pagabile con i soldi gi&agrave; memorizzati nell'account</p><p class='ntext'>Sembra che nel tuo account ci siano i soldi necessari per l'acquisto. Per effettuare il pagamento con i soldi gi&agrave; memorizzati nell'account, <a onclick='prepagatommpp()'>CLICCA QUI</a> "
   }else{
     var soldiad = profile.displayName
@@ -963,6 +1015,18 @@ padding:8px;
   bottom: 10px;
   left: 5px;
 }
+#loading_screen{
+  position: absolute;
+  top:5%;
+  right:5%;
+  height: 90%;
+  width: 90%;
+  background-color: #fcc0c0;
+  border: 3px solid red;
+  border-radius: 10px;
+
+}
+
 </style>
 
 </body>
