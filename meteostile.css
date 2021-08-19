@@ -2,8 +2,11 @@
 .material-icons.md-24 { font-size: 24px; }
 .material-icons.md-36 { font-size: 36px; }
 .material-icons.md-48 { font-size: 48px; }
+.material-icons.md-75 { font-size: 75px; }
 .material-icons.md-150 { font-size: 150px; }
 .material-icons.red { color: red; }
+.material-icons.yellow { color: yellow; }
+.material-icons.green { color: #00b336; }
       body{
         font-family:"Josefin Sans", sans-serif;
       }
@@ -79,6 +82,10 @@
       #ntext{
         font-size: 40px;
       }
+      .ntext.infod{
+        font-size: 40px;
+        padding-left: 20px;
+      }
       #pomet{
         font-size: 40px;
       }
@@ -151,7 +158,6 @@
         }
 
         #datidue {
-
           width: 98%;
           height: 10%;
           border: 2px solid #00c3ff;
@@ -159,20 +165,16 @@
           background-color: #73ebe1;
           border-radius: 15px;
           box-shadow: 10px 10px 5px #dedede;
-
         }
 
         #modnome{
-
           width: 50px;
           height: 50px;
-
         }
 
         #nuovonome{
           font-size: 100%;
           width: 70%
-
         }
 
         #confermanome{
@@ -201,9 +203,42 @@
           border-radius: 25px;
           right: 320px;
         }
-        .dettgli{
+        .dettagli{
+          width: 80px;
+          height: 80px;
+          border-radius: 37.5px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+        }
+        .dettglitext{
+          display: none;
+        }
+        .ntext.a{
+          font-size: 42px;
+        }
+        #temperatura{
+          border: 5px solid red;
+          background-color: #ff8282;
+        }
+        #venti{
+          border: 5px solid yellow;
+          background-color: #f9ff82;
+        }
+        #precipitazioni{
+          border: 5px solid #00b5ff;
+          background-color: #b0e8ff;
+        }
+        #dataaggiornamento{
+          width: 45%;
+          border: 5px solid #8c00ff;
+          background-color: #bd6eff;
+        }
+
+        .dettglitext{
           font-family: 'Raleway', sans-serif;
-          font-size: 40px;
+          font-size: 36px;
         }
         .valriassunto{
           font-family: 'Raleway', sans-serif;
