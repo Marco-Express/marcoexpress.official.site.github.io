@@ -418,9 +418,9 @@ firebase.database().ref("Allerte").on("child_added", function (snapshot) {
   document.getElementById('display').innerHTML += "<hr style='width: 200px; background-color: white;'></hr>"
   document.getElementById('display').innerHTML += '<br><br><br><center><span id="all"></span><p class="ntext a"><strong>Allerte</strong></p><hr style="width: 750px; height: 3px; background: #696969;"></hr><p id="ntext">' + all + '</p></center>'
   if(tipo === "rosso"){
-  document.getElementById("all").innerHTML = '<span class="material-icons md-36 red">error</span>'
+  document.getElementById("all").innerHTML = '<span class="material-icons md-75 red">error</span>'
 }else if(tipo === "giallo"){
-  document.getElementById("all").innerHTML = '<span class="material-icons md-36 yellow">error</span>'
+  document.getElementById("all").innerHTML = '<span class="material-icons md-75 yellow">error</span>'
 }else if(tipo === "verde"){
   document.getElementById("all").innerHTML = '<span class="material-icons md-75 green">error</span>'
 }
@@ -694,7 +694,7 @@ user.updateProfile({
                }).then(function() {
                  window.location.reload()
                }).catch(function(error) {
-                 alert('Errore: ' + error)
+                 alert('Errore: ' + error.name)
                });
            clearInterval(x);
          }
