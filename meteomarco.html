@@ -43,7 +43,7 @@ gtag('config', 'G-1EFHH3K88D');
 
     <br>
 
-      <input type="text" placeholder="Email" id="email"></input><br><br>
+      <input type="text" placeholder="Email" id="email" onchange="checkEmail()"></input><br><p id="validaidmail"></p><br>
     <input type="password" placeholder="Password" id="password"/>
     <button id="button" type="button" onclick="showPwd()">
 
@@ -104,10 +104,40 @@ document.addEventListener('contextmenu', event => event.preventDefault(
 
    ));
 
-     function prosegui() {
-       document.getElementById("hh").style.display="none";
+   var input = document.getElementById("password");
 
+   input.addEventListener("keydown", function (e) {
+   if (e.keyCode == 13) {
+   signIn();
+   }
+   });
+
+   function validaEmail(email) {
+
+       var regexp = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+       return regexp.test(email);
+   }
+
+   function checkEmail(){
+     risultato = document.getElementById("validaidmail");
+     email = document.getElementById("email").value;
+     risultato.innerHTML = "";
+     if (validaEmail(email)) {
+       console.log("ok")
+     } else {
+       risultato.innerHTML = "<p id='ntext'><span class='material-icons md-48' style='color: red;'>error_outline</span> Indirizzo email non valido</p>";
+       risultato.style.color = 'red';
      }
+   }
+
+   function dark(){
+     $('p').css('color','white');
+     $('body').css('background','#363636');
+     $('.dettglitext').css('color','black');
+    $('h2').css('color','white');
+
+   }
+
 
      function jj() {
        var ok = $("#feed")
@@ -286,11 +316,11 @@ function vai() {
        if(window.innerWidth > 1000){
          console.log('Computer')
          document.getElementById("acc").innerHTML = "<button id='previsioni' onclick='previsionipp()'><h1>Previsioni</h1></button> <button id='dati' onclick='datipp()'><h1>Dati</h1></button>"
-         document.getElementById("acc").innerHTML += "<button onclick='tuoacc()' id='tuoacc'><h1>Gestisci account</h1></button>"
+         document.getElementById("acc").innerHTML += "<button onclick='tuoacc()' id='tuoacc'><h1>Impostazioni</h1></button>"
 
        }else{
          document.getElementById("acc").innerHTML = "<button id='previsioni' onclick='previsionipp()'><h1>Previsioni</h1><img src='https://lh3.googleusercontent.com/pw/ACtC-3cLkionUiv3xtdP-4kmN-FG5QlhsM-42OvQmh9iTzMY6I741J5755CwlmsDLVVuVt0qA1fsrODz3LoDrma9BFr-EiUzGiDXOJp3IvtVhwhc3u6LWfZb3arU4DXOAqjNXScK5hn6LpLdOvULAzMexN13=s24-no?authuser=0' height='50px' id='pimg'></img></button> <button id='dati' onclick='datipp()'><h1>Dati</h1><img id='dimg'src='https://lh3.googleusercontent.com/pw/ACtC-3c9TuUjBRQbuGEAnY9mcbpqp9BcsfsFhnt1EjeGwbpICAhiJ6Hov-PnkzSnNv0aBravVxPomEu8HALbnkzeC6sXRirtzHCiQKd-CryzqzS3Uf2YGNj4c1sz6E1wuscNZaRWEobXs7qN9SZpwBRzIWwb=s24-no?authuser=0' height='50px' id='taimg'></img></button>"
-         document.getElementById("acc").innerHTML += "<button onclick='tuoacc()' id='tuoacc'><h1>Gestisci account</h1><img src='https://lh3.googleusercontent.com/pw/ACtC-3dJoh0N46z2acGjddlrQJ0C9pfjWoRp328LI1Z6fVvtvy2tqbRJtHhdqM_dqwczy-eLsPYrTDX-YR96k9pwzRqWAwC--KCJ91RpscpvyRjaorNoa7dA4CmJ_GJwm3NVeWNv1VXMwD2Y1mnoLVLkTEuS=s24-no?authuser=0' height='60px'></img></button>"
+         document.getElementById("acc").innerHTML += "<button onclick='tuoacc()' id='tuoacc'><h1>Impostazioni</h1><span class='material-icons md-60'>tune</span></button>"
 
          console.log('Dispositivo mobile')
        }
@@ -453,6 +483,12 @@ firebase.database().ref("Allerte").on("child_added", function (snapshot) {
 
         avviaahah()
 
+
+        var datadue = new Date();
+        orad = datadue.getHours();
+        if(orad >= 20){
+          dark();
+        }
    }
 
    function avviaahah() {
@@ -483,10 +519,13 @@ firebase.database().ref("Allerte").on("child_added", function (snapshot) {
    }
 
      function tuoacc(){
+
        document.title = "Meteo Marco - Account ME";
        document.getElementById("display").innerHTML =" ";
 
-       document.getElementById('display').innerHTML = "<p id='ttext'>Informazioni Account</p>" + '<hr align="left" size="1" width="600" color="#919191" noshade>'
+       document.getElementById('display').innerHTML = "<p id='ttext'>Personalizzazione</p>" + '<hr align="left" size="1" width="600" color="#919191" noshade>'
+       document.getElementById('display').innerHTML += "<p id='ntext'>Tema scuro automatico attivo: dalle 20:00 attivato. Presto sar&agrave; possibile disattivarlo.</p>"
+       document.getElementById('display').innerHTML += "<p id='ttext'>Informazioni Account</p>" + '<hr align="left" size="1" width="600" color="#919191" noshade>'
 
        var user = firebase.auth().currentUser;
        if (user != null) {
@@ -504,6 +543,12 @@ firebase.database().ref("Allerte").on("child_added", function (snapshot) {
           document.getElementById('display').innerHTML += '<br>' + '<button onclick="signOut()" id="signOut"><h1>Logout</h1><img src="https://lh3.googleusercontent.com/pw/ACtC-3fxEqyRV4Kgd6Zq9ZYJSi8aBG4TOp5qqBYOGl7OnRZUogm68jgxH4UIwV2rIi1pIUDv62xzfK4Cwbj_xIQyKVdqMtGtecPJa3t36jMGNe4bS_7_5h8QrdJH6lMSlc-9vmqzvKUcR5tGcj7zNqJpY_la=s24-no?authuser=0" height="50px"></img></button>'
           document.getElementById('display').innerHTML +='&nbsp;&nbsp;&nbsp;<button onclick="elimabb()" id="signOut"><h1>Elimina l\'abbonamento*</h1><h2><br>Attenzione! L\'eliminazione dell\'abbonamento non comporta NESSUN rimborso.</h2></button><br><p id="ntext">Gestisci i tuoi pagamenti accedentdo al portale ufficiale <a href="gestionepagamenti.html">cliccando qui</a>.</p><h2>Quando hai creato il tuo account, hai accettato le <a href="https://docs.google.com/document/d/19Mgx9IHb-IxL0nMT4j_Le_YNjQQFHJBy2KwLtY4yCa8/preview"  target="_blank">Condizioni d\'uso</a>. Per visualizzarle, <a href="https://docs.google.com/document/d/19Mgx9IHb-IxL0nMT4j_Le_YNjQQFHJBy2KwLtY4yCa8/preview" target="_blank">CLICCA QUI</a>'
         });
+      }
+
+      var datadue = new Date();
+      orad = datadue.getHours();
+      if(orad >= 20){
+        dark();
       }
 
      }
@@ -607,6 +652,11 @@ user.updateProfile({
      }
 
      function datipp() {
+       var datadue = new Date();
+       orad = datadue.getHours();
+       if(orad >= 20){
+         dark();
+       }
        document.title = "Meteo Marco - Dati meteo";
        console.log('datipp');
        document.getElementById('display').innerHTML = '<button onclick="datireal()" id="datidue"><h1>Richiedi dati real time</h1></button>';
