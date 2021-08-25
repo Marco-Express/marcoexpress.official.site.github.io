@@ -37,7 +37,7 @@ gtag('config', 'G-1EFHH3K88D');
       <span id='acc'></span>
     </div>
     <br><br><br><br><br><br><br>
-    <center><img src='https://lh3.googleusercontent.com/pw/ACtC-3d6_e7jSouNpO3LWtGjFmerZVfma28jS-j7WxYCDY8FLknR8tNhLrowpPKmzODeX8sLARB9YbG6uuOr7harzHiU2rUNaYBf8c8O2GLOYhnaDmK3TwykuNjZSTJnP1ZabfgmpIvlCiFebB4MmJJ8g4Rt=s366-no?authuser=0' id='inizio'></img></center>
+    <center><img src='meteomarcologo.png' id='inizio'></img></center>
 
     <center><h1 id='textuno'>Accedi col tuo account Marco Express per visualizzare dati, prevsioni e altro ancora! Se hai gi&agrave; effettuato l'accesso in questo dispositivo senza disconnetterlo, attendi qualche istante....</h1>
 
@@ -98,11 +98,11 @@ document.getElementById("loading_screen").style.display = 'none';
 
      const auth = firebase.auth();
 
-document.addEventListener('contextmenu', event => event.preventDefault(
+/*document.addEventListener('contextmenu', event => event.preventDefault(
 
       document.getElementById('display').innerHTML = "<div id='hh'><center><h1>EHI! NON CERCARE D'IMBROGLIARE!</h1><h2>Secondo la politica sul corretto utilizzo dei siti Marco Express, &egrave; severamente vietato l'utilizzo della console ai non autorizzati. <br> Abbiamo segnalato il fatto che tu hai provato a barare. Nonostante ci&ograve; potrebbe essere che tu l'abbia fatto involontariamente. <b>Ora sai che non devi farlo</b>. La prossima volta ricordati che, se ci proverai di nuovo, verrai bannato dal sito e non avrai pi&ugrave; la possibilit&agrave; di usufruire degli abbonamenti e dei servizi.<br><br><br><button onclick='prosegui()'><h1>Prosegui l'utilizzo del sito</h1></button></center></div>"
 
-   ));
+   ));*/
 
    var input = document.getElementById("password");
 
@@ -135,7 +135,23 @@ document.addEventListener('contextmenu', event => event.preventDefault(
      $('body').css('background','#363636');
      $('.dettglitext').css('color','black');
     $('h2').css('color','white');
-
+    $("#inizio").attr("src","https://lh3.googleusercontent.com/pw/AM-JKLUoDeBgtZIjsa-nvJPfVNggNzh4INzye5hmOZO2Xjv9yV7lRbPG49NjejeObQKUtp5wYAQKssXUoTi15-05jnqjaves_nMT3MsVC5FoS-8NaLVmJB5BJO0Kj2mLM2QzeeyzDm2-C4w3fbzIhPZJQbxQ=s903-no?authuser=0");
+    $('#pomet').css('color','black');
+    $('#mattt').css('color','black');
+    $('#descrivimattina').css('color','black');
+    $('#descrivipomeriggio').css('color','black');
+    setTimeout(dark, 1000)
+   }
+   function chiaro(){
+     $('p').css('color','black');
+     $('body').css('background','white');
+     $('.dettglitext').css('color','black');
+    $('h2').css('color','black');
+    $("#inizio").attr("src","https://lh3.googleusercontent.com/pw/AM-JKLVZGFiK5reg51jGXRh0bgF08EDqu6FDCe_VGLSCW4G0QktLk4Y_ye-9DCntiMjRQEEDloWF7_Tozq5pbFHbMDCNWuOLgQud5SBURSMIb13JJNwxhax_WmLmAjMwEvzndJvRY6nOws3_yd3bw2nIKBRL=s903-no?authuser=0");
+    $('#pomet').css('color','black');
+    $('#mattt').css('color','black');
+    $('#descrivimattina').css('color','black');
+    $('#descrivipomeriggio').css('color','black');
    }
 
 
@@ -335,7 +351,7 @@ function vai() {
            var testo = snapshot.val().message;
            var titolo = snapshot.val().sender;
            var disp = document.getElementById('display')
-           disp.innerHTML = '<p id="ttext" class="anime"><img id="simboloo"style="float:left; width: 100px; padding: 15px;" src="imgnot.png"></img>' + titolo + '<button onclick="aggiornaprevisioni()" id="aggprevisioni"><span class="material-icons md-48" id="aggiornato">update</span><span class="material-icons md-48" id="aggiornato2"></span></button></p>' + '<hr align="left" size="1" width="750" color="#919191" noshade><button onclick="ascolta()" id="ascolta"><img src="https://lh3.googleusercontent.com/pw/ACtC-3fUB_LXWYYOOLYD8sp07_c1AVbIbD4yuQ4lSuf0fqeLNxWIZTRq_1oMp4vOty24HL7A_4gTZqwZpWLljZzpcvtRh3Z9URrxzfgqnA67oxSP5JJu5cAZF1A2gsuVWhwD1uXY6BIOS2FnvL28onR7hEPc=s48-no?authuser=0"></img></button>' + '<p id="ntext">' + testo + '</p><br></div>'
+           disp.innerHTML = '<p id="ttext" class="anime"><img id="simboloo"style="float:left; width: 100px; padding: 15px;" src="imgnot.png"></img>' + titolo + '<button onclick="aggiornaprevisioni()" id="aggprevisioni"><span class="material-icons md-48" id="aggiornato">update</span><span class="material-icons md-48" id="aggiornato2"></span></button></p>' + '<hr align="left" size="1" width="750" color="#919191" noshade><button onclick="ascolta()" id="ascolta"><img src="https://lh3.googleusercontent.com/pw/ACtC-3fUB_LXWYYOOLYD8sp07_c1AVbIbD4yuQ4lSuf0fqeLNxWIZTRq_1oMp4vOty24HL7A_4gTZqwZpWLljZzpcvtRh3Z9URrxzfgqnA67oxSP5JJu5cAZF1A2gsuVWhwD1uXY6BIOS2FnvL28onR7hEPc=s48-no?authuser=0"></img></button>' + '<p id="ntext" class="anime">' + testo + '</p><br></div>'
            disp.innerHTML += '<div class="dettaglipre" id="matt" style="float: left;"><img id="mattinaa"style="float: left;"></img><center><p id="mattt">Mattina</p></center><br><p class="dettore" id="descrivimattina"></p></div><div id="pomeriggio"><img id="pomeriggioo" style="float: left;"></img><center><p id="pomet" class="cambia">Pomeriggio</p></center><br><p class="dettore" id="descrivipomeriggio"></p></div></div>'
             clearTimeout(verificaprevisioni);
            var matt = $("#mattinaa")
@@ -484,10 +500,13 @@ firebase.database().ref("Allerte").on("child_added", function (snapshot) {
         avviaahah()
 
 
-        var datadue = new Date();
-        orad = datadue.getHours();
-        if(orad >= 20){
-          dark();
+        let tema = localStorage.getItem("tema");
+        if(tema === "chiaro"){
+          chiaro()
+        }else if(tema === "scuro"){
+          dark()
+        }else if(tema === "automatico"){
+
         }
    }
 
@@ -519,12 +538,22 @@ firebase.database().ref("Allerte").on("child_added", function (snapshot) {
    }
 
      function tuoacc(){
+       let tema = localStorage.getItem("tema");
+       var tipotema
+       if(tema === "chiaro"){
+         tipotema = "chiaro"
+       }else if(tema === "scuro"){
+         tipotema = "scuro"
+       }else if(tema === "automatico"){
+         let temaor = localStorage.getItem("temaorario");
+         tipotema = "automatico: chiaro fino alle ore 20:00."
+       }
 
        document.title = "Meteo Marco - Account ME";
        document.getElementById("display").innerHTML =" ";
-
        document.getElementById('display').innerHTML = "<p id='ttext'>Personalizzazione</p>" + '<hr align="left" size="1" width="600" color="#919191" noshade>'
-       document.getElementById('display').innerHTML += "<p id='ntext'>Tema scuro automatico attivo: dalle 20:00 attivato. Presto sar&agrave; possibile disattivarlo.</p>"
+       var seleziona = '<select id="selezionatema" style="width: 20%; height: 100px; font-size: 30px; border: 2px solid #0096bf; border-radius: 15px; background-color: #b9ccfa;"><option value="chiaro"><p>Chiaro</p></option><option value="scuro"><h1>Scuro</h1></option></select>'
+       document.getElementById('display').innerHTML += "<p id='ntext'>Tema: " + tipotema + "</p><br>" + seleziona + "&nbsp;&nbsp;&nbsp;&nbsp;<button onclick='confermatema()' style='width: 10%; border: 3px solid #0096bf; border-radius: 10px; background-color:#e3ebff;'><h1>Salva</h1></button>"
        document.getElementById('display').innerHTML += "<p id='ttext'>Informazioni Account</p>" + '<hr align="left" size="1" width="600" color="#919191" noshade>'
 
        var user = firebase.auth().currentUser;
@@ -551,6 +580,18 @@ firebase.database().ref("Allerte").on("child_added", function (snapshot) {
         dark();
       }
 
+     }
+
+     function confermatema(){
+       var tiposalva = document.getElementById("selezionatema").value
+       if(tiposalva === "chiaro"){
+         localStorage.setItem("tema", "chiaro");
+       }if(tiposalva === "scuro"){
+         localStorage.setItem("tema", "scuro");
+       }/*if(tiposalva === "automatico"){
+         localStorage.setItem("tema", "automatico");
+       }*/
+       window.location.reload()
      }
 
      function elimabb() {
