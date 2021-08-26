@@ -7,6 +7,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https: //fonts.googleapis.com/css2? family= Raleway & display=swap" rel="stylesheet">
 <link href="https: //fonts.googleapis.com/css2? family= Source+Code+Pro:wght@300 & display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
 <link href="meteostile.css" rel="stylesheet" type="text/css">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
@@ -336,7 +338,8 @@ function vai() {
 
        }else{
          document.getElementById("acc").innerHTML = "<button id='previsioni' onclick='previsionipp()'><h1>Previsioni</h1><img src='https://lh3.googleusercontent.com/pw/ACtC-3cLkionUiv3xtdP-4kmN-FG5QlhsM-42OvQmh9iTzMY6I741J5755CwlmsDLVVuVt0qA1fsrODz3LoDrma9BFr-EiUzGiDXOJp3IvtVhwhc3u6LWfZb3arU4DXOAqjNXScK5hn6LpLdOvULAzMexN13=s24-no?authuser=0' height='50px' id='pimg'></img></button> <button id='dati' onclick='datipp()'><h1>Dati</h1><img id='dimg'src='https://lh3.googleusercontent.com/pw/ACtC-3c9TuUjBRQbuGEAnY9mcbpqp9BcsfsFhnt1EjeGwbpICAhiJ6Hov-PnkzSnNv0aBravVxPomEu8HALbnkzeC6sXRirtzHCiQKd-CryzqzS3Uf2YGNj4c1sz6E1wuscNZaRWEobXs7qN9SZpwBRzIWwb=s24-no?authuser=0' height='50px' id='taimg'></img></button>"
-         document.getElementById("acc").innerHTML += "<button onclick='tuoacc()' id='tuoacc'><h1>Impostazioni</h1><span class='material-icons md-60'>tune</span></button>"
+         document.getElementById("acc").innerHTML += "<button onclick='comunita()' id='comunita'><h1>Community</h1><span class='material-icons md-60'>forum</span></button>"
+         document.getElementById("acc").innerHTML += "<button onclick='tuoacc()' id='tuoacc' style='width: 25%; height: 35%; background: #c7c8c9; letter-spacing: 2px; border-radius: 15px;box-shadow: 10px 10px 5px #dedede; border: 3px solid #939596;'><h1>Impostazioni</h1><span class='material-icons md-60'>tune</span></button>"
 
          console.log('Dispositivo mobile')
        }
@@ -508,6 +511,65 @@ firebase.database().ref("Allerte").on("child_added", function (snapshot) {
         }else if(tema === "automatico"){
 
         }
+   }
+
+   function comunita(){
+     console.log('Comunità');
+     var disp = document.getElementById("display")
+     disp.innerHTML = "<p class='ltext'>Comunit&agrave; Meteo Marco</p><p class='ntext'>Qui puoi chattare con Marco in persona e con tutta la community appartenente a Meteo Marco.</p>"
+     disp.innerHTML += '<div style="width: 90%; height: 500px; overflow: auto"><span id="nuovimess"></span></div>'
+    disp.innerHTML += '<center><input type="text" autocomplete="off" placeholder="Scrivi qui il messaggio" id="messaggioscrivi"></input><button onclick="inviamess()" id="invia"><span class="material-icons md-36">send</span></button></center>'
+
+     firebase.database().ref("gruppocomunita").on("child_added", function (snapshot) {
+       var mess = snapshot.val().message;
+       var mittente = snapshot.val().sender;
+       var ore = snapshot.val().ore;
+
+      var user = firebase.auth().currentUser;
+       user.providerData.forEach(function (profile) {
+      if(mittente == profile.email){
+        mittente = "Tu"
+        document.getElementById('nuovimess').innerHTML += `<div class='messaggio' align="right"><p class='mittmesss'><strong>Alle ore ${ore} - ${mittente}&nbsp;</strong></p><p class='messt'>${mess}</p></div><br>`
+      }else{
+        document.getElementById('nuovimess').innerHTML += `<div class='messaggio'><p class='mittmess'><strong>&nbsp;${mittente}</strong> - Alle ore ${ore}</p><p class='messt'>${mess}</p></div><br>`
+
+      }
+   })
+       console.log(mittente)
+     })
+   }
+
+   var inputdue = document.getElementById("messaggioscrivi");
+
+   inputdue.addEventListener("keydown", function (e) {
+   if (e.keyCode == 13) {
+   inviamess();
+   }
+   });
+
+   function inviamess(){
+     var scrivimess = document.getElementById("messaggioscrivi").value
+
+     var user = firebase.auth().currentUser;
+      user.providerData.forEach(function (profile) {
+     if(scrivimess === " "){
+       console.log("Troppo corto")
+     }else if(scrivimess.length > 500){
+       console.log("Troppo lungo")
+     }else{
+       var datadue = new Date();
+       orad = datadue.getHours();
+       min = datadue.getMinutes();
+       var ore = orad + ":" + min
+     firebase.database().ref("gruppocomunita").push().set({
+        "ore": ore,
+         "sender": profile.email,
+         "message": scrivimess
+
+     });
+     return false;
+   }
+ });
    }
 
    function avviaahah() {
@@ -886,7 +948,7 @@ user.updateProfile({
             }
 
             #tuoacc{
-              width: 38%;
+              width: 25%;
               height: 35%;
               background: #f6ff00;
               letter-spacing: 2px;
@@ -923,13 +985,22 @@ user.updateProfile({
             }
 
             #dati{
-              width: 30%;
+              width: 20%;
               height: 35%;
               background-color: #9d9ff2;
               border: 3px solid #0004de;
               letter-spacing: 2px;
               border-radius: 15px;
               box-shadow: 10px 10px 5px #dedede;
+            }
+            #comunita{
+              width: 20%;
+              height: 35%;
+              background: #f7da7c;
+              letter-spacing: 2px;
+              border-radius: 15px;
+              box-shadow: 10px 10px 5px #dedede;
+              border: 3px solid #ffc403;
             }
 
             #previsioni{
