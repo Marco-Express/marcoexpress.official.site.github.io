@@ -338,7 +338,7 @@ function vai() {
 
        }else{
          document.getElementById("acc").innerHTML = "<button id='previsioni' onclick='previsionipp()'><h1>Previsioni</h1><img src='https://lh3.googleusercontent.com/pw/ACtC-3cLkionUiv3xtdP-4kmN-FG5QlhsM-42OvQmh9iTzMY6I741J5755CwlmsDLVVuVt0qA1fsrODz3LoDrma9BFr-EiUzGiDXOJp3IvtVhwhc3u6LWfZb3arU4DXOAqjNXScK5hn6LpLdOvULAzMexN13=s24-no?authuser=0' height='50px' id='pimg'></img></button> <button id='dati' onclick='datipp()'><h1>Dati</h1><img id='dimg'src='https://lh3.googleusercontent.com/pw/ACtC-3c9TuUjBRQbuGEAnY9mcbpqp9BcsfsFhnt1EjeGwbpICAhiJ6Hov-PnkzSnNv0aBravVxPomEu8HALbnkzeC6sXRirtzHCiQKd-CryzqzS3Uf2YGNj4c1sz6E1wuscNZaRWEobXs7qN9SZpwBRzIWwb=s24-no?authuser=0' height='50px' id='taimg'></img></button>"
-         document.getElementById("acc").innerHTML += "<button onclick='comunita()' id='comunita'><h1>Community</h1><span class='material-icons md-60'>forum</span></button>"
+         document.getElementById("acc").innerHTML += "<button onclick='comunita()' style='width: 20%; height: 35%; background: #fffc57; border: 3px solid yellow;  letter-spacing: 2px; border-radius: 15px;box-shadow: 10px 10px 5px #dedede;'><h1>Community</h1><span class='material-icons md-60'>forum</span></button>"
          document.getElementById("acc").innerHTML += "<button onclick='tuoacc()' id='tuoacc' style='width: 25%; height: 35%; background: #c7c8c9; letter-spacing: 2px; border-radius: 15px;box-shadow: 10px 10px 5px #dedede; border: 3px solid #939596;'><h1>Impostazioni</h1><span class='material-icons md-60'>tune</span></button>"
 
          console.log('Dispositivo mobile')
@@ -518,7 +518,7 @@ firebase.database().ref("Allerte").on("child_added", function (snapshot) {
      var disp = document.getElementById("display")
      disp.innerHTML = "<p class='ltext'>Comunit&agrave; Meteo Marco</p><p class='ntext'>Qui puoi chattare con Marco in persona e con tutta la community appartenente a Meteo Marco.</p>"
      disp.innerHTML += '<div style="width: 90%; height: 500px; overflow: auto"><span id="nuovimess"></span></div>'
-    disp.innerHTML += '<center><input type="text" autocomplete="off" placeholder="Scrivi qui il messaggio" id="messaggioscrivi"></input><button onclick="inviamess()" id="invia"><span class="material-icons md-36">send</span></button></center>'
+    disp.innerHTML += '<center><form id="formscrivi"><input type="text" autocomplete="off" placeholder="Scrivi qui il messaggio" id="messaggioscrivi"></input></form><button onclick="inviamess()" id="invia"><span class="material-icons md-36">send</span></button></center>'
 
      firebase.database().ref("gruppocomunita").on("child_added", function (snapshot) {
        var mess = snapshot.val().message;
@@ -549,6 +549,7 @@ firebase.database().ref("Allerte").on("child_added", function (snapshot) {
 
    function inviamess(){
      var scrivimess = document.getElementById("messaggioscrivi").value
+     document.getElementById("formscrivi").reset()
 
      var user = firebase.auth().currentUser;
       user.providerData.forEach(function (profile) {
