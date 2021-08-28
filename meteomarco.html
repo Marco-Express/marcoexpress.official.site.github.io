@@ -100,11 +100,11 @@ document.getElementById("loading_screen").style.display = 'none';
 
      const auth = firebase.auth();
 
-/*document.addEventListener('contextmenu', event => event.preventDefault(
+document.addEventListener('contextmenu', event => event.preventDefault(
 
       document.getElementById('display').innerHTML = "<div id='hh'><center><h1>EHI! NON CERCARE D'IMBROGLIARE!</h1><h2>Secondo la politica sul corretto utilizzo dei siti Marco Express, &egrave; severamente vietato l'utilizzo della console ai non autorizzati. <br> Abbiamo segnalato il fatto che tu hai provato a barare. Nonostante ci&ograve; potrebbe essere che tu l'abbia fatto involontariamente. <b>Ora sai che non devi farlo</b>. La prossima volta ricordati che, se ci proverai di nuovo, verrai bannato dal sito e non avrai pi&ugrave; la possibilit&agrave; di usufruire degli abbonamenti e dei servizi.<br><br><br><button onclick='prosegui()'><h1>Prosegui l'utilizzo del sito</h1></button></center></div>"
 
-   ));*/
+   ));
 
    var input = document.getElementById("password");
 
@@ -338,7 +338,7 @@ function vai() {
 
        }else{
          document.getElementById("acc").innerHTML = "<button id='previsioni' onclick='previsionipp()'><h1>Previsioni</h1><img src='https://lh3.googleusercontent.com/pw/ACtC-3cLkionUiv3xtdP-4kmN-FG5QlhsM-42OvQmh9iTzMY6I741J5755CwlmsDLVVuVt0qA1fsrODz3LoDrma9BFr-EiUzGiDXOJp3IvtVhwhc3u6LWfZb3arU4DXOAqjNXScK5hn6LpLdOvULAzMexN13=s24-no?authuser=0' height='50px' id='pimg'></img></button> <button id='dati' onclick='datipp()'><h1>Dati</h1><img id='dimg'src='https://lh3.googleusercontent.com/pw/ACtC-3c9TuUjBRQbuGEAnY9mcbpqp9BcsfsFhnt1EjeGwbpICAhiJ6Hov-PnkzSnNv0aBravVxPomEu8HALbnkzeC6sXRirtzHCiQKd-CryzqzS3Uf2YGNj4c1sz6E1wuscNZaRWEobXs7qN9SZpwBRzIWwb=s24-no?authuser=0' height='50px' id='taimg'></img></button>"
-         document.getElementById("acc").innerHTML += "<button onclick='comunita()' style='width: 20%; height: 35%; background: #fffc57; border: 3px solid yellow;  letter-spacing: 2px; border-radius: 15px;box-shadow: 10px 10px 5px #dedede;'><h1>Community</h1><span class='material-icons md-60'>forum</span></button>"
+         document.getElementById("acc").innerHTML += "<button onclick='comunita()' id='comunita'  style='width: 20%; height: 35%; background:#f7f254; letter-spacing: 2px; border-radius: 15px;box-shadow: 10px 10px 5px #dedede; border: 3px solid yellow;'><h1>Community</h1><span class='material-icons md-60'>forum</span></button>"
          document.getElementById("acc").innerHTML += "<button onclick='tuoacc()' id='tuoacc' style='width: 25%; height: 35%; background: #c7c8c9; letter-spacing: 2px; border-radius: 15px;box-shadow: 10px 10px 5px #dedede; border: 3px solid #939596;'><h1>Impostazioni</h1><span class='material-icons md-60'>tune</span></button>"
 
          console.log('Dispositivo mobile')
@@ -517,27 +517,41 @@ firebase.database().ref("Allerte").on("child_added", function (snapshot) {
      console.log('Comunità');
      var disp = document.getElementById("display")
      disp.innerHTML = "<p class='ltext'>Comunit&agrave; Meteo Marco</p><p class='ntext'>Qui puoi chattare con Marco in persona e con tutta la community appartenente a Meteo Marco.</p>"
-     disp.innerHTML += '<div style="width: 90%; height: 500px; overflow: auto"><span id="nuovimess"></span></div>'
-    disp.innerHTML += '<center><form id="formscrivi"><input type="text" autocomplete="off" placeholder="Scrivi qui il messaggio" id="messaggioscrivi"></input></form><button onclick="inviamess()" id="invia"><span class="material-icons md-36">send</span></button></center>'
+     disp.innerHTML += '<div style="width: 90%; height: 800px; overflow: auto;" id="nuovimes"><span id="nuovimess"></span></div>'
+    disp.innerHTML += '<center><form id="form"><input type="text" autocomplete="off" placeholder="Scrivi qui il messaggio" id="messaggioscrivi"></input></form><button onclick="inviamess()" id="invia"><span class="material-icons md-36">send</span></button></center>'
 
      firebase.database().ref("gruppocomunita").on("child_added", function (snapshot) {
        var mess = snapshot.val().message;
        var mittente = snapshot.val().sender;
        var ore = snapshot.val().ore;
+       var s = snapshot.key
 
       var user = firebase.auth().currentUser;
        user.providerData.forEach(function (profile) {
       if(mittente == profile.email){
         mittente = "Tu"
-        document.getElementById('nuovimess').innerHTML += `<div class='messaggio' align="right"><p class='mittmesss'><strong>Alle ore ${ore} - ${mittente}&nbsp;</strong></p><p class='messt'>${mess}</p></div><br>`
+        document.getElementById('nuovimess').innerHTML += `<div class='messaggio' align="right"><p class='mittmesss'><strong>${mittente}&nbsp;</strong>Alle ore ${ore} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button data-id = "${snapshot.key}" onclick="deleteMessage(this);" style="background: #67cf59; border: 2px solid #088201; height: 60px; width: 60px; border-radius: 30px;"><center><span class="material-icons md-36">delete</span></center></button></p><p class='messt' id='message-${snapshot.key}'>${mess}</p></div><br>`
       }else{
         document.getElementById('nuovimess').innerHTML += `<div class='messaggio'><p class='mittmess'><strong>&nbsp;${mittente}</strong> - Alle ore ${ore}</p><p class='messt'>${mess}</p></div><br>`
 
       }
+      div();
    })
        console.log(mittente)
      })
    }
+   function deleteMessage(self) {
+       // get message ID
+       var messageId = self.getAttribute("data-id");
+
+       // delete message
+       firebase.database().ref("gruppocomunita").child(messageId).remove();
+   }
+
+   firebase.database().ref("gruppocomunita").on("child_removed", function (snapshot) {
+       // remove message node
+       document.getElementById("message-" + snapshot.key).innerHTML = '<span class="material-icons md-36">not_interested</span> Questo messaggio è stato eliminato'
+   });
 
    var inputdue = document.getElementById("messaggioscrivi");
 
@@ -547,17 +561,19 @@ firebase.database().ref("Allerte").on("child_added", function (snapshot) {
    }
    });
 
+
    function inviamess(){
      var scrivimess = document.getElementById("messaggioscrivi").value
-     document.getElementById("formscrivi").reset()
-
+     document.getElementById("form").reset();
      var user = firebase.auth().currentUser;
       user.providerData.forEach(function (profile) {
      if(scrivimess === " "){
        console.log("Troppo corto")
      }else if(scrivimess.length > 500){
        console.log("Troppo lungo")
+       document.getElementById("nuovimess").innerHTML += "<center><div style='border: 4px solid red; border-radius: 15px; width: 80%; height: 25%;'><p class='ntext'><span class='material-icons md-36 red'>error_outline</span><strong> Messaggio troppo lungo<strong></p><p style='font-size: 25px;'>Il Tuo messaggio &egrave; troppo lungo: supera i 500 caratteri.</p></div></center>"
      }else{
+
        var datadue = new Date();
        orad = datadue.getHours();
        min = datadue.getMinutes();
@@ -571,6 +587,10 @@ firebase.database().ref("Allerte").on("child_added", function (snapshot) {
      return false;
    }
  });
+   }
+
+   function div() {
+     document.getElementById('nuovimes').scrollTop = 10000000000000
    }
 
    function avviaahah() {
