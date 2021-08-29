@@ -82,6 +82,7 @@ document.getElementById("loading_screen").style.display = 'none';
     <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-app.js" onload="document.getElementById('lo').innerHTML = 'Caricamento libreria Firebase app in corso...'"></script>
     <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-auth.js" onload="document.getElementById('lo').innerHTML = 'Caricamento libreria Firebase auth in corso...'"></script>
     <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-database.js" onload="document.getElementById('lo').innerHTML = 'Caricamento libreria Firebase DB in corso...'"></script>
+     <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-firestore.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"onload="document.getElementById('lo').innerHTML = 'Caricamento libreria pdf creator in corso...'"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js" onload="document.getElementById('lo').innerHTML = 'Caricamento libreria jQuery in corso...'"></script>
 
@@ -100,11 +101,11 @@ document.getElementById("loading_screen").style.display = 'none';
 
      const auth = firebase.auth();
 
-document.addEventListener('contextmenu', event => event.preventDefault(
+/*document.addEventListener('contextmenu', event => event.preventDefault(
 
       document.getElementById('display').innerHTML = "<div id='hh'><center><h1>EHI! NON CERCARE D'IMBROGLIARE!</h1><h2>Secondo la politica sul corretto utilizzo dei siti Marco Express, &egrave; severamente vietato l'utilizzo della console ai non autorizzati. <br> Abbiamo segnalato il fatto che tu hai provato a barare. Nonostante ci&ograve; potrebbe essere che tu l'abbia fatto involontariamente. <b>Ora sai che non devi farlo</b>. La prossima volta ricordati che, se ci proverai di nuovo, verrai bannato dal sito e non avrai pi&ugrave; la possibilit&agrave; di usufruire degli abbonamenti e dei servizi.<br><br><br><button onclick='prosegui()'><h1>Prosegui l'utilizzo del sito</h1></button></center></div>"
 
-   ));
+   ));*/
 
    var input = document.getElementById("password");
 
@@ -476,22 +477,52 @@ firebase.database().ref("Allerte").on("child_added", function (snapshot) {
 })
         firebase.database().ref("Temperature").on("child_added", function (snapshot) {
           var temp = snapshot.val().message;
+          var rapporto = snapshot.val().sender;
 
+          document.getElementById('display').innerHTML += "<br><div class='aumentoediminuzione'><center><span class='material-icons md-48' id='aedtempspan'></span></center></div><div id='temperatura' class='dettagli'><span class='material-icons md-48'>device_thermostat</span><p class='dettglitext' id='dettglitext'> Temperature</p></div><p class='ntext infod'>" + temp + "</p>"
 
-          document.getElementById('display').innerHTML += "<br><div id='temperatura' class='dettagli'><span class='material-icons md-48'>device_thermostat</span><p class='dettglitext' id='dettglitext'> Temperature</p></div><p class='ntext infod'>" + temp + "</p>"
-
+          if(rapporto === "In aumento"){
+            document.getElementById("aedtempspan").innerHTML = "trending_up"
+          }else if(rapporto === "In diminuzione"){
+            document.getElementById("aedtempspan").innerHTML = "trending_down"
+          }else if(rapporto === "Stabile"){
+            document.getElementById("aedtempspan").innerHTML = "arrow_right_alt"
+          }else{
+            document.getElementById("aedtempspan").innerHTML = "update_disabled"
+          }
         })
 
         firebase.database().ref("Venti").on("child_added", function (snapshot) {
           var venti = snapshot.val().message;
+          var rapporto = snapshot.val().sender;
 
-          document.getElementById('display').innerHTML += "<br><div id='venti' class='dettagli'><span class='material-icons md-48'>speed</span><p class='dettglitext'> Venti</p></div><p class='ntext infod'>" + venti + "</p>"
+          document.getElementById('display').innerHTML += "<br><div class='aumentoediminuzione'><center><span class='material-icons md-48' id='aedventspan'></span></center></div><div id='venti' class='dettagli'><span class='material-icons md-48'>speed</span><p class='dettglitext'> Venti</p></div><p class='ntext infod'>" + venti + "</p>"
 
+          if(rapporto === "In aumento"){
+            document.getElementById("aedventspan").innerHTML = "trending_up"
+          }else if(rapporto === "In diminuzione"){
+            document.getElementById("aedventspan").innerHTML = "trending_down"
+          }else if(rapporto === "Stabile"){
+            document.getElementById("aedventspan").innerHTML = "arrow_right_alt"
+          }else{
+            document.getElementById("aedventspan").innerHTML = "update_disabled"
+          }
         })
         firebase.database().ref("preci").on("child_added", function (snapshot) {
           var prec = snapshot.val().message;
+          var rapporto = snapshot.val().sender;
 
-          document.getElementById('display').innerHTML += "<br><div id='precipitazioni' class='dettagli'><span class='material-icons md-48'>water_drop</span><p class='dettglitext'> Precipitazioni</p></div><p class='ntext infod'>" + prec + "</p>"
+          document.getElementById('display').innerHTML += "<br><div class='aumentoediminuzione'><center><span class='material-icons md-48' id='aedprecispan'></span></center></div><div id='precipitazioni' class='dettagli'><span class='material-icons md-48'>water_drop</span><p class='dettglitext'> Precipitazioni</p></div><p class='ntext infod'>" + prec + "</p>"
+          if(rapporto === "In aumento"){
+            document.getElementById("aedprecispan").innerHTML = "trending_up"
+          }else if(rapporto === "In diminuzione"){
+            document.getElementById("aedprecispan").innerHTML = "trending_down"
+          }else if(rapporto === "Stabile"){
+            document.getElementById("aedprecispan").innerHTML = "arrow_right_alt"
+          }else{
+            document.getElementById("aedprecispan").innerHTML = "update_disabled"
+          }
+
         })
 
         firebase.database().ref("dataagg").on("child_added", function (snapshot) {
@@ -524,16 +555,16 @@ firebase.database().ref("Allerte").on("child_added", function (snapshot) {
        var mess = snapshot.val().message;
        var mittente = snapshot.val().sender;
        var ore = snapshot.val().ore;
+       var data = snapshot.val().data;
        var s = snapshot.key
 
       var user = firebase.auth().currentUser;
        user.providerData.forEach(function (profile) {
       if(mittente == profile.email){
         mittente = "Tu"
-        document.getElementById('nuovimess').innerHTML += `<div class='messaggio' align="right"><p class='mittmesss'><strong>${mittente}&nbsp;</strong>Alle ore ${ore} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button data-id = "${snapshot.key}" onclick="deleteMessage(this);" style="background: #67cf59; border: 2px solid #088201; height: 60px; width: 60px; border-radius: 30px;"><center><span class="material-icons md-36">delete</span></center></button></p><p class='messt' id='message-${snapshot.key}'>${mess}</p></div><br>`
+        document.getElementById('nuovimess').innerHTML += `<div class='messaggio' align="right"><p class='mittmesss'><strong>${mittente}&nbsp;</strong>Alle ore ${ore} del ${data} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button data-id = "${snapshot.key}" onclick="deleteMessage(this);" style="background: #67cf59; border: 2px solid #088201; height: 60px; width: 60px; border-radius: 30px;"><center><span class="material-icons md-36">delete</span></center></button></p><p class='messt' id='message-${snapshot.key}'>${mess}</p></div><br>`
       }else{
-        document.getElementById('nuovimess').innerHTML += `<div class='messaggio'><p class='mittmess'><strong>&nbsp;${mittente}</strong> - Alle ore ${ore}</p><p class='messt'>${mess}</p></div><br>`
-
+        document.getElementById('nuovimess').innerHTML += `<div class='messaggio'><p class='mittmess'><strong>&nbsp;${mittente}</strong> - Alle ore ${ore} del ${data}</p><p class='messt'>${mess}</p></div><br>`
       }
       div();
    })
@@ -577,12 +608,16 @@ firebase.database().ref("Allerte").on("child_added", function (snapshot) {
        var datadue = new Date();
        orad = datadue.getHours();
        min = datadue.getMinutes();
+       giorno = datadue.getDate();
+       mese = datadue.getMonth();
+       mese++
        var ore = orad + ":" + min
+       var datacompleta = giorno + "/" + mese + "/" + "2021"
      firebase.database().ref("gruppocomunita").push().set({
         "ore": ore,
          "sender": profile.email,
-         "message": scrivimess
-
+         "message": scrivimess,
+         "data": datacompleta
      });
      return false;
    }
@@ -1309,6 +1344,17 @@ user.updateProfile({
         border-radius: 25px;
         border: 3px solid #ffff00;
         background: #ffff52;
+      }
+      .aumentoediminuzione{
+        width: 80px;
+        height: 80px;
+        border-radius: 40px;
+        border: 3px solid black;
+        float: left;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #ebebeb;
       }
 
 
