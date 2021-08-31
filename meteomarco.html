@@ -332,6 +332,8 @@ function vai() {
        document.getElementById("textuno").style.display="none";
        document.getElementById("reiu").style.display="none";
        controllaabb();
+       messaggidaleggere();
+       setTimeout(messaggidaleggere , 1000)
        if(window.innerWidth > 1000){
          console.log('Computer')
          document.getElementById("acc").innerHTML = "<button id='previsioni' onclick='previsionipp()'><h1>Previsioni</h1></button> <button id='dati' onclick='datipp()'><h1>Dati</h1></button>"
@@ -557,12 +559,20 @@ firebase.database().ref("Allerte").on("child_added", function (snapshot) {
        var ore = snapshot.val().ore;
        var data = snapshot.val().data;
        var s = snapshot.key
-
+       var quantimess = document.getElementsByClassName("messaggio")
+       var corretto = Number(quantimess.length)
+       var corr = corretto++
+       console.log(corr)
+       localStorage.setItem("messletti", corr);
       var user = firebase.auth().currentUser;
        user.providerData.forEach(function (profile) {
-      if(mittente == profile.email){
+         var email = profile.email
+         if(profile.email === "marcoscortegagna009@gmail.com" || profile.email === "marco.scorte@outlook.it"){
+           emaill = "Marco Express Official"
+         }
+      if(mittente == emaill){
         mittente = "Tu"
-        document.getElementById('nuovimess').innerHTML += `<div class='messaggio' align="right"><p class='mittmesss'><strong>${mittente}&nbsp;</strong>Alle ore ${ore} del ${data} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button data-id = "${snapshot.key}" onclick="deleteMessage(this);" style="background: #67cf59; border: 2px solid #088201; height: 60px; width: 60px; border-radius: 30px;"><center><span class="material-icons md-36">delete</span></center></button></p><p class='messt' id='message-${snapshot.key}'>${mess}</p></div><br>`
+        document.getElementById('nuovimess').innerHTML += `<div class='messaggio' align="right"><p class='mittmesss'><strong>${mittente}&nbsp;</strong>Alle ore ${ore} del ${data} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button data-id = "${snapshot.key}" onclick="deleteMessage(this);" style="background: #67cf59; border: 2px solid #088201; height: 60px; width: 60px; border-radius: 30px;"><center><span class="material-icons md-36">delete</span></center></button><button data-id = "${snapshot.key}" onclick="modificamess(this);" style="background: #67cf59; border: 2px solid #088201; height: 60px; width: 60px; border-radius: 30px;"><center><span class="material-icons md-36">mode_edit</span></center></button></p><p class='messt' id='message-${snapshot.key}'>${mess}</p></div><br>`
       }else{
         document.getElementById('nuovimess').innerHTML += `<div class='messaggio'><p class='mittmess'><strong>&nbsp;${mittente}</strong> - Alle ore ${ore} del ${data}</p><p class='messt'>${mess}</p></div><br>`
       }
@@ -584,6 +594,31 @@ firebase.database().ref("Allerte").on("child_added", function (snapshot) {
        document.getElementById("message-" + snapshot.key).innerHTML = '<span class="material-icons md-36">not_interested</span> Questo messaggio è stato eliminato'
    });
 
+   function modificamess(self){
+     var messageId = self.getAttribute("data-id");
+
+     var nuovomess = prompt("Inserisci il nuovo messaggio")
+     firebase.database().ref("gruppocomunita/" + messageId).update({
+  message: nuovomess
+}, (error) => {
+  if (error) {
+    // The write failed...
+  } else {
+    // Data saved successfully!
+  }
+});
+   }
+
+   firebase.database().ref("gruppocomunita").on("child_changed", function (snapshot) {
+        var mess = snapshot.val().message;
+       // remove message node
+       document.getElementById("message-" + snapshot.key).innerHTML = mess
+   });
+
+   function piuinfo(self){
+     var messageId = self.getAttribute("data-id");
+   }
+
    var inputdue = document.getElementById("messaggioscrivi");
 
    inputdue.addEventListener("keydown", function (e) {
@@ -594,6 +629,7 @@ firebase.database().ref("Allerte").on("child_added", function (snapshot) {
 
 
    function inviamess(){
+
      var scrivimess = document.getElementById("messaggioscrivi").value
      document.getElementById("form").reset();
      var user = firebase.auth().currentUser;
@@ -613,9 +649,32 @@ firebase.database().ref("Allerte").on("child_added", function (snapshot) {
        mese++
        var ore = orad + ":" + min
        var datacompleta = giorno + "/" + mese + "/" + "2021"
+       var email = profile.email
+       if(profile.email === "marcoscortegagna009@gmail.com" || profile.email === "marco.scorte@outlook.it"){
+         email = "Marco Express Official"
+       }
+
+
+       const dbRef = firebase.database().ref();
+     dbRef.child('messaggiinviaticomm').get().then((snapshot) => {
+       if (snapshot.exists()) {
+         console.log(snapshot.val());
+         var ok = snapshot.val().totale
+        var numero = Number(ok);
+        var invia = numero + 1
+         firebase.database().ref('messaggiinviaticomm').update({
+           totale: invia
+         })
+       } else {
+         console.log("No data available");
+       }
+     }).catch((error) => {
+       console.error(error);
+     });
+
      firebase.database().ref("gruppocomunita").push().set({
         "ore": ore,
-         "sender": profile.email,
+         "sender": email,
          "message": scrivimess,
          "data": datacompleta
      });
@@ -808,6 +867,7 @@ user.updateProfile({
 
      function previsionipp() {
        premiumplus();
+       escecomm();
      }
 
      function datipp() {
@@ -934,6 +994,77 @@ user.updateProfile({
       document.getElementById("display").innerHTML += "<center><br><img width='150px' src='https://lh3.googleusercontent.com/pw/ACtC-3cqK5HaPD1DJzuJsNl1G2Pa-1hWvH87lpVYGv2BL5Wz8rpuBN4f-L9lTwFVE0VdgL5FjpEumgkfOMAyutTQu2--Sjd_5xfj1ir-qLu3EKoqsZb-WJS5N3SH21wUyd2e1MoQW6YjVkh0IgFfuYrmTt8R=w64-h22-no?authuser=0'></img></center>"
       setTimeout(premiumplus, 1500)
     }
+
+
+    //Nuovi mess e community Impostazioni
+
+
+    function escecomm(){
+      var messaggiletti = localStorage.getItem("messletti");
+      console.log(messaggiletti)
+      var numcorrezione = Number(messaggiletti)
+      console.log(numcorrezione)
+      var corr = numcorrezione + 1
+      console.log(corr)
+      var invio = "" + corr
+      var user = firebase.auth().currentUser;
+        firebase.database().ref('Utenti/' + user.uid).update({
+          numeromessaggiletti: invio
+      })
+    }
+
+    function messaggidaleggere(){
+        var user = firebase.auth().currentUser;
+      var starCountRef = firebase.database().ref('Utenti/' + user.uid);
+    starCountRef.on('value', (snapshot) => {
+      const data = snapshot.val();
+      console.log(data);
+      console.log(data.numeromessaggiletti)
+      var messletti = data.numeromessaggiletti
+      var numero = Number(messletti);
+     localStorage.setItem("messletti", numero);
+    });
+
+
+    var altro = firebase.database().ref('messaggiinviaticomm');
+  altro.on('value', (snapshot) => {
+    const dataa = snapshot.val();
+    var mess = dataa.totale
+    var numero = Number(mess);
+    var messaggiletti = localStorage.getItem("messletti");
+    var messlett = Number(messaggiletti)
+    console.log(numero)
+    console.log(messlett)
+    var differenza = numero - messlett
+    console.log(differenza)
+    if(differenza === 0){
+      console.log("nonhaimessaggidaleggere")
+    }else if(differenza > 0){
+      console.log("Hai " + differenza + " messaggi da leggere")
+      var oi
+      var messaggi
+      if(differenza === 1){
+        oi = "o"
+        messaggi = "o"
+      }else{
+        oi = "i"
+        messaggi = ""
+      }
+      document.getElementById("display").innerHTML += `<div id='nuovimessss'><h1>Hai ${differenza} nuov${oi} messaggi${messaggi}!</h1><h2>Vai nella sezione community per visualizzarl${oi}.</h2><button onclick='comunita()' style='width: 70%; background: yellow; border: 2px solid black; border-radius: 25px;'><h1>Community</h1></button></div>`
+      setTimeout(chiudinuovimess , 8000)
+    }
+
+  });
+
+    }
+    function chiudinuovimess(){
+      $("#nuovimessss").fadeOut("slow")
+    }
+
+
+
+
+
       </script>
       <style>
       .material-icons.md-18 { font-size: 18px; }
@@ -1356,7 +1487,17 @@ user.updateProfile({
         align-items: center;
         background: #ebebeb;
       }
-
+      #nuovimessss{
+        position: fixed;
+        top: 30px;
+        right: 10px;
+        width: 50%;
+        height: 200px;
+        border: 2px solid black;
+        border-radius: 15px;
+        background-color: white;
+        padding: 15px;
+      }
 
       </style>
 
