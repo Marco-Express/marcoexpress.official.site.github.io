@@ -12,9 +12,16 @@
 <input type='number' id='euro'></input><input type='text' id='pp'placeholder='Password amministratore'></input><button onclick='ok()'>Carica</button><br>
 <h1>Rimborso</h1>
 <input type='text' id='ppp'placeholder='Password amministratore'></input><button onclick='ook()'>Rimborsa</button>
+<h1>Seleziona il tipo di codice</h1>
+<button onclick="unasettimana()">Una settimana di Meteo Marco</button>
+<button onclick="duesettimane()">Due settimane di Meteo Marco</button>
+<input type="number" id="sol"></input>
+<button onclick="soldi()" id="soldi">Ricarica portafoglio</button>
+<h1 id="codice"></h1>
 <button onclick='signOut()'>Esci</button>
   <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-database.js"></script>
 <script>
 var firebaseConfig = {
   apiKey: "AIzaSyCIw0-w1C3zDjoGgVpLKsFYm2TFXqJr9yw",
@@ -122,6 +129,66 @@ auth.onAuthStateChanged(function(user){
         })
      }
    }
+
+
+   function unasettimana(){
+     var elencoCaratteri="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+   	var minimoCaratteri=6;
+   	var massimoCaratteri=15;
+   	var differenzaCaratteri=massimoCaratteri-minimoCaratteri;
+   	var lunghezza=Math.round((Math.random()*differenzaCaratteri)+minimoCaratteri);
+   	var incremento=0;
+   	var password="";
+   	while(incremento<lunghezza){
+   	   password+=elencoCaratteri.charAt(Math.round(Math.random()*elencoCaratteri.length));
+   	   incremento++;
+   	}
+    firebase.database().ref('Riscattacodice/' + password).set({
+     premio: "Meteo Marco - 1 Settimana"
+    });
+    document.getElementById("codice").innerHTML = "Il tuo codice &egrave; " + password
+   }
+
+   function duesettimane(){
+     var elencoCaratteri="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+   	var minimoCaratteri=6;
+   	var massimoCaratteri=15;
+   	var differenzaCaratteri=massimoCaratteri-minimoCaratteri;
+   	var lunghezza=Math.round((Math.random()*differenzaCaratteri)+minimoCaratteri);
+   	var incremento=0;
+   	var password="";
+   	while(incremento<lunghezza){
+   	   password+=elencoCaratteri.charAt(Math.round(Math.random()*elencoCaratteri.length));
+   	   incremento++;
+   	}
+    firebase.database().ref('Riscattacodice/' + password).set({
+     premio: "Meteo Marco - 2 Settimane"
+    });
+    document.getElementById("codice").innerHTML = "Il tuo codice &egrave; " + password
+   }
+
+   function soldi(){
+     var elencoCaratteri="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+   	var minimoCaratteri=6;
+   	var massimoCaratteri=15;
+   	var differenzaCaratteri=massimoCaratteri-minimoCaratteri;
+   	var lunghezza=Math.round((Math.random()*differenzaCaratteri)+minimoCaratteri);
+   	var incremento=0;
+   	var password="";
+   	while(incremento<lunghezza){
+   	   password+=elencoCaratteri.charAt(Math.round(Math.random()*elencoCaratteri.length));
+   	   incremento++;
+   	}
+    var soldi = document.getElementById("sol").value
+    var soldidaric = "" + soldi
+    firebase.database().ref('Riscattacodice/' + password).set({
+     premio: "Ricarica portafoglio",
+     ricarica: soldidaric
+    });
+    document.getElementById("codice").innerHTML = "Il tuo codice &egrave; " + password
+   }
+
+
 </script>
 <style>
 #signOut {

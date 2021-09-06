@@ -1,0 +1,268 @@
+<html>
+<head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Mukta:wght@200;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+<title>Riscatta codice Marco Express Service</title>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1EFHH3K88D"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+
+gtag('config', 'UA-204455590-1');
+gtag('config', 'G-1EFHH3K88D');
+</script>
+</head>
+<body onload="setTimeout(parte , 5000)">
+
+  <center><img src="https://lh3.googleusercontent.com/pw/AM-JKLUFiD_dbz-alodAMi71i9dIIXbArYEs8gioAhyVM1psrn4qh0qg1hBo7QWfY5h7Tcc8q7d8vOm4VjvoZt8oTGj23hZCgt1mzN8-g7lWdLzn_JpTM5HQ0jK8IRF_aCGIcak36Q6eVEV95TzsyH3_vi5f=s512-no?authuser=0" id="immagine"></img>
+    <h1>Riscatta il tuo codice regalo Marco Express</h1>
+  <h2>Il codice viene generato da un sistema automatico Marco Express ed &egrave; composto da minimo 6 caratteri.</h2></center>
+  <center><div id="box">
+    <p id="labe"><strong>Inserisci codice qui:</strong> </p>
+  &nbsp;	&nbsp;	<input type="text" id="codice" autocomplete="off">
+  &nbsp;	&nbsp;	&nbsp;	&nbsp;	<button onclick="riscattacodice()" id="button"><span class="material-icons md-55">check_circle</span></button>
+</div><div id="ris">
+  <p id="risultatouno"></p>
+  <p id="risultato"></p>
+</div>
+</center>
+
+<script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-database.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+
+
+<script>
+var firebaseConfig = {
+  apiKey: "AIzaSyCIw0-w1C3zDjoGgVpLKsFYm2TFXqJr9yw",
+  authDomain: "marco-express-d30c8.firebaseapp.com",
+  projectId: "marco-express-d30c8",
+  storageBucket: "marco-express-d30c8.appspot.com",
+  messagingSenderId: "764621319758",
+  appId: "1:764621319758:web:9390a4a994df27cda4dd1f",
+  measurementId: "G-3ZK6NW0G3F"
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+
+const auth = firebase.auth();
+
+function parte(){
+  $('#codice').attr({placeholder:'Scrivi il tuo codice qui'});
+  setTimeout(function(){
+    $('#codice').attr({placeholder:'Minimo 6 caratteri'});
+    setTimeout(function(){
+        $('#codice').attr({placeholder:'Massimo 15 caratteri'});
+      setTimeout(function(){
+        $('#codice').attr({placeholder:'Può essere utilizzato una volta'});
+        setTimeout(function(){
+          $('#codice').attr({placeholder:' '});
+          setTimeout(parte , 5000)
+        }, 2500)
+      }, 2500)
+    }, 2500)
+  }, 2500)
+}
+
+function riscattacodice(){
+  document.getElementById("risultatouno").innerHTML = '<span class="material-icons md-48">travel_explore</span><br><strong>Verifica in corso...</strong>'
+  var codice = document.getElementById("codice").value
+  const dbRef = firebase.database().ref();
+dbRef.child("Riscattacodice").child(codice).get().then((snapshot) => {
+  if (snapshot.exists()) {
+    console.log(snapshot.val());
+    var premio = {
+      tipo: snapshot.val().premio,
+      ricarica: snapshot.val().ricarica,
+
+    }
+    console.log(premio.tipo)
+    console.log(premio.ricarica)
+    $("#risultatouno").fadeOut()
+      document.getElementById("risultato").innerHTML = "<span class='material-icons md-48'>schedule</span><br><strong>Codice regalo trovato... Stiamo completando l'operazione. Attendere prego.</strong>"
+      document.getElementById("risultato").style.color = "#e8a217"
+
+
+    var user = firebase.auth().currentUser;
+    if(premio.tipo === "Ricarica portafoglio"){
+      var quantisoldi = Number(premio.ricarica)
+      console.log(quantisoldi)
+      user.providerData.forEach(function (profile) {
+      //var soldiora = profile.displayName
+      var ehe = Number(profile.displayName)
+
+        var piu = ehe+quantisoldi
+        var inv = "" + piu
+
+        user.updateProfile({
+       displayName: inv
+     }).then(function() {
+       firebase.database().ref().child("Riscattacodice").child(codice).remove()
+       document.getElementById("risultato").innerHTML = `<span class="material-icons md-48">check_circle_outline</span><br><strong>Codice monouso riscattato. Abbiamo aggiunto &euro; ${quantisoldi} al tuo account.</strong>`
+       document.getElementById("risultato").style.color = "#0ca607"
+
+     }).catch(function(error) {
+       console.log(error)
+     });
+
+   })
+    }else if(premio.tipo === "Meteo Marco - 1 Settimana"){
+      user.providerData.forEach(function (profile) {
+        console.log(profile.photoURL)
+        if(profile.photoURL === ' ') {
+          var d = new Date();
+          orad = d.getHours();
+          min = d.getMinutes();
+          dataduen = d.getDate();
+          mesed = d.getMonth();
+          annodue = d.getFullYear();
+          mesed++
+          var piusett = new Date()
+          piusett.setDate(dataduen + 7)
+          console.log(piusett)
+          var invia = ""+piusett
+
+          user.updateProfile({
+          photoURL: invia
+          }).then(function() {
+            firebase.database().ref().child("Riscattacodice").child(codice).remove()
+           document.getElementById("risultato").innerHTML = '<span class="material-icons md-48">check_circle_outline</span><br><strong>Codice monouso riscattato. Ora puoi visualizzare le previsioni Meteo Marco per una settimana</strong>'
+           document.getElementById("risultato").style.color = "#0ca607"
+
+          })
+        }else{
+          document.getElementById("risultato").innerHTML = "<span class='material-icons md-48'>highlight_off</span><br><strong>Hai gi&agrave; un abbonamento Meteo Marco attivo ora. Quando scade, riscatta il codice qui.</strong>"
+          document.getElementById("risultato").style.color = "red"
+          console.log("abbonamento già attivo")
+        }
+    })
+
+
+  }else if(premio.tipo === "Meteo Marco - 2 Settimane"){
+    user.providerData.forEach(function (profile) {
+      console.log(profile.photoURL)
+      if(profile.photoURL === ' ') {
+        var d = new Date();
+        orad = d.getHours();
+        min = d.getMinutes();
+        dataduen = d.getDate();
+        mesed = d.getMonth();
+        annodue = d.getFullYear();
+        mesed++
+        var piusett = new Date()
+        piusett.setDate(dataduen + 14)
+        console.log(piusett)
+        var invia = ""+piusett
+
+        user.updateProfile({
+        photoURL: invia
+        }).then(function() {
+          firebase.database().ref().child("Riscattacodice").child(codice).remove()
+         document.getElementById("risultato").innerHTML = '<span class="material-icons md-48">check_circle_outline</span><br><strong>Codice monouso riscattato. Ora puoi visualizzare le previsioni Meteo Marco per due settimane</strong>'
+         document.getElementById("risultato").style.color = "#0ca607"
+
+        })
+      }else{
+        document.getElementById("risultato").innerHTML = "<span class='material-icons md-48'>highlight_off</span><br><strong>Hai gi&agrave; un abbonamento Meteo Marco attivo ora. Quando scade, riscatta il codice qui.</strong>"
+        document.getElementById("risultato").style.color = "red"
+        console.log("abbonamento già attivo")
+      }
+  })
+
+
+}
+
+  } else {
+        $("#risultatouno").fadeOut(1500, function(){
+          document.getElementById("risultato").innerHTML = "<span class='material-icons md-48'>highlight_off</span><br><strong>Codice regalo non valido!</strong>"
+          document.getElementById("risultato").style.color = "red"
+          setTimeout(function (){
+            document.getElementById("risultato").innerHTML = " "
+          } , 7000)
+        });
+  }
+}).catch((error) => {
+  console.error(error);
+});
+}
+</script>
+<style>
+.material-icons.md-18 { font-size: 18px; }
+.material-icons.md-24 { font-size: 24px; }
+.material-icons.md-36 { font-size: 36px; }
+.material-icons.md-48 { font-size: 48px; }
+.material-icons.md-55 { font-size: 55px; }
+.material-icons.md-60 { font-size: 60px; }
+.material-icons.md-75 { font-size: 75px; }
+.material-icons.md-150 { font-size: 150px; }
+body{
+  background-color: #ffd1d1;
+}
+h1{
+  font-family: 'Mukta', sans-serif;
+  font-size: 45px;
+}
+#box{
+  width: 95%;
+  border: 2px solid red;
+  height: 30%;
+  display: flex;
+  align-items: center;
+  border-radius: 35px;
+  background-color: #faacac;
+}
+#codice{
+  width: 50%;
+  height: 75px;
+  border: 3px solid black;
+  border-radius: 5px;
+  box-shadow: 10px 10px 5px #949494;
+  background-color: #f2f2f2;
+  font-size: 30px;
+}
+#labe{
+  font-family: 'Mukta', sans-serif;
+  font-size: 30px;
+  margin-left: 20px;
+}
+#button{
+  height: 75px;
+  width: 75px;
+  border-radius: 30px;
+  border: 3px solid black;
+  box-shadow: 10px 10px 5px #949494;
+}
+#ris{
+  width: 95%;
+  height: auto;
+  border: 2px solid #a3a3a3;
+  background-color: #dedede;
+  border-radius: 30px;
+}
+#risultato{
+  font-family: 'Mukta', sans-serif;
+  font-size: 37px;
+  margin-bottom: 15px;
+}
+#risultatouno{
+  font-family: 'Mukta', sans-serif;
+  font-size: 37px;
+  margin-bottom: 15px;
+  color: #0000e0;
+}
+#immagine{
+  height: 250px;
+  border-top-right-radius: 40px;
+  border-bottom-left-radius: 40px;
+  border-top-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+</style>
+</body>
+</html>
