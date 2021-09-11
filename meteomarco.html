@@ -588,7 +588,7 @@ firebase.database().ref("Allerte").on("child_added", function (snapshot) {
        console.log(mittente)
      })
 
-     document.getElementById("messaggioscrivi").focus()
+     
      var messaggioscrivi = document.getElementById("messaggioscrivi");
      messaggioscrivi.addEventListener("keydown", function (e) {
      if (e.keyCode == 13) {
