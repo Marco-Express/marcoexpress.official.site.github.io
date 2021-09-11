@@ -341,11 +341,9 @@ function vai() {
          document.getElementById("acc").innerHTML += "<button onclick='tuoacc()' id='tuoacc'><h1>Impostazioni</h1></button>"
 
        }else{
-         document.getElementById("acc").innerHTML = "<button id='previsioni' onclick='previsionipp()'><h1>Previsioni</h1><img src='https://lh3.googleusercontent.com/pw/ACtC-3cLkionUiv3xtdP-4kmN-FG5QlhsM-42OvQmh9iTzMY6I741J5755CwlmsDLVVuVt0qA1fsrODz3LoDrma9BFr-EiUzGiDXOJp3IvtVhwhc3u6LWfZb3arU4DXOAqjNXScK5hn6LpLdOvULAzMexN13=s24-no?authuser=0' height='50px' id='pimg'></img></button> <button id='dati' onclick='datipp()'><h1>Dati</h1><img id='dimg'src='https://lh3.googleusercontent.com/pw/ACtC-3c9TuUjBRQbuGEAnY9mcbpqp9BcsfsFhnt1EjeGwbpICAhiJ6Hov-PnkzSnNv0aBravVxPomEu8HALbnkzeC6sXRirtzHCiQKd-CryzqzS3Uf2YGNj4c1sz6E1wuscNZaRWEobXs7qN9SZpwBRzIWwb=s24-no?authuser=0' height='50px' id='taimg'></img></button>"
-         document.getElementById("acc").innerHTML += "<button onclick='comunita()' id='comunita'  style='width: 20%; height: 35%; background:#f7f254; letter-spacing: 2px; border-radius: 15px;box-shadow: 10px 10px 5px #dedede; border: 3px solid yellow;'><h1>Community</h1><span class='material-icons md-60'>forum</span></button>"
-         document.getElementById("acc").innerHTML += "<button onclick='tuoacc()' id='tuoacc' style='width: 25%; height: 35%; background: #c7c8c9; letter-spacing: 2px; border-radius: 15px;box-shadow: 10px 10px 5px #dedede; border: 3px solid #939596;'><h1>Impostazioni</h1><span class='material-icons md-60'>tune</span></button>"
+         document.getElementById("acc").innerHTML = "<div id='pulsantiera'><button id='previsioni' onclick='previsionipp()'><strong><h1>Previsioni</h1></strong><span class='material-icons md-50'>description</span></button> <button id='dati' onclick='datipp()'><h1>Dati</h1><span class='material-icons md-50'>poll</span></button><button onclick='comunita()' id='comunita'  style='width: 20%; height: 35%; background:#f7f254; letter-spacing: 2px; border-radius: 15px;box-shadow: 10px 10px 5px #dedede; border: 3px solid yellow;'><h1>Community</h1><span class='material-icons md-60'>forum</span></button><button onclick='tuoacc()' id='tuoacc' style='width: 25%; height: 35%; background: #c7c8c9; letter-spacing: 2px; border-radius: 15px;box-shadow: 10px 10px 5px #dedede; border: 3px solid #939596;'><h1>Impostazioni</h1><span class='material-icons md-60'>tune</span></button>"
 
-         console.log('Dispositivo mobile')
+
        }
 
 
@@ -596,6 +594,12 @@ firebase.database().ref("Allerte").on("child_added", function (snapshot) {
      if (e.keyCode == 13) {
      inviamess();
      }
+     });
+     messaggioscrivi.addEventListener("focus", function () {
+       document.getElementById("accessoc").style.display = "none"
+     });
+     messaggioscrivi.addEventListener("blur", function () {
+       document.getElementById("accessoc").style.display = "block"
      });
 
      $('#messaggioscrivi').attr({placeholder:'Scrivi qui il messaggio'});
@@ -1096,8 +1100,8 @@ user.updateProfile({
         oi = "i"
         messaggi = ""
       }
-      //document.getElementById("display").innerHTML += `<div id='nuovimessss'><h1>Hai ${differenza} nuov${oi} messaggi${messaggi}!</h1><h2>Vai nella sezione community per visualizzarl${oi}.</h2><button onclick='comunita()' style='width: 70%; background: yellow; border: 2px solid black; border-radius: 25px;'><h1>Community</h1></button></div>`
-     // setTimeout(chiudinuovimess , 8000)
+      document.getElementById("display").innerHTML += `<div id='nuovimessss'><h1>Hai ${differenza} nuov${oi} messaggi${messaggi}!</h1><h2>Vai nella sezione community per visualizzarl${oi}.</h2><button onclick='comunita()' style='width: 70%; background: yellow; border: 2px solid black; border-radius: 25px;'><h1>Community</h1></button></div>`
+      setTimeout(chiudinuovimess , 8000)
     }
 
   });
@@ -1117,6 +1121,7 @@ user.updateProfile({
       .material-icons.md-24 { font-size: 24px; }
       .material-icons.md-36 { font-size: 36px; }
       .material-icons.md-48 { font-size: 48px; }
+      .material-icons.md-50 { font-size: 50px; }
       .material-icons.md-60 { font-size: 60px; }
       .material-icons.md-75 { font-size: 75px; }
       .material-icons.md-150 { font-size: 150px; }
