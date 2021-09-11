@@ -82,7 +82,8 @@ document.getElementById("loading_screen").style.display = 'none';
     <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-app.js" onload="document.getElementById('lo').innerHTML = 'Caricamento libreria Firebase app in corso...'"></script>
     <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-auth.js" onload="document.getElementById('lo').innerHTML = 'Caricamento libreria Firebase auth in corso...'"></script>
     <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-database.js" onload="document.getElementById('lo').innerHTML = 'Caricamento libreria Firebase DB in corso...'"></script>
-     <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-firestore.js"></script>
+     <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-firestore.js" onload="document.getElementById('lo').innerHTML = 'Caricamento libreria Firebase firestore in corso...'"></script>
+     <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-storage.js" onload="document.getElementById('lo').innerHTML = 'Caricamento libreria Firebase Storage in corso...'"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"onload="document.getElementById('lo').innerHTML = 'Caricamento libreria pdf creator in corso...'"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js" onload="document.getElementById('lo').innerHTML = 'Caricamento libreria jQuery in corso...'"></script>
 
@@ -134,8 +135,11 @@ document.getElementById("loading_screen").style.display = 'none';
    }
 
    function dark(){
-     $('p').css('color','white');
      $('body').css('background','#363636');
+    setTimeout(dopodark, 2000)
+   }
+   function dopodark(){
+      $('p').css('color','white');
      $('.dettglitext').css('color','black');
     $('h2').css('color','white');
     $("#inizio").attr("src","https://lh3.googleusercontent.com/pw/AM-JKLUoDeBgtZIjsa-nvJPfVNggNzh4INzye5hmOZO2Xjv9yV7lRbPG49NjejeObQKUtp5wYAQKssXUoTi15-05jnqjaves_nMT3MsVC5FoS-8NaLVmJB5BJO0Kj2mLM2QzeeyzDm2-C4w3fbzIhPZJQbxQ=s903-no?authuser=0");
@@ -143,7 +147,6 @@ document.getElementById("loading_screen").style.display = 'none';
     $('#mattt').css('color','black');
     $('#descrivimattina').css('color','black');
     $('#descrivipomeriggio').css('color','black');
-    setTimeout(dark, 1000)
    }
    function chiaro(){
      $('p').css('color','black');
@@ -332,8 +335,6 @@ function vai() {
        document.getElementById("textuno").style.display="none";
        document.getElementById("reiu").style.display="none";
        controllaabb();
-       messaggidaleggere();
-       setTimeout(messaggidaleggere , 1000)
        if(window.innerWidth > 1000){
          console.log('Computer')
          document.getElementById("acc").innerHTML = "<button id='previsioni' onclick='previsionipp()'><h1>Previsioni</h1></button> <button id='dati' onclick='datipp()'><h1>Dati</h1></button>"
@@ -547,9 +548,22 @@ firebase.database().ref("Allerte").on("child_added", function (snapshot) {
    }
 
    function comunita(){
+     let tema = localStorage.getItem("tema");
+     if(tema === "chiaro"){
+       chiaro()
+     }else if(tema === "scuro"){
+       dark()
+       setTimeout(function(){
+         $('p').css('color','white');
+         $('.mittmess').css('color','black');
+         $('.mittmesss').css('color','black');
+         $('.messt').css('color','black');
+
+       }, 2000)
+     }
      console.log('Comunità');
      var disp = document.getElementById("display")
-     disp.innerHTML = "<p class='ltext'>Comunit&agrave; Meteo Marco</p><p class='ntext'>Qui puoi chattare con Marco in persona e con tutta la community appartenente a Meteo Marco.</p>"
+     disp.innerHTML = "<p class='ltext'>Comunit&agrave; Meteo Marco</p><p class='ntext'>Qui puoi chattare con Marco in persona e con tutta la community appartenente a Meteo Marco.<br>Ti ricordiamo di rispettare le norme della Community.</p>"
      disp.innerHTML += '<div style="width: 90%; height: 800px; overflow: auto;" id="nuovimes"><span id="nuovimess"></span></div>'
     disp.innerHTML += '<center><form id="form"><input type="text" autocomplete="off" placeholder="Scrivi qui il messaggio" id="messaggioscrivi"></input></form><button onclick="inviamess()" id="invia"><span class="material-icons md-36">send</span></button></center>'
 
@@ -559,11 +573,6 @@ firebase.database().ref("Allerte").on("child_added", function (snapshot) {
        var ore = snapshot.val().ore;
        var data = snapshot.val().data;
        var s = snapshot.key
-       var quantimess = document.getElementsByClassName("messaggio")
-       var corretto = Number(quantimess.length)
-       var corr = corretto++
-       console.log(corr)
-       localStorage.setItem("messletti", corr);
       var user = firebase.auth().currentUser;
        user.providerData.forEach(function (profile) {
          var email = profile.email
@@ -580,6 +589,30 @@ firebase.database().ref("Allerte").on("child_added", function (snapshot) {
    })
        console.log(mittente)
      })
+
+     document.getElementById("messaggioscrivi").focus()
+     var messaggioscrivi = document.getElementById("messaggioscrivi");
+     messaggioscrivi.addEventListener("keydown", function (e) {
+     if (e.keyCode == 13) {
+     inviamess();
+     }
+     });
+
+     $('#messaggioscrivi').attr({placeholder:'Scrivi qui il messaggio'});
+     setTimeout(function(){
+       $('#messaggioscrivi').attr({placeholder:'Sarà possibile eliminarlo quando si desidera'});
+       setTimeout(function(){
+           $('#messaggioscrivi').attr({placeholder:'Massimo 500 caratteri'});
+         setTimeout(function(){
+           $('#messaggioscrivi').attr({placeholder:'Rispetta le norme della community'});
+           setTimeout(function(){
+             $('#messaggioscrivi').attr({placeholder:'Scrivi qui il messaggio'});
+
+           }, 2500)
+         }, 2500)
+       }, 2500)
+     }, 2500)
+
    }
    function deleteMessage(self) {
        // get message ID
@@ -619,23 +652,16 @@ firebase.database().ref("Allerte").on("child_added", function (snapshot) {
      var messageId = self.getAttribute("data-id");
    }
 
-   var inputdue = document.getElementById("messaggioscrivi");
-
-   inputdue.addEventListener("keydown", function (e) {
-   if (e.keyCode == 13) {
-   inviamess();
-   }
-   });
-
-
    function inviamess(){
 
      var scrivimess = document.getElementById("messaggioscrivi").value
      document.getElementById("form").reset();
      var user = firebase.auth().currentUser;
       user.providerData.forEach(function (profile) {
-     if(scrivimess === " "){
+     if(scrivimess === " " || scrivimess === "") {
        console.log("Troppo corto")
+       document.getElementById("nuovimess").innerHTML += "<center><div style='border: 4px solid red; border-radius: 15px; width: 80%; height: 25%;'><p class='ntext'><span class='material-icons md-36 red'>error_outline</span><strong> Impossibile inviare un messaggio vuoto<strong></p><p style='font-size: 25px;'>Non &egrave; possibile inviare un messaggio vuoto.</p></div></center>"
+
      }else if(scrivimess.length > 500){
        console.log("Troppo lungo")
        document.getElementById("nuovimess").innerHTML += "<center><div style='border: 4px solid red; border-radius: 15px; width: 80%; height: 25%;'><p class='ntext'><span class='material-icons md-36 red'>error_outline</span><strong> Messaggio troppo lungo<strong></p><p style='font-size: 25px;'>Il Tuo messaggio &egrave; troppo lungo: supera i 500 caratteri.</p></div></center>"
@@ -655,23 +681,6 @@ firebase.database().ref("Allerte").on("child_added", function (snapshot) {
        }
 
 
-       const dbRef = firebase.database().ref();
-     dbRef.child('messaggiinviaticomm').get().then((snapshot) => {
-       if (snapshot.exists()) {
-         console.log(snapshot.val());
-         var ok = snapshot.val().totale
-        var numero = Number(ok);
-        var invia = numero + 1
-         firebase.database().ref('messaggiinviaticomm').update({
-           totale: invia
-         })
-       } else {
-         console.log("No data available");
-       }
-     }).catch((error) => {
-       console.error(error);
-     });
-
      firebase.database().ref("gruppocomunita").push().set({
         "ore": ore,
          "sender": email,
@@ -680,6 +689,7 @@ firebase.database().ref("Allerte").on("child_added", function (snapshot) {
      });
      return false;
    }
+   div()
  });
    }
 
@@ -721,10 +731,10 @@ firebase.database().ref("Allerte").on("child_added", function (snapshot) {
          tipotema = "chiaro"
        }else if(tema === "scuro"){
          tipotema = "scuro"
-       }else if(tema === "automatico"){
+       }/*else if(tema === "automatico"){
          let temaor = localStorage.getItem("temaorario");
          tipotema = "automatico: chiaro fino alle ore 20:00."
-       }
+       }*/
 
        document.title = "Meteo Marco - Account ME";
        document.getElementById("display").innerHTML =" ";
@@ -738,26 +748,62 @@ firebase.database().ref("Allerte").on("child_added", function (snapshot) {
          user.providerData.forEach(function (profile) {
           console.log("Sign-in provider: " + profile.providerId);
           console.log("  Provider-specific UID: " + profile.uid);
-
+          var disp = document.getElementById('display');
           console.log("  Name: " + profile.displayName);
           //document.getElementById('display').innerHTML += "<p id='ntext'>" + "Nome: <span id='nome'>" + profile.displayName + "</span>&nbsp;&nbsp;&nbsp;&nbsp;<button onclick='modnome()' id='modnome'><img src='https://lh3.googleusercontent.com/pw/ACtC-3da3hW4dsZX5PbU-tHhQjjutzLdZalnhafSWjPTYDusOcQpV3Q0GM7lXsa2wmAomFEv0RBE500H8EbisBrcBCTUZ3lO5ZtkKWkdc95ZEYTHvIR_gKFKkrk0EfPacCbUN10t1_bkr11qZ5A-kSep27Yf=s24-no?authuser=0' width='40px'/></button>"
           console.log("  Email: " + profile.email);
-          document.getElementById('display').innerHTML += "<p id='ntext'>" + "Email: " + profile.email
+          disp.innerHTML += "<p id='ntext'>" + "Email: " + profile.email
           console.log("  Photo URL: " + profile.photoURL);
-          document.getElementById('display').innerHTML += "<p id='ntext'>" + "Password: <span id='passwordo'>" + "**************" + "</span>&nbsp;&nbsp;&nbsp;&nbsp;<button onclick='modpw()' id='modnome'><img src='https://lh3.googleusercontent.com/pw/ACtC-3da3hW4dsZX5PbU-tHhQjjutzLdZalnhafSWjPTYDusOcQpV3Q0GM7lXsa2wmAomFEv0RBE500H8EbisBrcBCTUZ3lO5ZtkKWkdc95ZEYTHvIR_gKFKkrk0EfPacCbUN10t1_bkr11qZ5A-kSep27Yf=s24-no?authuser=0' width='40px'/></button>"
-          document.getElementById('display').innerHTML += "<p id='ntext'>" + "Scadenza dell'abbonamento:  " + profile.photoURL
-          document.getElementById('display').innerHTML += '<br>' + '<button onclick="signOut()" id="signOut"><h1>Logout</h1><img src="https://lh3.googleusercontent.com/pw/ACtC-3fxEqyRV4Kgd6Zq9ZYJSi8aBG4TOp5qqBYOGl7OnRZUogm68jgxH4UIwV2rIi1pIUDv62xzfK4Cwbj_xIQyKVdqMtGtecPJa3t36jMGNe4bS_7_5h8QrdJH6lMSlc-9vmqzvKUcR5tGcj7zNqJpY_la=s24-no?authuser=0" height="50px"></img></button>'
-          document.getElementById('display').innerHTML +='&nbsp;&nbsp;&nbsp;<button onclick="elimabb()" id="signOut"><h1>Elimina l\'abbonamento*</h1><h2><br>Attenzione! L\'eliminazione dell\'abbonamento non comporta NESSUN rimborso.</h2></button><br><p id="ntext">Gestisci i tuoi pagamenti accedentdo al portale ufficiale <a href="gestionepagamenti.html">cliccando qui</a>.</p><h2>Quando hai creato il tuo account, hai accettato le <a href="https://docs.google.com/document/d/19Mgx9IHb-IxL0nMT4j_Le_YNjQQFHJBy2KwLtY4yCa8/preview"  target="_blank">Condizioni d\'uso</a>. Per visualizzarle, <a href="https://docs.google.com/document/d/19Mgx9IHb-IxL0nMT4j_Le_YNjQQFHJBy2KwLtY4yCa8/preview" target="_blank">CLICCA QUI</a>'
+          disp.innerHTML += "<p id='ntext'>" + "Password: <span id='passwordo'>" + "**************" + "</span>&nbsp;&nbsp;&nbsp;&nbsp;<button onclick='modpw()' id='modnome'><img src='https://lh3.googleusercontent.com/pw/ACtC-3da3hW4dsZX5PbU-tHhQjjutzLdZalnhafSWjPTYDusOcQpV3Q0GM7lXsa2wmAomFEv0RBE500H8EbisBrcBCTUZ3lO5ZtkKWkdc95ZEYTHvIR_gKFKkrk0EfPacCbUN10t1_bkr11qZ5A-kSep27Yf=s24-no?authuser=0' width='40px'/></button>"
+          disp.innerHTML += "<p id='ntext'>" + "Scadenza dell'abbonamento:  " + profile.photoURL
+
+          var uid = user.uid;
+          const dbRef = firebase.database().ref();
+          //var uid = profile.uid
+          dbRef.child("Utenti/" + user.uid).get().then((snapshot) => {
+            if (snapshot.exists()) {
+              var offoon = snapshot.val().aggiornamentoautomatico
+              if(offoon === "off"){
+                console.log("è off")
+                disp.innerHTML += `<p id="ntext">Rinnovo automatico...............................................................<label class="switch" style="float: right;"><input type="checkbox" onclick='attivarinnovo()'><span class="slider round"></span></label></p>`
+                disp.innerHTML += '<br>' + '<button onclick="signOut()" id="signOut"><h1>Logout</h1><img src="https://lh3.googleusercontent.com/pw/ACtC-3fxEqyRV4Kgd6Zq9ZYJSi8aBG4TOp5qqBYOGl7OnRZUogm68jgxH4UIwV2rIi1pIUDv62xzfK4Cwbj_xIQyKVdqMtGtecPJa3t36jMGNe4bS_7_5h8QrdJH6lMSlc-9vmqzvKUcR5tGcj7zNqJpY_la=s24-no?authuser=0" height="50px"></img></button>'
+                disp.innerHTML +='&nbsp;&nbsp;&nbsp;<button onclick="elimabb()" id="signOut"><h1>Elimina l\'abbonamento*</h1><h2><br>Attenzione! L\'eliminazione dell\'abbonamento non comporta NESSUN rimborso.</h2></button><br><p id="ntext">Gestisci i tuoi pagamenti accedentdo al portale ufficiale <a href="gestionepagamenti.html">cliccando qui</a>.</p><h2>Quando hai creato il tuo account, hai accettato le <a href="https://docs.google.com/document/d/19Mgx9IHb-IxL0nMT4j_Le_YNjQQFHJBy2KwLtY4yCa8/preview"  target="_blank">Condizioni d\'uso</a>. Per visualizzarle, <a href="https://docs.google.com/document/d/19Mgx9IHb-IxL0nMT4j_Le_YNjQQFHJBy2KwLtY4yCa8/preview" target="_blank">CLICCA QUI</a>'
+
+
+              }else if(offoon === "on"){
+                disp.innerHTML += `<p id="ntext">Rinnovo automatico...............................................................<label class="switch" style="float: right;"><input type="checkbox" onclick='disattivarinnovo()' checked><span class="slider round"></span></label></p>`
+                disp.innerHTML += '<br>' + '<button onclick="signOut()" id="signOut"><h1>Logout</h1><img src="https://lh3.googleusercontent.com/pw/ACtC-3fxEqyRV4Kgd6Zq9ZYJSi8aBG4TOp5qqBYOGl7OnRZUogm68jgxH4UIwV2rIi1pIUDv62xzfK4Cwbj_xIQyKVdqMtGtecPJa3t36jMGNe4bS_7_5h8QrdJH6lMSlc-9vmqzvKUcR5tGcj7zNqJpY_la=s24-no?authuser=0" height="50px"></img></button>'
+                disp.innerHTML +='&nbsp;&nbsp;&nbsp;<button onclick="elimabb()" id="signOut"><h1>Elimina l\'abbonamento*</h1><h2><br>Attenzione! L\'eliminazione dell\'abbonamento non comporta NESSUN rimborso.</h2></button><br><p id="ntext">Gestisci i tuoi pagamenti accedentdo al portale ufficiale <a href="gestionepagamenti.html">cliccando qui</a>.</p><h2>Quando hai creato il tuo account, hai accettato le <a href="https://docs.google.com/document/d/19Mgx9IHb-IxL0nMT4j_Le_YNjQQFHJBy2KwLtY4yCa8/preview"  target="_blank">Condizioni d\'uso</a>. Per visualizzarle, <a href="https://docs.google.com/document/d/19Mgx9IHb-IxL0nMT4j_Le_YNjQQFHJBy2KwLtY4yCa8/preview" target="_blank">CLICCA QUI</a>'
+
+
+              }
+            } else {
+              console.log("No data available");
+            }
+          }).catch((error) => {
+            console.error(error);
+          });
+
         });
       }
 
-      var datadue = new Date();
-      orad = datadue.getHours();
-      if(orad >= 20){
-        dark();
-      }
-
      }
+
+     function attivarinnovo(){
+       var user = firebase.auth().currentUser;
+       firebase.database().ref("Utenti/" + user.uid).update({
+         aggiornamentoautomatico: "on"
+       });
+       tuoacc()
+     }
+     function disattivarinnovo(){
+       var user = firebase.auth().currentUser;
+       firebase.database().ref("Utenti/" + user.uid).update({
+         aggiornamentoautomatico: "off"
+       });
+       tuoacc()
+     }
+
 
      function confermatema(){
        var tiposalva = document.getElementById("selezionatema").value
@@ -867,7 +913,6 @@ user.updateProfile({
 
      function previsionipp() {
        premiumplus();
-       escecomm();
      }
 
      function datipp() {
@@ -958,6 +1003,7 @@ user.updateProfile({
          //do something later when date is reached
          if (distance < 0) {
            console.log('ALLARME')
+
            user.updateProfile({
                photoURL: " "
                }).then(function() {
@@ -999,7 +1045,7 @@ user.updateProfile({
     //Nuovi mess e community Impostazioni
 
 
-    function escecomm(){
+  /*  function escecomm(){
       var messaggiletti = localStorage.getItem("messletti");
       console.log(messaggiletti)
       var numcorrezione = Number(messaggiletti)
@@ -1013,7 +1059,7 @@ user.updateProfile({
       })
     }
 
-    function messaggidaleggere(){
+     messaggidaleggere(){
         var user = firebase.auth().currentUser;
       var starCountRef = firebase.database().ref('Utenti/' + user.uid);
     starCountRef.on('value', (snapshot) => {
@@ -1059,7 +1105,7 @@ user.updateProfile({
     }
     function chiudinuovimess(){
       $("#nuovimessss").fadeOut("slow")
-    }
+    }*/
 
 
 
@@ -1465,9 +1511,9 @@ user.updateProfile({
         width: 90%;
         border: 2px solid #707070;
         background-color: #adadad;
-        height: 50px;
+        height: 65px;
         border-radius: 25px;
-        font-size: 32px;
+        font-size: 40px;
       }
       #invia{
         height: 60px;
@@ -1498,6 +1544,67 @@ user.updateProfile({
         background-color: white;
         padding: 15px;
       }
+
+      .switch {
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 34px;
+      }
+
+      .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
+
+      .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        -webkit-transition: .4s;
+        transition: .4s;
+      }
+
+      .slider:before {
+        position: absolute;
+        content: "";
+        height: 26px;
+        width: 26px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        -webkit-transition: .4s;
+        transition: .4s;
+      }
+
+      input:checked + .slider {
+        background-color: #2196F3;
+      }
+
+      input:focus + .slider {
+        box-shadow: 0 0 1px #2196F3;
+      }
+
+      input:checked + .slider:before {
+        -webkit-transform: translateX(26px);
+        -ms-transform: translateX(26px);
+        transform: translateX(26px);
+      }
+
+      /* Rounded sliders */
+      .slider.round {
+        border-radius: 34px;
+      }
+
+      .slider.round:before {
+        border-radius: 50%;
+      }
+
 
       </style>
 
