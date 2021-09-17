@@ -1,6 +1,6 @@
 <html>
 <head>
-    <link rel='icon' type='image/ico”' href='https://lh3.googleusercontent.com/pw/ACtC-3efjJgaQUddJ_VcHyhOJG2rReAo2QYbyWFw7f8iueqxyqGuKZT8ub3k8d9Gk7iCrJaokmWOVRmmRzc8uKHlIEfO7oFFN0qxlv7Ki207U1kYCyEfEd92pzkcHWW38cl-rfXRb6yApcHkBa1uus1swscO=s150-no?authuser=0'>
+    <link rel='icon' type='image/ico”' href='https://lh3.googleusercontent.com/pw/AM-JKLXGUw7IN1wheeQ2k3knaICulaSvgZKwIo98ll6xF7VytX9iyQG4Qkb4LWkjVdDJxkHm2QKjedb0JPglpM1anVjRHsqh2SwIPZegaRHNerY1-XTflRE444BjQrNNcK3S0exgkzJFsmRO1Vwk5_SqGntk=s32-no?authuser=0'>
     <title>Meteo Marco v 1.0</title>
     <link rel = "preconnect" href = "https://fonts.gstatic.com">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -560,35 +560,43 @@ firebase.database().ref("Allerte").on("child_added", function (snapshot) {
        }, 2000)
      }
      console.log('Comunità');
+
      var disp = document.getElementById("display")
-     disp.innerHTML = "<p class='ltext'>Comunit&agrave; Meteo Marco</p><p class='ntext'>Qui puoi chattare con Marco in persona e con tutta la community appartenente a Meteo Marco.<br>Ti ricordiamo di rispettare le norme della Community.</p>"
+     disp.innerHTML = "<p class='ltext'>Comunit&agrave; Meteo Marco</p><p class='ntext'>Qui puoi chattare con Marco in v2persona e con tutta la community appartenente a Meteo Marco.<br>Ti ricordiamo di rispettare le norme della Community.</p>"
      disp.innerHTML += '<div style="width: 90%; height: 800px; overflow: auto;" id="nuovimes"><span id="nuovimess"></span></div>'
     disp.innerHTML += '<center><form id="form"><input type="text" autocomplete="off" placeholder="Scrivi qui il messaggio" id="messaggioscrivi"></input></form><button onclick="inviamess()" id="invia"><span class="material-icons md-36">send</span></button></center>'
 
      firebase.database().ref("gruppocomunita").on("child_added", function (snapshot) {
-       var mess = snapshot.val().message;
-       var mittente = snapshot.val().sender;
-       var ore = snapshot.val().ore;
-       var data = snapshot.val().data;
+
        var s = snapshot.key
-      var user = firebase.auth().currentUser;
-       user.providerData.forEach(function (profile) {
-         var email = profile.email
-         if(profile.email === "marcoscortegagna009@gmail.com" || profile.email === "marco.scorte@outlook.it"){
-           emaill = "Marco Express Official"
-         }
-      if(mittente == emaill){
-        mittente = "Tu"
-        document.getElementById('nuovimess').innerHTML += `<div class='messaggio' align="right"><p class='mittmesss'><strong>${mittente}&nbsp;</strong>Alle ore ${ore} del ${data} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button data-id = "${snapshot.key}" onclick="deleteMessage(this);" style="background: #67cf59; border: 2px solid #088201; height: 60px; width: 60px; border-radius: 30px;"><center><span class="material-icons md-36">delete</span></center></button><button data-id = "${snapshot.key}" onclick="modificamess(this);" style="background: #67cf59; border: 2px solid #088201; height: 60px; width: 60px; border-radius: 30px;"><center><span class="material-icons md-36">mode_edit</span></center></button></p><p class='messt' id='message-${snapshot.key}'>${mess}</p></div><br>`
-      }else{
-        document.getElementById('nuovimess').innerHTML += `<div class='messaggio'><p class='mittmess'><strong>&nbsp;${mittente}</strong> - Alle ore ${ore} del ${data}</p><p class='messt'>${mess}</p></div><br>`
-      }
-      div();
+       var starCountRef = firebase.database().ref('gruppocomunita/' + s);
+starCountRef.on('value', (snapshot) => {
+  const datamess = snapshot.val();
+  console.log(datamess.message)
+  var mess = datamess.message;
+  var mittente = datamess.sender;
+  var ore = datamess.ore;
+  var data = datamess.data;
+  var user = firebase.auth().currentUser;
+   user.providerData.forEach(function (profile) {
+     var email = profile.email
+     if(profile.email === "marcoscortegagna009@gmail.com" || profile.email === "marco.scorte@outlook.it"){
+       emaill = "Marco Express Official"
+     }
+  if(mittente == emaill){
+    mittente = "Tu"
+    document.getElementById('nuovimess').innerHTML += `<div class='messaggio' align="right"><p class='mittmesss'><strong>${mittente}&nbsp;</strong>Alle ore ${ore} del ${data} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button data-id = "${snapshot.key}" onclick="deleteMessage(this);" style="background: #67cf59; border: 2px solid #088201; height: 60px; width: 60px; border-radius: 30px;"><center><span class="material-icons md-36">delete</span></center></button><button data-id = "${snapshot.key}" onclick="modificamess(this);" style="background: #67cf59; border: 2px solid #088201; height: 60px; width: 60px; border-radius: 30px;"><center><span class="material-icons md-36">mode_edit</span></center></button></p><p class='messt' id='message-${snapshot.key}'>${mess}</p></div><br>`
+  }else{
+    document.getElementById('nuovimess').innerHTML += `<div class='messaggio'><p class='mittmess'><strong>&nbsp;${mittente}</strong> - Alle ore ${ore} del ${data}</p><p class='messt'>${mess}</p></div><br>`
+  }
+  div();
+});
+
    })
        console.log(mittente)
      })
 
-     
+
      var messaggioscrivi = document.getElementById("messaggioscrivi");
      messaggioscrivi.addEventListener("keydown", function (e) {
      if (e.keyCode == 13) {
