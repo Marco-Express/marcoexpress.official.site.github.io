@@ -562,15 +562,17 @@ firebase.database().ref("Allerte").on("child_added", function (snapshot) {
      console.log('Comunità');
 
      var disp = document.getElementById("display")
-     disp.innerHTML = "<p class='ltext'>Comunit&agrave; Meteo Marco</p><p class='ntext'>Qui puoi chattare con Marco in v2persona e con tutta la community appartenente a Meteo Marco.<br>Ti ricordiamo di rispettare le norme della Community.</p>"
+     disp.innerHTML = "<p class='ltext'>Comunit&agrave; Meteo Marco</p><p class='ntext'>Qui puoi chattare con Marco in 2vvvvpersona e con tutta la community appartenente a Meteo Marco.<br>Ti ricordiamo di rispettare le norme della Community.</p>"
      disp.innerHTML += '<div style="width: 90%; height: 800px; overflow: auto;" id="nuovimes"><span id="nuovimess"></span></div>'
     disp.innerHTML += '<center><form id="form"><input type="text" autocomplete="off" placeholder="Scrivi qui il messaggio" id="messaggioscrivi"></input></form><button onclick="inviamess()" id="invia"><span class="material-icons md-36">send</span></button></center>'
 
      firebase.database().ref("gruppocomunita").on("child_added", function (snapshot) {
-
+alert("Child")
        var s = snapshot.key
        var starCountRef = firebase.database().ref('gruppocomunita/' + s);
+
 starCountRef.on('value', (snapshot) => {
+  alert("Nuvoo")
   const datamess = snapshot.val();
   console.log(datamess.message)
   var mess = datamess.message;
