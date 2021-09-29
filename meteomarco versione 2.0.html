@@ -1,0 +1,831 @@
+<html>
+<head>
+  <link rel='icon' type='image/ico”' href='https://lh3.googleusercontent.com/pw/AM-JKLXGUw7IN1wheeQ2k3knaICulaSvgZKwIo98ll6xF7VytX9iyQG4Qkb4LWkjVdDJxkHm2QKjedb0JPglpM1anVjRHsqh2SwIPZegaRHNerY1-XTflRE444BjQrNNcK3S0exgkzJFsmRO1Vwk5_SqGntk=s32-no?authuser=0'>
+  <title>Meteo Marco v 2.0</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <div id="copri"><br>
+    <center><span class="material-icons md-75 white" id="serratura">lock</span></center>
+    <center><span id="totale"></span></center>
+    <center><h1 id="testomacchinascrivi"></h1></center>
+    <center><h1 id="testomacchinascrivi2"></h1></center>
+    <center><h1 id="avvisiederrori"></h1></center>
+  </div>
+
+  <span id="dati"><center>
+    <h1></h1>
+    <h1>Dati raccolti nel 2020 dalla stazione meteorologica di Meteo Marco</h1>
+    <iframe height="70%" src="https://drive.google.com/file/d/1DCtSum9FyM9JTNZ00ONTRVuhGo5ro1Jp/preview" width="90%"><h1>Caricamento...</h1></iframe></center>
+    </span>
+
+     <span id="community">
+      <div id="tuttiimess" style="overflow-y: scroll; width: 90%; height: 85%;"></div>
+      <h1 style="float: left;">A</h1><select id="a" style="width: 10%; height: 115px;float: left; font-size: 35px;"><option value="tutti"><h1>Tutti</h1></option><option value="marcoexpress"><h2>Marco</h2></option></select><textarea id="messaggio" placeholder="Scrivi qui il tuo messaggio" style="width: 75%; font-size: 40px; border: 3px solid black; border-radius: 15px;"></textarea><button onclick="inviamess()" style="height: 80px; width: 80px; border-radius: 40px; float: right; background-color: white; border: 3px solid black;"><span class="material-icons md-48">send</span></button>
+      </span>
+
+  <span id="display">
+    <h1 id="saluta">Ciao, </h1>
+    <h1 id="saluto2"></h1>
+    <div id="immaginesenzazione"></div>
+    <br><br><br>
+    <div id="previsionicomp"><div id="previsionitutti"></div><br><br><br>
+    <button id="ascolta" onclick="ascolta()"><span class="material-icons md-50">hearing</span></button>
+    <h1 id="titoloprevisioni" style="position: absolute;"></h1><br><br><br><br>
+    <h2 id="testoprevisioni" style="position: absolute;"></h2><br><br><br>
+    <div id="orainora"></div>
+  </div>
+  </span>
+
+
+
+
+
+  <div id="menu">
+    <button onclick="previsioni()" class="pulsantiera" id="previsioni"><img src="menumeteomarco/descriptionnoselect.svg" width="36px" id="previsioniimg"></img><br><h2>Previsioni</h2></button>
+    <button onclick="dati()" class="pulsantiera"><img src="menumeteomarco/pollnoselect.svg" width="36px" id="datiimg"></img><h2>Dati</h2></button>
+    <button onclick="community()" class="pulsantiera"><img src="menumeteomarco/forumnoselect.svg" width="36px" id="communityimg"></img><h2>Community</h2></button>
+    <button onclick="post()" class="pulsantiera"><img src="menumeteomarco/articlenoselect.svg" width="36px" id="postimg"></img><h2>Post</h2></button>
+    <button onclick="impostazioni()" class="pulsantiera"><img src="menumeteomarco/settingnoselect.svg" width="36px" id="impostazioniimg"></img><br><h2>Impostazioni</h2></button>
+  </div>
+</body>
+</html>
+<script src="libreriamacchinascrivi.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-database.js"></script>
+ <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-firestore.js"></script>
+ <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-storage.js"></script>
+<script>
+const target = document.querySelector("#testomacchinascrivi")
+const writer = new Typewriter(target, {
+ loop: false,
+ typeSpeed: 50,
+ deleteSpeed: 80,
+ typeColor: 'white'
+})
+
+writer
+.type('Stiamo verificando che tu abbia i requisiti necessari per accedere')
+.start()
+setTimeout(dopopresentazione , 3000)
+
+function dopopresentazione(){
+ const targett = document.querySelector("#testomacchinascrivi2")
+ const writerr = new Typewriter(targett, {
+  loop: false,
+  typeSpeed: 50,
+  deleteSpeed: 0,
+  typeColor: 'red'
+})
+
+writerr
+.type('Attendere prego...')
+.remove(3)
+.type('...')
+.start()
+}
+
+</script>
+<script>
+var firebaseConfig = {
+  apiKey: "AIzaSyCIw0-w1C3zDjoGgVpLKsFYm2TFXqJr9yw",
+  authDomain: "marco-express-d30c8.firebaseapp.com",
+  projectId: "marco-express-d30c8",
+  storageBucket: "marco-express-d30c8.appspot.com",
+  messagingSenderId: "764621319758",
+  appId: "1:764621319758:web:9390a4a994df27cda4dd1f",
+  measurementId: "G-3ZK6NW0G3F"
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+
+const auth = firebase.auth();
+var database = firebase.database();
+//Per migliore esperienza utente, carica tutti i messaggi prima che l'utente lo chieda
+ var user = firebase.auth().currentUser;
+firebase.database().ref("Messaggi community").on("child_added", function (snapshot) {
+  const data = snapshot.val()
+
+  var messaggio = data.messaggio
+  var datamess = data.datainvio
+  var ora = data.ora
+  var mittente = data.mittente
+  var destinatario = data.destinatario
+  console.log(messaggio)
+ var user = firebase.auth().currentUser;
+ if(destinatario === "Marco Express"){
+   if(user.email === "marcoscortegagna009@gmail.com"){
+     //è marco, okk
+     document.getElementById("tuttiimess").innerHTML += "<div class='intromessaggio'><img src='imgprofilo.jpg' style='width: 50px; height: 50px; border-radius: 25px; float: left;'></img><h1 class='h1mess'>&nbsp;&nbsp;<strong>" + mittente + "</strong> alle " + ora + " del " + datamess + "</h1></div><h1 class='h1messs'>" + messaggio + "</h1>"
+   }else{
+     //Niente visual
+   }
+ }else if(destinatario === "Tutti"){
+   if(user.email === mittente){
+     document.getElementById("tuttiimess").innerHTML += "<div class='intromessaggioinviato' align='right'><h1 class='h1mess'>&nbsp;&nbsp;<strong>Tu</strong> alle " + ora + " del " + datamess + "</h1></div><div align='right'><h1 class='h1messs'>" + messaggio + "</h1></div>"
+   }else if(user.email === "marcoscortegagna009@gmail.com" && mittente === "Marco Express Official"){
+     document.getElementById("tuttiimess").innerHTML += "<div class='intromessaggioinviato' align='right'><h1 class='h1mess'>&nbsp;&nbsp;<strong>Tu</strong> alle " + ora + " del " + datamess + "</h1></div><div align='right'><h1 class='h1messs'>" + messaggio + "</h1></div>"
+
+   }else{
+     document.getElementById("tuttiimess").innerHTML += "<div class='intromessaggio'><img src='imgprofilo.jpg' style='width: 50px; height: 50px; border-radius: 25px; float: left;'></img><h1 class='h1mess'>&nbsp;&nbsp;<strong>" + mittente + "</strong> alle " + ora + " del " + datamess + "</h1></div><h1 class='h1messs'>" + messaggio + "</h1>"
+   }
+ }
+
+});
+
+function inviamess(){
+  var user = firebase.auth().currentUser;
+   user.providerData.forEach(function (profile) {
+  var messaggio = document.getElementById("messaggio").value
+  var destinatario = document.getElementById("a").value
+  var dataattuale = new Date();
+  oraattuale = dataattuale.getHours();
+  minutiattuali = dataattuale.getMinutes();
+  giornoattuale = dataattuale.getDate();
+  meseattuale = dataattuale.getMonth();
+  annoattuale = dataattuale.getYear();
+  meseattuale++
+  var datadainviare = giornoattuale + "/" + meseattuale + "/" + annoattuale
+  var oradainviare = oraattuale + ":" + minutiattuali
+
+var mitt
+if(profile.email === "marcoscortegagna009@gmail.com" || profile.email === "marco.scorte@outlook.it"){
+  mitt = "Marco Express Official"
+}else{
+  mitt = profile.email
+}
+var desti
+if(destinatario === "marcoexpress"){
+  desti = "Marco Express"
+}else{
+  desti = "Tutti"
+}
+  firebase.database().ref("Messaggi community").push().set({
+     "datainvio": datadainviare ,
+     "ora": oradainviare ,
+     "messaggio": messaggio ,
+     "mittente": mitt,
+     "destinatario": desti
+  });
+})
+}
+
+
+ auth.onAuthStateChanged(function(user){
+   if(user){
+     console.log("Attivo!")
+     var dataattuale = new Date();
+     oraattuale = dataattuale.getHours();
+     var tiposaluto
+     if(oraattuale > 5 && oraattuale <= 12){
+       tiposaluto = "Buongiorno"
+     }else if(oraattuale > 12 && oraattuale < 18){
+       tiposaluto = "Buon pomeriggio"
+     }else if(oraattuale >= 18 && oraattuale <= 23){
+       tiposaluto = "Buona sera"
+     }else{
+       tiposaluto = "Ciao,"
+     }
+     var user = firebase.auth().currentUser;
+     const dbRef = firebase.database().ref();
+dbRef.child("Utenti").child(user.uid).get().then((snapshot) => {
+  if (snapshot.exists()) {
+    console.log(snapshot.val());
+    var utente = snapshot.val()
+    document.getElementById("saluta").innerHTML = tiposaluto + ", " + utente.Nome
+    document.getElementById("saluta").style.display = "none"
+    if(utente.Genere === "Maschio"){
+      document.getElementById("saluto2").innerHTML = "Benvenuto nella seconda versione del sito Meteo Marco"
+    }else if(utente.Genere === "Femmina"){
+      document.getElementById("saluto2").innerHTML = "Benvenuta nella seconda versione del sito Meteo Marco"
+    }
+    document.getElementById("saluto2").style.display = "none"
+  } else {
+    document.getElementById("saluta").innerHTML = tiposaluto
+  }
+}).catch((error) => {
+  //document.getElementById("saluta").innerHTML = tiposaluto
+});
+     document.getElementById("saluta").innerHTML =
+     user.providerData.forEach(function (profile) {
+       console.log(profile.photoURL)
+        if(profile.photoURL != ' ') {
+            document.getElementById("serratura").innerHTML = "lock_open"
+            document.getElementById("testomacchinascrivi2").style.display = "none"
+            document.getElementById("testomacchinascrivi").style.display = "none"
+            document.getElementById("copri").style.background = "gray"
+            var total = document.getElementById("totale")
+            total.innerHTML = "<img src='https://lh3.googleusercontent.com/pw/AM-JKLU5o18ZiaGNxX1ceX394jCHFofPC7XlplfrwTG18Jeo_7Ca-ISK0rTqkROh9fpRftmrCVMK4rUB-TKcie2wzjL0cti7TMEhduPusHYN0fDvfVFe4cED6jtkcq8p_RFa1xR1ZGM0WnSbPe8PW7_WnlJm=s903-no?authuser=0' style='width: 30%'></img><br><h1>Scorri in qualsiasi direzione per sbloccare</h1>"
+            total.innerHTML += "<center><div id='scorri'></div></center>"
+            var scorri = document.getElementById("scorri")
+           scorri.addEventListener('touchstart', e => {
+              console.log("Partito")
+          })
+          scorri.addEventListener('touchend', e => {
+            console.log("Terminato")
+            document.getElementById("copri").style.display = "none"
+            document.getElementById("dati").style.display = "none"
+            document.getElementById("community").style.display = "none"
+            //sbloccato
+
+
+            $("#previsioni").css({fontSize: 20})
+           setTimeout(previsioni , 1000)
+           /*
+           setTimeout(function(){
+              $("#saluta").fadeIn(1000)
+              setTimeout(function(){
+                $("#saluta").animate({
+                  fontSize: "35px"
+                })
+                setTimeout(function(){
+                  $("#saluto2").fadeIn(1000)
+                  setTimeout(function(){
+                    $("#saluto2").animate({
+                      fontSize: "35px"
+                    }, function(){
+                      $("#introimg").fadeIn(1000)
+                      setTimeout(function(){
+                        $("#saluta").fadeOut(1000)
+                        $("#saluto2").fadeOut(1000)
+                         setTimeout(previsioni , 1000)
+                      }, 2000)
+                    })
+                  }, 4000)
+                },500)
+              }, 4000)
+            }, 1000)*/
+        });
+        scorri.addEventListener('touchmove', e => {
+          console.log("mosso")
+      });
+
+        }else{
+          document.getElementById("testomacchinascrivi2").style.display = "none"
+          document.getElementById("avvisiederrori").innerHTML = '<br><span class="material-icons md-60 red">error_outline</span><br><h1 style="color:red; font-size: 35px;"><strong>Non hai nessun abbonamento Meteo Marco attivo ora.</strong><br>Abbonati ora <a href="gestionepagamenti.html">cliccando qui</a>.</h1>'
+          setTimeout(function(){
+            $("#testomacchinascrivi").fadeOut(2000)
+          }, 3000)
+        }
+     })
+
+   }else{
+    window.location.href = "accedi.html";
+   }
+
+
+ });
+
+
+ $(".pulsantiera").click(function(){
+   console.log("ha cliccato!")
+   $(".pulsantiera").css({fontSize: "12px"})
+   var questoelemento = $(this)
+   questoelemento.css({fontSize: 20})
+
+ })
+
+function previsioni(){
+  $("#titoloprevisioni").css("left","-250px")
+  $("#testoprevisioni").css("left","-250px")
+  $("#info").css("left","-250px")
+  $("#titoloprevisioni").css("opacity","0.5")
+  $("#testoprevisioni").css("opacity","0.5")
+  $("#previsioniimg").attr("src", "menumeteomarco/descriptionselect.svg")
+  $("#datiimg").attr("src", "menumeteomarco/pollnoselect.svg")
+  $("#communityimg").attr("src", "menumeteomarco/forumnoselect.svg")
+  $("#postimg").attr("src", "menumeteomarco/articlenoselect.svg")
+  $("#impostazioniimg").attr("src", "menumeteomarco/settingnoselect.svg")
+  //avvia le previsioni
+  var titolo = document.getElementById("titoloprevisioni")
+  var testot = document.getElementById("testoprevisioni")
+  titolo.innerHTML = " "
+testot.innerHTML = " "
+document.getElementById("previsionitutti").innerHTML = " "
+document.getElementById("orainora").innerHTML = " "
+  var testo = firebase.database().ref('Previsioni/Condizioni generali');
+testo.on('value', (snapshot) => {
+  const data = snapshot.val();
+  titolo.innerHTML = "<h1>" + data.titolo + "</h1>"
+  $("#titoloprevisioni").animate({
+    left: 15,
+    opacity: 1
+  }, 1500)
+  if(data.avvisi){
+    testot.innerHTML = "<h2>" + data.testo + "</h2><br><h3><img src='menumeteomarco/info.svg' width='35px'></img>&nbsp;<strong>" + data.avvisi + "</strong></h3><br><br><br>"
+    $("#testoprevisioni").animate({
+      left: 15,
+      opacity: 1
+    }, 1500)
+
+  }else{
+    testot.innerHTML = "<h2>" + data.testo + "</h2>"
+    $("#testoprevisioni").animate({
+      left: 15,
+      opacity: 1
+    }, 1500)
+
+  }
+
+
+  switch(data.simbolo){
+    case "Soleggiato":
+      $("#presentazioneimg").attr("src","https://ssl.gstatic.com/onebox/weather/48/sunny.png");
+      break;
+    case "Parzialmente soleggiato":
+      $("#presentazioneimg").attr("src","https://ssl.gstatic.com/onebox/weather/48/partly_cloudy.png");
+      break;
+      case "Nuvoloso":
+        $("#presentazioneimg").attr("src","https://ssl.gstatic.com/onebox/weather/64/cloudy.png");
+        break;
+      case "Piovoso":
+        $("#presentazioneimg").attr("src","https://ssl.gstatic.com/onebox/weather/48/rain_s_cloudy.png");
+        break;
+      case "Temporali":
+        $("#presentazioneimg").attr("src","https://ssl.gstatic.com/onebox/weather/48/thunderstorms.png");
+        break;
+  }
+});
+const dbRef = firebase.database().ref();
+dbRef.child("Previsioni/Temperature").get().then((snapshot) => {
+  if (snapshot.exists()) {
+    console.log(snapshot.val());
+    var condgen = "<h2 style='font-size: 35px;'>Domani</h2>"
+    var maxmin = "<h2 style='margin-left: 10px;'>Min: " + snapshot.val().minima + "<br>Max: " + snapshot.val().massima + "</h2>"
+    document.getElementById("previsionitutti").innerHTML += '<div id="giorno" class="altrigiorni"><img src="" width="75px" id="giornoimg" style="float: left;"></img>' + condgen + maxmin + '</div>'
+
+
+    dbRef.child("Previsioni/Condizioni generali").get().then((snapshot) => {
+      if (snapshot.exists()) {
+        console.log(snapshot.val());
+        switch(snapshot.val().simbolo){
+          case "Soleggiato":
+            $("#giornoimg").attr("src","https://ssl.gstatic.com/onebox/weather/48/sunny.png");
+            document.getElementById("immaginesenzazione").style.backgroundImage = "url('Immaginisfondodiv/soleggiato.png')"
+            break;
+          case "Parzialmente soleggiato":
+            $("#giornoimg").attr("src","https://ssl.gstatic.com/onebox/weather/48/partly_cloudy.png");
+            document.getElementById("immaginesenzazione").style.backgroundImage = "url('Immaginisfondodiv/Parzialmentesoleggiato.png')"
+            break;
+            case "Nuvoloso":
+              $("#giornoimg").attr("src","https://ssl.gstatic.com/onebox/weather/64/cloudy.png");
+                document.getElementById("immaginesenzazione").style.backgroundImage = "url('Immaginisfondodiv/Nuvoloso.png')"
+              break;
+            case "Piovoso":
+              $("#giornoimg").attr("src","https://ssl.gstatic.com/onebox/weather/48/rain_s_cloudy.png");
+              document.getElementById("immaginesenzazione").style.backgroundImage = "url('Immaginisfondodiv/Pioggia.png')"
+              break;
+            case "Temporali":
+              $("#giornoimg").attr("src","https://ssl.gstatic.com/onebox/weather/48/thunderstorms.png");
+              document.getElementById("immaginesenzazione").style.backgroundImage = "url('Immaginisfondodiv/Temporali.png')"
+              break;
+        }
+
+      } else {
+        console.log("No data available");
+      }
+    }).catch((error) => {
+      console.error(error);
+    });
+
+
+  } else {
+    console.log("No data available");
+  }
+}).catch((error) => {
+  console.error(error);
+});
+
+const primo = firebase.database().ref();
+primo.child("Previsioni/giornodopo1").get().then((snapshot) => {
+  if (snapshot.exists()) {
+    console.log(snapshot.val());
+    var condgen = "<h2 style='font-size: 35px;'>" + snapshot.val().giorno + "</h2>"
+    var maxmin = "<h2 style='margin-left: 10px;'>Min: " + snapshot.val().minima + "<br>Max: " + snapshot.val().massima + "</h2>"
+    document.getElementById("previsionitutti").innerHTML += '<div id="giorno1" class="altrigiorni"><img src="" width="75px" id="giorno1img" style="float: left;"></img>' + condgen + maxmin + '</div>'
+
+    switch(snapshot.val().simbolo){
+      case "Soleggiato":
+        $("#giorno1img").attr("src","https://ssl.gstatic.com/onebox/weather/48/sunny.png");
+        break;
+      case "Parzialmente soleggiato":
+        $("#giorno1img").attr("src","https://ssl.gstatic.com/onebox/weather/48/partly_cloudy.png");
+        break;
+        case "Nuvoloso":
+          $("#giorno1img").attr("src","https://ssl.gstatic.com/onebox/weather/64/cloudy.png");
+          break;
+        case "Piovoso":
+          $("#giorno1img").attr("src","https://ssl.gstatic.com/onebox/weather/48/rain_s_cloudy.png");
+          break;
+        case "Temporali":
+          $("#giorno1img").attr("src","https://ssl.gstatic.com/onebox/weather/48/thunderstorms.png");
+          break;
+    }
+
+  } else {
+    console.log("No data available");
+  }
+}).catch((error) => {
+  console.error(error);
+});
+
+
+const secondog = firebase.database().ref();
+secondog.child("Previsioni/giornodopo2").get().then((snapshot) => {
+  if (snapshot.exists()) {
+    console.log(snapshot.val());
+    var condgen = "<h2 style='font-size: 35px;'>" + snapshot.val().giorno + "</h2>"
+    var maxmin = "<h2 style='margin-left: 10px;'>Min: " + snapshot.val().minima + "<br>Max: " + snapshot.val().massima + "</h2>"
+    document.getElementById("previsionitutti").innerHTML += '<div id="giorno1" class="altrigiorni"><img src="" width="75px" id="giorno2img" style="float: left;"></img>' + condgen + maxmin + '</div>'
+
+    switch(snapshot.val().simbolo){
+      case "Soleggiato":
+        $("#giorno2img").attr("src","https://ssl.gstatic.com/onebox/weather/48/sunny.png");
+        break;
+      case "Parzialmente soleggiato":
+        $("#giorno2img").attr("src","https://ssl.gstatic.com/onebox/weather/48/partly_cloudy.png");
+        break;
+        case "Nuvoloso":
+          $("#giorno2img").attr("src","https://ssl.gstatic.com/onebox/weather/64/cloudy.png");
+          break;
+        case "Piovoso":
+          $("#giorno2img").attr("src","https://ssl.gstatic.com/onebox/weather/48/rain_s_cloudy.png");
+          break;
+        case "Temporali":
+          $("#giorno2img").attr("src","https://ssl.gstatic.com/onebox/weather/48/thunderstorms.png");
+          break;
+    }
+
+  } else {
+    console.log("No data available");
+  }
+}).catch((error) => {
+  console.error(error);
+});
+
+dbRef.child("Previsioni/Orainora").get().then((snapshot) => {
+  if (snapshot.exists()) {
+    var dati = snapshot.val();
+
+
+    document.getElementById("orainora").innerHTML += "<div class='oraino'><center><h3>Dalle 03:00 alle 06:00</h3><img src='' id='da3a6'></img></center></div>"
+    switch(snapshot.val().da3a6){
+      case "Soleggiato":
+        $("#da3a6").attr("src","https://ssl.gstatic.com/onebox/weather/48/sunny.png");
+        break;
+      case "Parzialmente soleggiato":
+        $("#da3a6").attr("src","https://ssl.gstatic.com/onebox/weather/48/partly_cloudy.png");
+        break;
+        case "Nuvoloso":
+          $("#da3a6").attr("src","https://ssl.gstatic.com/onebox/weather/64/cloudy.png");
+          break;
+        case "Piovoso":
+          $("#da3a6").attr("src","https://ssl.gstatic.com/onebox/weather/48/rain_s_cloudy.png");
+          break;
+        case "Temporali":
+          $("#da3a6").attr("src","https://ssl.gstatic.com/onebox/weather/48/thunderstorms.png");
+          break;
+    }
+
+    document.getElementById("orainora").innerHTML += "<div class='oraino'><center><h3>Dalle 06:00 alle 09:00</h3><img src='' id='da6a9'></img></center></div>"
+    switch(snapshot.val().da6a9){
+      case "Soleggiato":
+        $("#da6a9").attr("src","https://ssl.gstatic.com/onebox/weather/48/sunny.png");
+        break;
+      case "Parzialmente soleggiato":
+        $("#da6a9").attr("src","https://ssl.gstatic.com/onebox/weather/48/partly_cloudy.png");
+        break;
+        case "Nuvoloso":
+          $("#da6a9").attr("src","https://ssl.gstatic.com/onebox/weather/64/cloudy.png");
+          break;
+        case "Piovoso":
+          $("#da6a9").attr("src","https://ssl.gstatic.com/onebox/weather/48/rain_s_cloudy.png");
+          break;
+        case "Temporali":
+          $("#da6a9").attr("src","https://ssl.gstatic.com/onebox/weather/48/thunderstorms.png");
+          break;
+    }
+
+    document.getElementById("orainora").innerHTML += "<div class='oraino'><center><h3>Dalle 09:00 alle 12:00</h3><img src='' id='da9a12'></img></center></div>"
+    switch(snapshot.val().da9a12){
+      case "Soleggiato":
+        $("#da9a12").attr("src","https://ssl.gstatic.com/onebox/weather/48/sunny.png");
+        break;
+      case "Parzialmente soleggiato":
+        $("#da9a12").attr("src","https://ssl.gstatic.com/onebox/weather/48/partly_cloudy.png");
+        break;
+        case "Nuvoloso":
+          $("#da9a12").attr("src","https://ssl.gstatic.com/onebox/weather/64/cloudy.png");
+          break;
+        case "Piovoso":
+          $("#da9a12").attr("src","https://ssl.gstatic.com/onebox/weather/48/rain_s_cloudy.png");
+          break;
+        case "Temporali":
+          $("#da9a12").attr("src","https://ssl.gstatic.com/onebox/weather/48/thunderstorms.png");
+          break;
+    }
+
+    document.getElementById("orainora").innerHTML += "<div class='oraino'><center><h3>Dalle 12:00 alle 15:00</h3><img src='' id='da12a15'></img></center></div>"
+    switch(snapshot.val().da12a15){
+      case "Soleggiato":
+        $("#da12a15").attr("src","https://ssl.gstatic.com/onebox/weather/48/sunny.png");
+        break;
+      case "Parzialmente soleggiato":
+        $("#da12a15").attr("src","https://ssl.gstatic.com/onebox/weather/48/partly_cloudy.png");
+        break;
+        case "Nuvoloso":
+          $("#da12a15").attr("src","https://ssl.gstatic.com/onebox/weather/64/cloudy.png");
+          break;
+        case "Piovoso":
+          $("#da12a15").attr("src","https://ssl.gstatic.com/onebox/weather/48/rain_s_cloudy.png");
+          break;
+        case "Temporali":
+          $("#da12a15").attr("src","https://ssl.gstatic.com/onebox/weather/48/thunderstorms.png");
+          break;
+    }
+
+    document.getElementById("orainora").innerHTML += "<div class='oraino'><center><h3>Dalle 15:00 alle 18:00</h3><img src='' id='da15a18'></img></center></div>"
+    switch(snapshot.val().da15a18){
+      case "Soleggiato":
+        $("#da15a18").attr("src","https://ssl.gstatic.com/onebox/weather/48/sunny.png");
+        break;
+      case "Parzialmente soleggiato":
+        $("#da15a18").attr("src","https://ssl.gstatic.com/onebox/weather/48/partly_cloudy.png");
+        break;
+        case "Nuvoloso":
+          $("#da15a18").attr("src","https://ssl.gstatic.com/onebox/weather/64/cloudy.png");
+          break;
+        case "Piovoso":
+          $("#da15a18").attr("src","https://ssl.gstatic.com/onebox/weather/48/rain_s_cloudy.png");
+          break;
+        case "Temporali":
+          $("#da15a18").attr("src","https://ssl.gstatic.com/onebox/weather/48/thunderstorms.png");
+          break;
+    }
+
+    document.getElementById("orainora").innerHTML += "<div class='oraino'><center><h3>Dalle 18:00 alle 21:00</h3><img src='' id='da18a21'></img></center></div>"
+    switch(snapshot.val().da18a21){
+      case "Soleggiato":
+        $("#da18a21").attr("src","https://ssl.gstatic.com/onebox/weather/48/sunny.png");
+        break;
+      case "Parzialmente soleggiato":
+        $("#da18a21").attr("src","https://ssl.gstatic.com/onebox/weather/48/partly_cloudy.png");
+        break;
+        case "Nuvoloso":
+          $("#da18a21").attr("src","https://ssl.gstatic.com/onebox/weather/64/cloudy.png");
+          break;
+        case "Piovoso":
+          $("#da18a21").attr("src","https://ssl.gstatic.com/onebox/weather/48/rain_s_cloudy.png");
+          break;
+        case "Temporali":
+          $("#da18a21").attr("src","https://ssl.gstatic.com/onebox/weather/48/thunderstorms.png");
+          break;
+    }
+
+    document.getElementById("orainora").innerHTML += "<div class='oraino'><center><h3>Dalle 21:00 alle 24:00</h3><img src='' id='da21a24'></img></center></div>"
+    switch(snapshot.val().da21a24){
+      case "Soleggiato":
+        $("#da21a24").attr("src","https://ssl.gstatic.com/onebox/weather/48/sunny.png");
+        break;
+      case "Parzialmente soleggiato":
+        $("#da21a24").attr("src","https://ssl.gstatic.com/onebox/weather/48/partly_cloudy.png");
+        break;
+        case "Nuvoloso":
+          $("#da21a24").attr("src","https://ssl.gstatic.com/onebox/weather/64/cloudy.png");
+          break;
+        case "Piovoso":
+          $("#da21a24").attr("src","https://ssl.gstatic.com/onebox/weather/48/rain_s_cloudy.png");
+          break;
+        case "Temporali":
+          $("#da21a24").attr("src","https://ssl.gstatic.com/onebox/weather/48/thunderstorms.png");
+          break;
+    }
+    $(".oraino").click(function(){
+      console.log("click")
+      var questo = $(this)
+      //altri
+      $(".oraino").animate({
+        width: "11%"
+      })
+      $(this).animate({
+        width: "18%"
+      })
+    })
+  } else {
+    console.log("No data available");
+  }
+}).catch((error) => {
+  console.error(error);
+});
+
+document.getElementById("display").style.display = "block"
+nonècommunity()
+nonèdati()
+}
+
+function ascolta(){
+  var testo = firebase.database().ref('Previsioni/Condizioni generali');
+  testo.on('value', (snapshot) => {
+    const data = snapshot.val();
+    var ascolta = data.testo
+    console.log(ascolta)
+    var msg = new SpeechSynthesisUtterance();
+    var voices = window.speechSynthesis.getVoices();
+    msg.voice = voices[10];
+    msg.voiceURI = 'native'
+    msg.volume = 1; // 0 to 1
+    msg.rate = 0.7; // 0.1 to 10
+    msg.pitch = 1; //0 to 2
+    msg.text = ascolta;
+    msg.lang = 'it-IT';
+
+    speechSynthesis.speak(msg);
+  })
+}
+function nonèprevisioni(){
+  document.getElementById("display").style.display = "none"
+}
+function nonèdati(){
+  document.getElementById("dati").style.display = "none"
+}
+function nonècommunity(){
+  document.getElementById("community").style.display = "none"
+}
+
+function dati(){
+  nonèprevisioni()
+  nonècommunity()
+  document.getElementById("dati").style.display = "block"
+  $("#previsioniimg").attr("src", "menumeteomarco/descriptionnoselect.svg")
+  $("#datiimg").attr("src", "menumeteomarco/pollselect.svg")
+  $("#communityimg").attr("src", "menumeteomarco/forumnoselect.svg")
+  $("#postimg").attr("src", "menumeteomarco/articlenoselect.svg")
+  $("#impostazioniimg").attr("src", "menumeteomarco/settingnoselect.svg")
+}
+function community(){
+  nonèprevisioni()
+  nonèdati()
+  document.getElementById("community").style.display = "block"
+  $("#previsioniimg").attr("src", "menumeteomarco/descriptionnoselect.svg")
+  $("#datiimg").attr("src", "menumeteomarco/pollnoselect.svg")
+  $("#communityimg").attr("src", "menumeteomarco/forumselect.svg")
+  $("#postimg").attr("src", "menumeteomarco/articlenoselect.svg")
+  $("#impostazioniimg").attr("src", "menumeteomarco/settingnoselect.svg")
+}
+function post(){
+  nonèprevisioni()
+  nonèdati()
+  nonècommunity()
+  $("#previsioniimg").attr("src", "menumeteomarco/descriptionnoselect.svg")
+  $("#datiimg").attr("src", "menumeteomarco/pollnoselect.svg")
+  $("#communityimg").attr("src", "menumeteomarco/forumnoselect.svg")
+  $("#postimg").attr("src", "menumeteomarco/articleselect.svg")
+  $("#impostazioniimg").attr("src", "menumeteomarco/settingnoselect.svg")
+}
+function impostazioni(){
+  nonèprevisioni()
+  nonèdati()
+  nonècommunity()
+  $("#previsioniimg").attr("src", "menumeteomarco/descriptionnoselect.svg")
+  $("#datiimg").attr("src", "menumeteomarco/pollnoselect.svg")
+  $("#communityimg").attr("src", "menumeteomarco/forumnoselect.svg")
+  $("#postimg").attr("src", "menumeteomarco/articlenoselect.svg")
+  $("#impostazioniimg").attr("src", "menumeteomarco/settingselect.svg")
+}
+
+</script>
+
+<style>
+.material-icons.md-18 { font-size: 18px; }
+.material-icons.md-24 { font-size: 24px; }
+.material-icons.md-36 { font-size: 36px; }
+.material-icons.md-48 { font-size: 48px; }
+.material-icons.md-50 { font-size: 50px; }
+.material-icons.md-60 { font-size: 60px; }
+.material-icons.md-75 { font-size: 75px; }
+.material-icons.md-150 { font-size: 150px; }
+.material-icons.red { color: red; }
+.material-icons.yellow { color: yellow; }
+.material-icons.green { color: #00b336; }
+.material-icons.white { color: white; }
+.pulsantiera {
+  height: 100%;
+  width: 19.2%;
+  background: white;
+  border: 2px solid white;
+}
+
+*{
+  font-family: 'Open Sans', sans-serif;
+}
+h1{
+  font-size: 42px;
+}
+.h1mess{
+  font-size: 25px;
+}
+.h1messs{
+  font-size: 38px;
+}
+#saluta{
+  margin-left: 5px;
+  margin-top: 10px;
+  font-size: 50px;
+}
+#saluto2{
+  margin-top: 10px;
+  font-size: 50px;
+}
+#copri{
+  position: absolute;
+  top:0px;
+  right:0px;
+  height: 100%;
+  width: 100%;
+  background-color: black;
+}
+#scorri{
+  width: 80%;
+  height: 70%;
+}
+#menu{
+  margin-left: 0px;
+  position: fixed;
+  width: 100%;
+  height: 150px;
+  bottom: 1px;
+  background-color: white;
+  box-shadow: 0px 0px 0px 10px #dedede;
+}
+
+#previsionitutt {
+    width: 90%;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+#presentazioneimg{
+  width: 75px;
+  border: 2px solid gray;
+  position: absolute;
+  right: 10px;
+  top: 350px;
+  border-radius: 10px;
+}
+.altrigiorni{
+  width: 29%;
+  height: 200px;
+  border: 2px solid gray;
+  border-radius: 15px;
+  padding-left: 10px;
+  margin-left: 20px;
+  display: inline-block;
+}
+#ascolta{
+  position: fixed;
+  right: 20px;
+  width: 80px;
+  height: 80px;
+  border-radius: 40px;
+  top: 37.5%;
+  background-color: #bdbdbd;
+  border: 0px;
+}
+#orainora{
+  position: fixed;
+  top: 78.5%;
+  width: 100%;
+  height: auto;
+}
+.oraino{
+  margin-left: 10px;
+  width: 12%;
+  height: 150px;
+  border: 2px solid gray;
+  border-top-right-radius: 25px;
+  border-bottom-left-radius: 25px;
+  display: inline-block;
+}
+#immaginesenzazione{
+  width: 100%;
+  height: 20%;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.intromessaggio{
+  border-radius: 15px;
+  background-color: #78a0ff;
+}
+.intromessaggioinviato{
+  border-radius: 15px;
+  background-color: #78ff7c
+}
+</style>
