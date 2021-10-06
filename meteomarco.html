@@ -1,1629 +1,1407 @@
 <html>
 <head>
-    <link rel='icon' type='image/ico”' href='https://lh3.googleusercontent.com/pw/AM-JKLXGUw7IN1wheeQ2k3knaICulaSvgZKwIo98ll6xF7VytX9iyQG4Qkb4LWkjVdDJxkHm2QKjedb0JPglpM1anVjRHsqh2SwIPZegaRHNerY1-XTflRE444BjQrNNcK3S0exgkzJFsmRO1Vwk5_SqGntk=s32-no?authuser=0'>
-    <title>Meteo Marco v 1.0</title>
-    <link rel = "preconnect" href = "https://fonts.gstatic.com">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https: //fonts.googleapis.com/css2? family= Raleway & display=swap" rel="stylesheet">
-<link href="https: //fonts.googleapis.com/css2? family= Source+Code+Pro:wght@300 & display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
-<link href="meteostile.css" rel="stylesheet" type="text/css">
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+  <link rel='icon' type='image/ico”' href='https://lh3.googleusercontent.com/pw/AM-JKLXGUw7IN1wheeQ2k3knaICulaSvgZKwIo98ll6xF7VytX9iyQG4Qkb4LWkjVdDJxkHm2QKjedb0JPglpM1anVjRHsqh2SwIPZegaRHNerY1-XTflRE444BjQrNNcK3S0exgkzJFsmRO1Vwk5_SqGntk=s32-no?authuser=0'>
+  <title>Meteo Marco v 2.0</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
 
-      <!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-1EFHH3K88D"></script>
-<script>
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@500&display=swap" rel="stylesheet">
+</head>
+<body>
 
-  gtag('config', 'UA-204455590-1');
-gtag('config', 'G-1EFHH3K88D');
-</script>
+  <div id="copri"><br>
+    <center><span class="material-icons md-75 white" id="serratura">lock</span></center>
+    <center><span id="totale"></span></center>
+    <center><h1 id="testomacchinascrivi"></h1></center>
+    <center><h1 id="testomacchinascrivi2"></h1></center>
+    <center><h1 id="avvisiederrori"></h1></center>
+  </div>
 
-  </head>
-  <body onload="iniziobody()">
+<div id="tuttopernascondere">
+  <span id="dati"><center>
+    <h1>Massima del 2020!</h1>
+    <table>
+      <tr><td>/</td><td>Massima</td><td>Data di ricezione</td></tr>
+      <tr><td>Temperature</td><td>43,6 °C</td><td>08/8  15:00</td></tr>
+      <tr><td>Umidit&agrave;</td><td>99%</td><td>02/3  0:46</td></tr>
+      <tr><td>Vento</td><td>36,7 km/h</td><td>04/2  23:02</td></tr>
+      <tr><td>Pioggia</td><td>90,8 mm*</td><td>04/2  23:02</td></tr>
+    </table>
+    <h3>*=90,8 litri su m<sup>2</sup></h3>
+    <h1>Minime del 2020!</h1>
+    <table>
+      <tr><td>/</td><td>Minima</td><td>Data di ricezione</td></tr>
+      <tr><td>Temperature</td><td>-6,2 °C</td><td>15/2  7:00</td></tr>
+      <tr><td>Umidit&agrave;</td><td>11%</td><td>28/2  14:48</td></tr>
+    </table>
 
-    <div id="loading_screen">
-      <center><h1>Caricamento...</h1>
-        <h1 id='lo'></h1>
-      <img src='https://lh3.googleusercontent.com/4C_-jJfQzD8FECrYDyvi34N8spXBHIr26IPH-9njn7dYmImreD3zfIFm-4bDSwxYJJrWFPgA3nCgGhHj82Q8orUE_Iqh2dpaYRqg14HGi_QRJZ03f8-MzgfGbDo0zxDbLXMRnKCxe1Z8s4x9c1Rg0m6MTqgS3wh70_fRa9BfiimsFXbKVuOb5x0i9SDOvm7qUZdkhEghP9wHXNi70knLwEh-1LiXGLNV2mSqd-wcamtpgNXfoHJB_Xr4Obn_zb7vqCke4pO7MF9lWMBkFz3vhncIsiBgdbmWytphchLc_I9Z9pE76tmFcyXazY8pSOcRdWSnxdR2rX67GddqbfcQQCLTEDgdLOP2K8zk1LGYfC3y_ZdRUI81TmP46zWTPRzl1CNuROo7sPkk6dV_wGorS1RN9f56qGz-gwuoNh6E1fIO_oHVO6HOuZ0oWldGFeZ-gZ9yn6Iacq2pqM7Vqxp--Bq_PT-uqHUwCxYlMTJ4YaU-oL8l-ZLIB5-jsFdfCvKD91PPNdZWC-Qm67EXbG5kg4_BiPN0EEDgtNz0Ob4JfEhXQPT40MO18e5lKS9D8wljuqi1Ir1XE_NBpuVxisiA3HdqKg4PXkLMgM0qj9Sy_y4aG-kzA26mN9wNXZSwK8CX27J7WfSxqNqBjHLDtTW0IX-hVovPWVIlntsF0UR-CAgS7FTAvw-aw5DgUbFpJbp2VN-pvAafKFUYC3OCcNETNDg=s400-no?authuser=0'></img>
+    <h1>Dati raccolti nel 2020 dalla stazione meteorologica di Meteo Marco</h1>
+
+    <iframe height="70%" src="https://drive.google.com/file/d/1DCtSum9FyM9JTNZ00ONTRVuhGo5ro1Jp/preview" width="90%"><h1>Caricamento...</h1></iframe></center>
+    </span>
+
+     <span id="community">
+      <div id="tuttiimess" style="overflow-y: scroll; width: 90%; height: 85%;"></div>
+      <h1 style="float: left;">A</h1><select id="a" style="width: 10%; height: 115px;float: left; font-size: 35px;"><option value="tutti"><h1>Tutti</h1></option><option value="marcoexpress"><h2>Marco</h2></option></select><textarea id="messaggio" placeholder="Scrivi qui il tuo messaggio" style="width: 75%; font-size: 40px; border: 3px solid black; border-radius: 15px;"></textarea><button onclick="inviamess()" style="height: 80px; width: 80px; border-radius: 40px; float: right; background-color: white; border: 3px solid black;"><span class="material-icons md-48">send</span></button>
+      </span>
+
+  <span id="display">
+    <h1 id="saluta">Ciao, </h1>
+    <h1 id="saluto2"></h1>
+    <div id="immaginesenzazione"></div>
+    <br><br><br>
+    <div id="previsionicomp"><div id="previsionitutti"></div><br><br><br>
+    <div id="ascoltavic"><span id="attendibilita"></span><button id="ascolta" onclick="ascolta()"><span class="material-icons md-50">hearing</span></button></div><br>
+    <h1 id="titoloprevisioni" style="position: absolute;"></h1><br><br><br><br>
+    <h2 id="testoprevisioni" style="position: absolute;"></h2><br><br><br>
+    <div id="orainora"></div>
+  </div>
+  </span>
+
+<div id="divimp">
+  <span id="impostazioni">
+    <center><h1>Impostazioni</h1>
+    <h2>Gestisci le tue preferenze in questa sezione. Tutte le informazioni verranno salvate sul tuo account.</h2></center><br>
+    <hr></hr><h1 id="statoimp"></h1>
+    <hr></hr><br><h2>Opzioni sito</h2>
+    <h1 style="float:left; margin-top: 10px;">Saluta all'avvio</h1><div class="btn1_container" id="prima">
+      <span class="one"></span><br>
+    </div>
+
+    <br><br><br><br><br><br>
+
+    <h1 style="float:left; margin-top: 10px;">Mostra attendibilit&agrave; previsioni</h1><div class="btn1_container" id="seconda">
+      <span class="one"></span><br>
+    </div>
+
+    <br><br><br><br><br><br>
+
+    <h1 style="float:left; margin-top: 10px;">Tema scuro</h1><div class="btn1_container" id="terza">
+      <span class="one"></span><br>
+    </div>
+
+    <br><br><br><br><br><br>
+
+    <h2>Informazioni Account</h2><br>
+    <span id="infoacc"></span>
+
+  </span>
+</div>
+</div>
+  <div id="comprameteomarco" style="position:absolute; width:100%; height:100%;background-color: white;">
+    <center>
+      <img src="https://lh3.googleusercontent.com/pw/AM-JKLU5o18ZiaGNxX1ceX394jCHFofPC7XlplfrwTG18Jeo_7Ca-ISK0rTqkROh9fpRftmrCVMK4rUB-TKcie2wzjL0cti7TMEhduPusHYN0fDvfVFe4cED6jtkcq8p_RFa1xR1ZGM0WnSbPe8PW7_WnlJm=s903-no?authuser=0" width="300px"></img>
+    <span id="compradopo"><h1>Acquista Meteo Marco</h1>
+    <h2 style="font-size: 32px;">Il tuo abbonamento Meteo Marco Premium Plus &egrave; scaduto.<br>Acquista Meteo Marco ora per goderti moltissimi vantaggi.</h2>
+    <button style="background-color: #0dd406; border: 0px; width: 35%; height: 150px; border-radius: 15px; float: left;"><h1 style="font-family: 'Ubuntu', sans-serif;" onclick="acquistaunasett()">Acquista Ora</h1><h2><b>1 Settimana</b></h2></button>
+
+    <button style="background-color: red; border: 0px; width: 35%; height: 150px; border-radius: 15px; float: right; margin-left: 50px;"><h1 style="font-family: 'Ubuntu', sans-serif;" onclick="acquistaduesett()">Acquista Ora</h1><h2><b>2 Settimane</b></h2></button>
+
     </center>
-    </div>
-
-
-    <div id='accessoc'>
-      <span id='acc'></span>
-    </div>
+    <hr color="white"></hr>
     <br><br><br><br><br><br><br>
-    <center><img src='meteomarcologo.png' id='inizio'></img></center>
+    <div class="motivimm">
+      <center><span class="material-icons md-150">refresh</span>
+      <h1>Un sito sempre aggiornato</h1>
+      <h2>Meteo Marco aggiorna le sue previsioni <strong>ogni</strong> giorno.</h2></center>
+    </div>
+    <div class="motivimm">
+      <center><span class="material-icons md-150">tag_faces</span>
+      <h1>Soddisfatti o rimborsati</h1>
+      <h2>Disdici l'abbonamento quando vuoi e senza costi aggiuntivi.</h2></center>
+    </div>
+    <div class="motivimm">
+      <center><span class="material-icons md-150">bar_chart</span>
+      <h1>Dati storici</h1>
+      <h2>Dati meteorologici del 2020 sempre disponibili. Provenienti direttamente dalla stazione meteorologica di Meteo Marco.</h2></center>
+    </div>
+    <div class="motivimm">
+      <center><span class="material-icons md-150">check_circle_outline</span>
+      <h1>Si effettuano rimborsi</h1>
+      <h2>Qualora Meteo Marco non aggiornasse le previsioni, verr&agrave; aggiunto un giorno allo scadere dell'abbonamento.</h2></center>
+    </div>
+    <div class="motivimm">
+      <center><span class="material-icons md-150">question_answer</span>
+      <h1>Chatta con gli esperti</h1>
+      <h2>Chiedi pi&ugrave; informazioni sul meteo chattando direttamente con Marco.</h2></center>
+    </div>
+    <div class="motivimm">
+      <center><span class="material-icons md-150">euro_symbol</span>
+      <h1>Alla portata di tutti</h1>
+      <h2>Acquista Meteo Marco a soli &euro; 0,65 a settimana.</h2></center>
+    </div>
+</span>
+  </div>
 
-    <center><h1 id='textuno'>Accedi col tuo account Marco Express per visualizzare dati, prevsioni e altro ancora! Se hai gi&agrave; effettuato l'accesso in questo dispositivo senza disconnetterlo, attendi qualche istante....</h1>
-
-    <br>
-
-      <input type="text" placeholder="Email" id="email" onchange="checkEmail()"></input><br><p id="validaidmail"></p><br>
-    <input type="password" placeholder="Password" id="password"/>
-    <button id="button" type="button" onclick="showPwd()">
-
-
-    <img src='https://lh3.googleusercontent.com/pw/ACtC-3fsiPnrtt4QsQITPf6bt7DuGpEJAp2jiVi9HDAMd9lfL2n_zRkioGhq3ON7kNKTkDYH0U-Cg1He3jzivqsRC87hgNx3bZoE9QOE4cnWiTqKElk_I5CvicwuHro24wXBohZhEmOWC5OTgUBiULJGhc55=s24-no?authuser=0' height='40px'></img>
-  </button><br><br>
-    <button onclick="signIn()" id="signIn"><h1><b>Login</b></h1></button><br><br>
-    <button onclick='reimposta()' id='reiu'><h1>Password dimenticata? Reimpostala ora.</h1></button></center>
-
-    <span id='display'></span>
-    <button onclick='feed()' id='feed'><h2 id='fte'>Lascia un Feedback!</h2></button>
-    <button onclick='due()' id='due'><h2 id='tdue'>Esegui una donazione!</h2></button>
-
-
+  <div id="menu">
+    <button onclick="previsioni()" class="pulsantiera" id="previsioni"><img src="menumeteomarco/descriptionnoselect.svg" width="36px" id="previsioniimg"></img><br><h2 class="testopuls">Previsioni</h2></button>
+    <button onclick="dati()" class="pulsantiera"><img src="menumeteomarco/pollnoselect.svg" width="36px" id="datiimg"></img><h2 class="testopuls">Dati</h2></button>
+    <button onclick="community()" class="pulsantiera"><img src="menumeteomarco/forumnoselect.svg" width="36px" id="communityimg"></img><h2 class="testopuls">Community</h2></button>
+    <button onclick="post()" class="pulsantiera"><img src="menumeteomarco/articlenoselect.svg" width="36px" id="postimg"></img><h2 class="testopuls">News</h2></button>
+    <button onclick="impostazioni()" class="pulsantiera"><img src="menumeteomarco/settingnoselect.svg" width="36px" id="impostazioniimg"></img><br><h2 class="testopuls">Impostazioni</h2></button>
+  </div>
+</body>
+</html>
+<script src="libreriamacchinascrivi.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-database.js"></script>
+ <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-firestore.js"></script>
+ <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-storage.js"></script>
 <script>
-(function(){
-if (window.addEventListener)
-{
-window.addEventListener("load", nascondi_loading_screen, false);
+const target = document.querySelector("#testomacchinascrivi")
+const writer = new Typewriter(target, {
+ loop: false,
+ typeSpeed: 50,
+ deleteSpeed: 80,
+ typeColor: 'white'
+})
 
-}else{
-window.attachEvent("onload", nascondi_loading_screen);
+writer
+.type('Stiamo verificando che tu abbia i requisiti necessari per accedere')
+.start()
+setTimeout(dopopresentazione , 3000)
+
+function dopopresentazione(){
+ const targett = document.querySelector("#testomacchinascrivi2")
+ const writerr = new Typewriter(targett, {
+  loop: false,
+  typeSpeed: 50,
+  deleteSpeed: 0,
+  typeColor: 'red'
+})
+
+writerr
+.type('Attendere prego...')
+.remove(3)
+.type('...')
+.start()
 }
-})();
-function nascondi_loading_screen()
-{
-document.getElementById("loading_screen").style.display = 'none';
-}
-
-
 
 </script>
+<script>
+var firebaseConfig = {
+  apiKey: "AIzaSyCIw0-w1C3zDjoGgVpLKsFYm2TFXqJr9yw",
+  authDomain: "marco-express-d30c8.firebaseapp.com",
+  projectId: "marco-express-d30c8",
+  storageBucket: "marco-express-d30c8.appspot.com",
+  messagingSenderId: "764621319758",
+  appId: "1:764621319758:web:9390a4a994df27cda4dd1f",
+  measurementId: "G-3ZK6NW0G3F"
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
 
-    <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-app.js" onload="document.getElementById('lo').innerHTML = 'Caricamento libreria Firebase app in corso...'"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-auth.js" onload="document.getElementById('lo').innerHTML = 'Caricamento libreria Firebase auth in corso...'"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-database.js" onload="document.getElementById('lo').innerHTML = 'Caricamento libreria Firebase DB in corso...'"></script>
-     <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-firestore.js" onload="document.getElementById('lo').innerHTML = 'Caricamento libreria Firebase firestore in corso...'"></script>
-     <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-storage.js" onload="document.getElementById('lo').innerHTML = 'Caricamento libreria Firebase Storage in corso...'"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"onload="document.getElementById('lo').innerHTML = 'Caricamento libreria pdf creator in corso...'"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js" onload="document.getElementById('lo').innerHTML = 'Caricamento libreria jQuery in corso...'"></script>
+const auth = firebase.auth();
+var database = firebase.database();
+document.getElementById("impostazioni").style.display = "none"
+document.getElementById("ascoltavic").style.display = "none"
 
-    <script>
-      var firebaseConfig = {
-        apiKey: "AIzaSyCIw0-w1C3zDjoGgVpLKsFYm2TFXqJr9yw",
-        authDomain: "marco-express-d30c8.firebaseapp.com",
-        projectId: "marco-express-d30c8",
-        storageBucket: "marco-express-d30c8.appspot.com",
-        messagingSenderId: "764621319758",
-        appId: "1:764621319758:web:9390a4a994df27cda4dd1f",
-        measurementId: "G-3ZK6NW0G3F"
-      };
-      // Initialize Firebase
-      firebase.initializeApp(firebaseConfig);
 
-     const auth = firebase.auth();
+//Per migliore esperienza utente, carica tutti i messaggi prima che l'utente lo chieda
 
-/*document.addEventListener('contextmenu', event => event.preventDefault(
+ var user = firebase.auth().currentUser;
+firebase.database().ref("Messaggi community").on("child_added", function (snapshot) {
+  const data = snapshot.val()
 
-      document.getElementById('display').innerHTML = "<div id='hh'><center><h1>EHI! NON CERCARE D'IMBROGLIARE!</h1><h2>Secondo la politica sul corretto utilizzo dei siti Marco Express, &egrave; severamente vietato l'utilizzo della console ai non autorizzati. <br> Abbiamo segnalato il fatto che tu hai provato a barare. Nonostante ci&ograve; potrebbe essere che tu l'abbia fatto involontariamente. <b>Ora sai che non devi farlo</b>. La prossima volta ricordati che, se ci proverai di nuovo, verrai bannato dal sito e non avrai pi&ugrave; la possibilit&agrave; di usufruire degli abbonamenti e dei servizi.<br><br><br><button onclick='prosegui()'><h1>Prosegui l'utilizzo del sito</h1></button></center></div>"
+  var messaggio = data.messaggio
+  var datamess = data.datainvio
+  var ora = data.ora
+  var mittente = data.mittente
+  var destinatario = data.destinatario
+  console.log(messaggio)
+ var user = firebase.auth().currentUser;
+ if(destinatario === "Marco Express"){
+   if(user.email === "marcoscortegagna009@gmail.com" || user.email === mittente){
+     if(user.email === mittente){
+       document.getElementById("tuttiimess").innerHTML += "<div class='intromessaggioinviato' align='right'><h1 class='h1mess'>&nbsp;&nbsp;<strong>Tu</strong> alle " + ora + " del " + datamess + "</h1></div><div align='right'><h1 class='h1messs'>" + messaggio + "</h1></div>"
+     }else if(user.email === "marcoscortegagna009@gmail.com" && mittente === "Marco Express Official"){
+       document.getElementById("tuttiimess").innerHTML += "<div class='intromessaggioinviato' align='right'><h1 class='h1mess'>&nbsp;&nbsp;<strong>Tu</strong> alle " + ora + " del " + datamess + "</h1></div><div align='right'><h1 class='h1messs'>" + messaggio + "</h1></div>"
 
-   ));*/
-
-   var input = document.getElementById("password");
-
-   input.addEventListener("keydown", function (e) {
-   if (e.keyCode == 13) {
-   signIn();
-   }
-   });
-
-   function validaEmail(email) {
-
-       var regexp = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-       return regexp.test(email);
-   }
-
-   function checkEmail(){
-     risultato = document.getElementById("validaidmail");
-     email = document.getElementById("email").value;
-     risultato.innerHTML = "";
-     if (validaEmail(email)) {
-       console.log("ok")
-     } else {
-       risultato.innerHTML = "<p id='ntext'><span class='material-icons md-48' style='color: red;'>error_outline</span> Indirizzo email non valido</p>";
-       risultato.style.color = 'red';
+     }else{
+       document.getElementById("tuttiimess").innerHTML += "<div class='intromessaggio'><img src='imgprofilo.jpg' style='width: 50px; height: 50px; border-radius: 25px; float: left;'></img><h1 class='h1mess'>&nbsp;&nbsp;<strong>" + mittente + "</strong> alle " + ora + " del " + datamess + "</h1></div><h1 class='h1messs'>" + messaggio + "</h1>"
      }
+   }else{
+     //Niente visual
    }
+ }else if(destinatario === "Tutti"){
+   if(user.email === mittente){
+     document.getElementById("tuttiimess").innerHTML += "<div class='intromessaggioinviato' align='right'><h1 class='h1mess'>&nbsp;&nbsp;<strong>Tu</strong> alle " + ora + " del " + datamess + "</h1></div><div align='right'><h1 class='h1messs'>" + messaggio + "</h1></div>"
+   }else if(user.email === "marcoscortegagna009@gmail.com" && mittente === "Marco Express Official"){
+     document.getElementById("tuttiimess").innerHTML += "<div class='intromessaggioinviato' align='right'><h1 class='h1mess'>&nbsp;&nbsp;<strong>Tu</strong> alle " + ora + " del " + datamess + "</h1></div><div align='right'><h1 class='h1messs'>" + messaggio + "</h1></div>"
 
-   function dark(){
-     $('body').css('background','#363636');
-    setTimeout(dopodark, 2000)
+   }else{
+     document.getElementById("tuttiimess").innerHTML += "<div class='intromessaggio'><img src='imgprofilo.jpg' style='width: 50px; height: 50px; border-radius: 25px; float: left;'></img><h1 class='h1mess'>&nbsp;&nbsp;<strong>" + mittente + "</strong> alle " + ora + " del " + datamess + "</h1></div><h1 class='h1messs'>" + messaggio + "</h1>"
    }
-   function dopodark(){
-      $('p').css('color','white');
-     $('.dettglitext').css('color','black');
-    $('h2').css('color','white');
-    $("#inizio").attr("src","https://lh3.googleusercontent.com/pw/AM-JKLUoDeBgtZIjsa-nvJPfVNggNzh4INzye5hmOZO2Xjv9yV7lRbPG49NjejeObQKUtp5wYAQKssXUoTi15-05jnqjaves_nMT3MsVC5FoS-8NaLVmJB5BJO0Kj2mLM2QzeeyzDm2-C4w3fbzIhPZJQbxQ=s903-no?authuser=0");
-    $('#pomet').css('color','black');
-    $('#mattt').css('color','black');
-    $('#descrivimattina').css('color','black');
-    $('#descrivipomeriggio').css('color','black');
-   }
-   function chiaro(){
-     $('p').css('color','black');
-     $('body').css('background','white');
-     $('.dettglitext').css('color','black');
-    $('h2').css('color','black');
-    $("#inizio").attr("src","https://lh3.googleusercontent.com/pw/AM-JKLVZGFiK5reg51jGXRh0bgF08EDqu6FDCe_VGLSCW4G0QktLk4Y_ye-9DCntiMjRQEEDloWF7_Tozq5pbFHbMDCNWuOLgQud5SBURSMIb13JJNwxhax_WmLmAjMwEvzndJvRY6nOws3_yd3bw2nIKBRL=s903-no?authuser=0");
-    $('#pomet').css('color','black');
-    $('#mattt').css('color','black');
-    $('#descrivimattina').css('color','black');
-    $('#descrivipomeriggio').css('color','black');
-   }
+ }
 
+});
 
-     function jj() {
-       var ok = $("#feed")
-       ok.animate({
-         height: "80px",
-         width: "80px"
-       }, 900)
-       document.getElementById('fte').innerHTML = '<img src="https://lh3.googleusercontent.com/pw/AM-JKLVbVOJs-bg9c5p-4RMYN1rU3WwYceo4sCH6vFdmujR1tz3xxcOHHNGecU4GVq8PFT8uDJ7hmTkmfHnxNOzGdLVcLT39HE-ptKkf0kkNM1SOgezDTYY5TyBPUPYkN4i0jXdn2yoAPrSNVdoS8N2o6S2z=s24-no?authuser=0" height= "39px" width="39px"></img>'
-       $('#feed').css('border-radius', '40px');
-
-
-       var ook = $("#due")
-       ook.animate({
-         height: "80px",
-         width: "80px"
-       }, 900, jjj)
-       document.getElementById('tdue').innerHTML = '<img src="donazione.png" height= "39px" width="39px"></img>'
-       $('#due').css('border-radius', '40px');
-     }
-
-     function jjj() {
-        $('#due').animate({
-          right: "100px"
-        }, 750)
-     }
-
-     function iniziobody() {
-       setTimeout(jj, 7000)
-      controllaabb()
-    }
-
-    function feed() {
-      location.href = 'https://docs.google.com/forms/d/e/1FAIpQLSdtuUKjayKMK4yypsgnN0ftwQNLXYO_SGX-yTO4ocf4reLPBA/viewform?usp=sf_link'
-    }
-
-    function due(){
-      alert('Ora ti reindrizzeremo sulla pagina dei pagamenti. Cliccare "Nuova Spesa", selezionare "Donazione", scrivere l\'importo e cliccare nuovamente su "Acquista". Ti ringraziamo di cuore dell\'aiuto che ci darai donando una qualsiasi cifra. (Clicca su "ok" per continuare)')
-      location.href = 'gestionepagamenti.html'
-
-    }
-
-
-
-     function reimposta() {
-       document.title = "Reimposta nuova password";
-       document.getElementById('display').innerHTML = '<center><input type="text" id="rei" placeholder="Inserisci email"></input><br><br><button onclick="inviaemail()" id="confi"><h1>Invia email</h1></button></center>'
-       document.getElementById('display').innerHTML += '<center><h1 id="avviso"></h1></center>'
-       document.getElementById("password").style.display="none";
-       document.getElementById("email").style.display="none";
-       document.getElementById("signIn").style.display="none";
-       document.getElementById("button").style.display="none";
-       document.getElementById("textuno").style.display="none";
-       document.getElementById("reiu").style.display="none";
-     }
-
-     function inviaemail() {
-       if(navigator.onLine){
-       var auth = firebase.auth();
-       var emailAddress = document.getElementById('rei').value
-
-       auth.sendPasswordResetEmail(emailAddress).then(function() {
-         console.log('vai')
-         document.getElementById('avviso').innerHTML = 'EMAIL INVIATA'
-         document.getElementById('avviso').innerHTML += '<br><br><button id="rlogin" onclick="rlogin()">Effettua nuovamente il login</button>'
-
-       }).catch(function(error) {
-         console.log('no')
-         document.getElementById('avviso').innerHTML = 'ERRORE: EMAIL NON DISPONIBILE'
-         document.getElementById('avviso').innerHTML += '<br><br><button id="rlogin" onclick="rlogin()">Effettua nuovamente il login</button>'
-
-  });}else{
-    document.getElementById('avviso').innerHTML = 'ERRORE: IMPOSSIBILE CONNETTERSI AL SERVER'
-  }
-     }
-
-function rlogin() {
-location.reload()
-
-}
-
-function vai() {
-  console.log('vai')
-}
-
-   	function signIn(){
-      if(navigator.onLine){
-   		var email = document.getElementById("email");
-   		var password = document.getElementById("password");
-   		const promise = auth.signInWithEmailAndPassword(email.value, password.value);
-   		promise.catch(e => alert('Combinazione utente/password errata'));
-
-   	}else{
-      document.getElementById('display').innerHTML = '<h1>Impossibile connetersi al server</h1>'
-    }}
-
-
-   	function signOut(){
-   		auth.signOut();
-   		alert("Disconnessione completata!");
-      window.location.reload()
-
-   	}
-
-     auth.onAuthStateChanged(function(user){
-        document.title = "Meteo Marco - Previsioni";
-         var email = user.email;
-         alert("Uttente attivo:" + " " + email);
-         console.warn('Utente attivo.')
-
-
-         var user = firebase.auth().currentUser;
-         user.providerData.forEach(function (profile) {
-           if(profile.photoURL != ' ') {
-             console.log('Premium Plus')
-             premiumplus()
-           }else{
-                 document.getElementById("password").style.display="none";
-                 document.getElementById("email").style.display="none";
-                 document.getElementById("signIn").style.display="none";
-                 document.getElementById("button").style.display="none";
-                 document.getElementById("textuno").style.display="none";
-                 document.getElementById("reiu").style.display="none";
-                 document.getElementById('display').innerHTML = "<center><h1>Non hai nessun abbonamento Meteo Marco attivo ora.<br> <h1>Per acquistare Meteo Marco Premium Plus, <a href='https://marco-express.github.io/marcoexpress.official.site.github.io/gestionepagamenti.html'>clicca qui</a> e accedi. Poi vai sulla sezione \"Nuova spesa\" e seleziona \"Meteo Marco Premium Plus\". </h1></center>"
-                 document.getElementById('display').innerHTML += '<br><br><center><button onclick="signOut()" id="signOut"><h1>Logout</h1><img src="https://lh3.googleusercontent.com/pw/ACtC-3fxEqyRV4Kgd6Zq9ZYJSi8aBG4TOp5qqBYOGl7OnRZUogm68jgxH4UIwV2rIi1pIUDv62xzfK4Cwbj_xIQyKVdqMtGtecPJa3t36jMGNe4bS_7_5h8QrdJH6lMSlc-9vmqzvKUcR5tGcj7zNqJpY_la=s24-no?authuser=0" height="50px"></img></button></center>'
-               }
-
-        });
-
-
-           })
-
-           function selezionaabb() {
-             document.getElementById('display').innerHTML = ""
-
-          }
-
-
-           function ppabbn(){
-             var user = firebase.auth().currentUser;
-             var datadue = new Date();
-             orad = datadue.getHours();
-             min = datadue.getMinutes();
-             dataduen = datadue.getDate();
-             mesed = datadue.getMonth();
-             annodue = datadue.getFullYear();
-             mesed++
-
-
-
-             var aa = "Ha acquistato Premium Plus " +  dataduen + "/" + mesed + "/" + annodue  + " alle ore " + orad + ":" + min
-             user.updateProfile({
-               photoURL: "Meteo Marco Premium Plus"
-             }).then(function() {
-               firebase.database().ref("MMPPacqtt").push().set({
-                   "sender": user.email,
-                   "message": aa,
-               });
-               document.getElementById('display').innerHTML = '<h1>Grazie! Acquisto effettuato!<br>Aggiorna la pagina e accedi, potrai visualizzare le info destinate agli utenti PP.</h1>'
-
-               return false;
-             }).catch(function(error) {
-               document.getElementById('display').innerHTML = '<h1>Si &egrave; verificato un\'errore, riprova tra qualche minuto</h1>'
-          });
-           }
-
-       function premiumplus() {
-         document.title = "Meteo Marco - Previsioni";
-       console.log('PremiumPlus')
-       document.getElementById("password").style.display="none";
-       document.getElementById("email").style.display="none";
-       document.getElementById("signIn").style.display="none";
-       document.getElementById("button").style.display="none";
-       document.getElementById("textuno").style.display="none";
-       document.getElementById("reiu").style.display="none";
-       controllaabb();
-       if(window.innerWidth > 1000){
-         console.log('Computer')
-         document.getElementById("acc").innerHTML = "<button id='previsioni' onclick='previsionipp()'><h1>Previsioni</h1></button> <button id='dati' onclick='datipp()'><h1>Dati</h1></button>"
-         document.getElementById("acc").innerHTML += "<button onclick='tuoacc()' id='tuoacc'><h1>Impostazioni</h1></button>"
-
-       }else{
-         document.getElementById("acc").innerHTML = "<div id='pulsantiera'><button id='previsioni' onclick='previsionipp()'><strong><h1>Previsioni</h1></strong><span class='material-icons md-50'>description</span></button> <button id='dati' onclick='datipp()'><h1>Dati</h1><span class='material-icons md-50'>poll</span></button><button onclick='comunita()' id='comunita'  style='width: 20%; height: 35%; background:#f7f254; letter-spacing: 2px; border-radius: 15px;box-shadow: 10px 10px 5px #dedede; border: 3px solid yellow;'><h1>Community</h1><span class='material-icons md-60'>forum</span></button><button onclick='tuoacc()' id='tuoacc' style='width: 25%; height: 35%; background: #c7c8c9; letter-spacing: 2px; border-radius: 15px;box-shadow: 10px 10px 5px #dedede; border: 3px solid #939596;'><h1>Impostazioni</h1><span class='material-icons md-60'>tune</span></button>"
-
-
-       }
-
-
-        document.getElementById("display").innerHTML = "<center><h2>Caricamento delle previsioni...</h2></center>"
-        document.getElementById("display").innerHTML += "<center><h3>Connessione al server...</h3></center>"
-        document.getElementById("display").innerHTML += "<center><br><img width='150px' src='https://lh3.googleusercontent.com/pw/ACtC-3cqK5HaPD1DJzuJsNl1G2Pa-1hWvH87lpVYGv2BL5Wz8rpuBN4f-L9lTwFVE0VdgL5FjpEumgkfOMAyutTQu2--Sjd_5xfj1ir-qLu3EKoqsZb-WJS5N3SH21wUyd2e1MoQW6YjVkh0IgFfuYrmTt8R=w64-h22-no?authuser=0'></img></center>"
-        verificaprevisioni = setTimeout(noprevisioni, 10000)
-
-         firebase.database().ref("Meteo Marco Premium Plus").on("child_added", function (snapshot) {
-           var testo = snapshot.val().message;
-           var titolo = snapshot.val().sender;
-           var disp = document.getElementById('display')
-           disp.innerHTML = '<p id="ttext" class="anime"><img id="simboloo"style="float:left; width: 100px; padding: 15px;" src="imgnot.png"></img>' + titolo + '<button onclick="aggiornaprevisioni()" id="aggprevisioni"><span class="material-icons md-48" id="aggiornato">update</span><span class="material-icons md-48" id="aggiornato2"></span></button></p>' + '<hr align="left" size="1" width="750" color="#919191" noshade><button onclick="ascolta()" id="ascolta"><img src="https://lh3.googleusercontent.com/pw/ACtC-3fUB_LXWYYOOLYD8sp07_c1AVbIbD4yuQ4lSuf0fqeLNxWIZTRq_1oMp4vOty24HL7A_4gTZqwZpWLljZzpcvtRh3Z9URrxzfgqnA67oxSP5JJu5cAZF1A2gsuVWhwD1uXY6BIOS2FnvL28onR7hEPc=s48-no?authuser=0"></img></button>' + '<p id="ntext" class="anime">' + testo + '</p><br></div>'
-           disp.innerHTML += '<div class="dettaglipre" id="matt" style="float: left;"><img id="mattinaa"style="float: left;"></img><center><p id="mattt">Mattina</p></center><br><p class="dettore" id="descrivimattina"></p></div><div id="pomeriggio"><img id="pomeriggioo" style="float: left;"></img><center><p id="pomet" class="cambia">Pomeriggio</p></center><br><p class="dettore" id="descrivipomeriggio"></p></div></div>'
-            clearTimeout(verificaprevisioni);
-           var matt = $("#mattinaa")
-           matt.attr("src","https://ssl.gstatic.com/onebox/weather/48/partly_cloudy.png");
-          $("#pomeriggioo").attr("src","https://ssl.gstatic.com/onebox/weather/48/partly_cloudy.png");
-           setTimeout(animatutto , 1000)
-     })
-
-firebase.database().ref("Pom").on("child_added", function (snapshot) {
-      var descrivi = snapshot.val().message;
-  var logo = snapshot.val().sender;
-  if(logo === "Soleggiato"){
-    console.log('Soleggiatoooo!')
-    $("#pomeriggioo").attr("src","https://ssl.gstatic.com/onebox/weather/48/sunny.png");
-   document.getElementById('pomeriggio').style.backgroundImage = "url(https://laprovinciadibiella.it/wp-content/uploads/2020/04/meteo-soleggiato.jpg)";
-  }else if(logo === "Parzialmente soleggiato"){
-    document.getElementById('pomeriggio').style.backgroundImage = "url(https://script.meteolive.it/admin/immaginiNotizie/SRC/__070003___parziale.jpg)";
-    $("#pomeriggioo").attr("src","https://ssl.gstatic.com/onebox/weather/48/partly_cloudy.png");
-    document.getElementById('descrivipomeriggio').style.background = "#8fffea"
-  }else if(logo === "Piovoso"){
-    document.getElementById('pomeriggio').style.backgroundImage = "url(https://trani.news24.city/wp-content/uploads/sites/14/2019/04/PIOGGIA-MALTEMPO-METEO.jpg)";
-      document.getElementById('descrivipomeriggio').style.color = "white"
-      document.getElementById('pomet').style.color = "white"
-    $("#pomeriggioo").attr("src","https://ssl.gstatic.com/onebox/weather/48/rain_s_cloudy.png");
-  }else if(logo === "Temporali"){
-    document.getElementById('pomeriggio').style.backgroundImage = "url(https://www.malpensa24.it/wp-content/uploads/2020/08/temporali-grandine-calo-termico.jpg)";
-    $("#pomeriggioo").attr("src","https://ssl.gstatic.com/onebox/weather/48/thunderstorms.png");
-document.getElementById('descrivipomeriggio').style.background = "#141C2F"
-document.getElementById('descrivipomeriggio').style.color = "white"
-  }else if(logo === "Nuvoloso"){
-    document.getElementById('pomeriggio').style.backgroundImage = "url(https://www.malpensa24.it/wp-content/uploads/2018/11/nuvole-cielo-coperto.jpg)";
-    $("#pomeriggioo").attr("src","https://ssl.gstatic.com/onebox/weather/64/cloudy.png")
-    document.getElementById('pomet').style.color = "white"
-    document.getElementById('descrivipomeriggio').style.color = "white"
-    document.getElementById('descrivipomeriggio').style.background = "#626363"
-
-  }
-  document.getElementById('descrivipomeriggio').innerHTML = descrivi
-  setTimeout(animatutto , 1000)
-})
-
-firebase.database().ref("Matt").on("child_added", function (snapshot) {
-      var descrivi = snapshot.val().message;
-  var logo = snapshot.val().sender;
-  if(logo === "Soleggiato"){
-    console.log('Soleggiatoooo!')
-    $("#mattinaa").attr("src","https://ssl.gstatic.com/onebox/weather/48/sunny.png");
-    document.getElementById('matt').style.backgroundImage = "url(https://laprovinciadibiella.it/wp-content/uploads/2020/04/meteo-soleggiato.jpg)";
-  }else if(logo === "Parzialmente soleggiato"){
-    $("#mattinaa").attr("src","https://ssl.gstatic.com/onebox/weather/48/partly_cloudy.png");
-    document.getElementById('descrivimattina').style.background = "#8fffea"
-  }else if(logo === "Piovoso"){
-    document.getElementById('matt').style.backgroundImage = "url(https://trani.news24.city/wp-content/uploads/sites/14/2019/04/PIOGGIA-MALTEMPO-METEO.jpg)";
-      document.getElementById('descrivimattina').style.color = "white"
-      document.getElementById('mattt').style.color = "white"
-    $("#mattinaa").attr("src","https://ssl.gstatic.com/onebox/weather/48/rain_s_cloudy.png");
-  }else if(logo === "Temporali"){
-    document.getElementById('matt').style.backgroundImage = "url(https://www.malpensa24.it/wp-content/uploads/2020/08/temporali-grandine-calo-termico.jpg)";
-      document.getElementById('descrivimattina').style.background = "#141C2F"
-      document.getElementById('descrivimattina').style.color = "white"
-    $("#mattinaa").attr("src","https://ssl.gstatic.com/onebox/weather/48/thunderstorms.png");
-  }else if(logo === "Nuvoloso"){
-    $("#mattinaa").attr("src","https://ssl.gstatic.com/onebox/weather/64/cloudy.png")
-    document.getElementById('mattt').style.color = "white"
-    document.getElementById('descrivimattina').style.color = "white"
-    document.getElementById('descrivimattina').style.background = "#626363"
-    document.getElementById('matt').style.backgroundImage = "url(https://www.malpensa24.it/wp-content/uploads/2018/11/nuvole-cielo-coperto.jpg)";
-
-
-  }
-  document.getElementById('descrivimattina').innerHTML = descrivi
-
-})
-
-
-
-firebase.database().ref("simbolo").on("child_added", function (snapshot) {
-    var logo = snapshot.val().sender
-    var log = document.getElementById('logo');
-    if(logo === "Soleggiato"){
-      console.log('Soleggiatoooo!')
-      $("#simboloo").attr("src","https://ssl.gstatic.com/onebox/weather/48/sunny.png");
-    }else if(logo === "Parzialmente soleggiato"){
-      $("#simboloo").attr("src","https://ssl.gstatic.com/onebox/weather/48/partly_cloudy.png");
-    }else if(logo === "Piovoso"){
-      $("#simboloo").attr("src","https://ssl.gstatic.com/onebox/weather/48/rain_s_cloudy.png");
-    }else if(logo === "Temporali"){
-      $("#simboloo").attr("src","https://ssl.gstatic.com/onebox/weather/48/thunderstorms.png");
-    }else if(logo === "Nuvoloso"){
-      $("#simboloo").attr("src","https://ssl.gstatic.com/onebox/weather/64/cloudy.png")
-    }
-
-})
-
-function animatutto(){
-  console.log('funzione partita')
-  $("#mattinaa").animate({
-    width: "125px"
-  }, 1000)
-  $("#pomeriggioo").animate({
-    width: "125px"
-  }, 1000)
-
-}
-
-firebase.database().ref("Allerte").on("child_added", function (snapshot) {
-  var all = snapshot.val().message;
-  var tipo = snapshot.val().sender;
-
-  document.getElementById('display').innerHTML += "<hr style='width: 200px; background-color: white;'></hr>"
-  document.getElementById('display').innerHTML += '<br><br><br><center><span id="all"></span><p class="ntext a"><strong>Allerte</strong></p><hr style="width: 750px; height: 3px; background: #696969;"></hr><p id="ntext">' + all + '</p></center>'
-  if(tipo === "rosso"){
-  document.getElementById("all").innerHTML = '<span class="material-icons md-75 red">error</span>'
-}else if(tipo === "giallo"){
-  document.getElementById("all").innerHTML = '<span class="material-icons md-75 yellow">error</span>'
-}else if(tipo === "verde"){
-  document.getElementById("all").innerHTML = '<span class="material-icons md-75 green">error</span>'
-}
-})
-        firebase.database().ref("Temperature").on("child_added", function (snapshot) {
-          var temp = snapshot.val().message;
-          var rapporto = snapshot.val().sender;
-
-          document.getElementById('display').innerHTML += "<br><div class='aumentoediminuzione'><center><span class='material-icons md-48' id='aedtempspan'></span></center></div><div id='temperatura' class='dettagli'><span class='material-icons md-48'>device_thermostat</span><p class='dettglitext' id='dettglitext'> Temperature</p></div><p class='ntext infod'>" + temp + "</p>"
-
-          if(rapporto === "In aumento"){
-            document.getElementById("aedtempspan").innerHTML = "trending_up"
-          }else if(rapporto === "In diminuzione"){
-            document.getElementById("aedtempspan").innerHTML = "trending_down"
-          }else if(rapporto === "Stabile"){
-            document.getElementById("aedtempspan").innerHTML = "arrow_right_alt"
-          }else{
-            document.getElementById("aedtempspan").innerHTML = "update_disabled"
-          }
-        })
-
-        firebase.database().ref("Venti").on("child_added", function (snapshot) {
-          var venti = snapshot.val().message;
-          var rapporto = snapshot.val().sender;
-
-          document.getElementById('display').innerHTML += "<br><div class='aumentoediminuzione'><center><span class='material-icons md-48' id='aedventspan'></span></center></div><div id='venti' class='dettagli'><span class='material-icons md-48'>speed</span><p class='dettglitext'> Venti</p></div><p class='ntext infod'>" + venti + "</p>"
-
-          if(rapporto === "In aumento"){
-            document.getElementById("aedventspan").innerHTML = "trending_up"
-          }else if(rapporto === "In diminuzione"){
-            document.getElementById("aedventspan").innerHTML = "trending_down"
-          }else if(rapporto === "Stabile"){
-            document.getElementById("aedventspan").innerHTML = "arrow_right_alt"
-          }else{
-            document.getElementById("aedventspan").innerHTML = "update_disabled"
-          }
-        })
-        firebase.database().ref("preci").on("child_added", function (snapshot) {
-          var prec = snapshot.val().message;
-          var rapporto = snapshot.val().sender;
-
-          document.getElementById('display').innerHTML += "<br><div class='aumentoediminuzione'><center><span class='material-icons md-48' id='aedprecispan'></span></center></div><div id='precipitazioni' class='dettagli'><span class='material-icons md-48'>water_drop</span><p class='dettglitext'> Precipitazioni</p></div><p class='ntext infod'>" + prec + "</p>"
-          if(rapporto === "In aumento"){
-            document.getElementById("aedprecispan").innerHTML = "trending_up"
-          }else if(rapporto === "In diminuzione"){
-            document.getElementById("aedprecispan").innerHTML = "trending_down"
-          }else if(rapporto === "Stabile"){
-            document.getElementById("aedprecispan").innerHTML = "arrow_right_alt"
-          }else{
-            document.getElementById("aedprecispan").innerHTML = "update_disabled"
-          }
-
-        })
-
-        firebase.database().ref("dataagg").on("child_added", function (snapshot) {
-          var dat = snapshot.val().message;
-
-          document.getElementById('display').innerHTML += "<br><div id='dataaggiornamento' class='dettagli'><span class='material-icons md-48'>event</span><p class='dettglitext'> Data aggiornamento</p></div><p class='ntext infod'>" + dat + "</p>"
-        })
-
-        avviaahah()
-
-
-        let tema = localStorage.getItem("tema");
-        if(tema === "chiaro"){
-          chiaro()
-        }else if(tema === "scuro"){
-          dark()
-        }else if(tema === "automatico"){
-
-        }
-   }
-
-   function comunita(){
-     let tema = localStorage.getItem("tema");
-     if(tema === "chiaro"){
-       chiaro()
-     }else if(tema === "scuro"){
-       dark()
-       setTimeout(function(){
-         $('p').css('color','white');
-         $('.mittmess').css('color','black');
-         $('.mittmesss').css('color','black');
-         $('.messt').css('color','black');
-
-       }, 2000)
-     }
-     console.log('Comunità');
-
-     var disp = document.getElementById("display")
-     disp.innerHTML = "<p class='ltext'>Comunit&agrave; Meteo Marco</p><p class='ntext'>Qui puoi chattare con Marco in 2vvvvpersona e con tutta la community appartenente a Meteo Marco.<br>Ti ricordiamo di rispettare le norme della Community.</p>"
-     disp.innerHTML += '<div style="width: 90%; height: 800px; overflow: auto;" id="nuovimes"><span id="nuovimess"></span></div>'
-    disp.innerHTML += '<center><form id="form"><input type="text" autocomplete="off" placeholder="Scrivi qui il messaggio" id="messaggioscrivi"></input></form><button onclick="inviamess()" id="invia"><span class="material-icons md-36">send</span></button></center>'
-
-     firebase.database().ref("gruppocomunita").on("child_added", function (snapshot) {
-alert("Child")
-       var s = snapshot.key
-       var starCountRef = firebase.database().ref('gruppocomunita/' + s);
-
-starCountRef.on('value', (snapshot) => {
-  alert("Nuvoo")
-  const datamess = snapshot.val();
-  console.log(datamess.message)
-  var mess = datamess.message;
-  var mittente = datamess.sender;
-  var ore = datamess.ore;
-  var data = datamess.data;
+function inviamess(){
   var user = firebase.auth().currentUser;
    user.providerData.forEach(function (profile) {
-     var email = profile.email
-     if(profile.email === "marcoscortegagna009@gmail.com" || profile.email === "marco.scorte@outlook.it"){
-       emaill = "Marco Express Official"
-     }
-  if(mittente == emaill){
-    mittente = "Tu"
-    document.getElementById('nuovimess').innerHTML += `<div class='messaggio' align="right"><p class='mittmesss'><strong>${mittente}&nbsp;</strong>Alle ore ${ore} del ${data} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button data-id = "${snapshot.key}" onclick="deleteMessage(this);" style="background: #67cf59; border: 2px solid #088201; height: 60px; width: 60px; border-radius: 30px;"><center><span class="material-icons md-36">delete</span></center></button><button data-id = "${snapshot.key}" onclick="modificamess(this);" style="background: #67cf59; border: 2px solid #088201; height: 60px; width: 60px; border-radius: 30px;"><center><span class="material-icons md-36">mode_edit</span></center></button></p><p class='messt' id='message-${snapshot.key}'>${mess}</p></div><br>`
-  }else{
-    document.getElementById('nuovimess').innerHTML += `<div class='messaggio'><p class='mittmess'><strong>&nbsp;${mittente}</strong> - Alle ore ${ore} del ${data}</p><p class='messt'>${mess}</p></div><br>`
-  }
-  div();
-});
+  var messaggio = document.getElementById("messaggio").value
+  var destinatario = document.getElementById("a").value
+  var dataattuale = new Date();
+  oraattuale = dataattuale.getHours();
+  minutiattuali = dataattuale.getMinutes();
+  giornoattuale = dataattuale.getDate();
+  meseattuale = dataattuale.getMonth();
+  annoattuale = dataattuale.getYear();
+  meseattuale++
+  var datadainviare = giornoattuale + "/" + meseattuale + "/" + annoattuale
+  var oradainviare = oraattuale + ":" + minutiattuali
 
-   })
-       console.log(mittente)
-     })
+var mitt
+if(profile.email === "marcoscortegagna009@gmail.com" || profile.email === "marco.scorte@outlook.it"){
+  mitt = "Marco Express Official"
+}else{
+  mitt = profile.email
+}
+var desti
+if(destinatario === "marcoexpress"){
+  desti = "Marco Express"
+}else{
+  desti = "Tutti"
+}
+  firebase.database().ref("Messaggi community").push().set({
+     "datainvio": datadainviare ,
+     "ora": oradainviare ,
+     "messaggio": messaggio ,
+     "mittente": mitt,
+     "destinatario": desti
+  });
+})
+}
 
 
-     var messaggioscrivi = document.getElementById("messaggioscrivi");
-     messaggioscrivi.addEventListener("keydown", function (e) {
-     if (e.keyCode == 13) {
-     inviamess();
-     }
-     });
-     messaggioscrivi.addEventListener("focus", function () {
-       document.getElementById("accessoc").style.display = "none"
-     });
-     messaggioscrivi.addEventListener("blur", function () {
-       document.getElementById("accessoc").style.display = "block"
-     });
-
-     $('#messaggioscrivi').attr({placeholder:'Scrivi qui il messaggio'});
-     setTimeout(function(){
-       $('#messaggioscrivi').attr({placeholder:'Sarà possibile eliminarlo quando si desidera'});
-       setTimeout(function(){
-           $('#messaggioscrivi').attr({placeholder:'Massimo 500 caratteri'});
-         setTimeout(function(){
-           $('#messaggioscrivi').attr({placeholder:'Rispetta le norme della community'});
-           setTimeout(function(){
-             $('#messaggioscrivi').attr({placeholder:'Scrivi qui il messaggio'});
-
-           }, 2500)
-         }, 2500)
-       }, 2500)
-     }, 2500)
-
-   }
-   function deleteMessage(self) {
-       // get message ID
-       var messageId = self.getAttribute("data-id");
-
-       // delete message
-       firebase.database().ref("gruppocomunita").child(messageId).remove();
-   }
-
-   firebase.database().ref("gruppocomunita").on("child_removed", function (snapshot) {
-       // remove message node
-       document.getElementById("message-" + snapshot.key).innerHTML = '<span class="material-icons md-36">not_interested</span> Questo messaggio è stato eliminato'
-   });
-
-   function modificamess(self){
-     var messageId = self.getAttribute("data-id");
-
-     var nuovomess = prompt("Inserisci il nuovo messaggio")
-     firebase.database().ref("gruppocomunita/" + messageId).update({
-  message: nuovomess
-}, (error) => {
-  if (error) {
-    // The write failed...
-  } else {
-    // Data saved successfully!
-  }
-});
-   }
-
-   firebase.database().ref("gruppocomunita").on("child_changed", function (snapshot) {
-        var mess = snapshot.val().message;
-       // remove message node
-       document.getElementById("message-" + snapshot.key).innerHTML = mess
-   });
-
-   function piuinfo(self){
-     var messageId = self.getAttribute("data-id");
-   }
-
-   function inviamess(){
-
-     var scrivimess = document.getElementById("messaggioscrivi").value
-     document.getElementById("form").reset();
-     var user = firebase.auth().currentUser;
-      user.providerData.forEach(function (profile) {
-     if(scrivimess === " " || scrivimess === "") {
-       console.log("Troppo corto")
-       document.getElementById("nuovimess").innerHTML += "<center><div style='border: 4px solid red; border-radius: 15px; width: 80%; height: 25%;'><p class='ntext'><span class='material-icons md-36 red'>error_outline</span><strong> Impossibile inviare un messaggio vuoto<strong></p><p style='font-size: 25px;'>Non &egrave; possibile inviare un messaggio vuoto.</p></div></center>"
-
-     }else if(scrivimess.length > 500){
-       console.log("Troppo lungo")
-       document.getElementById("nuovimess").innerHTML += "<center><div style='border: 4px solid red; border-radius: 15px; width: 80%; height: 25%;'><p class='ntext'><span class='material-icons md-36 red'>error_outline</span><strong> Messaggio troppo lungo<strong></p><p style='font-size: 25px;'>Il Tuo messaggio &egrave; troppo lungo: supera i 500 caratteri.</p></div></center>"
+ auth.onAuthStateChanged(function(user){
+   if(user){
+     console.log("Attivo!")
+     setTimeout(verifica , 100)
+     setTimeout(verificaimpostazioni , 1000)
+     var dataattuale = new Date();
+     oraattuale = dataattuale.getHours();
+     var tiposaluto
+     if(oraattuale > 5 && oraattuale <= 12){
+       tiposaluto = "Buongiorno"
+     }else if(oraattuale > 12 && oraattuale < 18){
+       tiposaluto = "Buon pomeriggio"
+     }else if(oraattuale >= 18 && oraattuale <= 23){
+       tiposaluto = "Buona sera"
      }else{
+       tiposaluto = "Ciao,"
+     }
+     var user = firebase.auth().currentUser;
+     const dbRef = firebase.database().ref();
+dbRef.child("Utenti").child(user.uid).get().then((snapshot) => {
+  if (snapshot.exists()) {
+    console.log(snapshot.val());
+    var utente = snapshot.val()
+    document.getElementById("saluta").innerHTML = tiposaluto + ", " + utente.Nome
+    document.getElementById("saluta").style.display = "none"
+    if(utente.Genere === "Maschio"){
+      document.getElementById("saluto2").innerHTML = "Benvenuto nella seconda versione del sito Meteo Marco"
+    }else if(utente.Genere === "Femmina"){
+      document.getElementById("saluto2").innerHTML = "Benvenuta nella seconda versione del sito Meteo Marco"
+    }
+    document.getElementById("saluto2").style.display = "none"
+  } else {
+    document.getElementById("saluta").innerHTML = tiposaluto
+  }
+}).catch((error) => {
+  //document.getElementById("saluta").innerHTML = tiposaluto
+});
+     document.getElementById("saluta").innerHTML =
 
-       var datadue = new Date();
-       orad = datadue.getHours();
-       min = datadue.getMinutes();
-       giorno = datadue.getDate();
-       mese = datadue.getMonth();
-       mese++
-       var ore = orad + ":" + min
-       var datacompleta = giorno + "/" + mese + "/" + "2021"
-       var email = profile.email
-       if(profile.email === "marcoscortegagna009@gmail.com" || profile.email === "marco.scorte@outlook.it"){
-         email = "Marco Express Official"
-       }
-
-
-     firebase.database().ref("gruppocomunita").push().set({
-        "ore": ore,
-         "sender": email,
-         "message": scrivimess,
-         "data": datacompleta
-     });
-     return false;
-   }
-   div()
- });
-   }
-
-   function div() {
-     document.getElementById('nuovimes').scrollTop = 10000000000000
-   }
-
-   function avviaahah() {
-     setTimeout(aaaa, 13500)
-
-   }
-   function aaaa(){
-
-     $('#temperatura').animate({
-       height: "75px",
-       width: "35%"
-     }, 800 , function(){
-
-       $('#venti').animate({
-         height: "75px",
-         width: "35%"
-       }, 800 , function(){
-
-         $('#precipitazioni').animate({
-           height: "75px",
-           width: "35%"
-         }, 800 , function(){
-           $('.dettglitext').fadeIn(3000);
-
-         })
-       })
-     })
-   }
-
-     function tuoacc(){
-       let tema = localStorage.getItem("tema");
-       var tipotema
-       if(tema === "chiaro"){
-         tipotema = "chiaro"
-       }else if(tema === "scuro"){
-         tipotema = "scuro"
-       }/*else if(tema === "automatico"){
-         let temaor = localStorage.getItem("temaorario");
-         tipotema = "automatico: chiaro fino alle ore 20:00."
-       }*/
-
-       document.title = "Meteo Marco - Account ME";
-       document.getElementById("display").innerHTML =" ";
-       document.getElementById('display').innerHTML = "<p id='ttext'>Personalizzazione</p>" + '<hr align="left" size="1" width="600" color="#919191" noshade>'
-       var seleziona = '<select id="selezionatema" style="width: 20%; height: 100px; font-size: 30px; border: 2px solid #0096bf; border-radius: 15px; background-color: #b9ccfa;"><option value="chiaro"><p>Chiaro</p></option><option value="scuro"><h1>Scuro</h1></option></select>'
-       document.getElementById('display').innerHTML += "<p id='ntext'>Tema: " + tipotema + "</p><br>" + seleziona + "&nbsp;&nbsp;&nbsp;&nbsp;<button onclick='confermatema()' style='width: 10%; border: 3px solid #0096bf; border-radius: 10px; background-color:#e3ebff;'><h1>Salva</h1></button>"
-       document.getElementById('display').innerHTML += "<p id='ttext'>Informazioni Account</p>" + '<hr align="left" size="1" width="600" color="#919191" noshade>'
-
-       var user = firebase.auth().currentUser;
-       if (user != null) {
-         user.providerData.forEach(function (profile) {
-          console.log("Sign-in provider: " + profile.providerId);
-          console.log("  Provider-specific UID: " + profile.uid);
-          var disp = document.getElementById('display');
-          console.log("  Name: " + profile.displayName);
-          //document.getElementById('display').innerHTML += "<p id='ntext'>" + "Nome: <span id='nome'>" + profile.displayName + "</span>&nbsp;&nbsp;&nbsp;&nbsp;<button onclick='modnome()' id='modnome'><img src='https://lh3.googleusercontent.com/pw/ACtC-3da3hW4dsZX5PbU-tHhQjjutzLdZalnhafSWjPTYDusOcQpV3Q0GM7lXsa2wmAomFEv0RBE500H8EbisBrcBCTUZ3lO5ZtkKWkdc95ZEYTHvIR_gKFKkrk0EfPacCbUN10t1_bkr11qZ5A-kSep27Yf=s24-no?authuser=0' width='40px'/></button>"
-          console.log("  Email: " + profile.email);
-          disp.innerHTML += "<p id='ntext'>" + "Email: " + profile.email
-          console.log("  Photo URL: " + profile.photoURL);
-          disp.innerHTML += "<p id='ntext'>" + "Password: <span id='passwordo'>" + "**************" + "</span>&nbsp;&nbsp;&nbsp;&nbsp;<button onclick='modpw()' id='modnome'><img src='https://lh3.googleusercontent.com/pw/ACtC-3da3hW4dsZX5PbU-tHhQjjutzLdZalnhafSWjPTYDusOcQpV3Q0GM7lXsa2wmAomFEv0RBE500H8EbisBrcBCTUZ3lO5ZtkKWkdc95ZEYTHvIR_gKFKkrk0EfPacCbUN10t1_bkr11qZ5A-kSep27Yf=s24-no?authuser=0' width='40px'/></button>"
-          disp.innerHTML += "<p id='ntext'>" + "Scadenza dell'abbonamento:  " + profile.photoURL
-
-          var uid = user.uid;
-          const dbRef = firebase.database().ref();
-          //var uid = profile.uid
-          dbRef.child("Utenti/" + user.uid).get().then((snapshot) => {
-            if (snapshot.exists()) {
-              var offoon = snapshot.val().aggiornamentoautomatico
-              if(offoon === "off"){
-                console.log("è off")
-                disp.innerHTML += `<p id="ntext">Rinnovo automatico...............................................................<label class="switch" style="float: right;"><input type="checkbox" onclick='attivarinnovo()'><span class="slider round"></span></label></p>`
-                disp.innerHTML += '<br>' + '<button onclick="signOut()" id="signOut"><h1>Logout</h1><img src="https://lh3.googleusercontent.com/pw/ACtC-3fxEqyRV4Kgd6Zq9ZYJSi8aBG4TOp5qqBYOGl7OnRZUogm68jgxH4UIwV2rIi1pIUDv62xzfK4Cwbj_xIQyKVdqMtGtecPJa3t36jMGNe4bS_7_5h8QrdJH6lMSlc-9vmqzvKUcR5tGcj7zNqJpY_la=s24-no?authuser=0" height="50px"></img></button>'
-                disp.innerHTML +='&nbsp;&nbsp;&nbsp;<button onclick="elimabb()" id="signOut"><h1>Elimina l\'abbonamento*</h1><h2><br>Attenzione! L\'eliminazione dell\'abbonamento non comporta NESSUN rimborso.</h2></button><br><p id="ntext">Gestisci i tuoi pagamenti accedentdo al portale ufficiale <a href="gestionepagamenti.html">cliccando qui</a>.</p><h2>Quando hai creato il tuo account, hai accettato le <a href="https://docs.google.com/document/d/19Mgx9IHb-IxL0nMT4j_Le_YNjQQFHJBy2KwLtY4yCa8/preview"  target="_blank">Condizioni d\'uso</a>. Per visualizzarle, <a href="https://docs.google.com/document/d/19Mgx9IHb-IxL0nMT4j_Le_YNjQQFHJBy2KwLtY4yCa8/preview" target="_blank">CLICCA QUI</a>'
+dbRef.child("Utenti").child(user.uid).get().then(function (snapshot) {
+       var abbonato = snapshot.val().Abbonamento
+        if(abbonato === "Attivo") {
+            document.getElementById("serratura").innerHTML = "lock_open"
+            document.getElementById("testomacchinascrivi2").style.display = "none"
+            document.getElementById("testomacchinascrivi").style.display = "none"
+            document.getElementById("copri").style.background = "gray"
+            var total = document.getElementById("totale")
+            total.innerHTML = "<img src='https://lh3.googleusercontent.com/pw/AM-JKLU5o18ZiaGNxX1ceX394jCHFofPC7XlplfrwTG18Jeo_7Ca-ISK0rTqkROh9fpRftmrCVMK4rUB-TKcie2wzjL0cti7TMEhduPusHYN0fDvfVFe4cED6jtkcq8p_RFa1xR1ZGM0WnSbPe8PW7_WnlJm=s903-no?authuser=0' style='width: 30%'></img><br><h1>Scorri in qualsiasi direzione per sbloccare</h1>"
+            total.innerHTML += "<center><div id='scorri'></div></center>"
+            var scorri = document.getElementById("scorri")
+           scorri.addEventListener('touchstart', e => {
+              console.log("Partito")
+          })
+          scorri.addEventListener('touchend', e => {
+            console.log("Terminato")
+            document.getElementById("copri").style.display = "none"
+            document.getElementById("dati").style.display = "none"
+            document.getElementById("community").style.display = "none"
+            //sbloccato
 
 
-              }else if(offoon === "on"){
-                disp.innerHTML += `<p id="ntext">Rinnovo automatico...............................................................<label class="switch" style="float: right;"><input type="checkbox" onclick='disattivarinnovo()' checked><span class="slider round"></span></label></p>`
-                disp.innerHTML += '<br>' + '<button onclick="signOut()" id="signOut"><h1>Logout</h1><img src="https://lh3.googleusercontent.com/pw/ACtC-3fxEqyRV4Kgd6Zq9ZYJSi8aBG4TOp5qqBYOGl7OnRZUogm68jgxH4UIwV2rIi1pIUDv62xzfK4Cwbj_xIQyKVdqMtGtecPJa3t36jMGNe4bS_7_5h8QrdJH6lMSlc-9vmqzvKUcR5tGcj7zNqJpY_la=s24-no?authuser=0" height="50px"></img></button>'
-                disp.innerHTML +='&nbsp;&nbsp;&nbsp;<button onclick="elimabb()" id="signOut"><h1>Elimina l\'abbonamento*</h1><h2><br>Attenzione! L\'eliminazione dell\'abbonamento non comporta NESSUN rimborso.</h2></button><br><p id="ntext">Gestisci i tuoi pagamenti accedentdo al portale ufficiale <a href="gestionepagamenti.html">cliccando qui</a>.</p><h2>Quando hai creato il tuo account, hai accettato le <a href="https://docs.google.com/document/d/19Mgx9IHb-IxL0nMT4j_Le_YNjQQFHJBy2KwLtY4yCa8/preview"  target="_blank">Condizioni d\'uso</a>. Per visualizzarle, <a href="https://docs.google.com/document/d/19Mgx9IHb-IxL0nMT4j_Le_YNjQQFHJBy2KwLtY4yCa8/preview" target="_blank">CLICCA QUI</a>'
+            $("#previsioni").css({fontSize: 20})
 
-
-              }
-            } else {
-              console.log("No data available");
-            }
-          }).catch((error) => {
-            console.error(error);
-          });
-
+           const dbRef = firebase.database().ref();
+           dbRef.child("Utenti").child(user.uid).child("Impostazioni").get().then((snapshot) => {
+             if (snapshot.exists()) {
+               var impostazioni = snapshot.val();
+               console.log("Salvato sul cloud: " + impostazioni.primaimpostazione)
+               if(impostazioni.primaimpostazione === "On"){
+                 setTimeout(function(){
+                    $("#saluta").fadeIn(1000)
+                    setTimeout(function(){
+                      $("#saluta").animate({
+                        fontSize: "35px"
+                      })
+                      setTimeout(function(){
+                        $("#saluto2").fadeIn(1000)
+                        setTimeout(function(){
+                          $("#saluto2").animate({
+                            fontSize: "35px"
+                          }, function(){
+                            $("#introimg").fadeIn(1000)
+                            setTimeout(function(){
+                              $("#saluta").fadeOut(1000)
+                              $("#saluto2").fadeOut(1000)
+                               setTimeout(previsioni , 1000)
+                            }, 2000)
+                          })
+                        }, 4000)
+                      },500)
+                    }, 4000)
+                  }, 1000)
+               }else{
+                 setTimeout(previsioni , 1000)
+               }
+}
+})
         });
-      }
-
-     }
-
-     function attivarinnovo(){
-       var user = firebase.auth().currentUser;
-       firebase.database().ref("Utenti/" + user.uid).update({
-         aggiornamentoautomatico: "on"
-       });
-       tuoacc()
-     }
-     function disattivarinnovo(){
-       var user = firebase.auth().currentUser;
-       firebase.database().ref("Utenti/" + user.uid).update({
-         aggiornamentoautomatico: "off"
-       });
-       tuoacc()
-     }
-
-
-     function confermatema(){
-       var tiposalva = document.getElementById("selezionatema").value
-       if(tiposalva === "chiaro"){
-         localStorage.setItem("tema", "chiaro");
-       }if(tiposalva === "scuro"){
-         localStorage.setItem("tema", "scuro");
-       }/*if(tiposalva === "automatico"){
-         localStorage.setItem("tema", "automatico");
-       }*/
-       window.location.reload()
-     }
-
-     function elimabb() {
-       var user = firebase.auth().currentUser;
-
-user.updateProfile({
-    photoURL: " "
-    }).then(function() {
-
-      var datadue = new Date();
-      orad = datadue.getHours();
-      min = datadue.getMinutes();
-      dataduen = datadue.getDate();
-      mesed = datadue.getMonth();
-      annodue = datadue.getFullYear();
-      mesed++
-      var mess = "Ha eliminato l'abbonamento Meteo Marco Premium plus nel giorno " +  dataduen + "/" + mesed + "/" + annodue + " alle ore " + orad + ":" + min
-      firebase.database().ref("persone elimina abb").push().set({
-          "sender": user.email,
-          "message": mess
-
+        scorri.addEventListener('touchmove', e => {
+          console.log("mosso")
       });
-      alert('Abbonamento Eliminato!')
-      window.location.reload()
-    }).catch(function(error) {
-      alert('Errore, riprova tra qualche istante')
-    });
-     }
+
+        }else{
+          console.log("ll")
+          document.getElementById("dati").style.display = "none"
+          document.getElementById("community").style.display = "none"
+          document.getElementById("impostazioni").style.display = "none"
+          document.getElementById("display").style.display = "none"
+          document.getElementById("comprameteomarco").style.display = "block"
+          document.getElementById("copri").style.display = "none"
+          document.getElementsByClassName("pulsantiera")[0].disabled = "true"
+          document.getElementsByClassName("pulsantiera")[1].disabled = "true"
+          document.getElementsByClassName("pulsantiera")[2].disabled = "true"
+          document.getElementsByClassName("pulsantiera")[3].disabled = "true"
+          document.getElementsByClassName("pulsantiera")[4].disabled = "true"
+        }
+     })
+
+   }else{
+    window.location.href = "accedi.html";
+   }
 
 
+ });
 
 
-     function modnome() {
-       document.getElementById("modnome").style.display="none";
-       document.getElementById('nome').innerHTML = " "
-       document.getElementById('nome').innerHTML = "<input type='text' id='nuovonome' placeholder='Inserisci nuovo nome'></input>" + "<button onclick='confermanome()' id='confermanome'><h1>Conferma</h1></button>"
+ $(".pulsantiera").click(function(){
+   console.log("ha cliccato!")
+   $(".pulsantiera").css({fontSize: "12px"})
+   var questoelemento = $(this)
+   questoelemento.css({fontSize: 20})
 
-     }
-
-     function modpw() {
-       document.getElementById('display').innerHTML = "<p id='ttext'>Per maggiore sicurezza, abbiamo inviato un'email al tuo indirizzo email</p><span id='infooo'></span>"
-       document.getElementById('display').innerHTML += "<h2>Non &egrave; arrivata nessuna email? Prova a controllare la spam.</h2>"
-       var user = firebase.auth().currentUser;
-       var auth = firebase.auth();
-       var emailAddress = user.email;
-
-       auth.sendPasswordResetEmail(emailAddress).then(function() {
-         console.log('fatto')
-         document.getElementById('infooo').innerHTML = '<h1>Fatto, abbiamo inviato un\'email a ' + emailAddress + '</h1>'
-       }).catch(function(error) {
-          document.getElementById('infooo').innerHTML = '<h1>Spiacenti. Si &egrave; verificato un errore imprevisto</h1><br><button onclick="window.reload()" id="home"><h1>Torna alla home</h1></button>'
-       });
-
-     }
-
-     function confermanome() {
-       var user = firebase.auth().currentUser;
-       var newnome = document.getElementById('nuovonome').value
-       user.updateProfile({
-      displayName: newnome
-
-    }).then(function() {
-      tuoacc();
-    }).catch(function(error) {
-      console.log('errore')
-    });
-     }
-
-     function aggiornaprevisioni(){
-       premiumplus()
-       $("#aggprevisioni").css("cursor","no-drop");
-       document.getElementById('aggiornato').innerHTML = " "
-      $("#aggiornato2").fadeIn("slow")
-       document.getElementById('aggiornato2').innerHTML = "check_circle"
-       setTimeout(cambiaag, 2000)
-       document.getElementById("aggprevisioni").disabled = true;
-    return true;
-     }
-
-     function cambiaag(){
-
-       if(navigator.online = true){
-         document.getElementById('aggiornato').innerHTML = "update"
-         document.getElementById('aggiornato2').innerHTML = " "
-         document.getElementById("aggprevisioni").disabled = false;
-          $("#aggprevisioni").css("cursor","pointer");
-      return false;
-    }else{
-      document.getElementById('aggiornato').innerHTML = "error"
-      document.getElementById('aggiornato2').innerHTML = " "
-      document.getElementById("aggprevisioni").disabled = true;
-   return true;
-    }
-
-     }
-
-     function previsionipp() {
-       premiumplus();
-     }
-
-     function datipp() {
-       var datadue = new Date();
-       orad = datadue.getHours();
-       if(orad >= 20){
-         dark();
-       }
-       document.title = "Meteo Marco - Dati meteo";
-       console.log('datipp');
-       document.getElementById('display').innerHTML = '<button onclick="datireal()" id="datidue"><h1>Richiedi dati real time</h1></button>';
-       document.getElementById('display').innerHTML += '<br><button onclick="datiipp()" id="datidue"><h1>Visualizza documento intero</h1></button>';
-       document.getElementById('display').innerHTML += '<br><br><center><iframe height="90%" src="https://drive.google.com/file/d/1DCtSum9FyM9JTNZ00ONTRVuhGo5ro1Jp/preview" width="90%"><h1>Caricamento...</h1></iframe></center>'
-
-
-     }
-
-     function datiipp() {
-       location.assign('https://drive.google.com/file/d/1DCtSum9FyM9JTNZ00ONTRVuhGo5ro1Jp/preview');
-     }
-
-     function datireal() {
-       document.getElementById('display').innerHTML = '<p id="ntext"> Per la richiesta dei dati real time, non &egrave; disponibile riceverli in questo sito. Attendi la prossima versione per averli disponibili. Naturalmente, visto il tuo abbonamento attivo, &egrave; disponibile ricevere i dati tramite WhatsApp o Gmail.</p>'
-     }
-
-
-     function premium() {
-       console.log('Premium')
-
-         firebase.database().ref("Meteo Marco Premium").on("child_added", function (snapshot) {
-           var testoo = snapshot.val().message;
-
-           console.log(testoo);
-
-         });
-
-     }
-
-     function showPwd() {
-       var input = document.getElementById('password');
-       if (input.type === "password") {
-         input.type = "text";
-       } else {
-         input.type = "password";
-
-       }
-     }
-
-     function ascolta() {
-       var audio = new Audio('meteomarco.mp3');
-      audio.play();
-
-      window.setTimeout('asc()', 2000)
-
-    }
-
-    function asc() {
-      firebase.database().ref("Meteo Marco Premium Plus").on("child_added", function (snapshot) {
-        var testopo = snapshot.val().message;
-        var titolopo = snapshot.val().sender;
-
-        var msg = new SpeechSynthesisUtterance(testopo);
-        window.speechSynthesis.speak(msg);
-      });
-    }
-
-
-
-    //Annullamento dell'abbonamento
-
-    function controllaabb() {
-      var user = firebase.auth().currentUser;
- user.providerData.forEach(function (profile) {
-   var piusett = profile.photoURL
-   console.log(piusett)
-   const second = 1000,
-         minute = second * 60,
-         hour = minute * 60,
-         day = hour * 24;
-
-   let birthday = piusett,
-       countDown = new Date(birthday).getTime(),
-       x = setInterval(function() {
-
-         let now = new Date().getTime(),
-             distance = countDown - now;
-
-         //do something later when date is reached
-         if (distance < 0) {
-           console.log('ALLARME')
-
-           user.updateProfile({
-               photoURL: " "
-               }).then(function() {
-                 window.location.reload()
-               }).catch(function(error) {
-                 alert('Errore: ' + error.name)
-               });
-           clearInterval(x);
-         }
-         //seconds
-       }, 0)
  })
 
+function previsioni(){
+  $("#titoloprevisioni").css("left","-250px")
+  $("#testoprevisioni").css("left","-250px")
+  $("#info").css("left","-250px")
+  $("#titoloprevisioni").css("opacity","0.5")
+  $("#testoprevisioni").css("opacity","0.5")
+  $("#previsioniimg").attr("src", "menumeteomarco/descriptionselect.svg")
+  $("#datiimg").attr("src", "menumeteomarco/pollnoselect.svg")
+  $("#communityimg").attr("src", "menumeteomarco/forumnoselect.svg")
+  $("#postimg").attr("src", "menumeteomarco/articlenoselect.svg")
+  $("#impostazioniimg").attr("src", "menumeteomarco/settingnoselect.svg")
+  //avvia le previsioni
+  var titolo = document.getElementById("titoloprevisioni")
+  var testot = document.getElementById("testoprevisioni")
+  titolo.innerHTML = " "
+testot.innerHTML = " "
+document.getElementById("previsionitutti").innerHTML = " "
+document.getElementById("orainora").innerHTML = " "
+document.getElementById("ascoltavic").style.display = "block"
+  var testo = firebase.database().ref('Previsioni/Condizioni generali');
+testo.on('value', (snapshot) => {
+  const data = snapshot.val();
+  titolo.innerHTML = "<h1>" + data.titolo + "</h1>"
+  $("#titoloprevisioni").animate({
+    left: 15,
+    opacity: 1
+  }, 1500)
+  if(data.avvisi){
+    testot.innerHTML = "<h2>" + data.testo + "</h2><br><h3><img src='menumeteomarco/info.svg' width='35px'></img>&nbsp;<strong>" + data.avvisi + "</strong></h3><br><br><br>"
+    $("#testoprevisioni").animate({
+      left: 15,
+      opacity: 1
+    }, 1500)
 
-    }
+  }else{
+    testot.innerHTML = "<h2>" + data.testo + "</h2>"
+    $("#testoprevisioni").animate({
+      left: 15,
+      opacity: 1
+    }, 1500)
 
-    function noprevisioni(){
-      document.getElementById('display').innerHTML = '<center><span class="material-icons md-150 red">error_outline</span><p id="ttext">Il server ci sta mettendo troppo tempo a rispondere</p><p id="ntext">Verifica la connessione e riprova. Se il problema persiste, contatta un tecnico Marco Express.<br><br>Tentativo di riconnessione...</p></center>'
-      setTimeout(rigeneraconnessione, 100)
-    }
-    function rigeneraconnessione(){
-      if(navigator.onLine){
-        document.getElementById("display").innerHTML = "<center><h2>Ricerca errori...</h2></center>"
-        document.getElementById("display").innerHTML += "<center><h3>Attendere prego...</h3></center>"
-        document.getElementById("display").innerHTML += "<center><br><img width='150px' src='https://lh3.googleusercontent.com/pw/ACtC-3cqK5HaPD1DJzuJsNl1G2Pa-1hWvH87lpVYGv2BL5Wz8rpuBN4f-L9lTwFVE0VdgL5FjpEumgkfOMAyutTQu2--Sjd_5xfj1ir-qLu3EKoqsZb-WJS5N3SH21wUyd2e1MoQW6YjVkh0IgFfuYrmTt8R=w64-h22-no?authuser=0'></img></center>"
-        setTimeout(ri,1500)
+  }
+
+  var attd = data.attendibilità
+  var user = firebase.auth().currentUser;
+  const dbRef = firebase.database().ref();
+  dbRef.child("Utenti").child(user.uid).child("Impostazioni").get().then((snapshot) => {
+    if (snapshot.exists()) {
+      var impostazioni = snapshot.val();
+      console.log("Salvato sul cloud: " + impostazioni.secondaimpostazione)
+      if(impostazioni.secondaimpostazione === "On"){
+          document.getElementById("attendibilita").innerHTML = "<h2>Attendibilit&agrave;: " + attd + "</h2>"
+            $("#ascolta").css({"margin-left":"325px"})
+            $("#ascoltavic").animate({
+              width: "400px"
+            })
       }else{
-        setTimeout(rigeneraconnessione,100)
+        document.getElementById("attendibilita").innerHTML = " "
+        $("#ascoltavic").animate({
+          width: "90px"
+        })
+
+        document.getElementById("attendibilita").innerHTML = '<button id="ascolta" onclick="ascolta()"><span class="material-icons md-50">hearing</span></button>'
+        $("#ascolta").css({"margin-left":"5px"})
       }
+
     }
-    function ri() {
-      document.getElementById("display").innerHTML = "<center><h2>Rigenerazione della connessione...</h2></center>"
-      document.getElementById("display").innerHTML += "<center><h3>Attendere prego...</h3></center>"
-      document.getElementById("display").innerHTML += "<center><br><img width='150px' src='https://lh3.googleusercontent.com/pw/ACtC-3cqK5HaPD1DJzuJsNl1G2Pa-1hWvH87lpVYGv2BL5Wz8rpuBN4f-L9lTwFVE0VdgL5FjpEumgkfOMAyutTQu2--Sjd_5xfj1ir-qLu3EKoqsZb-WJS5N3SH21wUyd2e1MoQW6YjVkh0IgFfuYrmTt8R=w64-h22-no?authuser=0'></img></center>"
-      setTimeout(premiumplus, 1500)
-    }
+})
+  switch(data.simbolo){
+    case "Soleggiato":
+      $("#presentazioneimg").attr("src","https://ssl.gstatic.com/onebox/weather/48/sunny.png");
+      break;
+    case "Parzialmente soleggiato":
+      $("#presentazioneimg").attr("src","https://ssl.gstatic.com/onebox/weather/48/partly_cloudy.png");
+      break;
+      case "Nuvoloso":
+        $("#presentazioneimg").attr("src","https://ssl.gstatic.com/onebox/weather/64/cloudy.png");
+        break;
+      case "Piovoso":
+        $("#presentazioneimg").attr("src","https://ssl.gstatic.com/onebox/weather/48/rain_s_cloudy.png");
+        break;
+      case "Temporali":
+        $("#presentazioneimg").attr("src","https://ssl.gstatic.com/onebox/weather/48/thunderstorms.png");
+        break;
+  }
+});
+const dbRef = firebase.database().ref();
+dbRef.child("Previsioni/Temperature").get().then((snapshot) => {
+  if (snapshot.exists()) {
+    console.log(snapshot.val());
+    var condgen = "<h2 style='font-size: 35px;'>Domani</h2>"
+    var maxmin = "<h2 style='margin-left: 10px;'>Min: " + snapshot.val().minima + "<br>Max: " + snapshot.val().massima + "</h2>"
+    document.getElementById("previsionitutti").innerHTML += '<div id="giorno" class="altrigiorni"><img src="" width="75px" id="giornoimg" style="float: left;"></img>' + condgen + maxmin + '</div>'
 
 
-    //Nuovi mess e community Impostazioni
+    dbRef.child("Previsioni/Condizioni generali").get().then((snapshot) => {
+      if (snapshot.exists()) {
+        console.log(snapshot.val());
+        switch(snapshot.val().simbolo){
+          case "Soleggiato":
+            $("#giornoimg").attr("src","https://ssl.gstatic.com/onebox/weather/48/sunny.png");
+            document.getElementById("immaginesenzazione").style.backgroundImage = "url('Immaginisfondodiv/soleggiato.png')"
+            break;
+          case "Parzialmente soleggiato":
+            $("#giornoimg").attr("src","https://ssl.gstatic.com/onebox/weather/48/partly_cloudy.png");
+            document.getElementById("immaginesenzazione").style.backgroundImage = "url('Immaginisfondodiv/Parzialmentesoleggiato.png')"
+            break;
+            case "Nuvoloso":
+              $("#giornoimg").attr("src","https://ssl.gstatic.com/onebox/weather/64/cloudy.png");
+                document.getElementById("immaginesenzazione").style.backgroundImage = "url('Immaginisfondodiv/Nuvoloso.png')"
+              break;
+            case "Piovoso":
+              $("#giornoimg").attr("src","https://ssl.gstatic.com/onebox/weather/48/rain_s_cloudy.png");
+              document.getElementById("immaginesenzazione").style.backgroundImage = "url('Immaginisfondodiv/Pioggia.png')"
+              break;
+            case "Temporali":
+              $("#giornoimg").attr("src","https://ssl.gstatic.com/onebox/weather/48/thunderstorms.png");
+              document.getElementById("immaginesenzazione").style.backgroundImage = "url('Immaginisfondodiv/Temporali.png')"
+              break;
+        }
 
-
-  /*  function escecomm(){
-      var messaggiletti = localStorage.getItem("messletti");
-      console.log(messaggiletti)
-      var numcorrezione = Number(messaggiletti)
-      console.log(numcorrezione)
-      var corr = numcorrezione + 1
-      console.log(corr)
-      var invio = "" + corr
-      var user = firebase.auth().currentUser;
-        firebase.database().ref('Utenti/' + user.uid).update({
-          numeromessaggiletti: invio
-      })
-    }
-
-     messaggidaleggere(){
-        var user = firebase.auth().currentUser;
-      var starCountRef = firebase.database().ref('Utenti/' + user.uid);
-    starCountRef.on('value', (snapshot) => {
-      const data = snapshot.val();
-      console.log(data);
-      console.log(data.numeromessaggiletti)
-      var messletti = data.numeromessaggiletti
-      var numero = Number(messletti);
-     localStorage.setItem("messletti", numero);
+      } else {
+        console.log("No data available");
+      }
+    }).catch((error) => {
+      console.error(error);
     });
 
 
-    var altro = firebase.database().ref('messaggiinviaticomm');
-  altro.on('value', (snapshot) => {
-    const dataa = snapshot.val();
-    var mess = dataa.totale
-    var numero = Number(mess);
-    var messaggiletti = localStorage.getItem("messletti");
-    var messlett = Number(messaggiletti)
-    console.log(numero)
-    console.log(messlett)
-    var differenza = numero - messlett
-    console.log(differenza)
-    if(differenza === 0){
-      console.log("nonhaimessaggidaleggere")
-    }else if(differenza > 0){
-      console.log("Hai " + differenza + " messaggi da leggere")
-      var oi
-      var messaggi
-      if(differenza === 1){
-        oi = "o"
-        messaggi = "o"
+  } else {
+    console.log("No data available");
+  }
+}).catch((error) => {
+  console.error(error);
+});
+
+const primo = firebase.database().ref();
+primo.child("Previsioni/giornodopo1").get().then((snapshot) => {
+  if (snapshot.exists()) {
+    console.log(snapshot.val());
+    var condgen = "<h2 style='font-size: 35px;'>" + snapshot.val().giorno + "</h2>"
+    var maxmin = "<h2 style='margin-left: 10px;'>Min: " + snapshot.val().minima + "<br>Max: " + snapshot.val().massima + "</h2>"
+    document.getElementById("previsionitutti").innerHTML += '<div id="giorno1" class="altrigiorni"><img src="" width="75px" id="giorno1img" style="float: left;"></img>' + condgen + maxmin + '</div>'
+
+    switch(snapshot.val().simbolo){
+      case "Soleggiato":
+        $("#giorno1img").attr("src","https://ssl.gstatic.com/onebox/weather/48/sunny.png");
+        break;
+      case "Parzialmente soleggiato":
+        $("#giorno1img").attr("src","https://ssl.gstatic.com/onebox/weather/48/partly_cloudy.png");
+        break;
+        case "Nuvoloso":
+          $("#giorno1img").attr("src","https://ssl.gstatic.com/onebox/weather/64/cloudy.png");
+          break;
+        case "Piovoso":
+          $("#giorno1img").attr("src","https://ssl.gstatic.com/onebox/weather/48/rain_s_cloudy.png");
+          break;
+        case "Temporali":
+          $("#giorno1img").attr("src","https://ssl.gstatic.com/onebox/weather/48/thunderstorms.png");
+          break;
+    }
+
+  } else {
+    console.log("No data available");
+  }
+}).catch((error) => {
+  console.error(error);
+});
+
+
+const secondog = firebase.database().ref();
+secondog.child("Previsioni/giornodopo2").get().then((snapshot) => {
+  if (snapshot.exists()) {
+    console.log(snapshot.val());
+    var condgen = "<h2 style='font-size: 35px;'>" + snapshot.val().giorno + "</h2>"
+    var maxmin = "<h2 style='margin-left: 10px;'>Min: " + snapshot.val().minima + "<br>Max: " + snapshot.val().massima + "</h2>"
+    document.getElementById("previsionitutti").innerHTML += '<div id="giorno1" class="altrigiorni"><img src="" width="75px" id="giorno2img" style="float: left;"></img>' + condgen + maxmin + '</div>'
+
+    switch(snapshot.val().simbolo){
+      case "Soleggiato":
+        $("#giorno2img").attr("src","https://ssl.gstatic.com/onebox/weather/48/sunny.png");
+        break;
+      case "Parzialmente soleggiato":
+        $("#giorno2img").attr("src","https://ssl.gstatic.com/onebox/weather/48/partly_cloudy.png");
+        break;
+        case "Nuvoloso":
+          $("#giorno2img").attr("src","https://ssl.gstatic.com/onebox/weather/64/cloudy.png");
+          break;
+        case "Piovoso":
+          $("#giorno2img").attr("src","https://ssl.gstatic.com/onebox/weather/48/rain_s_cloudy.png");
+          break;
+        case "Temporali":
+          $("#giorno2img").attr("src","https://ssl.gstatic.com/onebox/weather/48/thunderstorms.png");
+          break;
+    }
+
+  } else {
+    console.log("No data available");
+  }
+}).catch((error) => {
+  console.error(error);
+});
+
+dbRef.child("Previsioni/Orainora").get().then((snapshot) => {
+  if (snapshot.exists()) {
+    var dati = snapshot.val();
+
+
+    document.getElementById("orainora").innerHTML += "<div class='oraino'><center><h3>Dalle 03:00 alle 06:00</h3><img src='' id='da3a6'></img></center></div>"
+    switch(snapshot.val().da3a6){
+      case "Soleggiato":
+        $("#da3a6").attr("src","https://ssl.gstatic.com/onebox/weather/48/sunny.png");
+        break;
+      case "Parzialmente soleggiato":
+        $("#da3a6").attr("src","https://ssl.gstatic.com/onebox/weather/48/partly_cloudy.png");
+        break;
+        case "Nuvoloso":
+          $("#da3a6").attr("src","https://ssl.gstatic.com/onebox/weather/64/cloudy.png");
+          break;
+        case "Piovoso":
+          $("#da3a6").attr("src","https://ssl.gstatic.com/onebox/weather/48/rain_s_cloudy.png");
+          break;
+        case "Temporali":
+          $("#da3a6").attr("src","https://ssl.gstatic.com/onebox/weather/48/thunderstorms.png");
+          break;
+    }
+
+    document.getElementById("orainora").innerHTML += "<div class='oraino'><center><h3>Dalle 06:00 alle 09:00</h3><img src='' id='da6a9'></img></center></div>"
+    switch(snapshot.val().da6a9){
+      case "Soleggiato":
+        $("#da6a9").attr("src","https://ssl.gstatic.com/onebox/weather/48/sunny.png");
+        break;
+      case "Parzialmente soleggiato":
+        $("#da6a9").attr("src","https://ssl.gstatic.com/onebox/weather/48/partly_cloudy.png");
+        break;
+        case "Nuvoloso":
+          $("#da6a9").attr("src","https://ssl.gstatic.com/onebox/weather/64/cloudy.png");
+          break;
+        case "Piovoso":
+          $("#da6a9").attr("src","https://ssl.gstatic.com/onebox/weather/48/rain_s_cloudy.png");
+          break;
+        case "Temporali":
+          $("#da6a9").attr("src","https://ssl.gstatic.com/onebox/weather/48/thunderstorms.png");
+          break;
+    }
+
+    document.getElementById("orainora").innerHTML += "<div class='oraino'><center><h3>Dalle 09:00 alle 12:00</h3><img src='' id='da9a12'></img></center></div>"
+    switch(snapshot.val().da9a12){
+      case "Soleggiato":
+        $("#da9a12").attr("src","https://ssl.gstatic.com/onebox/weather/48/sunny.png");
+        break;
+      case "Parzialmente soleggiato":
+        $("#da9a12").attr("src","https://ssl.gstatic.com/onebox/weather/48/partly_cloudy.png");
+        break;
+        case "Nuvoloso":
+          $("#da9a12").attr("src","https://ssl.gstatic.com/onebox/weather/64/cloudy.png");
+          break;
+        case "Piovoso":
+          $("#da9a12").attr("src","https://ssl.gstatic.com/onebox/weather/48/rain_s_cloudy.png");
+          break;
+        case "Temporali":
+          $("#da9a12").attr("src","https://ssl.gstatic.com/onebox/weather/48/thunderstorms.png");
+          break;
+    }
+
+    document.getElementById("orainora").innerHTML += "<div class='oraino'><center><h3>Dalle 12:00 alle 15:00</h3><img src='' id='da12a15'></img></center></div>"
+    switch(snapshot.val().da12a15){
+      case "Soleggiato":
+        $("#da12a15").attr("src","https://ssl.gstatic.com/onebox/weather/48/sunny.png");
+        break;
+      case "Parzialmente soleggiato":
+        $("#da12a15").attr("src","https://ssl.gstatic.com/onebox/weather/48/partly_cloudy.png");
+        break;
+        case "Nuvoloso":
+          $("#da12a15").attr("src","https://ssl.gstatic.com/onebox/weather/64/cloudy.png");
+          break;
+        case "Piovoso":
+          $("#da12a15").attr("src","https://ssl.gstatic.com/onebox/weather/48/rain_s_cloudy.png");
+          break;
+        case "Temporali":
+          $("#da12a15").attr("src","https://ssl.gstatic.com/onebox/weather/48/thunderstorms.png");
+          break;
+    }
+
+    document.getElementById("orainora").innerHTML += "<div class='oraino'><center><h3>Dalle 15:00 alle 18:00</h3><img src='' id='da15a18'></img></center></div>"
+    switch(snapshot.val().da15a18){
+      case "Soleggiato":
+        $("#da15a18").attr("src","https://ssl.gstatic.com/onebox/weather/48/sunny.png");
+        break;
+      case "Parzialmente soleggiato":
+        $("#da15a18").attr("src","https://ssl.gstatic.com/onebox/weather/48/partly_cloudy.png");
+        break;
+        case "Nuvoloso":
+          $("#da15a18").attr("src","https://ssl.gstatic.com/onebox/weather/64/cloudy.png");
+          break;
+        case "Piovoso":
+          $("#da15a18").attr("src","https://ssl.gstatic.com/onebox/weather/48/rain_s_cloudy.png");
+          break;
+        case "Temporali":
+          $("#da15a18").attr("src","https://ssl.gstatic.com/onebox/weather/48/thunderstorms.png");
+          break;
+    }
+
+    document.getElementById("orainora").innerHTML += "<div class='oraino'><center><h3>Dalle 18:00 alle 21:00</h3><img src='' id='da18a21'></img></center></div>"
+    switch(snapshot.val().da18a21){
+      case "Soleggiato":
+        $("#da18a21").attr("src","https://ssl.gstatic.com/onebox/weather/48/sunny.png");
+        break;
+      case "Parzialmente soleggiato":
+        $("#da18a21").attr("src","https://ssl.gstatic.com/onebox/weather/48/partly_cloudy.png");
+        break;
+        case "Nuvoloso":
+          $("#da18a21").attr("src","https://ssl.gstatic.com/onebox/weather/64/cloudy.png");
+          break;
+        case "Piovoso":
+          $("#da18a21").attr("src","https://ssl.gstatic.com/onebox/weather/48/rain_s_cloudy.png");
+          break;
+        case "Temporali":
+          $("#da18a21").attr("src","https://ssl.gstatic.com/onebox/weather/48/thunderstorms.png");
+          break;
+    }
+
+    document.getElementById("orainora").innerHTML += "<div class='oraino'><center><h3>Dalle 21:00 alle 24:00</h3><img src='' id='da21a24'></img></center></div>"
+    switch(snapshot.val().da21a24){
+      case "Soleggiato":
+        $("#da21a24").attr("src","https://ssl.gstatic.com/onebox/weather/48/sunny.png");
+        break;
+      case "Parzialmente soleggiato":
+        $("#da21a24").attr("src","https://ssl.gstatic.com/onebox/weather/48/partly_cloudy.png");
+        break;
+        case "Nuvoloso":
+          $("#da21a24").attr("src","https://ssl.gstatic.com/onebox/weather/64/cloudy.png");
+          break;
+        case "Piovoso":
+          $("#da21a24").attr("src","https://ssl.gstatic.com/onebox/weather/48/rain_s_cloudy.png");
+          break;
+        case "Temporali":
+          $("#da21a24").attr("src","https://ssl.gstatic.com/onebox/weather/48/thunderstorms.png");
+          break;
+    }
+    $(".oraino").click(function(){
+      console.log("click")
+      var questo = $(this)
+      //altri
+      $(".oraino").animate({
+        width: "11%"
+      })
+      $(this).animate({
+        width: "18%"
+      })
+    })
+
+    var user = firebase.auth().currentUser;
+
+    const df = firebase.database().ref();
+    df.child("Utenti").child(user.uid).child("Impostazioni").get().then((snapshot) => {
+      var impostazioni = snapshot.val()
+    if(impostazioni.terzaimpostazione === "On"){
+      setTimeout(versionescura , 1500)
+    }else if(impostazioni.terzaimpostazione === "Off"){
+      versionechiara()
+    }
+  })
+  } else {
+    console.log("No data available");
+  }
+}).catch((error) => {
+  console.error(error);
+});
+
+document.getElementById("display").style.display = "block"
+nonècommunity()
+nonèdati()
+nonèimpostazioni()
+}
+
+function ascolta(){
+  var testo = firebase.database().ref('Previsioni/Condizioni generali');
+  testo.on('value', (snapshot) => {
+    const data = snapshot.val();
+    var ascolta = data.testo
+    console.log(ascolta)
+    var msg = new SpeechSynthesisUtterance();
+    var voices = window.speechSynthesis.getVoices();
+    msg.voice = voices[10];
+    msg.voiceURI = 'native'
+    msg.volume = 1; // 0 to 1
+    msg.rate = 0.7; // 0.1 to 10
+    msg.pitch = 1; //0 to 2
+    msg.text = ascolta;
+    msg.lang = 'it-IT';
+
+    speechSynthesis.speak(msg);
+  })
+}
+function nonèprevisioni(){
+  document.getElementById("display").style.display = "none"
+}
+function nonèdati(){
+  document.getElementById("dati").style.display = "none"
+}
+function nonècommunity(){
+  document.getElementById("community").style.display = "none"
+}
+function nonèimpostazioni(){
+    document.getElementById("impostazioni").style.display = "none"
+}
+
+function dati(){
+  nonèprevisioni()
+  nonècommunity()
+  nonèimpostazioni()
+  document.getElementById("dati").style.display = "block"
+  $("#previsioniimg").attr("src", "menumeteomarco/descriptionnoselect.svg")
+  $("#datiimg").attr("src", "menumeteomarco/pollselect.svg")
+  $("#communityimg").attr("src", "menumeteomarco/forumnoselect.svg")
+  $("#postimg").attr("src", "menumeteomarco/articlenoselect.svg")
+  $("#impostazioniimg").attr("src", "menumeteomarco/settingnoselect.svg")
+}
+function community(){
+  nonèprevisioni()
+  nonèdati()
+  nonèimpostazioni()
+  document.getElementById("community").style.display = "block"
+  $("#previsioniimg").attr("src", "menumeteomarco/descriptionnoselect.svg")
+  $("#datiimg").attr("src", "menumeteomarco/pollnoselect.svg")
+  $("#communityimg").attr("src", "menumeteomarco/forumselect.svg")
+  $("#postimg").attr("src", "menumeteomarco/articlenoselect.svg")
+  $("#impostazioniimg").attr("src", "menumeteomarco/settingnoselect.svg")
+}
+function post(){
+  nonèprevisioni()
+  nonèdati()
+  nonècommunity()
+  nonèimpostazioni()
+  $("#previsioniimg").attr("src", "menumeteomarco/descriptionnoselect.svg")
+  $("#datiimg").attr("src", "menumeteomarco/pollnoselect.svg")
+  $("#communityimg").attr("src", "menumeteomarco/forumnoselect.svg")
+  $("#postimg").attr("src", "menumeteomarco/articleselect.svg")
+  $("#impostazioniimg").attr("src", "menumeteomarco/settingnoselect.svg")
+}
+function impostazioni(){
+  nonèprevisioni()
+  nonèdati()
+  nonècommunity()
+  document.getElementById("impostazioni").style.display = "block"
+  $("#previsioniimg").attr("src", "menumeteomarco/descriptionnoselect.svg")
+  $("#datiimg").attr("src", "menumeteomarco/pollnoselect.svg")
+  $("#communityimg").attr("src", "menumeteomarco/forumnoselect.svg")
+  $("#postimg").attr("src", "menumeteomarco/articlenoselect.svg")
+  $("#impostazioniimg").attr("src", "menumeteomarco/settingselect.svg")
+}
+
+function verificaimpostazioni(){
+var user = firebase.auth().currentUser;
+const one = document.getElementsByClassName("one")[0];
+const two = document.getElementsByClassName("one")[1];
+const tre = document.getElementsByClassName("one")[2];
+
+const dbRef = firebase.database().ref();
+dbRef.child("Utenti").child(user.uid).child("Impostazioni").get().then((snapshot) => {
+  if (snapshot.exists()) {
+    var impostazioni = snapshot.val();
+    console.log("Salvato sul cloud: " + impostazioni.primaimpostazione)
+    var att
+    if(impostazioni.primaimpostazione === "On"){
+      one.classList.toggle("inactive1");
+      att = "On"
+
+    }else if(impostazioni.primaimpostazione === "Off"){
+      att = "Off"
+    }
+    document.getElementById("prima").addEventListener("click", () => {
+      one.classList.toggle("inactive1");
+      if(att === "On"){
+        versionechiara()
+        var user = firebase.auth().currentUser;
+      firebase.database().ref('Utenti/' + user.uid + '/Impostazioni').update({
+         primaimpostazione: "Off"
+       });
+       att = "Off"
       }else{
-        oi = "i"
-        messaggi = ""
+        versionescura()
+        var user = firebase.auth().currentUser;
+      firebase.database().ref('Utenti/' + user.uid + '/Impostazioni').update({
+         primaimpostazione: "On"
+       });
+       att = "On"
       }
-      document.getElementById("display").innerHTML += `<div id='nuovimessss'><h1>Hai ${differenza} nuov${oi} messaggi${messaggi}!</h1><h2>Vai nella sezione community per visualizzarl${oi}.</h2><button onclick='comunita()' style='width: 70%; background: yellow; border: 2px solid black; border-radius: 25px;'><h1>Community</h1></button></div>`
-      setTimeout(chiudinuovimess , 8000)
+
+    });
+
+
+
+
+
+    console.log("Salvato sul cloud: " + impostazioni.secondaimpostazione)
+    var attt
+    if(impostazioni.secondaimpostazione === "On"){
+      two.classList.toggle("inactive1");
+      attt = "On"
+
+    }else if(impostazioni.secondaimpostazione === "Off"){
+      attt = "Off"
     }
+    document.getElementById("seconda").addEventListener("click", () => {
+      two.classList.toggle("inactive1");
+      if(attt === "On"){
+        var user = firebase.auth().currentUser;
+      firebase.database().ref('Utenti/' + user.uid + '/Impostazioni').update({
+         secondaimpostazione: "Off"
+       });
+       attt = "Off"
+      }else{
+        var user = firebase.auth().currentUser;
+      firebase.database().ref('Utenti/' + user.uid + '/Impostazioni').update({
+         secondaimpostazione: "On"
+       });
+       attt = "On"
+      }
 
-  });
+    });
 
+
+
+    console.log("Salvato sul cloud: " + impostazioni.terzaimpostazione)
+    var atttt
+    if(impostazioni.terzaimpostazione === "On"){
+      tre.classList.toggle("inactive1");
+      atttt = "On"
+      versionescura()
+    }else if(impostazioni.terzaimpostazione === "Off"){
+      atttt = "Off"
+      versionechiara()
     }
-    function chiudinuovimess(){
-      $("#nuovimessss").fadeOut("slow")
-    }*/
-
-
-
-
-
-      </script>
-      <style>
-      .material-icons.md-18 { font-size: 18px; }
-      .material-icons.md-24 { font-size: 24px; }
-      .material-icons.md-36 { font-size: 36px; }
-      .material-icons.md-48 { font-size: 48px; }
-      .material-icons.md-50 { font-size: 50px; }
-      .material-icons.md-60 { font-size: 60px; }
-      .material-icons.md-75 { font-size: 75px; }
-      .material-icons.md-150 { font-size: 150px; }
-      .material-icons.red { color: red; }
-      .material-icons.yellow { color: yellow; }
-      .material-icons.green { color: #00b336; }
-      .ltext{
-        font-family: 'Raleway', sans-serif;
-        font-size: 50px;
-      }
-      .ntext{
-        font-family: 'Raleway', sans-serif;
-        font-size: 35px;
-      }
-            body{
-              font-family:"Josefin Sans", sans-serif;
-            }
-
-            button{
-              cursor: pointer;
-            }
-
-
-            #hh{
-            position: absolute;
-            top:0px;
-            right:0px;
-            height: 100%;
-            width: 100%;
-            background-color: gray;
-            z-index: 1000;
-            opacity: .90;
-            filter: alpha(opacity=90);
-            -moz-opacity: .90;
-            }
-
-            #reiu{
-              width: 65%;
-              height: 75px;
-             background: #d5dbd6;
-             border-radius: 7px;
-            }
-
-            #rei{
-              width: 90%;
-              border: 3px solid black;
-              background: #d5dbd6;
-              font-size: 250%;
-              border-radius: 15px;
-              box-shadow: 10px 10px 5px #dedede;
-            }
-
-            #rlogin{
-              height: 75px;
-              width: 65%;
-              background: #d5dbd6;
-            }
-            #confi{
-              height: 75px;
-              width: 65%;
-              background: #d5dbd6;
-            }
-
-            #rlogin{
-              width: 60%;
-              font-size: 35px;
-            }
-            #home{
-              width: 60%;
-
-            }
-
-
-
-
-            #ttext,#tttext{
-              font-size: 50px;
-            }
-            #ntext{
-              font-size: 40px;
-            }
-            .ntext.infod{
-              font-size: 40px;
-              padding-left: 20px;
-            }
-            #pomet{
-              font-size: 40px;
-            }
-            #mattt{
-              font-size: 40px;
-            }
-            #accessoc {
-              width: 98%;
-              height: 25%;
-              position: fixed;
-
-            }
-            #ace{
-              font-size: 100%;
-            }
-
-            #dati{
-              width: 20%;
-              height: 35%;
-              background-color: #9d9ff2;
-              border: 3px solid #0004de;
-              letter-spacing: 2px;
-              border-radius: 15px;
-              box-shadow: 10px 10px 5px #dedede;
-            }
-
-            #previsioni{
-              width: 30%;
-              height: 35%;
-              background-color: #afff9c;
-              border: 3px solid #33ff00;
-              letter-spacing: 2px;
-              border-radius: 15px;
-              box-shadow: 10px 10px 5px #dedede;
-            }
-
-              #inizio{
-                height:350px;
-              }
-              #signOut {
-                height: 25%;
-                background: #f0cccc;
-                width: 38%;
-                border: 3px solid red;
-                letter-spacing: 2px;
-                border-radius: 15px;
-                box-shadow: 10px 10px 5px #dedede;
-              }
-              #signIn {
-                background: #b2f7bc;
-                width: 200px;
-                border: 3px solid #0af52c;
-                letter-spacing: 2px;
-                border-radius: 40px;
-              }
-              #password,#email {
-                width:80%;
-                background: #d5dbd6;
-                border: 3px solid black;
-                font-size: 250%;
-                border-radius: 20px;
-                box-shadow: 15px 10px 5px #dedede;
-
-              }
-              #button {
-                background: #d5dbd6;
-                border: 3px solid black;
-                font-size: 120%;
-              box-shadow: 15px 10px 5px #dedede;
-              }
-
-              #datidue {
-                width: 98%;
-                height: 10%;
-                border: 2px solid #00c3ff;
-                letter-spacing: 2px;
-                background-color: #73ebe1;
-                border-radius: 15px;
-                box-shadow: 10px 10px 5px #dedede;
-              }
-
-              #modnome{
-                width: 50px;
-                height: 50px;
-              }
-
-              #nuovonome{
-                font-size: 100%;
-                width: 70%
-              }
-
-              #confermanome{
-                width: auto;
-                height: 75px;
-              }
-
-              #ascolta{
-                width: 750px;
-                height: 75px;
-              }
-
-              #feed{
-                position: fixed;
-                bottom: 10px;
-                height: 50px;
-                width: 300px;
-                border-radius: 25px;
-                right: 5px;
-              }
-              #due{
-                position: fixed;
-                bottom: 10px;
-                height: 50px;
-                width: 300px;
-                border-radius: 25px;
-                right: 320px;
-              }
-              .dettagli{
-                width: 80px;
-                height: 80px;
-                border-radius: 37.5px;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-
-              }
-              .dettglitext{
-                display: none;
-              }
-              .ntext.a{
-                font-size: 42px;
-              }
-              #temperatura{
-                border: 5px solid red;
-                background-color: #ff8282;
-              }
-              #venti{
-                border: 5px solid yellow;
-                background-color: #f9ff82;
-              }
-              #precipitazioni{
-                border: 5px solid #00b5ff;
-                background-color: #b0e8ff;
-              }
-              #dataaggiornamento{
-                width: 45%;
-                border: 5px solid #8c00ff;
-                background-color: #bd6eff;
-              }
-
-              .dettglitext{
-                font-family: 'Raleway', sans-serif;
-                font-size: 36px;
-              }
-              .valriassunto{
-                font-family: 'Raleway', sans-serif;
-                font-size: 30px;
-              }
-              #ultim{
-                font-family: 'Source Code Pro', monospazio;
-                top: 90px;
-              }
-              #ultima{
-                width: 100%;
-                height: 200px;
-                background-image: url("https://lh3.googleusercontent.com/pw/AM-JKLUFiD_dbz-alodAMi71i9dIIXbArYEs8gioAhyVM1psrn4qh0qg1hBo7QWfY5h7Tcc8q7d8vOm4VjvoZt8oTGj23hZCgt1mzN8-g7lWdLzn_JpTM5HQ0jK8IRF_aCGIcak36Q6eVEV95TzsyH3_vi5f=s512-no?authuser=0");
-                background-repeat: no-repeat;
-                background-position: left;
-                background-size: contain;
-                background-color: #bfbaba;
-              }
-              .dettaglipre{
-                padding: 15px;
-                width: 45%;
-                height: 400px;
-                border: 1px solid #615c5c;
-                border-radius: 15px;
-                left: 25px;
-                background-image: url("https://script.meteolive.it/admin/immaginiNotizie/SRC/__070003___parziale.jpg");
-                background-repeat: no-repeat;
-                background-size: cover;
-                background-position: center;
-
-
-              }
-              .dettore{
-                font-family: 'Raleway', sans-serif;
-                font-size: 30px;
-              }
-              #pomeriggio{
-                padding: 15px;
-                float: right;
-                width: 45%;
-                right: 25px;
-                height: 400px;
-                border: 1px solid #615c5c;
-                border-radius: 15px;
-                background-image: url("");
-                background-repeat: no-repeat;
-                background-size: cover;
-                background-position: center;
-                opacity: 1.0;
-
-              }
-
-      #loading_screen{
-        position: absolute;
-        top:0px;
-        right:0px;
-        height: 100%;
-        width: 100%;
-        background-color: gray;
-        z-index: 1000;
-        opacity: .75;
-        filter: alpha(opacity=75);
-        -moz-opacity: .75;
-
+    document.getElementById("terza").addEventListener("click", () => {
+      tre.classList.toggle("inactive1");
+      if(atttt === "On"){
+        versionescura()
+        var user = firebase.auth().currentUser;
+      firebase.database().ref('Utenti/' + user.uid + '/Impostazioni').update({
+         terzaimpostazione: "Off"
+       });
+       atttt = "Off"
+      }else{
+        versionechiara()
+        var user = firebase.auth().currentUser;
+      firebase.database().ref('Utenti/' + user.uid + '/Impostazioni').update({
+         terzaimpostazione: "On"
+       });
+       atttt = "On"
       }
 
-      #primoacc{
-        position: absolute;
-        top:0px;
-        right:0px;
-        height: 100%;
-        width: 100%;
-        background-color: gray;
-        z-index: 1000;
-        opacity: .90;
-        filter: alpha(opacity=75);
-        -moz-opacity: .75;
-      }
+    });
 
-      #casella{
-        width: 80%;
-        background: white;
-        opacity: .95;
-        border-radius: 15px;
-        box-shadow: 10px 10px 5px #dedede;
-      }
-      #cb{
-        ms-transform: scale(3); /* IE */
-          -moz-transform: scale(3); /* FF */
-          -webkit-transform: scale(3); /* Safari and Chrome */
-          -o-transform: scale(3); /* Opera */
-          transform: scale(3);
-          padding: 10px;
-      }
+}else{
 
-      #btn{
-        background: red;
-        font-size: 30px;
-        height: 60px;
-        width: 65%;
-        opacity: .99;
+}
+})
 
-      }
-      #d{
-      float: left; padding: 15px 15px 15px 15px;
-      }
-      #pp{
-        width: 98%;
-        height: auto;
-      border: 5px double black;
-      border-radius: 15px;
-      box-shadow: 10px 10px 5px #dedede;
-      }
-      #ppabbn{
-        width: 100%;
-        height: 75px;
-      }
-      #selezionaabb{
-        width: 90%;
-        height: 100px;
-      }
-      #aggprevisioni{
-        width: 75px;
-        height: 75px;
-        border-radius: 37.5px;
-        float: right;
-      }
-      .messaggio{
-        width: inherit;
-        padding-left: 15px;
-        padding-right: 15px;
-        padding-bottom: 10px;
-        height: auto;
-        background: #f5f5f5;
-        border-radius: 7px;
+var sec = firebase.database().ref('Utenti/' + user.uid);
+sec.on('value', (snapshot) => {
+  const utente = snapshot.val();
+  var nome = utente.Nome
+  var genere = utente.Genere
+  var scadenza = utente.Scadenza
+  var soldi = utente.Soldi
+  var out = document.getElementById("infoacc").innerHTML = "<h1 style='margin-top: 15px; font-size: 39px;'>Nome: " + nome + "<button onclick='modificanome()' style='float:right; width:80px; height:80px; border-radius:40px;background-color: #52ff52;'><span class='material-icons md-48'>mode_edit</span></button><br>Email: " + user.email + "<br>Sesso: " + genere + "<br>Scadenza abbonamento: " + scadenza + "<br>Denaro memorizzato nell'account: &euro; " + soldi + "<br></h1><h2>Uid utente: " + user.uid + "</h2>"
 
-      }
-      .mittmess{
-        font-family: 'Oswald', sans-serif;
-        font-size: 25px;
-        background-color: #c5c9c6
-      }
-      .mittmesss{
-        font-family: 'Oswald', sans-serif;
-        font-size: 25px;
-        background-color: #67cf59
+});
+}
 
-      }
-      .messt{
-        font-family: 'Noto Sans KR', sans-serif;
-        font-size: 30px;
-      }
-      #messaggioscrivi{
-        width: 90%;
-        border: 2px solid #707070;
-        background-color: #adadad;
-        height: 65px;
-        border-radius: 25px;
-        font-size: 40px;
-      }
-      #invia{
-        height: 60px;
-        width:60px;
-        border-radius: 25px;
-        border: 3px solid #ffff00;
-        background: #ffff52;
-      }
-      .aumentoediminuzione{
-        width: 80px;
-        height: 80px;
-        border-radius: 40px;
-        border: 3px solid black;
-        float: left;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background: #ebebeb;
-      }
-      #nuovimessss{
-        position: fixed;
-        top: 30px;
-        right: 10px;
-        width: 50%;
-        height: 200px;
-        border: 2px solid black;
-        border-radius: 15px;
-        background-color: white;
-        padding: 15px;
-      }
+function modificanome(){
+  var user = firebase.auth().currentUser;
+  var nome = prompt("Inserisci il tuo nuovo nome:");
+ if (nome == null || nome == ""){
 
-      .switch {
-        position: relative;
-        display: inline-block;
-        width: 60px;
-        height: 34px;
-      }
+ }else{
+   firebase.database().ref('Utenti/' + user.uid).update({
+     Nome: nome
+   });
+ }
+}
+function incasoon(){
+  one.classList.toggle("inactive1");
+}
 
-      .switch input {
-        opacity: 0;
-        width: 0;
-        height: 0;
-      }
-
-      .slider {
-        position: absolute;
-        cursor: pointer;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-color: #ccc;
-        -webkit-transition: .4s;
-        transition: .4s;
-      }
-
-      .slider:before {
-        position: absolute;
-        content: "";
-        height: 26px;
-        width: 26px;
-        left: 4px;
-        bottom: 4px;
-        background-color: white;
-        -webkit-transition: .4s;
-        transition: .4s;
-      }
-
-      input:checked + .slider {
-        background-color: #2196F3;
-      }
-
-      input:focus + .slider {
-        box-shadow: 0 0 1px #2196F3;
-      }
-
-      input:checked + .slider:before {
-        -webkit-transform: translateX(26px);
-        -ms-transform: translateX(26px);
-        transform: translateX(26px);
-      }
-
-      /* Rounded sliders */
-      .slider.round {
-        border-radius: 34px;
-      }
-
-      .slider.round:before {
-        border-radius: 50%;
-      }
+function versionescura(){
+  document.body.style.backgroundColor = "#1f1f1f"
+  $("h1").css({"color":"white"})
+  $("h2").css({"color":"white"})
+  $("h3").css({"color":"white"})
+  $("#menu").css({"backgroundColor":"#a6a6a6"})
+  $(".pulsantiera").css({"backgroundColor":"#a6a6a6" , "border":"0px"})
+}
+function secondaversionescura(){
+  document.body.style.backgroundColor = "#1f1f1f"
+  $("h1").css({"color":"white"})
+  $("h2").css({"color":"white"})
+  $("h3").css({"color":"white"})
+  $("#menu").css({"backgroundColor":"#a6a6a6"})
+  $(".pulsantiera").css({"backgroundColor":"#a6a6a6" , "border":"0px"})
+}
+function versionechiara(){
+  document.body.style.backgroundColor = "white"
+  $("h1").css({"color":"black"})
+  $("h2").css({"color":"black"})
+  $("h3").css({"color":"black"})
+  $("#menu").css({"backgroundColor":"white"})
+  $(".pulsantiera").css({"backgroundColor":"white" , "border":"2px solid white"})
+}
 
 
-      </style>
+//Compra Meteo marco
+function ricarica(){
+  window.location.reload();
+}
+function acquistaunasett(){
+  var user = firebase.auth().currentUser;
+  const dbRef = firebase.database().ref();
+dbRef.child("Utenti").child(user.uid).get().then((snapshot) => {
+  var valori = snapshot.val();
+  var soldiattuali = valori.Soldi
+  if(soldiattuali < 0.65){
+    //Non ha soldi
+    document.getElementsByClassName("motivimm")[0].style.display = "none"
+    document.getElementsByClassName("motivimm")[1].style.display = "none"
+    document.getElementsByClassName("motivimm")[2].style.display = "none"
+    document.getElementsByClassName("motivimm")[3].style.display = "none"
+    document.getElementsByClassName("motivimm")[4].style.display = "none"
+    document.getElementsByClassName("motivimm")[5].style.display = "none"
 
-        <br><br><br><br>
-        <center><img src='Copyright.jpg' height='150px' width='70%'></img></center>
-      </body>
-      </html>
+    document.getElementById("compradopo").innerHTML += '<br><br><br><br><br><br><span class="material-icons md-150 red">error_outline</span><h1>Non hai soldi nell\'account</h1><h2 style="font-size: 37px;">Sembra che nel tuo account non siano memorizzati i soldi necessari per l\'acquisto. Se vuoi ricaricare il portafoglio recati da Marco con i contanti che desideri acquistare.</h2>'
+
+  }else{
+  var d = new Date();
+  dataduen = d.getDate();
+
+  var piusette = new Date()
+  piusette.setDate(dataduen + 7)
+  var invia = "" + piusette
+  console.log(piusette)
+
+  var soldidainviare = soldiattuali - 0.65
+  firebase.database().ref('Utenti/' + user.uid).update({
+    Abbonamento: "Attivo",
+    Soldi: soldidainviare,
+    Scadenza: invia
+  }).then(function(){
+    //Fatto
+    console.log("Fatto")
+    var giorno = piusette.getDate()
+    var mese = piusette.getMonth()
+    var anno = piusette.getFullYear()
+    var ore = piusette.getHours()
+    var minuti = piusette.getMinutes()
+    document.getElementsByClassName("motivimm")[0].style.display = "none"
+    document.getElementsByClassName("motivimm")[1].style.display = "none"
+    document.getElementsByClassName("motivimm")[2].style.display = "none"
+    document.getElementsByClassName("motivimm")[3].style.display = "none"
+    document.getElementsByClassName("motivimm")[4].style.display = "none"
+    document.getElementsByClassName("motivimm")[5].style.display = "none"
+    document.getElementById("compradopo").innerHTML = '<br><br><span class="material-icons green md-150">check_circle_outline</span><h1>Acquisto effettuato!</h1><h2 style="font-size: 37px;">Ora goditi tutti i vantaggi di Meteo Marco! Li puoi trovare tutti in questo sito.</h2><h1>Dettagli: </h1><h2>Data e ora di scadenza dell\'abbonamento: ' + ore + ':' + minuti + '  '+ giorno + '/' + mese + '/' + anno + '<br>Costo spesa: &euro; 0,65 <br> Articolo acquistato: Meteo Marco Premium Plus - 1 settimana</h2><br><br><center><button style="background-color: #0dd406; border: 0px; width: 35%; height: 200px; border-radius: 15px; float: left;"><h1 style="font-family: "Ubuntu", sans-serif;" onclick="ricarica()">Accedi a Meteo Marco</h1></button></center>'
+    document.getElementById("compradopo").innerHTML += '<br><br>'
+  }).catch((error) =>{
+    document.getElementsByClassName("motivimm")[0].style.display = "none"
+    document.getElementsByClassName("motivimm")[1].style.display = "none"
+    document.getElementsByClassName("motivimm")[2].style.display = "none"
+    document.getElementsByClassName("motivimm")[3].style.display = "none"
+    document.getElementsByClassName("motivimm")[4].style.display = "none"
+    document.getElementsByClassName("motivimm")[5].style.display = "none"
+    console.error(error)
+    document.getElementById("compradopo").innerHTML += '<br><br><span class="material-icons md-150 red">error_outline</span><h1>Acquisto non riuscito</h1><h2 style="font-size: 37px;">Si &egrave; verificato un errore durante la memorizzazione dei dati sull\'account. Non abbiamo attivato l\'abbonamento ne tolto denaro al tuo account.</h2><h2>Specifiche errore:<br>' + error + '</h2>'
+
+  })
+}
+})
+
+}
+function acquistaduesett(){
+  var user = firebase.auth().currentUser;
+  const dbRef = firebase.database().ref();
+dbRef.child("Utenti").child(user.uid).get().then((snapshot) => {
+  var valori = snapshot.val();
+  var soldiattuali = valori.Soldi
+  if(soldiattuali < 1.3){
+    //Non ha soldi
+    document.getElementsByClassName("motivimm")[0].style.display = "none"
+    document.getElementsByClassName("motivimm")[1].style.display = "none"
+    document.getElementsByClassName("motivimm")[2].style.display = "none"
+    document.getElementsByClassName("motivimm")[3].style.display = "none"
+    document.getElementsByClassName("motivimm")[4].style.display = "none"
+    document.getElementsByClassName("motivimm")[5].style.display = "none"
+
+    document.getElementById("compradopo").innerHTML += '<br><br><br><br><br><br><span class="material-icons md-150 red">error_outline</span><h1>Non hai soldi nell\'account</h1><h2 style="font-size: 37px;">Sembra che nel tuo account non siano memorizzati i soldi necessari per l\'acquisto. Se vuoi ricaricare il portafoglio recati da Marco con i contanti che desideri acquistare.</h2>'
+
+  }else{
+  var d = new Date();
+  dataduen = d.getDate();
+
+  var piusette = new Date()
+  piusette.setDate(dataduen + 14)
+  var invia = "" + piusette
+  console.log(piusette)
+
+  var soldidainviare = soldiattuali - 1.3
+  firebase.database().ref('Utenti/' + user.uid).update({
+    Abbonamento: "Attivo",
+    Soldi: soldidainviare,
+    Scadenza: invia
+  }).then(function(){
+    //Fatto
+    console.log("Fatto")
+    var giorno = piusette.getDate()
+    var mese = piusette.getMonth()
+    var anno = piusette.getFullYear()
+    var ore = piusette.getHours()
+    var minuti = piusette.getMinutes()
+    document.getElementsByClassName("motivimm")[0].style.display = "none"
+    document.getElementsByClassName("motivimm")[1].style.display = "none"
+    document.getElementsByClassName("motivimm")[2].style.display = "none"
+    document.getElementsByClassName("motivimm")[3].style.display = "none"
+    document.getElementsByClassName("motivimm")[4].style.display = "none"
+    document.getElementsByClassName("motivimm")[5].style.display = "none"
+    document.getElementById("compradopo").innerHTML = '<br><br><span class="material-icons green md-150">check_circle_outline</span><h1>Acquisto effettuato!</h1><h2 style="font-size: 37px;">Ora goditi tutti i vantaggi di Meteo Marco! Li puoi trovare tutti in questo sito.</h2><h1>Dettagli: </h1><h2>Data e ora di scadenza dell\'abbonamento: ' + ore + ':' + minuti + '  '+ giorno + '/' + mese + '/' + anno + '<br>Costo spesa: &euro; 1,30 <br> Articolo acquistato: Meteo Marco Premium Plus - 2 settimane</h2><br><br><center><button style="background-color: #0dd406; border: 0px; width: 35%; height: 200px; border-radius: 15px; float: left;"><h1 style="font-family: "Ubuntu", sans-serif;" onclick="ricarica()">Accedi a Meteo Marco</h1></button></center>'
+    document.getElementById("compradopo").innerHTML += '<br><br>'
+  }).catch((error) =>{
+    document.getElementsByClassName("motivimm")[0].style.display = "none"
+    document.getElementsByClassName("motivimm")[1].style.display = "none"
+    document.getElementsByClassName("motivimm")[2].style.display = "none"
+    document.getElementsByClassName("motivimm")[3].style.display = "none"
+    document.getElementsByClassName("motivimm")[4].style.display = "none"
+    document.getElementsByClassName("motivimm")[5].style.display = "none"
+    console.error(error)
+    document.getElementById("compradopo").innerHTML += '<br><br><span class="material-icons md-150 red">error_outline</span><h1>Acquisto non riuscito</h1><h2 style="font-size: 37px;">Si &egrave; verificato un errore durante la memorizzazione dei dati sull\'account. Non abbiamo attivato l\'abbonamento ne tolto denaro al tuo account.</h2><h2>Specifiche errore:<br>' + error + '</h2>'
+
+  })
+}
+})
+}
+
+//verifica solo la data
+function verifica(){
+  var user = firebase.auth().currentUser;
+  const dbRef = firebase.database().ref();
+dbRef.child("Utenti").child(user.uid).get().then((snapshot) => {
+  if (snapshot.exists()) {
+    var valori = snapshot.val();
+    console.log(valori.Scadenza)
+    var piusett = valori.Scadenza
+    const second = 1000,
+          minute = second * 60,
+          hour = minute * 60,
+          day = hour * 24;
+
+    let birthday = piusett,
+        countDown = new Date(birthday).getTime(),
+        x = setInterval(function() {
+
+          let now = new Date().getTime(),
+              distance = countDown - now;
+
+          //do something later when date is reached
+          if (distance < 0){
+            console.log('ALLARME')
+            var data = new Date(birthday).getDate()
+            var mese = new Date(birthday).getMonth()
+            var anno = new Date(birthday).getFullYear()
+              var datascad = data + "/" + mese + "/" + anno
+            firebase.database().ref('Utenti/' + user.uid).update({
+              Abbonamento: "Scaduto",
+              Ultimascadenza: datascad
+            });
+            setTimeout(function(){
+              document.getElementById("tuttopernascondere").style.display = "none"
+            }, 100)
+            document.getElementById("comprameteomarco").style.display = "block"
+            clearInterval(x);
+          }
+          //seconds
+        }, 0)
+  } else {
+    console.log("No data available");
+  }
+}).catch((error) => {
+  console.error(error);
+});
+}
+
+document.getElementById("comprameteomarco").style.display = "none"
+
+
+</script>
+
+<style>
+.material-icons.md-18 { font-size: 18px; }
+.material-icons.md-24 { font-size: 24px; }
+.material-icons.md-30 { font-size: 30px; }
+.material-icons.md-36 { font-size: 36px; }
+.material-icons.md-48 { font-size: 48px; }
+.material-icons.md-50 { font-size: 50px; }
+.material-icons.md-60 { font-size: 60px; }
+.material-icons.md-75 { font-size: 75px; }
+.material-icons.md-150 { font-size: 150px; }
+.material-icons.md-300 { font-size: 300px; }
+.material-icons.red { color: red; }
+.material-icons.yellow { color: yellow; }
+.material-icons.green { color: #00b336; }
+.material-icons.white { color: white; }
+.pulsantiera {
+  height: 100%;
+  width: 19.2%;
+  background: white;
+  border: 2px solid white;
+}
+
+*{
+  font-family: 'Open Sans', sans-serif;
+}
+h1{
+  font-size: 42px;
+}
+td,th{
+  border: 1px solid black;
+  padding: 10px;
+  font-size: 40px;
+}
+.h1mess{
+  font-size: 25px;
+}
+.h1messs{
+  font-size: 38px;
+}
+#saluta{
+  margin-left: 5px;
+  margin-top: 10px;
+  font-size: 50px;
+}
+#saluto2{
+  margin-top: 10px;
+  font-size: 50px;
+}
+#copri{
+  position: absolute;
+  top:0px;
+  right:0px;
+  height: 100%;
+  width: 100%;
+  background-color: black;
+}
+#scorri{
+  width: 80%;
+  height: 70%;
+}
+#menu{
+  margin-left: 0px;
+  position: fixed;
+  width: 100%;
+  height: 150px;
+  bottom: 1px;
+  background-color: white;
+  box-shadow: 0px 0px 0px 10px #dedede;
+}
+
+#previsionitutt {
+    width: 90%;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+#presentazioneimg{
+  width: 75px;
+  border: 2px solid gray;
+  position: absolute;
+  right: 10px;
+  top: 350px;
+  border-radius: 10px;
+}
+.altrigiorni{
+  width: 29%;
+  height: 200px;
+  border: 2px solid gray;
+  border-radius: 15px;
+  padding-left: 10px;
+  margin-left: 20px;
+  display: inline-block;
+}
+#ascolta{
+  width: 80px;
+  height: 80px;
+  border-radius: 40px;
+  border: 2px solid #bdbdbd;
+  float: right;
+  position: fixed;
+  top: 37.5%;
+  margin-left: 325px;
+  margin-right: 5px;
+}
+#ascoltavic{
+  position: fixed;
+  right: 20px;
+  height: 90px;
+  width: 400px;
+  border-radius: 45px;
+  background-color: #bdbdbd;
+  top: 37.5%;
+  border: 0px;
+  padding-left: 15px;
+  font-size: 20px;
+}
+#orainora{
+  position: fixed;
+  top: 78.5%;
+  width: 100%;
+  height: auto;
+}
+.oraino{
+  margin-left: 10px;
+  width: 12%;
+  height: 150px;
+  border: 2px solid gray;
+  border-top-right-radius: 25px;
+  border-bottom-left-radius: 25px;
+  display: inline-block;
+}
+#immaginesenzazione{
+  width: 100%;
+  height: 20%;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.intromessaggio{
+  border-radius: 15px;
+  background-color: #78a0ff;
+}
+.intromessaggioinviato{
+  border-radius: 15px;
+  background-color: #78ff7c
+}
+
+/*Switch per impostazioni */
+.btn1_container {
+  float: right;
+  width: 120px;
+  height: 63px;
+  background-color: white;
+  display: flex;
+  position: relative;
+  border: 3px solid #111;
+  margin-right: 20px;
+  box-shadow: -1px 3px 22px 0px rgba(0, 0, 0, 0.75);
+}
+
+/* Style 1 */
+.btn1_container {
+  border-radius: 35px;
+}
+
+.one {
+  top: 10px;
+  position: absolute;
+  height: 40px;
+  width: 40px;
+  background-color: grey;
+  display: block;
+  border-radius: 30px;
+  border: 2px solid red;
+  background-color: rgba(280, 0, 0, 0.5);
+  transition: all 0.3s ease;
+}
+
+.one {
+  left: 5px;
+}
+
+.inactive1 {
+  transform: translateX(calc(70px - 6px));
+  border: 2px solid #10d610;
+  background-color: rgba(0, 265, 0, 0.3);
+}
+#nuovopin{
+  border-top-right-radius: 15px;
+  border: 2px solid black;
+}
+.motivimm{
+  width: 30%;
+  height: auto;
+  margin-left: 20px;
+  float: left;
+}
+
+</style>
