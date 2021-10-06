@@ -1,0 +1,239 @@
+<html>
+<head>
+  <title>Accedi - Account Marco Express</title>
+  <link rel='icon' type='image/ico”' href='https://lh3.googleusercontent.com/pw/AM-JKLVjDuepXLZCbYddXCJLsrvTaCt8gC5awBzwqwsgkmy-aXP6uPrfm819sDJ3LilWwiKZ1kDpGnlDqbtNlZ60CPxBKdjMZ6vpzT5Me4aC_GHUsut3TEGbWNJUKeuHa_9OmOO5PJ-4bmx_bE2WRaJSVgbi=s150-no?authuser=0'>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+
+</head>
+<body onload="document.getElementById('pw').style.display = 'none'">
+
+<center><div id="accedi">
+    <h1 id="accedit">Accedi</h1>
+    <h2 id="infot">Utilizza il tuo account Marco Express</h2>
+    <img src="https://lh3.googleusercontent.com/pw/AM-JKLUFiD_dbz-alodAMi71i9dIIXbArYEs8gioAhyVM1psrn4qh0qg1hBo7QWfY5h7Tcc8q7d8vOm4VjvoZt8oTGj23hZCgt1mzN8-g7lWdLzn_JpTM5HQ0jK8IRF_aCGIcak36Q6eVEV95TzsyH3_vi5f=s512-no?authuser=0" width="150px"></img>
+    <h3 id="info2"></h3>
+    <form action="" id="em">
+  <div class="input-field">
+    <input type="email" id="name" required autocomplete="off"/>
+    <label for="name"><h3>Indirizzo email</h3></label><br><br><br>
+  </div>
+</form>
+
+<form action="" id="pw">
+<div class="input-field">
+<input type="password" id="namee" required autocomplete="off"/>
+<label for="namee"><h3>Password</h3></label><br><br><br>
+</div>
+</form>
+<span id="avviso"></span>
+<h1 id="risultatotitolo"></h1>
+<span id="sottoris"></span>
+<h2 id="risultato"></h2>
+<span id="pulsanti"></span>
+<button onclick="procedi()" id="avanti"><h2>Avanti</h2></button><br>
+<button id="pwdimenticata" onclick="pwdim()"><h3 style="color:#005acf;"><strong>Password dimenticata?</strong></h3></button>
+  </div></center>
+
+  <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-auth.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+
+<script>
+var firebaseConfig = {
+  apiKey: "AIzaSyCIw0-w1C3zDjoGgVpLKsFYm2TFXqJr9yw",
+  authDomain: "marco-express-d30c8.firebaseapp.com",
+  projectId: "marco-express-d30c8",
+  storageBucket: "marco-express-d30c8.appspot.com",
+  messagingSenderId: "764621319758",
+  appId: "1:764621319758:web:9390a4a994df27cda4dd1f",
+  measurementId: "G-3ZK6NW0G3F"
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+
+const auth = firebase.auth();
+function procedi(){
+  document.getElementById('em').style.display = 'none'
+  document.getElementById('pw').style.display = 'block'
+  $("#avanti").attr("onclick" , "accedi()")
+
+}
+function accedi(){
+  var email = document.getElementById("name").value
+  var password = document.getElementById("namee").value
+  console.log("Email: " + email + " Password: " + password)
+  firebase.auth().signInWithEmailAndPassword(email, password)
+  .then((userCredential) => {
+    console.log("LogIn effettuato con successo!")
+    window.location.href = "meteomarco versione 2.0.html";
+
+  })
+  .catch((error) => {
+    var errorCode = error.code;
+    if(error.code = 400){
+
+      document.getElementById("avviso").innerHTML = "<span class='material-icons md-48 red' style='float:left;'>error_outline</span><h2 style='color:red;'>Le credenziali fornite non sono valide!</h2>"
+    }
+    var errorMessage = error.message;
+  });
+}
+
+function pwdim(){
+  document.getElementById('info2').style.display = 'block'
+  document.getElementById('em').style.display = 'block'
+
+
+  document.getElementById("sottoris").innerHTML = " "
+  document.getElementById("risultatotitolo").innerHTML = " "
+  document.getElementById("risultato").innerHTML = " "
+  document.getElementById("pulsanti").innerHTML = " "
+
+  document.getElementById("accedit").innerHTML = "Ripristino password"
+  document.getElementById("infot").innerHTML = "Account Marco Express - Ripristina password"
+  document.getElementById('em').style.display = 'block'
+  document.getElementById('pw').style.display = 'none'
+  document.getElementById('pwdimenticata').style.display = 'none'
+  document.getElementById("info2").innerHTML = "Inserisci il tuo indirizzo email, ti invieremo un'email per il ripristino della password"
+  $("#avanti").attr("onclick" , "ripristinapassword()")
+  document.getElementById("avanti").innerHTML = "<h2>Invia email</h2>"
+  $("#avanti").animate({
+    width: "35%"
+  })
+  document.getElementById('avanti').style.display = 'block'
+}
+
+function ripristinapassword(){
+  document.getElementById('info2').style.display = 'none'
+  document.getElementById('em').style.display = 'none'
+  document.getElementById('avanti').style.display = 'none'
+  document.getElementById("sottoris").innerHTML = "<img src='loading.gif'></img>"
+  var auth = firebase.auth();
+  var emailAddress = document.getElementById('name').value
+
+  auth.sendPasswordResetEmail(emailAddress).then(function() {
+    document.getElementById("sottoris").innerHTML = " "
+    document.getElementById("risultatotitolo").innerHTML = "Email inviata!"
+    document.getElementById("risultato").innerHTML = "Abbiamo inviato un'email al seguente indirizzo email: " + emailAddress + "."
+    document.getElementById("pulsanti").innerHTML = '<br><button onclick="home()" id="avanti"><h2>Ritorna al login</h2></button>'
+    $("#avanti").animate({
+      width: "50%"
+    })
+  }).catch(function(error) {
+    console.log(error.code)
+    document.getElementById("sottoris").innerHTML = " "
+    document.getElementById("risultatotitolo").innerHTML = "Invio email non riuscito"
+    document.getElementById("risultato").innerHTML = "Codice errore: " + error.code
+    document.getElementById("pulsanti").innerHTML = '<br><button onclick="home()" id="avanti"><h2>Accedi</h2></button> <button onclick="pwdim()" id="avanti"><h2>Riprova</h2></button>'
+
+    if(error.code === "auth/invalid-email"){
+      document.getElementById("sottoris").innerHTML = " "
+      document.getElementById("risultatotitolo").innerHTML = "Email non valida"
+      document.getElementById("risultato").innerHTML = "L'email inserita non &egrave; abbinata a nessun account Marco Express."
+      document.getElementById("pulsanti").innerHTML = '<br><button onclick="home()" id="avanti"><h2>Accedi</h2></button> <button onclick="pwdim()" id="avanti"><h2>Riprova</h2></button>'
+    }
+
+})
+}
+
+function home(){
+  location.reload()
+}
+
+</script>
+<style>
+.material-icons.md-18 { font-size: 18px; }
+.material-icons.md-24 { font-size: 24px; }
+.material-icons.md-36 { font-size: 36px; }
+.material-icons.md-48 { font-size: 48px; }
+.material-icons.md-50 { font-size: 50px; }
+.material-icons.md-60 { font-size: 60px; }
+.material-icons.md-75 { font-size: 75px; }
+.material-icons.md-150 { font-size: 150px; }
+.material-icons.red { color: red; }
+.material-icons.yellow { color: yellow; }
+.material-icons.green { color: #00b336; }
+.material-icons.white { color: white; }
+*{
+  font-family: 'Open Sans', sans-serif;
+}
+h1{
+  font-size: 45px;
+}
+h2{
+  font-size: 35px;
+}
+h3{
+  font-size: 25px;
+}
+#accedi{
+  width: 75%;
+  height: 50%;
+  border: 1px solid #bdbdb9;
+  border-radius: 20px;
+}
+form {
+  margin: 100px;
+}
+.input-field {
+  position: relative;
+  width: 100%;
+  height: 75px;
+  line-height: 44px;
+}
+label {
+  position: absolute;
+  top: -30px;
+  left: 0;
+  width: 100%;
+  color: #d3d3d3;
+  transition: 0.2s all;
+  cursor: text;
+}
+input {
+  font-size: 30px;
+  width: 100%;
+  border: 0;
+  outline: 0;
+  padding: 0.5rem 0;
+  border-bottom: 2px solid #d3d3d3;
+  box-shadow: none;
+  color: #111;
+}
+input:invalid {
+  outline: 0;
+  // color: #dd0000;
+  //   border-color: #ff2300;
+}
+input:focus,
+input:valid {
+  border-color: #dd0000;
+}
+input:focus~label,
+input:valid~label {
+  font-size: 14px;
+  top: -55px;
+  color: #dd0000;
+}
+#avanti{
+  width: 20%;
+  background-color: #b80000;
+  border-radius: 10px;
+  color: white;
+  height: 100px;
+}
+#pwdimenticata{
+  width: 300px;
+  height: 100px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: white;
+  border: 3px solid white;
+}
+
+</style>
+</body>
+</html>
