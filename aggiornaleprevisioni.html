@@ -1,0 +1,103 @@
+<html>
+<head>
+<title>Area riservata</title>
+</head>
+<body>
+
+  <h2>Previsioni per domani, <input id="titoloprevisioni" placeholder="giorno"></input></h2><br>
+  <select id="simbolo" style="width: 10%"><option value="Soleggiato"><h2>Soleggiato</h2></option><option value="Parzialmentesoleggiato"><h2>Parz. soleggiato</h2></option><option value="Nuvoloso"><h2>Nuvoloso</h2></option><option value="Piovoso"><h2>Piovoso</h2></option><option value="Temporali"><h2>Temporali</h2></option></select>
+  <br><br><textarea id="testoprevisioni" placeholder="Testo"></textarea><br><br>
+  <input type="text" id="temperaturamax" placeholder="Massima"/><input type="text" id="temperaturamin" placeholder="Minima"/><br><br>
+
+  <h2 style="float: left">Dalle 3 alle 6</h2><br> &nbsp;&nbsp;<select id="tresei" style="width: 10%"><option value="Soleggiato"><h2>Soleggiato</h2></option><option value="Parzialmente soleggiato"><h2>Parz. soleggiato</h2></option><option value="Nuvoloso"><h2>Nuvoloso</h2></option><option value="Piovoso"><h2>Piovoso</h2></option><option value="Temporali"><h2>Temporali</h2></option></select><br><br><br>
+  <h2 style="float: left">Dalle 6 alle 9</h2><br> &nbsp;&nbsp;<select id="seinove" style="width: 10%"><option value="Soleggiato"><h2>Soleggiato</h2></option><option value="Parzialmente soleggiato"><h2>Parz. soleggiato</h2></option><option value="Nuvoloso"><h2>Nuvoloso</h2></option><option value="Piovoso"><h2>Piovoso</h2></option><option value="Temporali"><h2>Temporali</h2></option></select><br><br><br>
+  <h2 style="float: left">Dalle 9 alle 12</h2><br> &nbsp;&nbsp;<select id="novedodici" style="width: 10%"><option value="Soleggiato"><h2>Soleggiato</h2></option><option value="Parzialmente soleggiato"><h2>Parz. soleggiato</h2></option><option value="Nuvoloso"><h2>Nuvoloso</h2></option><option value="Piovoso"><h2>Piovoso</h2></option><option value="Temporali"><h2>Temporali</h2></option></select><br><br><br>
+  <h2 style="float: left">Dalle 12 alle 15</h2><br> &nbsp;&nbsp;<select id="dodiciquindici" style="width: 10%"><option value="Soleggiato"><h2>Soleggiato</h2></option><option value="Parzialmente soleggiato"><h2>Parz. soleggiato</h2></option><option value="Nuvoloso"><h2>Nuvoloso</h2></option><option value="Piovoso"><h2>Piovoso</h2></option><option value="Temporali"><h2>Temporali</h2></option></select><br><br><br>
+  <h2 style="float: left">Dalle 15 alle 18</h2><br> &nbsp;&nbsp;<select id="quindicidiciotto" style="width: 10%"><option value="Soleggiato"><h2>Soleggiato</h2></option><option value="Parzialmente soleggiato"><h2>Parz. soleggiato</h2></option><option value="Nuvoloso"><h2>Nuvoloso</h2></option><option value="Piovoso"><h2>Piovoso</h2></option><option value="Temporali"><h2>Temporali</h2></option></select><br><br><br>
+  <h2 style="float: left">Dalle 18 alle 21</h2><br> &nbsp;&nbsp;<select id="diciottoventuno" style="width: 10%"><option value="Soleggiato"><h2>Soleggiato</h2></option><option value="Parzialmente soleggiato"><h2>Parz. soleggiato</h2></option><option value="Nuvoloso"><h2>Nuvoloso</h2></option><option value="Piovoso"><h2>Piovoso</h2></option><option value="Temporali"><h2>Temporali</h2></option></select><br><br><br>
+  <h2 style="float: left">Dalle 21 alle 24</h2><br> &nbsp;&nbsp;<select id="ventunoventiquattro" style="width: 10%"><option value="Soleggiato"><h2>Soleggiato</h2></option><option value="Parzialmente soleggiato"><h2>Parz. soleggiato</h2></option><option value="Nuvoloso"><h2>Nuvoloso</h2></option><option value="Piovoso"><h2>Piovoso</h2></option><option value="Temporali"><h2>Temporali</h2></option></select><br><br><br>
+  <br><br>
+  <h1>E il giorno dopo?</h1>
+  <input id="giornodopo1" placeholder="Nome di dopodomani"></input>
+  <input type="text" id="max1" placeholder="Massima"/><input type="text" id="min1" placeholder="Minima"/><br>
+
+  <select id="seldopo" style="width: 10%"><option value="Soleggiato"><h2>Soleggiato</h2></option><option value="Parzialmente soleggiato"><h2>Parz. soleggiato</h2></option><option value="Nuvoloso"><h2>Nuvoloso</h2></option><option value="Piovoso"><h2>Piovoso</h2></option><option value="Temporali"><h2>Temporali</h2></option></select>
+  <h1>E il giorno dopo ancora? (dopo il dopodomani)??</h1>
+  <input id="giornodopo2" placeholder="Nome di dopo dopodomani"></input>
+  <input type="text" id="max2" placeholder="Massima"/><input type="text" id="min2" placeholder="Minima"/><br><br>
+
+  <select id="selldopo" style="width: 10%"><option value="Soleggiato"><h2>Soleggiato</h2></option><option value="Parzialmente soleggiato"><h2>Parz. soleggiato</h2></option><option value="Nuvoloso"><h2>Nuvoloso</h2></option><option value="Piovoso"><h2>Piovoso</h2></option><option value="Temporali"><h2>Temporali</h2></option></select>
+
+
+  <br><br><br><input type="password" id="password" placeholder="Password"></input>
+  <button onclick="aggiorna()">Aggiorna!</button>
+
+
+
+  <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-database.js"></script>
+<script>
+var firebaseConfig = {
+  apiKey: "AIzaSyCIw0-w1C3zDjoGgVpLKsFYm2TFXqJr9yw",
+  authDomain: "marco-express-d30c8.firebaseapp.com",
+  projectId: "marco-express-d30c8",
+  storageBucket: "marco-express-d30c8.appspot.com",
+  messagingSenderId: "764621319758",
+  appId: "1:764621319758:web:9390a4a994df27cda4dd1f",
+  measurementId: "G-3ZK6NW0G3F"
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+
+const auth = firebase.auth();
+
+
+function aggiorna(){
+  var prevtest = document.getElementById("testoprevisioni").value
+  var prevtitolo = document.getElementById("titoloprevisioni").value
+  var prevsimbolo = document.getElementById("simbolo").value
+  var max = document.getElementById("temperaturamax").value
+  var min = document.getElementById("temperaturamin").value
+
+
+  if(document.getElementById("password").value === "009"){
+    firebase.database().ref('Previsioni/Condizioni generali').update({
+    testo: prevtest,
+    titolo: "Previsioni per domani, " + prevtitolo,
+    simbolo: prevsimbolo
+  });
+  firebase.database().ref('Previsioni/Temperature').update({
+  massima: "°C " + max,
+  minima: "°C " + min
+});
+firebase.database().ref('Previsioni/Orainora').update({
+ da3a6: document.getElementById("tresei").value ,
+ da6a9: document.getElementById("seinove").value ,
+ da9a12: document.getElementById("novedodici").value ,
+ da12a15: document.getElementById("dodiciquindici").value ,
+ da15a18: document.getElementById("quindicidiciotto").value ,
+ da18a21: document.getElementById("diciottoventuno").value ,
+ da21a24: document.getElementById("ventunoventiquattro").value
+});
+firebase.database().ref('Previsioni/giornodopo1').update({
+ giorno: document.getElementById("giornodopo1").value,
+ massima: "°C " + document.getElementById("max1").value,
+ minima: "°C " + document.getElementById("min1").value,
+ simbolo: document.getElementById("seldopo").value
+});
+firebase.database().ref('Previsioni/giornodopo2').update({
+  giorno: document.getElementById("giornodopo2").value,
+  massima: "°C " + document.getElementById("max2").value,
+  minima: "°C " + document.getElementById("min2").value,
+  simbolo: document.getElementById("selldopo").value
+});
+
+  }
+}
+</script>
+<style>
+
+</style>
+</body>
+</html>
