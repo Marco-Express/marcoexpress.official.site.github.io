@@ -1,7 +1,7 @@
 <html>
 <head>
   <link rel='icon' type='image/ico”' href='https://lh3.googleusercontent.com/pw/AM-JKLXGUw7IN1wheeQ2k3knaICulaSvgZKwIo98ll6xF7VytX9iyQG4Qkb4LWkjVdDJxkHm2QKjedb0JPglpM1anVjRHsqh2SwIPZegaRHNerY1-XTflRE444BjQrNNcK3S0exgkzJFsmRO1Vwk5_SqGntk=s32-no?authuser=0'>
-  <title>Meteo Marco v 2.0</title>
+  <title>Meteo Marco v 2.1</title>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
 
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
@@ -11,6 +11,16 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@500&display=swap" rel="stylesheet">
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1EFHH3K88D"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+
+  gtag('config', 'UA-204455590-1');
+gtag('config', 'G-1EFHH3K88D');
+</script>
 </head>
 <body>
 
@@ -62,6 +72,40 @@
     <div id="orainora"></div>
   </div>
   </span>
+
+  <span id="news">
+    <br>
+    <center><h1>Notizie meteorologiche direttamente da Meteo Marco!</h1>
+    <button style="border:1px solid black; border-radius: 20px;" onclick="document.getElementById('spieganews').style.display = 'block'"><h2 style="font-size: 30px;"><span class="material-icons md-36">help_outline</span> <strong>Bisogno d'aiuto?</strong></h2></button>
+    <h2 id="nonews">Ancora nessuna notizia! Torna presto!</h2></center>
+    <div style="overflow:scroll; height:100%; width:100%;">
+      <br><br>
+    <center><span id="mostranews">
+  </span></center></div>
+
+
+  </span>
+
+  <div id="spieganews" style="position:fixed; width:100%; height:100%;background-color: white; left: 0px; top:0px; overflow:auto;">
+    <center>
+    <span class="material-icons red md-85">warning</span>
+    <h1>Allerta</h1>
+    <h2 style="font-size: 39px;">Nel caso in cui si dovessero verificare dei fenomeni meteorologici di forte intensit&agrave;, Meteo Marco avvertir&agrave; gli utenti qualche giorno prima grazie a questo tipo di simbolo.</h2>
+    <h2 style="font-size: 35px;"><i>Esempio: Allerta pioggia: rischio nubifragi.</i></h2>
+    <br>
+    <span class="material-icons green md-85">insights</span>
+    <h1>Tendenza</h1>
+    <h2 style="font-size: 39px;">Una notizia con questo simbolo verde indica una tendenza, cio&egrave; delle previsioni a lungo termine. Esse, tuttavia, non sono molto affidabili.</h2>
+    <h2 style="font-size: 35px;"><i>Esempio: Previsioni fornite luned&igrave; per 5 giorni dopo.</i></h2>
+    <br>
+    <span class="material-icons gray md-85">info</span>
+    <h1>Informazione</h1>
+    <h2 style="font-size: 39px;">Quando viene mostrato questo simbolo, significa che il contenuto della notizia &egrave; un'informazione. Possono essere di vario tipo: informazioni sulla temperatura, sui venti e sulle precipitazioni.</h2>
+    <h2 style="font-size: 35px;"><i>Esempio: Oggi ha piovuto 55 mm.</i></h2>
+    <br>
+    <button style="width: 80px; height: 80px; border-radius: 40px; border: 2px solid black; background-color: white;" onclick="document.getElementById('spieganews').style.display = 'none'"><span class="material-icons md-48">arrow_back</span></button>
+
+  </div>
 
 <div id="divimp">
   <span id="impostazioni">
@@ -142,7 +186,7 @@
     <button onclick="previsioni()" class="pulsantiera" id="previsioni"><img src="menumeteomarco/descriptionnoselect.svg" width="36px" id="previsioniimg"></img><br><h2 class="testopuls">Previsioni</h2></button>
     <button onclick="dati()" class="pulsantiera"><img src="menumeteomarco/pollnoselect.svg" width="36px" id="datiimg"></img><h2 class="testopuls">Dati</h2></button>
     <button onclick="community()" class="pulsantiera"><img src="menumeteomarco/forumnoselect.svg" width="36px" id="communityimg"></img><h2 class="testopuls">Community</h2></button>
-    <button onclick="post()" class="pulsantiera"><img src="menumeteomarco/articlenoselect.svg" width="36px" id="postimg"></img><h2 class="testopuls">News</h2></button>
+    <button onclick="post()" class="pulsantiera"><div style="background-color:red; width: 10px; height: 10px; border-radius: 5px; float:right;" id="pallinonews"></div><img src="menumeteomarco/articlenoselect.svg" width="36px" id="postimg"></img><h2 class="testopuls">News</h2></button>
     <button onclick="impostazioni()" class="pulsantiera"><img src="menumeteomarco/settingnoselect.svg" width="36px" id="impostazioniimg"></img><br><h2 class="testopuls">Impostazioni</h2></button>
   </div>
 </body>
@@ -201,6 +245,9 @@ const auth = firebase.auth();
 var database = firebase.database();
 document.getElementById("impostazioni").style.display = "none"
 document.getElementById("ascoltavic").style.display = "none"
+document.getElementById('spieganews').style.display = 'none'
+document.getElementById('news').style.display = 'none'
+document.getElementById('community').style.display = 'none'
 
 
 //Per migliore esperienza utente, carica tutti i messaggi prima che l'utente lo chieda
@@ -285,6 +332,7 @@ if(destinatario === "marcoexpress"){
      console.log("Attivo!")
      setTimeout(verifica , 100)
      setTimeout(verificaimpostazioni , 1000)
+     setTimeout(mostraononmostrapallino , 1500)
      var dataattuale = new Date();
      oraattuale = dataattuale.getHours();
      var tiposaluto
@@ -788,6 +836,7 @@ document.getElementById("display").style.display = "block"
 nonècommunity()
 nonèdati()
 nonèimpostazioni()
+monèpost()
 }
 
 function ascolta(){
@@ -821,11 +870,16 @@ function nonècommunity(){
 function nonèimpostazioni(){
     document.getElementById("impostazioni").style.display = "none"
 }
+function monèpost(){
+    document.getElementById("news").style.display = "none"
+
+}
 
 function dati(){
   nonèprevisioni()
   nonècommunity()
   nonèimpostazioni()
+  monèpost()
   document.getElementById("dati").style.display = "block"
   $("#previsioniimg").attr("src", "menumeteomarco/descriptionnoselect.svg")
   $("#datiimg").attr("src", "menumeteomarco/pollselect.svg")
@@ -837,6 +891,8 @@ function community(){
   nonèprevisioni()
   nonèdati()
   nonèimpostazioni()
+  monèpost()
+
   document.getElementById("community").style.display = "block"
   $("#previsioniimg").attr("src", "menumeteomarco/descriptionnoselect.svg")
   $("#datiimg").attr("src", "menumeteomarco/pollnoselect.svg")
@@ -849,6 +905,17 @@ function post(){
   nonèdati()
   nonècommunity()
   nonèimpostazioni()
+    document.getElementById("pallinonews").style.display = "none"
+  $("#previsioni").click(function(){
+      var user = firebase.auth().currentUser;
+    var contaquantipost = document.getElementsByClassName("notizia").length;
+    console.log(contaquantipost)
+    //fa il back-up per il salvataggio
+    firebase.database().ref("Utenti/" + user.uid + '/Notifiche').update({
+      notificapost: contaquantipost
+ });
+  })
+  document.getElementById("news").style.display = "block"
   $("#previsioniimg").attr("src", "menumeteomarco/descriptionnoselect.svg")
   $("#datiimg").attr("src", "menumeteomarco/pollnoselect.svg")
   $("#communityimg").attr("src", "menumeteomarco/forumnoselect.svg")
@@ -859,6 +926,7 @@ function impostazioni(){
   nonèprevisioni()
   nonèdati()
   nonècommunity()
+  monèpost()
   document.getElementById("impostazioni").style.display = "block"
   $("#previsioniimg").attr("src", "menumeteomarco/descriptionnoselect.svg")
   $("#datiimg").attr("src", "menumeteomarco/pollnoselect.svg")
@@ -906,10 +974,6 @@ dbRef.child("Utenti").child(user.uid).child("Impostazioni").get().then((snapshot
 
     });
 
-
-
-
-
     console.log("Salvato sul cloud: " + impostazioni.secondaimpostazione)
     var attt
     if(impostazioni.secondaimpostazione === "On"){
@@ -936,9 +1000,6 @@ dbRef.child("Utenti").child(user.uid).child("Impostazioni").get().then((snapshot
       }
 
     });
-
-
-
     console.log("Salvato sul cloud: " + impostazioni.terzaimpostazione)
     var atttt
     if(impostazioni.terzaimpostazione === "On"){
@@ -1025,6 +1086,37 @@ function versionechiara(){
   $("#menu").css({"backgroundColor":"white"})
   $(".pulsantiera").css({"backgroundColor":"white" , "border":"2px solid white"})
 }
+
+//Caricamento non-richiesto news
+
+var user = firebase.auth().currentUser;
+firebase.database().ref("Previsioni/Notizie").on("child_added", function (snapshot) {
+ const notizia = snapshot.val();
+ console.log(snapshot.key)
+ document.getElementById("nonews").innerHTML = ""
+
+var logoeinfo
+console.log(notizia.Tipo)
+ if(notizia.Tipo === "Allerta"){
+   logoeinfo = '<h2 style="float: left;">&nbsp;&nbsp;Allerta</h2><h2 style="text-align: right; padding-right:30px;">' + notizia.Data + '</h2><span class="material-icons md-85 red">warning</span>'
+ }
+  if(notizia.Tipo === "Info"){
+    logoeinfo = '<h2 style="float: left;">&nbsp;&nbsp;Informazione</h2><h2 style="text-align: right; padding-right:30px;">' + notizia.Data + '</h2><span class="material-icons md-85 gray">info</span>'
+  }
+  if(notizia.Tipo === "Tendenza"){
+    logoeinfo = '<h2 style="float: left;">&nbsp;&nbsp;Tendenza</h2><h2 style="text-align: right; padding-right:30px;">' + notizia.Data + '</h2><span class="material-icons md-85 green">insights</span>'
+  }
+
+ var preparadiv = "<div class='notizia'><br>" + logoeinfo + "<h1 style='font-size: 53px;'>" + notizia.Titolo + "</h1><h1 style='font-size: 44px;'>" + notizia.Testo + "</h1><button class='like'><span class='material-icons md-50'>thumb_up</span></button></div><br><br>"
+
+ document.getElementById("mostranews").innerHTML += preparadiv
+ $(".like").click(function (){
+   console.log("okk")
+   this.style.color = "#0055ff"
+ })
+
+})
+
 
 
 //Compra Meteo marco
@@ -1155,6 +1247,47 @@ dbRef.child("Utenti").child(user.uid).get().then((snapshot) => {
 })
 }
 
+function mostraononmostrapallino(){
+    var user = firebase.auth().currentUser;
+  const dbRef = firebase.database().ref();
+  dbRef.child("Utenti").child(user.uid).child("Notifiche").get().then((snapshot) => {
+    if (snapshot.exists()) {
+     var not = snapshot.val()
+
+     dbRef.child("Previsioni").get().then((snapshot) => {
+       if (snapshot.exists()) {
+        var nume = snapshot.val()
+        var numeronewstotali = nume.Numeropost
+        var sottrai = numeronewstotali - not.notificapost
+        console.log("Numero di post totali: " + numeronewstotali);
+        console.log("Numero di post letti: " + not.notificapost);
+        console.log("Numero di post sott: " + sottrai);
+        console.log(typeof sottrai)
+        if(sottrai === 0){
+          console.log("lette tutte");
+          document.getElementById("pallinonews").style.display = "none"
+        }else if(sottrai > 0){
+          console.log("Ancora da leggere");
+          document.getElementById("pallinonews").style.display = "block"
+        }else{
+          console.log("Se vero")
+          firebase.database().ref("Utenti/" + user.uid + '/Notifiche').update({
+            notificapost: 0
+       });
+       mostraononmostrapallino();
+        }
+       } else {
+         console.log("No data available");
+       }
+     }).catch((error) => {
+       console.error(error);
+     });
+
+  }
+})
+
+}
+
 //verifica solo la data
 function verifica(){
   var user = firebase.auth().currentUser;
@@ -1217,12 +1350,16 @@ document.getElementById("comprameteomarco").style.display = "none"
 .material-icons.md-50 { font-size: 50px; }
 .material-icons.md-60 { font-size: 60px; }
 .material-icons.md-75 { font-size: 75px; }
+.material-icons.md-85 { font-size: 85px; }
 .material-icons.md-150 { font-size: 150px; }
 .material-icons.md-300 { font-size: 300px; }
 .material-icons.red { color: red; }
 .material-icons.yellow { color: yellow; }
 .material-icons.green { color: #00b336; }
 .material-icons.white { color: white; }
+.material-icons.gray { color: #5e5e5e; }
+.material-icons.blu { color: #0076f5; }
+
 .pulsantiera {
   height: 100%;
   width: 19.2%;
@@ -1403,5 +1540,25 @@ td,th{
   margin-left: 20px;
   float: left;
 }
+.notizia{
+  width: 90%;
+  height: auto;
+  box-shadow:  10px  15px 5px #dedede,
+              -10px -15px 5px #dedede,
+               10px -15px 5px #dedede,
+              -10px  15px 5px #dedede;
+  border: 0px;
+  border-radius: 30px;
+  padding-bottom: 30px;
+  margin-top: 30px;
+}
+.like{
+  width: 80px;
+  height: 80px;
+  border-radius: 40px;
+  background-color: white;
+  border: 2px solid gray;
+}
+
 
 </style>
