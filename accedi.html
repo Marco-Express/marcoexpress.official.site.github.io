@@ -69,7 +69,7 @@ function accedi(){
   firebase.auth().signInWithEmailAndPassword(email, password)
   .then((userCredential) => {
     console.log("LogIn effettuato con successo!")
-    window.location.href = "meteomarco versione 2.0.html";
+    window.location.href = "meteomarco.html";
 
   })
   .catch((error) => {
