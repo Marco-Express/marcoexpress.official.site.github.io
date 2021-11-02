@@ -93,25 +93,31 @@ dbRef.child("Riscattacodice").child(codice).get().then((snapshot) => {
     if(premio.tipo === "Ricarica portafoglio"){
       var quantisoldi = Number(premio.ricarica)
       console.log(quantisoldi)
-      user.providerData.forEach(function (profile) {
-      //var soldiora = profile.displayName
-      var ehe = Number(profile.displayName)
+      const dbRef = firebase.database().ref();
+dbRef.child("Utenti").child(user.uid).get().then((snapshot) => {
+  if (snapshot.exists()) {
+    console.log(snapshot.val());
+    var utente = snapshot.val();
 
-        var piu = ehe+quantisoldi
-        var inv = "" + piu
+    var piu = utente.Soldi+quantisoldi
+    var invia = Number(piu)
 
-        user.updateProfile({
-       displayName: inv
-     }).then(function() {
-       firebase.database().ref().child("Riscattacodice").child(codice).remove()
-       document.getElementById("risultato").innerHTML = `<span class="material-icons md-48">check_circle_outline</span><br><strong>Codice monouso riscattato. Abbiamo aggiunto &euro; ${quantisoldi} al tuo account.</strong>`
-       document.getElementById("risultato").style.color = "#0ca607"
+    firebase.database().ref('Utenti/' + user.uid).update({
+        Soldi: invia
+      }).then(function() {
+        firebase.database().ref().child("Riscattacodice").child(codice).remove()
+        document.getElementById("risultato").innerHTML = `<span class="material-icons md-48">check_circle_outline</span><br><strong>Codice monouso riscattato. Abbiamo aggiunto &euro; ${quantisoldi} al tuo account.</strong>`
+        document.getElementById("risultato").style.color = "#0ca607"
 
-     }).catch(function(error) {
-       console.log(error)
-     });
+      }).catch((error) => {
+        console.error(error);
+      });
 
-   })
+  } else {
+    console.log("No data available");
+  }
+})
+
     }else if(premio.tipo === "Meteo Marco - 1 Settimana"){
       user.providerData.forEach(function (profile) {
         console.log(profile.photoURL)
