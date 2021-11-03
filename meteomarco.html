@@ -1,7 +1,7 @@
 <html>
 <head>
   <link rel='icon' type='image/ico”' href='https://lh3.googleusercontent.com/pw/AM-JKLXGUw7IN1wheeQ2k3knaICulaSvgZKwIo98ll6xF7VytX9iyQG4Qkb4LWkjVdDJxkHm2QKjedb0JPglpM1anVjRHsqh2SwIPZegaRHNerY1-XTflRE444BjQrNNcK3S0exgkzJFsmRO1Vwk5_SqGntk=s32-no?authuser=0'>
-  <title>Meteo Marco v 2.1</title>
+  <title>Meteo Marco v 2.14</title>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
 
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
@@ -107,36 +107,9 @@ gtag('config', 'G-1EFHH3K88D');
 
   </div>
 
-<div id="divimp">
-  <span id="impostazioni">
-    <center><h1>Impostazioni</h1>
-    <h2>Gestisci le tue preferenze in questa sezione. Tutte le informazioni verranno salvate sul tuo account.</h2></center><br>
-    <hr></hr><h1 id="statoimp"></h1>
-    <hr></hr><br><h2>Opzioni sito</h2>
-    <h1 style="float:left; margin-top: 10px;">Saluta all'avvio</h1><div class="btn1_container" id="prima">
-      <span class="one"></span><br>
-    </div>
 
-    <br><br><br><br><br><br>
-
-    <h1 style="float:left; margin-top: 10px;">Mostra attendibilit&agrave; previsioni</h1><div class="btn1_container" id="seconda">
-      <span class="one"></span><br>
-    </div>
-
-    <br><br><br><br><br><br>
-
-    <h1 style="float:left; margin-top: 10px;">Tema scuro</h1><div class="btn1_container" id="terza">
-      <span class="one"></span><br>
-    </div>
-
-    <br><br><br><br><br><br>
-
-    <h2>Informazioni Account</h2><br>
-    <span id="infoacc"></span>
-
-  </span>
 </div>
-</div>
+
   <div id="comprameteomarco" style="position:absolute; width:100%; height:100%;background-color: white;">
     <center>
       <img src="https://lh3.googleusercontent.com/pw/AM-JKLU5o18ZiaGNxX1ceX394jCHFofPC7XlplfrwTG18Jeo_7Ca-ISK0rTqkROh9fpRftmrCVMK4rUB-TKcie2wzjL0cti7TMEhduPusHYN0fDvfVFe4cED6jtkcq8p_RFa1xR1ZGM0WnSbPe8PW7_WnlJm=s903-no?authuser=0" width="300px"></img>
@@ -243,7 +216,6 @@ firebase.initializeApp(firebaseConfig);
 
 const auth = firebase.auth();
 var database = firebase.database();
-document.getElementById("impostazioni").style.display = "none"
 document.getElementById("ascoltavic").style.display = "none"
 document.getElementById('spieganews').style.display = 'none'
 document.getElementById('news').style.display = 'none'
@@ -927,7 +899,7 @@ function impostazioni(){
   nonèdati()
   nonècommunity()
   monèpost()
-  document.getElementById("impostazioni").style.display = "block"
+ window.location = "gestioneaccount.html";
   $("#previsioniimg").attr("src", "menumeteomarco/descriptionnoselect.svg")
   $("#datiimg").attr("src", "menumeteomarco/pollnoselect.svg")
   $("#communityimg").attr("src", "menumeteomarco/forumnoselect.svg")

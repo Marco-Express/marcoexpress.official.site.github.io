@@ -1,0 +1,476 @@
+<html>
+<head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+Antique&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+Antique:wght@300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined"
+        rel="stylesheet">
+</head>
+<body>
+  <center>
+    <div id="contieniimg">
+    <img src="" id="img"></div>
+  </div>
+    <h1>Impostazioni account Marco Express</h1>
+    <h2 class="sotto">Gestisci qui il tuo account Marco Express. Modifica impostazioni, informazioni e preferenze sul tuo account. Questi dati sono salvati sul cloud e possono essere sincronizzati da ogni dispositivo.</h2>
+    <div id="pulsantiera">
+      <button onclick="acc()" id="account" class="pul"><h2 class="sotto"><span class="material-icons-outlined md-60" id="accicona">badge</span><br>Account</button>
+      <button onclick="impost()" id="impostazioni" class="pul"><h2 class="sotto"><span class="material-icons-outlined md-60" id="impicona">settings</span><br>Impostazioni</button>
+    </div>
+    <div id="carica">
+    </div>
+    <div id="accountmarcoexpress">
+    <h2>Informazioni account</h2>
+    <h2 class="lista"><span class="material-icons-outlined md-36">account_circle</span> Nome: <strong id="nome"></strong></h2>
+    <h2 class="lista"><span class="material-icons-outlined md-36">email</span> Email: <strong id="email"></strong></h2>
+    <h2 class="lista"><span class="material-icons-outlined md-36">vpn_key</span> Password: <button style="background:white; border:2px solid black;" onclick="modificapw()"><h2 class="lista"><strong>Modifica</strong></h2></button></h2>
+    <h2 class="lista"><span class="material-icons-outlined md-36">image</span>Carica immagine profilo:</h2><input type="file" value="upload" id="fileButton" accept="image/png, image/jpeg" style="width: 50%; height: 50px; font-size:31px;"/><br>
+    <progress value="0" max="100" id="up" style="width:50%;">0%</progress>
+    <h2><span id="caricamento"></span></h2><br>
+
+    <h2>Pagamenti e servizio Meteo Marco</h2>
+    <h2 class="lista"><span class="material-icons-outlined md-36">paid</span> Denaro totale memorizzato: <strong id="denaro"></strong></h2>
+    <h2 class="lista"><span class="material-icons-outlined md-36">sentiment_satisfied</span> Stato dell'abbonamento Meteo Marco: <strong id="stato"></strong></h2>
+    <h2 class="lista"><span class="material-icons-outlined md-36">event</span> Data di scadenza: <strong id="datascad"></strong></h2>
+
+  </div>
+  <div id="modpw">
+    <h1>Modifica la tua password</h1>
+    <h2>Per maggiore sicurezza, le inviamo un'email per modificare la password.</h2>
+    <button onclick="confermamodificapw()"><h1>Invia email</h1></button>
+    <h2 id="risultatopw" style="font-size: 37px;"></h2>
+  </div>
+  </center>
+
+  <div id="impostazionisiti">
+    <h1>Impostazioni del sito Meteo Marco</h1>
+    <h2 class="lista" style="float:left; margin-top: 10px;"><strong>Saluta all'avvio</strong></h2><br><div class="btn1_container" id="prima">
+      <span class="one"></span><br>
+    </div>
+
+    <br><br><br><br><br><br>
+
+    <h2 class="lista" style="float:left; margin-top: 10px;"><strong>Mostra attendibilit&agrave; previsioni</strong></h2><div class="btn1_container" id="seconda">
+      <span class="one"></span><br>
+    </div>
+
+    <br><br><br><br><br><br>
+
+    <h2 class="lista" style="float:left; margin-top: 10px;"><strong>Rintraccia dispositivo</strong></h2><div class="btn1_container" id="terza">
+      <span class="one"></span><br>
+    </div>
+  </div>
+
+</body>
+<script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-database.js"></script>
+ <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-firestore.js"></script>
+ <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-storage.js"></script>
+ <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-messaging.js"></script>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+
+
+<script>
+var firebaseConfig = {
+  apiKey: "AIzaSyCIw0-w1C3zDjoGgVpLKsFYm2TFXqJr9yw",
+  authDomain: "marco-express-d30c8.firebaseapp.com",
+  projectId: "marco-express-d30c8",
+  storageBucket: "marco-express-d30c8.appspot.com",
+  messagingSenderId: "764621319758",
+  appId: "1:764621319758:web:9390a4a994df27cda4dd1f",
+  measurementId: "G-3ZK6NW0G3F"
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+
+const auth = firebase.auth();
+var database = firebase.database();
+var storage = firebase.storage();
+console.log(navigator.platform)
+console.log(navigator.userAgent)
+console.log(navigator.appVersion)
+document.getElementById("accountmarcoexpress").style.display = "none"
+document.getElementById("impostazionisiti").style.display = "none"
+  document.getElementById("modpw").style.display = "none";
+
+var uploader = document.getElementById("up")
+var out = document.getElementById("caricamento")
+fileButton.addEventListener('change', function(e){
+  var user = firebase.auth().currentUser;
+  var ss = storage.ref();
+ var fotovecchia = ss.child('Foto_Profilo/' + user.uid + '/Immagineprofiloutente');
+
+// Delete the file
+fotovecchia.delete().then(() => {
+console.log("fatto")
+}).catch((error) => {
+  console.log("Errore...")
+});
+  out.innerHTML = "<span class='material-icons-outlined md-48'>backup</span> Caricamento dell'immagine in corso..."
+  out.style.color = "#ffb300"
+  out.style.display = "block"
+  var file = e.target.files[0];
+
+  var storageRef = firebase.storage().ref('Foto_Profilo/' + user.uid + '/Immagineprofiloutente')
+  var task = storageRef.put(file);
+  task.on('state_changed',
+
+  function progress(snapshot){
+    var percentuale = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+    uploader.value = percentuale
+  },
+  function error(err){
+    console.log(err)
+    out.innerHTML = "<span class='material-icons-outlined md-48'>cloud_off</span> Non &egrave; stato possibile caricare l'immagine, riprova."
+    out.style.color = "red"
+  },
+  function complete(){
+    console.log('completato!')
+    var user = firebase.auth().currentUser;
+
+    var database = firebase.database();
+
+    out.innerHTML = "<span class='material-icons-outlined md-48'>cloud_done</span> Caricamento dell'immagine riuscito!"
+    out.style.color = "#ffb300"
+    uploader.value = 0
+
+
+  // Get the download URL
+  storageRef.getDownloadURL()
+  .then((url) => {
+    firebase.database().ref('Utenti/' + user.uid).update({
+      Immagine: url
+    });
+    out.innerHTML = "<span class='material-icons-outlined md-48'>cloud_done</span> Salvataggio riuscito!"
+    out.style.color = "#09ff00"
+    setTimeout(function(){
+      out.style.display = "none"
+    }, 5000)
+  })
+  .catch((error) => {
+    out.innerHTML = "<span class='material-icons-outlined md-48'>link_off</span> Recupero del URL non riuscito. Riprova."
+    out.style.color = "red"
+  console.log(error.code)
+  // A full list of error codes is available at
+  // https://firebase.google.com/docs/storage/web/handle-errors
+  switch (error.code) {
+    case 'storage/object-not-found':
+      // File doesn't exist
+      break;
+    case 'storage/unauthorized':
+      // User doesn't have permission to access the object
+      break;
+    case 'storage/canceled':
+      // User canceled the upload
+      break;
+    // ...
+    case 'storage/unknown':
+      // Unknown error occurred, inspect the server response
+      break;
+  }
+  });
+  }
+);
+})
+
+auth.onAuthStateChanged(function(user){
+  if(user){
+    console.log("UTENTE ATTIVO!")
+    ricezionetutto()
+    acc()
+  }})
+function ricezionetutto(){
+  var user = firebase.auth().currentUser;
+  var database = firebase.database();
+  var posizioneutente = firebase.database().ref('Utenti/' + user.uid);
+posizioneutente.on('value', (snapshot) => {
+  const utente = snapshot.val();
+  //output
+
+  //Immagine profilo
+  var urlimage = utente.Immagine
+  console.log(urlimage)
+  $("#img").attr("src",urlimage)
+
+  document.getElementById("nome").innerHTML = utente.Nome
+  document.getElementById("email").innerHTML = user.email
+  document.getElementById("stato").innerHTML = utente.Abbonamento
+  if(utente.Abbonamento === "Scaduto"){
+    document.getElementById("datascad").innerHTML = "(Non attivo)"
+  }else{
+    var datascad = new Date(utente.Scadenza)
+    var data = datascad.getDate()
+    var mese = datascad.getMonth()
+    var min = datascad.getMinutes()
+    var ora = datascad.getHours()
+
+    document.getElementById("datascad").innerHTML = data +"/"+ mese + " alle ore " + ora + ":"+ min
+  }
+  document.getElementById("denaro").innerHTML = "&euro;" + utente.Soldi
+
+});
+
+//Impostazioni e coordinazione
+const one = document.getElementsByClassName("one")[0];
+const two = document.getElementsByClassName("one")[1];
+const tre = document.getElementsByClassName("one")[2];
+const dbRef = firebase.database().ref();
+dbRef.child("Utenti").child(user.uid).child("Impostazioni").get().then((snapshot) => {
+  if (snapshot.exists()) {
+    var impostazioni = snapshot.val();
+    console.log("Salvato sul cloud: " + impostazioni.primaimpostazione)
+    var att
+    if(impostazioni.primaimpostazione === "On"){
+      one.classList.toggle("inactive1");
+      att = "On"
+
+    }else if(impostazioni.primaimpostazione === "Off"){
+      att = "Off"
+    }
+    document.getElementById("prima").addEventListener("click", () => {
+      one.classList.toggle("inactive1");
+      if(att === "On"){
+        var user = firebase.auth().currentUser;
+      firebase.database().ref('Utenti/' + user.uid + '/Impostazioni').update({
+         primaimpostazione: "Off"
+       });
+       att = "Off"
+      }else{
+        var user = firebase.auth().currentUser;
+      firebase.database().ref('Utenti/' + user.uid + '/Impostazioni').update({
+         primaimpostazione: "On"
+       });
+       att = "On"
+      }
+
+    });
+
+    console.log("Salvato sul cloud: " + impostazioni.secondaimpostazione)
+    var attt
+    if(impostazioni.secondaimpostazione === "On"){
+      two.classList.toggle("inactive1");
+      attt = "On"
+
+    }else if(impostazioni.secondaimpostazione === "Off"){
+      attt = "Off"
+    }
+    document.getElementById("seconda").addEventListener("click", () => {
+      two.classList.toggle("inactive1");
+      if(attt === "On"){
+        var user = firebase.auth().currentUser;
+      firebase.database().ref('Utenti/' + user.uid + '/Impostazioni').update({
+         secondaimpostazione: "Off"
+       });
+       attt = "Off"
+      }else{
+        var user = firebase.auth().currentUser;
+      firebase.database().ref('Utenti/' + user.uid + '/Impostazioni').update({
+         secondaimpostazione: "On"
+       });
+       attt = "On"
+      }
+
+    });
+    console.log("Salvato sul cloud: " + impostazioni.terzaimpostazione)
+    var atttt
+    if(impostazioni.terzaimpostazione === "On"){
+      tre.classList.toggle("inactive1");
+      atttt = "On"
+    }else if(impostazioni.terzaimpostazione === "Off"){
+      atttt = "Off"
+    }
+    document.getElementById("terza").addEventListener("click", () => {
+      tre.classList.toggle("inactive1");
+      if(atttt === "On"){
+        console.log("ee")
+        var user = firebase.auth().currentUser;
+      firebase.database().ref('Utenti/' + user.uid + '/Impostazioni').update({
+         terzaimpostazione: "Off"
+       }, (error) => {
+         if (error) {
+
+         } else {
+           // Data saved successfully!
+         }
+});
+       atttt = "Off"
+      }else{
+        var user = firebase.auth().currentUser;
+      firebase.database().ref('Utenti/' + user.uid + '/Impostazioni').update({
+         terzaimpostazione: "On"
+       });
+       atttt = "On"
+      }
+
+    });
+
+}else{
+
+}
+})
+}
+
+function acc(){
+  document.getElementById("accountmarcoexpress").style.display = "none"
+    document.getElementById("modpw").style.display = "none";
+  $("#accicona").attr("class","material-icons md-60")
+  $("#impicona").attr("class","material-icons-outlined md-60")
+  document.getElementById("account").style.backgroundColor = "#dcddde"
+  document.getElementById("impostazioni").style.backgroundColor = "white"
+  document.getElementById("accountmarcoexpress").style.display = "block"
+  document.getElementById("impostazionisiti").style.display = "none"
+}
+
+function impost(){
+    document.getElementById("modpw").style.display = "none";
+  $("#impicona").attr("class","material-icons md-60")
+  $("#accicona").attr("class","material-icons-outlined md-60")
+  document.getElementById("account").style.backgroundColor = "white"
+  document.getElementById("impostazioni").style.backgroundColor = "#dcddde"
+    document.getElementById("accountmarcoexpress").style.display = "none"
+    document.getElementById("impostazionisiti").style.display = "block"
+}
+
+function modificapw(){
+  console.warn("Area privata");
+  document.getElementById("accountmarcoexpress").style.display = "none";
+  document.getElementById("modpw").style.display = "block";
+}
+
+function confermamodificapw(){
+  var user = firebase.auth().currentUser;
+  var ris = document.getElementById("risultatopw")
+
+   firebase.auth().sendPasswordResetEmail(user.email)
+  .then(() => {
+    ris.innerHTML = '<br><span class="material-icons-outlined md-48 green">check_circle</span> Email inviata!'
+  })
+  .catch((error) => {
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    ris.innerHTML = '<br><span class="material-icons-outlined red md-48">error_outline</span> Email non inviata: si &egrave; verificato un errore!<br>Error: ' + errorCode
+  });
+}
+
+
+
+</script>
+<style>
+.material-icons.md-18 { font-size: 18px; }
+.material-icons.md-24 { font-size: 24px; }
+.material-icons.md-30 { font-size: 30px; }
+.material-icons.md-36 { font-size: 36px; }
+.material-icons.md-48 { font-size: 48px; }
+.material-icons.md-50 { font-size: 50px; }
+.material-icons.md-60 { font-size: 60px; }
+.material-icons.md-75 { font-size: 75px; }
+.material-icons.md-85 { font-size: 85px; }
+.material-icons.md-150 { font-size: 150px; }
+.material-icons.md-300 { font-size: 300px; }
+.material-icons.red { color: red; }
+.material-icons.yellow { color: yellow; }
+.material-icons.green { color: #00b336; }
+.material-icons.white { color: white; }
+.material-icons.gray { color: #5e5e5e; }
+.material-icons.blu { color: #0076f5; }
+
+/*Out*/
+.material-icons-outlined.md-18 { font-size: 18px; }
+.material-icons-outlined.md-24 { font-size: 24px; }
+.material-icons-outlined.md-30 { font-size: 30px; }
+.material-icons-outlined.md-36 { font-size: 36px; }
+.material-icons-outlined.md-48 { font-size: 48px; }
+.material-icons-outlined.md-50 { font-size: 50px; }
+.material-icons-outlined.md-60 { font-size: 60px; }
+.material-icons-outlined.md-75 { font-size: 75px; }
+.material-icons-outlined.md-85 { font-size: 85px; }
+.material-icons-outlined.md-150 { font-size: 150px; }
+.material-icons-outlined.md-300 { font-size: 300px; }
+.material-icons-outlined.red { color: red; }
+.material-icons-outlined.yellow { color: yellow; }
+.material-icons-outlined.green { color: #00b336; }
+.material-icons-outlined.white { color: white; }
+.material-icons-outlined.gray { color: #5e5e5e; }
+.material-icons-outlined.blu { color: #0076f5; }
+
+
+h1{
+  font-family: 'Zen Kaku Gothic Antique', sans-serif;
+  font-size: 50px;
+}
+h2{
+  font-family: 'Zen Kaku Gothic Antique', sans-serif;
+  font-size: 40px;
+}
+.sotto{
+  font-family: 'Zen Kaku Gothic Antique', sans-serif;
+  font-size: 25px;
+  font-weight: 400;
+}
+.pul{
+  width:45%;
+  height: auto;
+  font-size: 35px;
+  border-top-color: white;
+  border-right-color: white;
+  border-left-color: white;
+  border-bottom-color: #8c8c8c;
+  background-color: white;
+}
+.lista{
+  font-family: 'Zen Kaku Gothic Antique', sans-serif;
+  font-size: 35px;
+  font-weight: 500;
+}
+#img{
+  max-width:400px;max-height:400px;
+  border-radius: 150px;
+}
+.btn1_container {
+  float: right;
+  width: 120px;
+  height: 63px;
+  background-color: white;
+  display: flex;
+  position: relative;
+  border: 3px solid #111;
+  margin-right: 20px;
+  box-shadow: -1px 3px 22px 0px rgba(0, 0, 0, 0.75);
+}
+/* Style 1 */
+.btn1_container {
+  border-radius: 35px;
+}
+.one {
+  top: 10px;
+  position: absolute;
+  height: 40px;
+  width: 40px;
+  background-color: grey;
+  display: block;
+  border-radius: 30px;
+  border: 2px solid red;
+  background-color: rgba(280, 0, 0, 0.5);
+  transition: all 0.3s ease;
+}
+.one {
+  left: 5px;
+}
+.inactive1 {
+  transform: translateX(calc(70px - 6px));
+  border: 2px solid #10d610;
+  background-color: rgba(0, 265, 0, 0.3);
+}
+#ritornamm{
+  width: 100%;
+  height: auto;
+  position: fixed;
+  margin-bottom: 5px;
+}
+
+</style>
+</html>
