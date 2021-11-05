@@ -57,7 +57,7 @@ gtag('config', 'G-1EFHH3K88D');
 
      <span id="community">
       <div id="tuttiimess" style="overflow-y: scroll; width: 90%; height: 85%;"></div>
-      <h1 style="float: left;">A</h1><select id="a" style="width: 10%; height: 115px;float: left; font-size: 35px;"><option value="tutti"><h1>Tutti</h1></option><option value="marcoexpress"><h2>Marco</h2></option></select><textarea id="messaggio" placeholder="Scrivi qui il tuo messaggio" style="width: 75%; font-size: 40px; border: 3px solid black; border-radius: 15px;"></textarea><button onclick="inviamess()" style="height: 80px; width: 80px; border-radius: 40px; float: right; background-color: white; border: 3px solid black;"><span class="material-icons md-48">send</span></button>
+      <textarea id="messaggio" placeholder="Scrivi qui il tuo messaggio" style="width: 90%; font-size: 40px; border: 3px solid black; border-radius: 15px;"></textarea><button onclick="inviamess()" id="inviamess" style="height: 80px; width: 80px; border-radius: 40px; float: right; background-color: white; border: 3px solid black;"><span class="material-icons md-48">send</span></button>
       </span>
 
   <span id="display">
@@ -220,52 +220,33 @@ document.getElementById("ascoltavic").style.display = "none"
 document.getElementById('spieganews').style.display = 'none'
 document.getElementById('news').style.display = 'none'
 document.getElementById('community').style.display = 'none'
+/*document.getElementsByClassName("pulsantiera")[0].disabled = true
+document.getElementsByClassName("pulsantiera")[1].disabled = true
+document.getElementsByClassName("pulsantiera")[2].disabled = true
+document.getElementsByClassName("pulsantiera")[3].disabled = true*/
 
-
-//Per migliore esperienza utente, carica tutti i messaggi prima che l'utente lo chieda
-
- var user = firebase.auth().currentUser;
-firebase.database().ref("Messaggi community").on("child_added", function (snapshot) {
-  const data = snapshot.val()
-
-  var messaggio = data.messaggio
-  var datamess = data.datainvio
-  var ora = data.ora
-  var mittente = data.mittente
-  var destinatario = data.destinatario
-  console.log(messaggio)
- var user = firebase.auth().currentUser;
- if(destinatario === "Marco Express"){
-   if(user.email === "marcoscortegagna009@gmail.com" || user.email === mittente){
-     if(user.email === mittente){
-       document.getElementById("tuttiimess").innerHTML += "<div class='intromessaggioinviato' align='right'><h1 class='h1mess'>&nbsp;&nbsp;<strong>Tu</strong> alle " + ora + " del " + datamess + "</h1></div><div align='right'><h1 class='h1messs'>" + messaggio + "</h1></div>"
-     }else if(user.email === "marcoscortegagna009@gmail.com" && mittente === "Marco Express Official"){
-       document.getElementById("tuttiimess").innerHTML += "<div class='intromessaggioinviato' align='right'><h1 class='h1mess'>&nbsp;&nbsp;<strong>Tu</strong> alle " + ora + " del " + datamess + "</h1></div><div align='right'><h1 class='h1messs'>" + messaggio + "</h1></div>"
-
-     }else{
-       document.getElementById("tuttiimess").innerHTML += "<div class='intromessaggio'><img src='imgprofilo.jpg' style='width: 50px; height: 50px; border-radius: 25px; float: left;'></img><h1 class='h1mess'>&nbsp;&nbsp;<strong>" + mittente + "</strong> alle " + ora + " del " + datamess + "</h1></div><h1 class='h1messs'>" + messaggio + "</h1>"
-     }
-   }else{
-     //Niente visual
-   }
- }else if(destinatario === "Tutti"){
-   if(user.email === mittente){
-     document.getElementById("tuttiimess").innerHTML += "<div class='intromessaggioinviato' align='right'><h1 class='h1mess'>&nbsp;&nbsp;<strong>Tu</strong> alle " + ora + " del " + datamess + "</h1></div><div align='right'><h1 class='h1messs'>" + messaggio + "</h1></div>"
-   }else if(user.email === "marcoscortegagna009@gmail.com" && mittente === "Marco Express Official"){
-     document.getElementById("tuttiimess").innerHTML += "<div class='intromessaggioinviato' align='right'><h1 class='h1mess'>&nbsp;&nbsp;<strong>Tu</strong> alle " + ora + " del " + datamess + "</h1></div><div align='right'><h1 class='h1messs'>" + messaggio + "</h1></div>"
-
-   }else{
-     document.getElementById("tuttiimess").innerHTML += "<div class='intromessaggio'><img src='imgprofilo.jpg' style='width: 50px; height: 50px; border-radius: 25px; float: left;'></img><h1 class='h1mess'>&nbsp;&nbsp;<strong>" + mittente + "</strong> alle " + ora + " del " + datamess + "</h1></div><h1 class='h1messs'>" + messaggio + "</h1>"
-   }
- }
-
+$("#messaggio").keyup(function(event) {
+    if (event.keyCode === 13) {
+        $("#inviamess").click();
+    }
 });
 
+document.getElementById("messaggio").addEventListener("focus" , function(){
+  console.log("okkkk")
+  $("#tuttiimess").css("height" , "50%")
+  document.getElementById("messaggio").style.border = "4px solid #03a306"
+  document.getElementById('tuttiimess').scrollTop = 10000000000000
+})
+document.getElementById("messaggio").addEventListener("blur" , function(){
+  console.log("okkkk")
+  $("#tuttiimess").css("height" , "85%")
+  document.getElementById("messaggio").style.border = "2px solid black"
+})
 function inviamess(){
+  console.log("cssaaa")
   var user = firebase.auth().currentUser;
    user.providerData.forEach(function (profile) {
   var messaggio = document.getElementById("messaggio").value
-  var destinatario = document.getElementById("a").value
   var dataattuale = new Date();
   oraattuale = dataattuale.getHours();
   minutiattuali = dataattuale.getMinutes();
@@ -276,25 +257,33 @@ function inviamess(){
   var datadainviare = giornoattuale + "/" + meseattuale + "/" + annoattuale
   var oradainviare = oraattuale + ":" + minutiattuali
 
-var mitt
-if(profile.email === "marcoscortegagna009@gmail.com" || profile.email === "marco.scorte@outlook.it"){
-  mitt = "Marco Express Official"
-}else{
-  mitt = profile.email
-}
-var desti
-if(destinatario === "marcoexpress"){
-  desti = "Marco Express"
-}else{
-  desti = "Tutti"
-}
+const dbRef = firebase.database().ref();
+dbRef.child("Utenti").child(user.uid).get().then((snapshot) => {
+  var utente = snapshot.val();
+  var nome = utente.Nome
+  var email = user.email
+  var imgprofilo = utente.Immagine
+  if(imgprofilo === "No"){
+    imgprofilo = "https://image.flaticon.com/icons/png/512/64/64572.png"
+  }
   firebase.database().ref("Messaggi community").push().set({
      "datainvio": datadainviare ,
      "ora": oradainviare ,
      "messaggio": messaggio ,
-     "mittente": mitt,
-     "destinatario": desti
-  });
+     "mittente": nome,
+     "emailmittente": email,
+     "fotoprofilo": imgprofilo
+  }, (error) => {
+  if (error) {
+    console.log(error);
+    document.getElementById("tuttiimess").innerHTML += "<h2>Ore " + oraattuale + ":" + minutiattuali + ". IMPOSSIBILE INVIARE IL MESSAGGIO. Riprova</h2>"
+  } else {
+     document.getElementById("messaggio").value = " ";
+     document.getElementById("messaggio").blur();
+  }
+});
+
+});
 })
 }
 
@@ -303,8 +292,28 @@ if(destinatario === "marcoexpress"){
    if(user){
      console.log("Attivo!")
      setTimeout(verifica , 100)
-     setTimeout(verificaimpostazioni , 1000)
      setTimeout(mostraononmostrapallino , 1500)
+     const dbRef = firebase.database().ref();
+     dbRef.child("Utenti").child(user.uid).get().then((snn) => {
+       var utente = snn.val();
+     firebase.database().ref("Messaggi community").on("child_added", function (snapshot) {
+       const data = snapshot.val()
+       var messaggio = data.messaggio
+       var datamess = data.datainvio
+       var ora = data.ora
+       var mittente = data.mittente
+       var email = data.email
+       var profiloph = data.fotoprofilo
+       if(mittente === utente.Nome){
+         mittente = "Tu"
+       }
+       var immaginemess = '<img src="' + profiloph + '" style="max-width:100px;max-height:100px; border-radius:50px;float:left;"/><center><h1 style="font-size:35px;">' + mittente + '</h1><h1 style="font-size:30px;">' + datamess + ', ore ' + ora + '</h1></center>'
+       var messaggio = '<hr style="width:90%;"></hr><div class="messaggi">' + immaginemess + '<h1 style="font-size:35px;">' + messaggio + '</h1></div>'
+       document.getElementById("tuttiimess").innerHTML += messaggio
+
+       document.getElementById('tuttiimess').scrollTop = 10000000000000
+     });
+   });
      var dataattuale = new Date();
      oraattuale = dataattuale.getHours();
      var tiposaluto
@@ -318,7 +327,6 @@ if(destinatario === "marcoexpress"){
        tiposaluto = "Ciao,"
      }
      var user = firebase.auth().currentUser;
-     const dbRef = firebase.database().ref();
 dbRef.child("Utenti").child(user.uid).get().then((snapshot) => {
   if (snapshot.exists()) {
     console.log(snapshot.val());
@@ -342,6 +350,7 @@ dbRef.child("Utenti").child(user.uid).get().then((snapshot) => {
 dbRef.child("Utenti").child(user.uid).get().then(function (snapshot) {
        var abbonato = snapshot.val().Abbonamento
         if(abbonato === "Attivo") {
+
             document.getElementById("serratura").innerHTML = "lock_open"
             document.getElementById("testomacchinascrivi2").style.display = "none"
             document.getElementById("testomacchinascrivi").style.display = "none"
@@ -386,6 +395,11 @@ dbRef.child("Utenti").child(user.uid).get().then(function (snapshot) {
                               $("#saluta").fadeOut(1000)
                               $("#saluto2").fadeOut(1000)
                                setTimeout(previsioni , 1000)
+                               //abilitapulsanti
+                               document.getElementsByClassName("pulsantiera")[0].disabled = false
+                               document.getElementsByClassName("pulsantiera")[1].disabled = false
+                               document.getElementsByClassName("pulsantiera")[2].disabled = false
+                              document.getElementsByClassName("pulsantiera")[3].disabled = false
                             }, 2000)
                           })
                         }, 4000)
@@ -421,10 +435,7 @@ dbRef.child("Utenti").child(user.uid).get().then(function (snapshot) {
    }else{
     window.location.href = "accedi.html";
    }
-
-
  });
-
 
  $(".pulsantiera").click(function(){
    console.log("ha cliccato!")
@@ -840,7 +851,7 @@ function nonècommunity(){
   document.getElementById("community").style.display = "none"
 }
 function nonèimpostazioni(){
-    document.getElementById("impostazioni").style.display = "none"
+  console.log("non è impostazioni")
 }
 function monèpost(){
     document.getElementById("news").style.display = "none"
@@ -864,8 +875,8 @@ function community(){
   nonèdati()
   nonèimpostazioni()
   monèpost()
-
   document.getElementById("community").style.display = "block"
+    document.getElementById('tuttiimess').scrollTop = 10000000000000
   $("#previsioniimg").attr("src", "menumeteomarco/descriptionnoselect.svg")
   $("#datiimg").attr("src", "menumeteomarco/pollnoselect.svg")
   $("#communityimg").attr("src", "menumeteomarco/forumselect.svg")
@@ -905,118 +916,6 @@ function impostazioni(){
   $("#communityimg").attr("src", "menumeteomarco/forumnoselect.svg")
   $("#postimg").attr("src", "menumeteomarco/articlenoselect.svg")
   $("#impostazioniimg").attr("src", "menumeteomarco/settingselect.svg")
-}
-
-function verificaimpostazioni(){
-var user = firebase.auth().currentUser;
-const one = document.getElementsByClassName("one")[0];
-const two = document.getElementsByClassName("one")[1];
-const tre = document.getElementsByClassName("one")[2];
-
-const dbRef = firebase.database().ref();
-dbRef.child("Utenti").child(user.uid).child("Impostazioni").get().then((snapshot) => {
-  if (snapshot.exists()) {
-    var impostazioni = snapshot.val();
-    console.log("Salvato sul cloud: " + impostazioni.primaimpostazione)
-    var att
-    if(impostazioni.primaimpostazione === "On"){
-      one.classList.toggle("inactive1");
-      att = "On"
-
-    }else if(impostazioni.primaimpostazione === "Off"){
-      att = "Off"
-    }
-    document.getElementById("prima").addEventListener("click", () => {
-      one.classList.toggle("inactive1");
-      if(att === "On"){
-        versionechiara()
-        var user = firebase.auth().currentUser;
-      firebase.database().ref('Utenti/' + user.uid + '/Impostazioni').update({
-         primaimpostazione: "Off"
-       });
-       att = "Off"
-      }else{
-        versionescura()
-        var user = firebase.auth().currentUser;
-      firebase.database().ref('Utenti/' + user.uid + '/Impostazioni').update({
-         primaimpostazione: "On"
-       });
-       att = "On"
-      }
-
-    });
-
-    console.log("Salvato sul cloud: " + impostazioni.secondaimpostazione)
-    var attt
-    if(impostazioni.secondaimpostazione === "On"){
-      two.classList.toggle("inactive1");
-      attt = "On"
-
-    }else if(impostazioni.secondaimpostazione === "Off"){
-      attt = "Off"
-    }
-    document.getElementById("seconda").addEventListener("click", () => {
-      two.classList.toggle("inactive1");
-      if(attt === "On"){
-        var user = firebase.auth().currentUser;
-      firebase.database().ref('Utenti/' + user.uid + '/Impostazioni').update({
-         secondaimpostazione: "Off"
-       });
-       attt = "Off"
-      }else{
-        var user = firebase.auth().currentUser;
-      firebase.database().ref('Utenti/' + user.uid + '/Impostazioni').update({
-         secondaimpostazione: "On"
-       });
-       attt = "On"
-      }
-
-    });
-    console.log("Salvato sul cloud: " + impostazioni.terzaimpostazione)
-    var atttt
-    if(impostazioni.terzaimpostazione === "On"){
-      tre.classList.toggle("inactive1");
-      atttt = "On"
-      versionescura()
-    }else if(impostazioni.terzaimpostazione === "Off"){
-      atttt = "Off"
-      versionechiara()
-    }
-    document.getElementById("terza").addEventListener("click", () => {
-      tre.classList.toggle("inactive1");
-      if(atttt === "On"){
-        versionescura()
-        var user = firebase.auth().currentUser;
-      firebase.database().ref('Utenti/' + user.uid + '/Impostazioni').update({
-         terzaimpostazione: "Off"
-       });
-       atttt = "Off"
-      }else{
-        versionechiara()
-        var user = firebase.auth().currentUser;
-      firebase.database().ref('Utenti/' + user.uid + '/Impostazioni').update({
-         terzaimpostazione: "On"
-       });
-       atttt = "On"
-      }
-
-    });
-
-}else{
-
-}
-})
-
-var sec = firebase.database().ref('Utenti/' + user.uid);
-sec.on('value', (snapshot) => {
-  const utente = snapshot.val();
-  var nome = utente.Nome
-  var genere = utente.Genere
-  var scadenza = utente.Scadenza
-  var soldi = utente.Soldi
-  var out = document.getElementById("infoacc").innerHTML = "<h1 style='margin-top: 15px; font-size: 39px;'>Nome: " + nome + "<button onclick='modificanome()' style='float:right; width:80px; height:80px; border-radius:40px;background-color: #52ff52;'><span class='material-icons md-48'>mode_edit</span></button><br>Email: " + user.email + "<br>Sesso: " + genere + "<br>Scadenza abbonamento: " + scadenza + "<br>Denaro memorizzato nell'account: &euro; " + soldi + "<br></h1><h2>Uid utente: " + user.uid + "</h2>"
-
-});
 }
 
 function modificanome(){
@@ -1140,7 +1039,7 @@ dbRef.child("Utenti").child(user.uid).get().then((snapshot) => {
     document.getElementsByClassName("motivimm")[3].style.display = "none"
     document.getElementsByClassName("motivimm")[4].style.display = "none"
     document.getElementsByClassName("motivimm")[5].style.display = "none"
-    document.getElementById("compradopo").innerHTML = '<br><br><span class="material-icons green md-150">check_circle_outline</span><h1>Acquisto effettuato!</h1><h2 style="font-size: 37px;">Ora goditi tutti i vantaggi di Meteo Marco! Li puoi trovare tutti in questo sito.</h2><h1>Dettagli: </h1><h2>Data e ora di scadenza dell\'abbonamento: ' + ore + ':' + minuti + '  '+ giorno + '/' + mese + '/' + anno + '<br>Costo spesa: &euro; 0,65 <br> Articolo acquistato: Meteo Marco Premium Plus - 1 settimana</h2><br><br><center><button style="background-color: #0dd406; border: 0px; width: 35%; height: 200px; border-radius: 15px; float: left;"><h1 style="font-family: "Ubuntu", sans-serif;" onclick="ricarica()">Accedi a Meteo Marco</h1></button></center>'
+    document.getElementById("compradopo").innerHTML = '<br><br><span class="material-icons green md-150">check_circle_outline</span><h1>Acquisto effettuato!</h1><h2 style="font-size: 37px;">Ora goditi tutti i vantaggi di Meteo Marco! Li puoi trovare tutti in questo sito.</h2><h1>Dettagli: </h1><h2>Data e ora di scadenza dell\'abbonamento: ' + ore + ':' + minuti + '  '+ giorno + '/' + mese + '/' + anno + '<br>Costo spesa: &euro; 0,65 <br> Articolo acquistato: Meteo Marco Premium Plus - 1 settimana</h2><h1>Denaro ora meomorizzato: &euro;' + soldidainviare + '</h1><br><br><center><button style="background-color: #0dd406; border: 0px; width: 35%; height: 200px; border-radius: 15px; float: left;"><h1 style="font-family: "Ubuntu", sans-serif;" onclick="ricarica()">Accedi a Meteo Marco</h1></button></center>'
     document.getElementById("compradopo").innerHTML += '<br><br>'
   }).catch((error) =>{
     document.getElementsByClassName("motivimm")[0].style.display = "none"
