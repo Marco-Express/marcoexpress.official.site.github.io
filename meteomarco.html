@@ -158,7 +158,7 @@ gtag('config', 'G-1EFHH3K88D');
   <div id="menu">
     <button onclick="previsioni()" class="pulsantiera" id="previsioni"><img src="menumeteomarco/descriptionnoselect.svg" width="36px" id="previsioniimg"></img><br><h2 class="testopuls">Previsioni</h2></button>
     <button onclick="dati()" class="pulsantiera"><img src="menumeteomarco/pollnoselect.svg" width="36px" id="datiimg"></img><h2 class="testopuls">Dati</h2></button>
-    <button onclick="community()" class="pulsantiera"><img src="menumeteomarco/forumnoselect.svg" width="36px" id="communityimg"></img><h2 class="testopuls">Community</h2></button>
+    <button onclick="community()" class="pulsantiera" id="communityyy"><div style="background-color:red; width: 10px; height: 10px; border-radius: 5px; float:right;" id="pallinocommunity"></div><img src="menumeteomarco/forumnoselect.svg" width="36px" id="communityimg"></img><h2 class="testopuls">Community</h2></button>
     <button onclick="post()" class="pulsantiera"><div style="background-color:red; width: 10px; height: 10px; border-radius: 5px; float:right;" id="pallinonews"></div><img src="menumeteomarco/articlenoselect.svg" width="36px" id="postimg"></img><h2 class="testopuls">News</h2></button>
     <button onclick="impostazioni()" class="pulsantiera"><img src="menumeteomarco/settingnoselect.svg" width="36px" id="impostazioniimg"></img><br><h2 class="testopuls">Impostazioni</h2></button>
   </div>
@@ -233,7 +233,7 @@ $("#messaggio").keyup(function(event) {
 
 document.getElementById("messaggio").addEventListener("focus" , function(){
   console.log("okkkk")
-  $("#tuttiimess").css("height" , "50%")
+  $("#tuttiimess").css("height" , "70%")
   document.getElementById("messaggio").style.border = "4px solid #03a306"
   document.getElementById('tuttiimess').scrollTop = 10000000000000
 })
@@ -280,6 +280,13 @@ dbRef.child("Utenti").child(user.uid).get().then((snapshot) => {
   } else {
      document.getElementById("messaggio").value = " ";
      document.getElementById("messaggio").blur();
+     dbRef.get().then((snapshot) => {
+       var totalemess = snapshot.val().Totalemessaggicommunity
+       totalemess++
+       firebase.database().ref().update({
+    Totalemessaggicommunity: totalemess
+  });
+     });
   }
 });
 
@@ -459,6 +466,7 @@ function previsioni(){
   //avvia le previsioni
   var titolo = document.getElementById("titoloprevisioni")
   var testot = document.getElementById("testoprevisioni")
+  mostraononmostrapallinocomm()
   titolo.innerHTML = " "
 testot.innerHTML = " "
 document.getElementById("previsionitutti").innerHTML = " "
@@ -863,6 +871,7 @@ function dati(){
   nonècommunity()
   nonèimpostazioni()
   monèpost()
+  mostraononmostrapallinocomm()
   document.getElementById("dati").style.display = "block"
   $("#previsioniimg").attr("src", "menumeteomarco/descriptionnoselect.svg")
   $("#datiimg").attr("src", "menumeteomarco/pollselect.svg")
@@ -882,12 +891,14 @@ function community(){
   $("#communityimg").attr("src", "menumeteomarco/forumselect.svg")
   $("#postimg").attr("src", "menumeteomarco/articlenoselect.svg")
   $("#impostazioniimg").attr("src", "menumeteomarco/settingnoselect.svg")
+  registracomm();
 }
 function post(){
   nonèprevisioni()
   nonèdati()
   nonècommunity()
   nonèimpostazioni()
+  mostraononmostrapallinocomm()
     document.getElementById("pallinonews").style.display = "none"
   $("#previsioni").click(function(){
       var user = firebase.auth().currentUser;
@@ -910,6 +921,7 @@ function impostazioni(){
   nonèdati()
   nonècommunity()
   monèpost()
+  mostraononmostrapallinocomm()
  window.location = "gestioneaccount.html";
   $("#previsioniimg").attr("src", "menumeteomarco/descriptionnoselect.svg")
   $("#datiimg").attr("src", "menumeteomarco/pollnoselect.svg")
@@ -988,7 +1000,57 @@ console.log(notizia.Tipo)
 
 })
 
+//Invia dati al server per push di community, function() a parte
+  function registracomm(){
+    var user = firebase.auth().currentUser;
 
+    var tuttiimess = document.getElementsByClassName("messaggi");
+    var invia = tuttiimess.length
+    console.log(invia);
+    firebase.database().ref('Utenti/' + user.uid + '/Notifiche').update({
+    notificacommunity: invia
+  });
+  var timerstop = setTimeout(registracomm , 1000)
+  $(".pulsantiera:not(#communityyy)").click(function(){
+    console.log("eeeeee")
+    clearTimeout(timerstop)
+  })
+  }
+
+function mostraononmostrapallinocomm(){
+  var user = firebase.auth().currentUser;
+  const dbRef = firebase.database().ref();
+dbRef.get().then((snapshot) => {
+  var totale = snapshot.val().Totalemessaggicommunity
+  dbRef.child("Utenti").child(user.uid).child("Notifiche").get().then((snapshot) => {
+    var letti = snapshot.val().notificacommunity
+    var sottrai = totale-letti
+    //ragionamento
+    if(sottrai === 0){
+      //Tutto a posto: tutto letto
+      document.getElementById("pallinocommunity").style.display = "none"
+      console.log("A posto");
+    }else if(sottrai > 0){
+      //Hai dei nuovi messaggi
+      console.log("Da leggere");
+      document.getElementById("pallinocommunity").style.display = "block"
+    }else if(sottrai < 0){
+      console.log("Negativo");
+      firebase.database().ref('Utenti/' + user.uid + '/Notifiche').update({
+      notificacommunity: 0
+    });
+    document.getElementById("pallinocommunity").style.display = "none"
+    }
+  });
+});
+
+
+var timerstop = setTimeout(mostraononmostrapallinocomm , 1000)
+$("#communityyy").click(function(){
+  console.log("eeeeee")
+  clearTimeout(timerstop)
+})
+}
 
 //Compra Meteo marco
 function ricarica(){
