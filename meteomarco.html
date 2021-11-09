@@ -1,7 +1,7 @@
 <html>
 <head>
   <link rel='icon' type='image/ico”' href='https://lh3.googleusercontent.com/pw/AM-JKLXGUw7IN1wheeQ2k3knaICulaSvgZKwIo98ll6xF7VytX9iyQG4Qkb4LWkjVdDJxkHm2QKjedb0JPglpM1anVjRHsqh2SwIPZegaRHNerY1-XTflRE444BjQrNNcK3S0exgkzJFsmRO1Vwk5_SqGntk=s32-no?authuser=0'>
-  <title>Meteo Marco v 2.15+</title>
+  <title>Meteo Marco v 2.16</title>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
 
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
@@ -30,6 +30,14 @@ gtag('config', 'G-1EFHH3K88D');
     <center><h1 id="testomacchinascrivi"></h1></center>
     <center><h1 id="testomacchinascrivi2"></h1></center>
     <center><h1 id="avvisiederrori"></h1></center>
+  </div>
+
+  <div id="nientesoldi">
+    <center>
+      <span class="material-icons md-75 red">sentiment_dissatisfied</span>
+      <h1 id="1niente">Non hai i soldi necessari per l'acquisto.</h1>
+      <h2 id="2niente">Hai richiesto il rinnovo automatico, ma non hai il denaro necessario per pagare 1 settimana di Meteo Marco</h2>
+    </center>
   </div>
 
 <div id="tuttopernascondere">
@@ -115,9 +123,9 @@ gtag('config', 'G-1EFHH3K88D');
       <img src="https://lh3.googleusercontent.com/pw/AM-JKLU5o18ZiaGNxX1ceX394jCHFofPC7XlplfrwTG18Jeo_7Ca-ISK0rTqkROh9fpRftmrCVMK4rUB-TKcie2wzjL0cti7TMEhduPusHYN0fDvfVFe4cED6jtkcq8p_RFa1xR1ZGM0WnSbPe8PW7_WnlJm=s903-no?authuser=0" width="300px"></img>
     <span id="compradopo"><h1>Acquista Meteo Marco</h1>
     <h2 style="font-size: 32px;">Il tuo abbonamento Meteo Marco Premium Plus &egrave; scaduto.<br>Acquista Meteo Marco ora per goderti moltissimi vantaggi.</h2>
-    <button style="background-color: #0dd406; border: 0px; width: 35%; height: 150px; border-radius: 15px; float: left;"><h1 style="font-family: 'Ubuntu', sans-serif;" onclick="acquistaunasett()">Acquista Ora</h1><h2><b>1 Settimana</b></h2></button>
+    <button style="background-color: #0dd406; border: 0px; width: 35%; height: 150px; border-radius: 15px; float: left;" onclick="acquistaunasett()"><h1 style="font-family: 'Ubuntu', sans-serif;">Acquista Ora</h1><h2><b>1 Settimana</b></h2></button>
 
-    <button style="background-color: red; border: 0px; width: 35%; height: 150px; border-radius: 15px; float: right; margin-left: 50px;"><h1 style="font-family: 'Ubuntu', sans-serif;" onclick="acquistaduesett()">Acquista Ora</h1><h2><b>2 Settimane</b></h2></button>
+    <button style="background-color: red; border: 0px; width: 35%; height: 150px; border-radius: 15px; float: right; margin-left: 50px;" onclick="acquistaduesett()"><h1 style="font-family: 'Ubuntu', sans-serif;">Acquista Ora</h1><h2><b>2 Settimane</b></h2></button>
 
     </center>
     <hr color="white"></hr>
@@ -427,7 +435,6 @@ dbRef.child("Utenti").child(user.uid).get().then(function (snapshot) {
           console.log("ll")
           document.getElementById("dati").style.display = "none"
           document.getElementById("community").style.display = "none"
-          document.getElementById("impostazioni").style.display = "none"
           document.getElementById("display").style.display = "none"
           document.getElementById("comprameteomarco").style.display = "block"
           document.getElementById("copri").style.display = "none"
@@ -804,18 +811,6 @@ dbRef.child("Previsioni/Orainora").get().then((snapshot) => {
         width: "18%"
       })
     })
-
-    var user = firebase.auth().currentUser;
-
-    const df = firebase.database().ref();
-    df.child("Utenti").child(user.uid).child("Impostazioni").get().then((snapshot) => {
-      var impostazioni = snapshot.val()
-    if(impostazioni.terzaimpostazione === "On"){
-      setTimeout(versionescura , 1500)
-    }else if(impostazioni.terzaimpostazione === "Off"){
-      versionechiara()
-    }
-  })
   } else {
     console.log("No data available");
   }
@@ -943,31 +938,6 @@ function modificanome(){
 }
 function incasoon(){
   one.classList.toggle("inactive1");
-}
-
-function versionescura(){
-  document.body.style.backgroundColor = "#1f1f1f"
-  $("h1").css({"color":"white"})
-  $("h2").css({"color":"white"})
-  $("h3").css({"color":"white"})
-  $("#menu").css({"backgroundColor":"#a6a6a6"})
-  $(".pulsantiera").css({"backgroundColor":"#a6a6a6" , "border":"0px"})
-}
-function secondaversionescura(){
-  document.body.style.backgroundColor = "#1f1f1f"
-  $("h1").css({"color":"white"})
-  $("h2").css({"color":"white"})
-  $("h3").css({"color":"white"})
-  $("#menu").css({"backgroundColor":"#a6a6a6"})
-  $(".pulsantiera").css({"backgroundColor":"#a6a6a6" , "border":"0px"})
-}
-function versionechiara(){
-  document.body.style.backgroundColor = "white"
-  $("h1").css({"color":"black"})
-  $("h2").css({"color":"black"})
-  $("h3").css({"color":"black"})
-  $("#menu").css({"backgroundColor":"white"})
-  $(".pulsantiera").css({"backgroundColor":"white" , "border":"2px solid white"})
 }
 
 //Caricamento non-richiesto news
@@ -1248,15 +1218,9 @@ dbRef.child("Utenti").child(user.uid).get().then((snapshot) => {
             var data = new Date(birthday).getDate()
             var mese = new Date(birthday).getMonth()
             var anno = new Date(birthday).getFullYear()
-              var datascad = data + "/" + mese + "/" + anno
-            firebase.database().ref('Utenti/' + user.uid).update({
-              Abbonamento: "Scaduto",
-              Ultimascadenza: datascad
-            });
-            setTimeout(function(){
-              document.getElementById("tuttopernascondere").style.display = "none"
-            }, 100)
-            document.getElementById("comprameteomarco").style.display = "block"
+            var datascad = data + "/" + mese + "/" + anno
+
+            abbonamentoterminato();
             clearInterval(x);
           }
           //seconds
@@ -1269,9 +1233,62 @@ dbRef.child("Utenti").child(user.uid).get().then((snapshot) => {
 });
 }
 
+function abbonamentoterminato(){
+  var user = firebase.auth().currentUser;
+  const dbRef = firebase.database().ref();
+dbRef.child("Utenti").child(user.uid).child("Impostazioni").get().then((snapshot) => {
+  var impostazione = snapshot.val().terzaimpostazione
+
+  if(impostazione === "On"){
+    var d = new Date()
+    var dataduen = d.getDate();
+    var piusette = new Date()
+    piusette.setDate(dataduen + 7)
+    var invia = "" + piusette
+
+dbRef.child("Utenti").child(user.uid).get().then((snapshot) => {
+  var utente = snapshot.val();
+  var sottrai = utente.Soldi - 0.65
+  if(sottrai >= 0){
+    firebase.database().ref('Utenti/' + user.uid).update({
+    Soldi: sottrai
+  });
+  firebase.database().ref('Utenti/' + user.uid).update({
+    Abbonamento: "Attivo",
+    Scadenza: invia
+  });
+}else{
+  document.getElementById("tuttopernascondere").style.display = "none"
+  document.getElementById("nientesoldi").style.display = "block"
+  document.getElementById("comprameteomarco").style.display = "none"
+}
+}).catch((error) => {
+  document.getElementById("1niente").innerHTML = "Si &egrave; verificato un errore"
+  document.getElementById("2niente").innerHTML = "Non &egrave; stato possibile rinnovare l'abbonamento, Ci scusiamo per il disagio."
+});
+
+  }else{
+    firebase.database().ref('Utenti/' + user.uid).update({
+      Abbonamento: "Scaduto"
+    });
+    setTimeout(function(){
+      document.getElementById("tuttopernascondere").style.display = "none"
+    }, 100)
+    document.getElementById("comprameteomarco").style.display = "block"
+  }
+}).catch((error) => {
+  console.error(error);
+});
+
+}
+
+function toglisoldi(){
+
+}
+
+
 document.getElementById("comprameteomarco").style.display = "none"
-
-
+document.getElementById("nientesoldi").style.display = "none"
 </script>
 
 <style>
@@ -1327,7 +1344,7 @@ td,th{
   font-size: 50px;
 }
 #copri{
-  position: absolute;
+  position: fixed;
   top:0px;
   right:0px;
   height: 100%;

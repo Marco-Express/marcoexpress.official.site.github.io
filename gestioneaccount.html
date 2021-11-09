@@ -59,10 +59,16 @@
 
     <br><br><br><br><br><br>
 
-    <h2 class="lista" style="float:left; margin-top: 10px;"><strong>Rintraccia dispositivo</strong></h2><div class="btn1_container" id="terza">
+
+    <h2 class="lista" style="float:left; margin-top: 10px;"><strong>Rinnovo automatico</strong></h2><div class="btn1_container" id="terza">
       <span class="one"></span><br>
     </div>
+    <br><br>
+    <h2 class="lista">Il rinnovo automatico sottrarr&agrave; ogni settimana la cifra corrispondente a 1 settimana di abbonamento. Il rinnovo automatico &egrave; totalmente gratuito e pu&ograve; essere disattivato in qualisasi momento. Nel caso in cui non si avesse il denaro necessario per una settimana, Meteo Marco ti avviser&agrave; senza addebitare nulla.</h2>
+
   </div>
+
+  <br><center><button onclick="esci()" id="logout"><span class="material-icons md-60" style="float:left;">logout</span></button></center>
 
 </body>
 <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-app.js"></script>
@@ -356,7 +362,10 @@ function confermamodificapw(){
   });
 }
 
-
+function esci(){
+  auth.signOut();
+  window.location = "accedi.html"
+}
 
 </script>
 <style>
@@ -470,6 +479,13 @@ h2{
   height: auto;
   position: fixed;
   margin-bottom: 5px;
+}
+#logout{
+  border: 3px solid red;
+  background-color: #fc9f9f;
+  width: 80px;
+  height: 80px;
+  border-radius: 40px;
 }
 
 </style>
