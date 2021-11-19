@@ -19,6 +19,7 @@
     <div id="pulsantiera">
       <button onclick="acc()" id="account" class="pul"><h2 class="sotto"><span class="material-icons-outlined md-60" id="accicona">badge</span><br>Account</button>
       <button onclick="impost()" id="impostazioni" class="pul"><h2 class="sotto"><span class="material-icons-outlined md-60" id="impicona">settings</span><br>Impostazioni</button>
+      <button onclick="pagamenti()" id="pagamenti" class="pul"><h2 class="sotto"><span class="material-icons-outlined md-60" id="pagaicona">monetization_on</span><br>Pagamenti</button>
     </div>
     <div id="carica">
     </div>
@@ -66,6 +67,66 @@
     <br><br>
     <h2 class="lista">Il rinnovo automatico sottrarr&agrave; ogni settimana la cifra corrispondente a 1 settimana di abbonamento. Il rinnovo automatico &egrave; totalmente gratuito e pu&ograve; essere disattivato in qualisasi momento. Nel caso in cui non si avesse il denaro necessario per una settimana, Meteo Marco ti avviser&agrave; senza addebitare nulla.</h2>
 
+    <br>
+
+  <!--  <h2 class="lista" style="float:left; margin-top: 10px;"><strong>Suono ad ogni nuovo messaggio dalla community</strong></h2><div class="btn1_container" id="quarta">
+      <span class="one"></span><br>
+    </div>
+    <br><br>
+    <h2 class="lista">Verr&agrave; riprodotto un suono quando sar&agrave; presente un messaggio non letto nella community.</h2>-->
+
+  </div>
+
+
+
+  <div id="pagamentidiv">
+    <center>
+      <h1 id="soldimemo"></h1>
+      <h2>PayFast</h2>
+      <button onclick="pagamh()" id="ppmh"><h2 class="lista"><img src="mhpng.png" width="100px"/><br><strong>Paga servizio Marco Hairdresser</strong></h2></button><br>
+      <br><!--<button onclick="dona()" id="dona"><h2 style="font-size: 40px; color: red;">&#x2764;</h2><h2 class="lista"><strong>Effetua una donazione a Marco Express</strong></h2></button>-->
+      <br><h2>Cronologia Transazioni</h2>
+      <h2 class="lista">Ordine: dal meno recente.</h2>
+        </center>
+      <div style="width: 93%; height: 55%; overflow-y:auto;float:left;" id="contieni">
+            <table id="ilmioid">
+        <tr><td><h1>&euro;</h1></td><td><h1>Prodotto</h1></td><td><h1>Data</h1></td><td><h1>Ora</h1></td><td><h1>ID</h1></td></tr>
+      </table>
+    </div>
+    <button onclick="document.getElementById('contieni').scrollTop = 0"><span class="material-icons-outlined md-48">north</span></button>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br><br><br><br>
+    <button onclick="document.getElementById('contieni').scrollTop = 10000000000000"><span class="material-icons-outlined md-48">south</span></button>
+    <br><br><br><br>
+  </div>
+
+  <div id="pagamarcohair">
+    <center>
+    <h1>Paga un servizio Marco Hairdresser</h1>
+    <h2>Paga ora un massaggio Marco Hairdresser col tuo portafoglio online Marco Express</h2>
+    <input type="number" id="soldimh" placeholder="Inserisci l'importo da pagare"/>
+    <button onclick="pagaamh()" style="width: 150px; height: 130px; border-radius: 50px; border: 3px solid black;background-color: #d9d9d9;"><h2>Paga</h2></button><br><br>
+    <button onclick="annullapagamh()" style="width: 25%; height: 100px; border: 3px solid red; border-radius: 100px; background-color: #ff9999;"><h2>Annulla</h2></button>
+  </center>
+  </div>
+
+  <div id="nientesoldi" style="">
+    <center>
+      <span class="material-icons md-75 red">sentiment_dissatisfied</span>
+      <h1 id="1niente">Non hai i soldi necessari per l'acquisto.</h1>
+      <h2 id="2niente">Ci dispiace, ma non hai il denaro necessario per l'acquisto. Ricarica il portafoglio e riprova.</h2>
+      <button onclick="document.getElementById('nientesoldi').style.display = 'none'; document.getElementById('pagamentidiv').style.display = 'block'" style="width:30%; height: 150px; border: 4px solid red; border-radius: 80px; background-color: white;"><h2>Indietro</h2></button>
+    </center>
+  </div>
+
+  <div id="pagamentoeseguito">
+    <center>
+    <span class="material-icons-outlined green md-75">task_alt</span>
+    <h1 id="1corretto"></h1>
+    <h2 id="2corretto"></h2>
+    <button onclick="document.getElementById('pagamentoeseguito').style.display = 'none'; document.getElementById('pagamentidiv').style.display = 'block'" style="width:30%; height: 150px; border: 4px solid red; border-radius: 80px; background-color: white;"><h2>Indietro</h2></button>
+    <center>
   </div>
 
   <br><center><button onclick="esci()" id="logout"><span class="material-icons md-60" style="float:left;">logout</span></button></center>
@@ -102,7 +163,14 @@ console.log(navigator.appVersion)
 document.getElementById("accountmarcoexpress").style.display = "none"
 document.getElementById("impostazionisiti").style.display = "none"
   document.getElementById("modpw").style.display = "none";
-
+  document.getElementById("pagamarcohair").style.display = "none"
+  document.getElementById("pagamentidiv").style.display = "none"
+  document.getElementById("pagamentoeseguito").style.display = "none"
+/*navigator.geolocation.getCurrentPosition(mostraPosizione)
+  function  mostraPosizione(posizione) {
+  	console.log("Latitudine: " + posizione.coords.latitude);
+  	console.log("Longitudine: " + posizione.coords.longitude);
+  }*/
 var uploader = document.getElementById("up")
 var out = document.getElementById("caricamento")
 fileButton.addEventListener('change', function(e){
@@ -188,6 +256,7 @@ auth.onAuthStateChanged(function(user){
     console.log("UTENTE ATTIVO!")
     ricezionetutto()
     acc()
+    ricezionepagamenti()
   }})
 function ricezionetutto(){
   var user = firebase.auth().currentUser;
@@ -217,6 +286,7 @@ posizioneutente.on('value', (snapshot) => {
     document.getElementById("datascad").innerHTML = data +"/"+ mese + " alle ore " + ora + ":"+ min
   }
   document.getElementById("denaro").innerHTML = "&euro;" + utente.Soldi
+  document.getElementById("soldimemo").innerHTML = "Denaro ora memorizzato: &euro;" + utente.Soldi
 
 });
 
@@ -264,7 +334,9 @@ dbRef.child("Utenti").child(user.uid).child("Impostazioni").get().then((snapshot
     }else if(impostazioni.secondaimpostazione === "Off"){
       attt = "Off"
     }
-    document.getElementById("seconda").addEventListener("click", () => {
+
+   document.getElementById("seconda").addEventListener("click", () => {
+      console.log("ppppcc");
       two.classList.toggle("inactive1");
       if(attt === "On"){
         var user = firebase.auth().currentUser;
@@ -315,7 +387,7 @@ dbRef.child("Utenti").child(user.uid).child("Impostazioni").get().then((snapshot
     });
 
 }else{
-
+  console.log("error")
 }
 })
 }
@@ -325,20 +397,39 @@ function acc(){
     document.getElementById("modpw").style.display = "none";
   $("#accicona").attr("class","material-icons md-60")
   $("#impicona").attr("class","material-icons-outlined md-60")
+    $("#pagaicona").attr("class","material-icons-outlined md-60")
   document.getElementById("account").style.backgroundColor = "#dcddde"
   document.getElementById("impostazioni").style.backgroundColor = "white"
   document.getElementById("accountmarcoexpress").style.display = "block"
+  document.getElementById("pagamenti").style.backgroundColor = "white"
   document.getElementById("impostazionisiti").style.display = "none"
+  document.getElementById("pagamentidiv").style.display = "none"
 }
 
 function impost(){
     document.getElementById("modpw").style.display = "none";
   $("#impicona").attr("class","material-icons md-60")
   $("#accicona").attr("class","material-icons-outlined md-60")
+  $("#pagaicona").attr("class","material-icons-outlined md-60")
   document.getElementById("account").style.backgroundColor = "white"
   document.getElementById("impostazioni").style.backgroundColor = "#dcddde"
+  document.getElementById("pagamenti").style.backgroundColor = "white"
     document.getElementById("accountmarcoexpress").style.display = "none"
     document.getElementById("impostazionisiti").style.display = "block"
+    document.getElementById("pagamentidiv").style.display = "none"
+}
+
+function pagamenti(){
+    document.getElementById("modpw").style.display = "none";
+  $("#pagaicona").attr("class","material-icons md-60")
+  $("#accicona").attr("class","material-icons-outlined md-60")
+  $("#impicona").attr("class","material-icons-outlined md-60")
+  document.getElementById("account").style.backgroundColor = "white"
+  document.getElementById("impostazioni").style.backgroundColor = "white"
+  document.getElementById("pagamenti").style.backgroundColor = "#dcddde"
+    document.getElementById("accountmarcoexpress").style.display = "none"
+    document.getElementById("impostazionisiti").style.display = "none"
+    document.getElementById("pagamentidiv").style.display = "block"
 }
 
 function modificapw(){
@@ -361,6 +452,140 @@ function confermamodificapw(){
     ris.innerHTML = '<br><span class="material-icons-outlined red md-48">error_outline</span> Email non inviata: si &egrave; verificato un errore!<br>Error: ' + errorCode
   });
 }
+
+function pagamh(){
+  console.warn("Attenzione: accesso eseguito ad area pagamenti");
+  document.getElementById("pagamentidiv").style.display = "none"
+  document.getElementById("pagamarcohair").style.display = "block"
+}
+function pagaamh(){
+  var user = firebase.auth().currentUser;
+
+    const dbRef = firebase.database().ref();
+  console.warn("Attenzione: pagamento in esecuzione...");
+  var denarodapagare = document.getElementById("soldimh").value
+  if(denarodapagare != null || denarodapagare != 0){
+    dbRef.child("Utenti").child(user.uid).get().then((snapshot) => {
+  var soldiattuali = snapshot.val().Soldi
+  var sottrai = soldiattuali-denarodapagare
+  console.log("Quello che riceve dal server: " + soldiattuali)
+  console.log("Quello che riceve dall'utente: " + denarodapagare)
+  console.log(soldiattuali);
+  console.log(denarodapagare);
+  console.log(sottrai)
+  if(sottrai >= 0){
+    //L'utente ha soldi
+    console.log("è strano: " + sottrai)
+    console.log("può")
+    var arrotondato = sottrai.toFixed(2)
+    console.log(arrotondato)
+    var invia = Number(arrotondato)
+    firebase.database().ref('Utenti/' + user.uid).update({
+    Soldi: arrotondato
+  });
+  //Ora memorizziamo il pagamento
+  var adesso = new Date();
+  var giorno = adesso.getDate();
+  var mese = adesso.getMonth();
+  var anno = adesso.getFullYear();
+  var minuto = adesso.getMinutes();
+  var oraa = adesso.getHours();
+  mese++
+
+  var data = giorno + "/" + mese + "/" + anno
+  var ora = oraa + ":" + minuto
+
+  var elencoCaratteri="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+ var minimoCaratteri=8;
+ var massimoCaratteri=8;
+ var differenzaCaratteri=massimoCaratteri-minimoCaratteri;
+ var lunghezza=Math.round((Math.random()*differenzaCaratteri)+minimoCaratteri);
+ var incremento=0;
+ var password="";
+ while(incremento<lunghezza){
+    password+=elencoCaratteri.charAt(Math.round(Math.random()*elencoCaratteri.length));
+    incremento++;
+ }
+
+  firebase.database().ref("Utenti/" + user.uid + "/Cronologiapagamenti").push().set({
+     "data": data,
+     "ora": ora,
+     "totale": denarodapagare,
+     "articolo": "Pagamento Marco Hairdresser",
+     "id": password
+  }, (error) => {
+  if (error) {
+    console.log(error);
+    document.getElementById("nientesoldi").style.display = "block"
+    document.getElementById("pagamarcohair").style.display = "none"
+    document.getElementById("1niente").innerHTML = "Errore interno"
+    document.getElementById("2niente").innerHTML = "Non siamo riusciti ad effettuare il pagamento. Riprova pi&ugrave; tardi."
+  } else {
+    console.log("fattio")
+    document.getElementById("pagamentoeseguito").style.display = "block"
+      document.getElementById("pagamarcohair").style.display = "none"
+    document.getElementById("1corretto").innerHTML = "Pagamento effettuato!"
+    document.getElementById("2corretto").innerHTML = "Pagamento eseguito con successo. Abbiamo scalato la somma al tuo account. Se viene richiesto l'ID di transazione, utilizzare il seguente: <br>" + password
+  }
+  })
+
+  }else{
+    //L'utente non ha soldi
+    console.log("non può")
+    document.getElementById("nientesoldi").style.display = "block"
+    document.getElementById("pagamarcohair").style.display = "none"
+    document.getElementById("1niente").innerHTML = "Non hai i soldi necessari per l'acquisto."
+    document.getElementById("2niente").innerHTML = "Ci dispiace, ma non hai il denaro necessario per l'acquisto. Ricarica il portafoglio e riprova."
+  }
+}).catch((error) => {
+  console.error(error);
+});
+}
+}
+function annullapagamh(){
+  document.getElementById("pagamarcohair").style.display = "none"
+  document.getElementById("pagamentidiv").style.display = "block"
+}
+
+function ricezionepagamenti(){
+    var user = firebase.auth().currentUser;
+  firebase.database().ref("Utenti/" + user.uid + "/Cronologiapagamenti").on("child_added", function (snapshot) {
+    var ss = snapshot.val()
+    var importonumero = "€" + ss.totale
+  var parentElm = document.getElementById("ilmioid")
+  var nuovaRiga = document.createElement("tr");
+
+var titolo = document.createElement("td");
+var data = document.createElement("td");
+var ora = document.createElement("td");
+var importo = document.createElement("td");
+var id = document.createElement("td");
+
+var titoloo = document.createTextNode(ss.articolo);
+var dataa = document.createTextNode(ss.data);
+var oraa = document.createTextNode(ss.ora);
+var importoo = document.createTextNode(importonumero);
+var idd = document.createTextNode(ss.id);
+
+titolo.appendChild(titoloo);
+data.appendChild(dataa);
+ora.appendChild(oraa);
+importo.appendChild(importoo);
+id.appendChild(idd);
+
+//Inserisci la cella nella riga
+nuovaRiga.appendChild(importo);
+nuovaRiga.appendChild(titolo);
+nuovaRiga.appendChild(data);
+nuovaRiga.appendChild(ora);
+nuovaRiga.appendChild(id);
+//importo prodotto data ora id
+
+//Inserisci la riga nella tabella
+parentElm.appendChild(nuovaRiga);
+});
+}
+
 
 function esci(){
   auth.signOut();
@@ -421,7 +646,7 @@ h2{
   font-weight: 400;
 }
 .pul{
-  width:45%;
+  width:30%;
   height: auto;
   font-size: 35px;
   border-top-color: white;
@@ -487,6 +712,45 @@ h2{
   height: 80px;
   border-radius: 40px;
 }
-
+#ppmh{
+  width:90%;
+  height: auto;
+  border: 1px solid #ffb700;
+  border-top-right-radius: 75px;
+  border-bottom-left-radius: 50px;
+  background-color: #fcef88;
+}
+#dona{
+  width:90%;
+  height: auto;
+  border: 1px solid #00aaff;
+  border-top-right-radius: 75px;
+  border-bottom-left-radius: 50px;
+  background-color: #a8e2ff;
+}
+#soldimh{
+  width: 60%;
+  height: 110px;
+  font-size: 40px;
+  border-radius: 40px;
+  border: 3px solid black;
+  background-color: #d9d9d9;
+}
+#nientesoldi{
+  width: 100%;
+  height: 100%;
+  position:fixed;
+  display: none;
+  background-color: white;
+}
+table {
+border-collapse:collapse
+}
+td, th {
+border:3px solid #ddd;
+padding:15px;
+font-size: 35px;
+font-family: 'Zen Kaku Gothic Antique', sans-serif;
+}
 </style>
 </html>

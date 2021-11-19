@@ -1,7 +1,7 @@
 <html>
 <head>
   <link rel='icon' type='image/ico”' href='https://lh3.googleusercontent.com/pw/AM-JKLXGUw7IN1wheeQ2k3knaICulaSvgZKwIo98ll6xF7VytX9iyQG4Qkb4LWkjVdDJxkHm2QKjedb0JPglpM1anVjRHsqh2SwIPZegaRHNerY1-XTflRE444BjQrNNcK3S0exgkzJFsmRO1Vwk5_SqGntk=s32-no?authuser=0'>
-  <title>Meteo Marco v 2.16</title>
+  <title>Meteo Marco v 2.17</title>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
 
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
@@ -325,7 +325,6 @@ dbRef.child("Utenti").child(user.uid).get().then((snapshot) => {
        var immaginemess = '<img src="' + profiloph + '" style="max-width:100px;max-height:100px; border-radius:50px;float:left;"/><center><h1 style="font-size:35px;">' + mittente + '</h1><h1 style="font-size:30px;">' + datamess + ', ore ' + ora + '</h1></center>'
        var messaggio = '<hr style="width:90%;"></hr><div class="messaggi">' + immaginemess + '<h1 style="font-size:35px;">' + messaggio + '</h1></div>'
        document.getElementById("tuttiimess").innerHTML += messaggio
-
        document.getElementById('tuttiimess').scrollTop = 10000000000000
      });
    });
@@ -1073,6 +1072,37 @@ dbRef.child("Utenti").child(user.uid).get().then((snapshot) => {
     document.getElementsByClassName("motivimm")[5].style.display = "none"
     document.getElementById("compradopo").innerHTML = '<br><br><span class="material-icons green md-150">check_circle_outline</span><h1>Acquisto effettuato!</h1><h2 style="font-size: 37px;">Ora goditi tutti i vantaggi di Meteo Marco! Li puoi trovare tutti in questo sito.</h2><h1>Dettagli: </h1><h2>Data e ora di scadenza dell\'abbonamento: ' + ore + ':' + minuti + '  '+ giorno + '/' + mese + '/' + anno + '<br>Costo spesa: &euro; 0,65 <br> Articolo acquistato: Meteo Marco Premium Plus - 1 settimana</h2><h1>Denaro ora meomorizzato: &euro;' + soldidainviare + '</h1><br><br><center><button style="background-color: #0dd406; border: 0px; width: 35%; height: 200px; border-radius: 15px; float: left;"><h1 style="font-family: "Ubuntu", sans-serif;" onclick="ricarica()">Accedi a Meteo Marco</h1></button></center>'
     document.getElementById("compradopo").innerHTML += '<br><br>'
+
+    var adesso = new Date();
+    var giorno = adesso.getDate();
+    var mese = adesso.getMonth();
+    var anno = adesso.getFullYear();
+    var minuto = adesso.getMinutes();
+    var oraa = adesso.getHours();
+    mese++
+
+    var data = giorno + "/" + mese + "/" + anno
+    var ora = oraa + ":" + minuto
+
+    var elencoCaratteri="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+   var minimoCaratteri=8;
+   var massimoCaratteri=8;
+   var differenzaCaratteri=massimoCaratteri-minimoCaratteri;
+   var lunghezza=Math.round((Math.random()*differenzaCaratteri)+minimoCaratteri);
+   var incremento=0;
+   var password="";
+   while(incremento<lunghezza){
+      password+=elencoCaratteri.charAt(Math.round(Math.random()*elencoCaratteri.length));
+      incremento++;
+   }
+
+    firebase.database().ref("Utenti/" + user.uid + "/Cronologiapagamenti").push().set({
+       "data": data,
+       "ora": ora,
+       "totale": "0,65",
+       "articolo": "Meteo Marco Premium Plus- 1 Settimana",
+       "id": password
+    });
   }).catch((error) =>{
     document.getElementsByClassName("motivimm")[0].style.display = "none"
     document.getElementsByClassName("motivimm")[1].style.display = "none"
@@ -1133,8 +1163,38 @@ dbRef.child("Utenti").child(user.uid).get().then((snapshot) => {
     document.getElementsByClassName("motivimm")[3].style.display = "none"
     document.getElementsByClassName("motivimm")[4].style.display = "none"
     document.getElementsByClassName("motivimm")[5].style.display = "none"
-    document.getElementById("compradopo").innerHTML = '<br><br><span class="material-icons green md-150">check_circle_outline</span><h1>Acquisto effettuato!</h1><h2 style="font-size: 37px;">Ora goditi tutti i vantaggi di Meteo Marco! Li puoi trovare tutti in questo sito.</h2><h1>Dettagli: </h1><h2>Data e ora di scadenza dell\'abbonamento: ' + ore + ':' + minuti + '  '+ giorno + '/' + mese + '/' + anno + '<br>Costo spesa: &euro; 1,30 <br> Articolo acquistato: Meteo Marco Premium Plus - 2 settimane</h2><br><br><center><button style="background-color: #0dd406; border: 0px; width: 35%; height: 200px; border-radius: 15px; float: left;"><h1 style="font-family: "Ubuntu", sans-serif;" onclick="ricarica()">Accedi a Meteo Marco</h1></button></center>'
+    document.getElementById("compradopo").innerHTML = '<br><br><span class="material-icons green md-150">check_circle_outline</span><h1>Acquisto effettuato!</h1><h2 style="font-size: 37px;">Ora goditi tutti i vantaggi di Meteo Marco! Li puoi trovare tutti in questo sito.</h2><h1>Dettagli: </h1><h2>Data e ora di scadenza dell\'abbonamento: ' + ore + ':' + minuti + '  '+ giorno + '/' + mese + '/' + anno + '<br>Costo spesa: &euro; 1,30 <br> Articolo acquistato: Meteo Marco Premium Plus - 2 settimane</h2><br><h1>Denaro ora meomorizzato: &euro;' + soldidainviare + '</h1><br><center><button style="background-color: #0dd406; border: 0px; width: 35%; height: 200px; border-radius: 15px; float: left;"><h1 style="font-family: "Ubuntu", sans-serif;" onclick="ricarica()">Accedi a Meteo Marco</h1></button></center>'
     document.getElementById("compradopo").innerHTML += '<br><br>'
+    var adesso = new Date();
+    var giorno = adesso.getDate();
+    var mese = adesso.getMonth();
+    var anno = adesso.getFullYear();
+    var minuto = adesso.getMinutes();
+    var oraa = adesso.getHours();
+    mese++
+
+    var data = giorno + "/" + mese + "/" + anno
+    var ora = oraa + ":" + minuto
+
+    var elencoCaratteri="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+   var minimoCaratteri=8;
+   var massimoCaratteri=8;
+   var differenzaCaratteri=massimoCaratteri-minimoCaratteri;
+   var lunghezza=Math.round((Math.random()*differenzaCaratteri)+minimoCaratteri);
+   var incremento=0;
+   var password="";
+   while(incremento<lunghezza){
+      password+=elencoCaratteri.charAt(Math.round(Math.random()*elencoCaratteri.length));
+      incremento++;
+   }
+
+    firebase.database().ref("Utenti/" + user.uid + "/Cronologiapagamenti").push().set({
+       "data": data,
+       "ora": ora,
+       "totale": "1,30",
+       "articolo": "Meteo Marco Premium Plus- 2 Settimane",
+       "id": password
+    });
   }).catch((error) =>{
     document.getElementsByClassName("motivimm")[0].style.display = "none"
     document.getElementsByClassName("motivimm")[1].style.display = "none"
@@ -1281,11 +1341,6 @@ dbRef.child("Utenti").child(user.uid).get().then((snapshot) => {
 });
 
 }
-
-function toglisoldi(){
-
-}
-
 
 document.getElementById("comprameteomarco").style.display = "none"
 document.getElementById("nientesoldi").style.display = "none"
