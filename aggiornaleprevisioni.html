@@ -3,7 +3,6 @@
 <title>Area riservata</title>
 </head>
 <body>
-
   <h2>Previsioni per domani, <input id="titoloprevisioni" placeholder="giorno"></input></h2><br>
   <select id="simbolo" style="width: 10%"><option value="Soleggiato"><h2>Soleggiato</h2></option><option value="Parzialmente soleggiato"><h2>Parz. soleggiato</h2></option><option value="Nuvoloso"><h2>Nuvoloso</h2></option><option value="Piovoso"><h2>Piovoso</h2></option><option value="Temporali"><h2>Temporali</h2></option></select>
   <br><br><textarea id="testoprevisioni" placeholder="Testo" rows="30" style="width:500px;"></textarea><br><br>
@@ -25,8 +24,20 @@
   <h1>E il giorno dopo ancora? (dopo il dopodomani)??</h1>
   <input id="giornodopo2" placeholder="Nome di dopo dopodomani"></input>
   <input type="text" id="max2" placeholder="Massima"/><input type="text" id="min2" placeholder="Minima"/><br><br>
-
   <select id="selldopo" style="width: 10%"><option value="Soleggiato"><h2>Soleggiato</h2></option><option value="Parzialmente soleggiato"><h2>Parz. soleggiato</h2></option><option value="Nuvoloso"><h2>Nuvoloso</h2></option><option value="Piovoso"><h2>Piovoso</h2></option><option value="Temporali"><h2>Temporali</h2></option></select>
+
+  <br><br>
+  <h1>News ora presenti</h1>
+  <span id="oranotizie"></span>
+  <h1>Aggiorna le news</h1>
+  <select id="newstipo" style="width: 20%"><option value="Info"><h2>Informazione</h2></option><option value="Allerta"><h2>Allerta</h2></option><option value="Tendenza"><h2>Tendenza</h2></option></select>
+  <br><br><input id="titolonews" placeholder="Titolo news"></input>
+  <br><br>
+  <textarea id="testonews" placeholder="Testo news" rows="10" style="width:500px;"></textarea>
+  <br>
+  <br>
+  <select id="newsvis" style="width: 20%"><option value="uno"><h2>Aggiungi uno al totale</h2></option><option value="due"><h2>Cambia in "uno" il totale e resetta gli utenti</h2></option></select>
+  <br><br><button onclick="news()"><h2>Registra news</h2></button>
 
 
   <br><br><br><input type="password" id="password" placeholder="Password"></input>
@@ -52,6 +63,10 @@ firebase.initializeApp(firebaseConfig);
 
 const auth = firebase.auth();
 
+firebase.database().ref("Previsioni/Notizie").on("child_added", function (snapshot) {
+ const notizia = snapshot.val();
+ document.getElementById("oranotizie").innerHTML += "<h2>Titolo: " + notizia.Titolo + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Data: " + notizia.Data + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button onclick='eliminanews(this)' data-id='" + snapshot.key + "'><h2>Elimina news</h2></button></h2>"
+});
 
 function aggiorna(){
   var prevtest = document.getElementById("testoprevisioni").value
@@ -94,6 +109,62 @@ firebase.database().ref('Previsioni/giornodopo2').update({
 });
 
   }
+}
+function news(){
+  const dbRef = firebase.database().ref();
+  var adesso = new Date();
+  var data = adesso.getDate() + "/" + adesso.getMonth() + "/" + adesso.getFullYear()
+  firebase.database().ref("Previsioni/Notizie").push().set({
+    Tipo: document.getElementById("newstipo").value ,
+    Titolo: document.getElementById("titolonews").value ,
+    Testo: document.getElementById("testonews").value ,
+    Data: data
+  });
+  var niusvis = document.getElementById("newsvis").value
+  if(niusvis === "uno"){
+dbRef.child("Previsioni").get().then((snapshot) => {
+  var totale = snapshot.val().Numeropost
+  totale++
+  firebase.database().ref('Previsioni').update({
+      Numeropost: totale
+    });
+})
+}else if(niusvis === "due"){
+  firebase.database().ref('Previsioni').update({
+      Numeropost: 1
+    });
+  firebase.database().ref('Utenti/SIe2jcTA55X9foYxtUOIstHRiHH2/Notifiche').update({
+      notificapost: 0
+    });
+    firebase.database().ref('Utenti/4vyWwyJYCtSCBoz6pbDCrXjvEEb2/Notifiche').update({
+        notificapost: 0
+      });
+      firebase.database().ref('Utenti/mjFamto1aHaixjpoAopYiL9KEVg1/Notifiche').update({
+          notificapost: 0
+        });
+        firebase.database().ref('Utenti/Qv5vod6GSrPKGUrtsmwU6pmMlkB2/Notifiche').update({
+            notificapost: 0
+          });
+          firebase.database().ref('Utenti/4C5n2tskIgNIiokwgcc935dGvlY2/Notifiche').update({
+              notificapost: 0
+            });
+            firebase.database().ref('Utenti/shKZK0SWjEMi1LRGZdNEvXK1m8l2/Notifiche').update({
+                notificapost: 0
+              });
+}
+
+}
+function eliminanews(self){
+    const dbRef = firebase.database().ref();
+  var newsId = self.getAttribute("data-id");
+  dbRef.child("Previsioni").get().then((snapshot) => {
+    var totale = snapshot.val().Numeropost
+    totale--
+    firebase.database().ref('Previsioni').update({
+        Numeropost: totale
+      });
+  })
+  firebase.database().ref("Previsioni/Notizie").child(newsId).remove();
 }
 </script>
 <style>
