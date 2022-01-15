@@ -1,5 +1,6 @@
 <html>
 <head>
+  <link rel='icon' type='image/ico”' href='https://lh3.googleusercontent.com/pw/AM-JKLU0v235HvVQQPDHrHASLhoUNVenYmGOLzeiamBe_uvwhPbfWXpIT7oSzUyLiLkfMPDxQyPEFUFSwBmzlgwWGJ7PAU47DF5WPHRRR4LFq2afUwWyhd4VgKKt8s-nZ6wbXaEE9LMcZQgx_hZ0ThOjhCkS=s720-no?authuser=0'>
   <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+Antique&display=swap" rel="stylesheet">
@@ -21,8 +22,7 @@
       <button onclick="impost()" id="impostazioni" class="pul"><h2 class="sotto"><span class="material-icons-outlined md-60" id="impicona">settings</span><br>Impostazioni</button>
       <button onclick="pagamenti()" id="pagamenti" class="pul"><h2 class="sotto"><span class="material-icons-outlined md-60" id="pagaicona">monetization_on</span><br>Pagamenti</button>
     </div>
-    <div id="carica">
-    </div>
+    <h2 id="caricamento">Caricamento... Attendere prego...<h3 id="caricamentostato">Connessione al server...</h3></h2>
     <div id="accountmarcoexpress">
     <h2>Informazioni account</h2>
     <h2 class="lista"><span class="material-icons-outlined md-36">account_circle</span> Nome: <strong id="nome"></strong></h2>
@@ -84,7 +84,9 @@
       <h1 id="soldimemo"></h1>
       <h2>PayFast</h2>
       <button onclick="pagamh()" id="ppmh"><h2 class="lista"><img src="mhpng.png" width="100px"/><br><strong>Paga servizio Marco Hairdresser</strong></h2></button><br>
-      <br><!--<button onclick="dona()" id="dona"><h2 style="font-size: 40px; color: red;">&#x2764;</h2><h2 class="lista"><strong>Effetua una donazione a Marco Express</strong></h2></button>-->
+      <br><button onclick="dona()" id="dona"><h2 style="font-size: 40px; color: red;">&#x2764;</h2><h2 class="lista"><strong>Effetua una donazione a Marco Express</strong></h2></button>
+      <br><br><button onclick="vario()" id="vario"><h2 class="lista"><img src="https://lh3.googleusercontent.com/Ywn5f52gHdejh5HAoQHVD_s2FT5URtqqyWcH-xd5XYcgt_OPNS1LAMBL1ZJDG5ojsGTyW2FI9cEs13uiX6NFPvorpBj8YEuQ3u3ufBDvoOWoVawZ0itGi0D4-2blbPncImMOAbMJAzW_49ii3Y0oHVhRSpgobAN8P-Hbw9Hbvrwfc_3n_L5xRYqnQ5wP6yndJk8LdS4_P4JbO8W7y6WF5S2_rScFravq76dguKmntwnzZKy9iUiV0C_gPnYjqXPGUVmsmLRiQEhzuyKDVIG1hP2qIhqeMq6ksWXncXeKejTFqas7n_UZIChyeKM-iHFoI9oJWeBrMh4RQxarV0ljZibbr0sXGAayTNN91a1CqbgY9bgx_3f1VXC20LKof5PwtwhXs7qneQ-3IHqzbiWzAg7hDX9kb0NvFMngBOrwKDZRF9Qbm2KStuLSNrnjpjqVBbeD4DX18_PprkK-ipmt21KpPtqjkvbEjsYS3rOt2Jxu2GUbWiSpsrYoSxLTiyrucejHS3oYjWFVpus0dLMCLSdnZikFrBQqsgmbnaf0eG6ErGiCOlcuXfIpJmKzcxhYm71ssRGto9SZMXKGQvlGQSRMhf2kr7fz7Fw7vs7ldMv7z_bL2BBjVEGx1wxXqsTS08oOXw7Pn-ZPVRpN1UzD6rbTlnb90Bg6zbuY3s877F99-23wxuWrOvtkP7obM1V2gql3nXZj7afmiSEY4Loz8Z0=s720-no?authuser=0" width="100px"/><br><strong>Paga un servizio Marco Express</strong></h2></button>
+
       <br><h2>Cronologia Transazioni</h2>
       <h2 class="lista">Ordine: dal meno recente.</h2>
         </center>
@@ -101,12 +103,12 @@
     <br><br><br><br>
   </div>
 
-  <div id="pagamarcohair">
+  <div id="divpaga">
     <center>
-    <h1>Paga un servizio Marco Hairdresser</h1>
-    <h2>Paga ora un massaggio Marco Hairdresser col tuo portafoglio online Marco Express</h2>
-    <input type="number" id="soldimh" placeholder="Inserisci l'importo da pagare"/>
-    <button onclick="pagaamh()" style="width: 150px; height: 130px; border-radius: 50px; border: 3px solid black;background-color: #d9d9d9;"><h2>Paga</h2></button><br><br>
+    <h1 id="titolopaga">Ops! Qualcosa &egrave; andato storto</h1>
+    <h2 id="testopaga">Riprova.</h2>
+    <input type="number" id="soldidapagare" placeholder="Inserisci l'importo"/>
+    <button onclick="" style="width: 150px; height: 130px; border-radius: 50px; border: 3px solid black;background-color: #d9d9d9;" id="pagamento"><h2>Paga</h2></button><br><br>
     <button onclick="annullapagamh()" style="width: 25%; height: 100px; border: 3px solid red; border-radius: 100px; background-color: #ff9999;"><h2>Annulla</h2></button>
   </center>
   </div>
@@ -163,9 +165,10 @@ console.log(navigator.appVersion)
 document.getElementById("accountmarcoexpress").style.display = "none"
 document.getElementById("impostazionisiti").style.display = "none"
   document.getElementById("modpw").style.display = "none";
-  document.getElementById("pagamarcohair").style.display = "none"
+  document.getElementById("divpaga").style.display = "none"
   document.getElementById("pagamentidiv").style.display = "none"
   document.getElementById("pagamentoeseguito").style.display = "none"
+    document.getElementById("caricamentostato").innerHTML = "Caricamento in avvio..."
 /*navigator.geolocation.getCurrentPosition(mostraPosizione)
   function  mostraPosizione(posizione) {
   	console.log("Latitudine: " + posizione.coords.latitude);
@@ -255,7 +258,6 @@ auth.onAuthStateChanged(function(user){
   if(user){
     console.log("UTENTE ATTIVO!")
     ricezionetutto()
-    acc()
     ricezionepagamenti()
   }})
 function ricezionetutto(){
@@ -263,6 +265,7 @@ function ricezionetutto(){
   var database = firebase.database();
   var posizioneutente = firebase.database().ref('Utenti/' + user.uid);
 posizioneutente.on('value', (snapshot) => {
+  document.getElementById("caricamentostato").innerHTML = "Lettura dei dati dell'account..."
   const utente = snapshot.val();
   //output
 
@@ -270,6 +273,8 @@ posizioneutente.on('value', (snapshot) => {
   var urlimage = utente.Immagine
   console.log(urlimage)
   $("#img").attr("src",urlimage)
+  console.log("Caricataimg!")
+    document.getElementById("caricamentostato").innerHTML = "Lettura dell'URL immagine"
 
   document.getElementById("nome").innerHTML = utente.Nome
   document.getElementById("email").innerHTML = user.email
@@ -296,6 +301,7 @@ const two = document.getElementsByClassName("one")[1];
 const tre = document.getElementsByClassName("one")[2];
 const dbRef = firebase.database().ref();
 dbRef.child("Utenti").child(user.uid).child("Impostazioni").get().then((snapshot) => {
+  document.getElementById("caricamentostato").innerHTML = "Lettura delle preferenze..."
   if (snapshot.exists()) {
     var impostazioni = snapshot.val();
     console.log("Salvato sul cloud: " + impostazioni.primaimpostazione)
@@ -385,7 +391,9 @@ dbRef.child("Utenti").child(user.uid).child("Impostazioni").get().then((snapshot
       }
 
     });
-
+document.getElementById("caricamento").style.display = "none"
+document.getElementById("caricamentostato").style.display = "none"
+acc()
 }else{
   console.log("error")
 }
@@ -430,6 +438,7 @@ function pagamenti(){
     document.getElementById("accountmarcoexpress").style.display = "none"
     document.getElementById("impostazionisiti").style.display = "none"
     document.getElementById("pagamentidiv").style.display = "block"
+    document.getElementById('contieni').scrollTop = 10000000000000
 }
 
 function modificapw(){
@@ -454,16 +463,53 @@ function confermamodificapw(){
 }
 
 function pagamh(){
+  $('#pagamento').attr('onclick','pagaamh()')
   console.warn("Attenzione: accesso eseguito ad area pagamenti");
   document.getElementById("pagamentidiv").style.display = "none"
-  document.getElementById("pagamarcohair").style.display = "block"
+  document.getElementById("titolopaga").innerHTML = "Paga ora un servizio Marco Hairdresser"
+  document.getElementById("testopaga").innerHTML = "Inserisci l'importo e conferma per pagare un servizio Marco Hairdresser"
+  document.getElementById("divpaga").style.display = "block"
 }
 function pagaamh(){
+  var importo = document.getElementById("soldidapagare").value
+  var nome = "Pagamento Marco Hairdresser"
+  paga(importo,nome);
+}
+
+function dona(){
+  $('#pagamento').attr('onclick','donaa()')
+  console.warn("Attenzione: accesso eseguito ad area pagamenti");
+  document.getElementById("pagamentidiv").style.display = "none"
+  document.getElementById("titolopaga").innerHTML = "Dona denaro a Marco Express"
+  document.getElementById("testopaga").innerHTML = "Dona ora una cifra, anche minima, a Marco Express per supportarlo"
+  document.getElementById("divpaga").style.display = "block"
+}
+function donaa(){
+  var importo = document.getElementById("soldidapagare").value
+  var nome = "Donazione Marco Express"
+  paga(importo,nome);
+}
+
+function vario(){
+  $('#pagamento').attr('onclick','varioo()')
+  console.warn("Attenzione: accesso eseguito ad area pagamenti");
+  document.getElementById("pagamentidiv").style.display = "none"
+  document.getElementById("titolopaga").innerHTML = "Paga un qualunque servizio Marco Express"
+  document.getElementById("testopaga").innerHTML = "Paga un servizio Marco Express come: Marco Spia, Marco Cleaning, etc."
+  document.getElementById("divpaga").style.display = "block"
+}
+function varioo(){
+  var importo = document.getElementById("soldidapagare").value
+  var nome = "Donazione Marco Express"
+  paga(importo,nome);
+}
+
+function paga(importo,nome){
   var user = firebase.auth().currentUser;
 
     const dbRef = firebase.database().ref();
   console.warn("Attenzione: pagamento in esecuzione...");
-  var denarodapagare = document.getElementById("soldimh").value
+  var denarodapagare = importo
   if(denarodapagare != null || denarodapagare != 0){
     dbRef.child("Utenti").child(user.uid).get().then((snapshot) => {
   var soldiattuali = snapshot.val().Soldi
@@ -511,21 +557,21 @@ function pagaamh(){
      "data": data,
      "ora": ora,
      "totale": denarodapagare,
-     "articolo": "Pagamento Marco Hairdresser",
+     "articolo": nome,
      "id": password
   }, (error) => {
   if (error) {
     console.log(error);
     document.getElementById("nientesoldi").style.display = "block"
-    document.getElementById("pagamarcohair").style.display = "none"
+    document.getElementById("divpaga").style.display = "none"
     document.getElementById("1niente").innerHTML = "Errore interno"
     document.getElementById("2niente").innerHTML = "Non siamo riusciti ad effettuare il pagamento. Riprova pi&ugrave; tardi."
   } else {
     console.log("fattio")
     document.getElementById("pagamentoeseguito").style.display = "block"
-      document.getElementById("pagamarcohair").style.display = "none"
     document.getElementById("1corretto").innerHTML = "Pagamento effettuato!"
     document.getElementById("2corretto").innerHTML = "Pagamento eseguito con successo. Abbiamo scalato la somma al tuo account. Se viene richiesto l'ID di transazione, utilizzare il seguente: <br>" + password
+    document.getElementById("divpaga").style.display = "none"
   }
   })
 
@@ -533,17 +579,18 @@ function pagaamh(){
     //L'utente non ha soldi
     console.log("non può")
     document.getElementById("nientesoldi").style.display = "block"
-    document.getElementById("pagamarcohair").style.display = "none"
+    document.getElementById("divpaga").style.display = "none"
     document.getElementById("1niente").innerHTML = "Non hai i soldi necessari per l'acquisto."
-    document.getElementById("2niente").innerHTML = "Ci dispiace, ma non hai il denaro necessario per l'acquisto. Ricarica il portafoglio e riprova."
+    document.getElementById("2niente").innerHTML = "Ci dispiace, ma non hai il denaro necessario per il pagamento. Ricarica il portafoglio e riprova."
   }
 }).catch((error) => {
   console.error(error);
 });
 }
 }
+
 function annullapagamh(){
-  document.getElementById("pagamarcohair").style.display = "none"
+  document.getElementById("divpaga").style.display = "none"
   document.getElementById("pagamentidiv").style.display = "block"
 }
 
@@ -584,6 +631,7 @@ nuovaRiga.appendChild(id);
 //Inserisci la riga nella tabella
 parentElm.appendChild(nuovaRiga);
 });
+
 }
 
 
@@ -728,7 +776,15 @@ h2{
   border-bottom-left-radius: 50px;
   background-color: #a8e2ff;
 }
-#soldimh{
+#vario{
+  width:90%;
+  height: auto;
+  border: 1px solid #2fc900;
+  border-top-right-radius: 75px;
+  border-bottom-left-radius: 50px;
+  background-color: #b1ff99;
+}
+#soldidapagare{
   width: 60%;
   height: 110px;
   font-size: 40px;

@@ -1,7 +1,7 @@
 <html>
 <head>
   <link rel='icon' type='image/ico”' href='https://lh3.googleusercontent.com/pw/AM-JKLXGUw7IN1wheeQ2k3knaICulaSvgZKwIo98ll6xF7VytX9iyQG4Qkb4LWkjVdDJxkHm2QKjedb0JPglpM1anVjRHsqh2SwIPZegaRHNerY1-XTflRE444BjQrNNcK3S0exgkzJFsmRO1Vwk5_SqGntk=s32-no?authuser=0'>
-  <title>Meteo Marco v 2.17</title>
+  <title>Meteo Marco v 2.18</title>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
 
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
@@ -64,7 +64,13 @@ gtag('config', 'G-1EFHH3K88D');
     </span>
 
      <span id="community">
-      <div id="tuttiimess" style="overflow-y: scroll; width: 90%; height: 85%;"></div>
+       <center><div id="infomessdiv" style="width:80%; height:60%; opacity: 0.9;background-color: #6b6a6a;position:fixed;border-top-right-radius:100px;border-bottom-left-radius:100px;top:10%;left:10%;">
+         <br><br>
+         <span id="spaninfo"></span>
+         <h1 style="font-size:35px;color:white;" id="titoloinfo"></h1>
+         <h1 style="font-size:29px;color:white;" id="descriviinfo"></h1>
+       </div></center>
+      <div id="tuttiimess" style="overflow-y: scroll; width: 100%; height: 85%;"></div>
       <textarea id="messaggio" placeholder="Scrivi qui il tuo messaggio" style="width: 90%; font-size: 40px; border: 3px solid black; border-radius: 15px;"></textarea><button onclick="inviamess()" id="inviamess" style="height: 80px; width: 80px; border-radius: 40px; float: right; background-color: white; border: 3px solid black;"><span class="material-icons md-48">send</span></button>
       </span>
 
@@ -228,6 +234,7 @@ document.getElementById("ascoltavic").style.display = "none"
 document.getElementById('spieganews').style.display = 'none'
 document.getElementById('news').style.display = 'none'
 document.getElementById('community').style.display = 'none'
+  document.getElementById("infomessdiv").style.display = "none"
 /*document.getElementsByClassName("pulsantiera")[0].disabled = true
 document.getElementsByClassName("pulsantiera")[1].disabled = true
 document.getElementsByClassName("pulsantiera")[2].disabled = true
@@ -260,7 +267,7 @@ function inviamess(){
   minutiattuali = dataattuale.getMinutes();
   giornoattuale = dataattuale.getDate();
   meseattuale = dataattuale.getMonth();
-  annoattuale = dataattuale.getYear();
+  annoattuale = dataattuale.getFullYear();
   meseattuale++
   var datadainviare = giornoattuale + "/" + meseattuale + "/" + annoattuale
   var oradainviare = oraattuale + ":" + minutiattuali
@@ -302,6 +309,36 @@ dbRef.child("Utenti").child(user.uid).get().then((snapshot) => {
 })
 }
 
+function infomess(self){
+  var Idmessaggio = self.getAttribute("data-id");
+  var info = document.getElementById("descriviinfo")
+  const dbRef = firebase.database().ref();
+dbRef.child("Messaggi community").child(Idmessaggio).get().then((snapshot) => {
+  if (snapshot.exists()) {
+    var mess = snapshot.val()
+    //Il messaggio esiste
+    document.getElementById("spaninfo").innerHTML = "<img src='" + mess.fotoprofilo + "' style='max-width:500px;max-height:500px;border-radius:40px;'></img>"
+    document.getElementById("infomessdiv").style.display = "block"
+    document.getElementById("titoloinfo").innerHTML = "Informazioni messaggio"
+    info.innerHTML = "Nome mittente: " + mess.mittente + "<br>"
+    info.innerHTML += "Email mittente: " + mess.emailmittente + "<br>"
+    info.innerHTML += "Data d'invio: " + mess.datainvio + "<br>"
+    info.innerHTML += "Ora d'invio: " + mess.ora + "<br>"
+    info.innerHTML += "ID univoco messaggio: " + Idmessaggio + "<br><br>"
+    info.innerHTML += "<button onclick='noinfomess()'><span class='material-icons md-85'>clear</span></button>"
+  } else {
+    //Il messaggio non esiste
+    info.innerHTML = "Il messaggio che hai cercato non esiste. Assicurati che non sia stato eliminato o che non abbia cambaito la sua posizione sul nostro server."
+  }
+}).catch((error) => {
+  //Errore
+});
+}
+
+function noinfomess(){
+  document.getElementById('infomessdiv').style.display = 'none'
+}
+
 
  auth.onAuthStateChanged(function(user){
    if(user){
@@ -323,7 +360,7 @@ dbRef.child("Utenti").child(user.uid).get().then((snapshot) => {
          mittente = "Tu"
        }
        var immaginemess = '<img src="' + profiloph + '" style="max-width:100px;max-height:100px; border-radius:50px;float:left;"/><center><h1 style="font-size:35px;">' + mittente + '</h1><h1 style="font-size:30px;">' + datamess + ', ore ' + ora + '</h1></center>'
-       var messaggio = '<hr style="width:90%;"></hr><div class="messaggi">' + immaginemess + '<h1 style="font-size:35px;">' + messaggio + '</h1></div>'
+       var messaggio = '<hr style="width:90%;"></hr><div class="messaggi"><div class="titolidiv" data-id="' + snapshot.key + '" onclick="infomess(this)">' + immaginemess + '</div><h1 style="font-size:35px;">' + messaggio + '</h1></div>'
        document.getElementById("tuttiimess").innerHTML += messaggio
        document.getElementById('tuttiimess').scrollTop = 10000000000000
      });
@@ -487,7 +524,7 @@ testo.on('value', (snapshot) => {
     opacity: 1
   }, 1500)
   if(data.avvisi){
-    testot.innerHTML = "<h2>" + data.testo + "</h2><br><h3><img src='menumeteomarco/info.svg' width='35px'></img>&nbsp;<strong>" + data.avvisi + "</strong></h3><br><br><br>"
+    testot.innerHTML = "<h2>" + data.testo + "</h2><br><h3><img src='menumeteomarco/info.svg' width='35px'></img>&nbsp;<strong>" + data.avvisi + "</strong></h3>"
     $("#testoprevisioni").animate({
       left: 15,
       opacity: 1
@@ -502,9 +539,42 @@ testo.on('value', (snapshot) => {
 
   }
 
-  var attd = data.attendibilità
   var user = firebase.auth().currentUser;
   const dbRef = firebase.database().ref();
+
+  //Spazio per avvisi personali
+  dbRef.child("Utenti").child(user.uid).get().then((snapshot) => {
+      var utente = snapshot.val();
+      var scadenza = new Date(utente.Scadenza)
+      console.log("Scadenza:" + scadenza)
+      var giornoscadenza = scadenza.getDate()
+      var oggi = new Date();
+      var giornooggi = oggi.getDate()
+      //differenza tra scadenza e Oggi
+      var differenza = giornoscadenza - giornooggi
+      console.log("Differenza: " + differenza)
+
+      if(differenza === 1){
+        console.log("mancauno")
+        testot.innerHTML += "<h3 style='color:#ff7b00'><span class='material-icons md-36'>event</span> Il tuo abbonamento scadr&agrave; domani alle " + scadenza.getHours() + ":" + scadenza.getMinutes() + "<strong></strong></h3>"
+      }
+    if(differenza === 0){
+      console.log("mancazero")
+      testot.innerHTML += "<h3 style='color:#b50000'><span class='material-icons md-36'>today</span> Il tuo abbonamento scadr&agrave; oggi alle " + scadenza.getHours() + ":" + scadenza.getMinutes() + "<strong></strong></h3>"
+    }
+    if(differenza<0){
+      testot.innerHTML += "<h3 style='color:#137a01'><span class='material-icons md-36'>check_circle_outline</span> Il tuo abbonamento scadr&agrave; il " + scadenza.getDate() + " del prossimo mese alle " + scadenza.getHours() + ":" + scadenza.getMinutes() + "<strong></strong></h3>"
+    }
+    if(differenza>1){
+      testot.innerHTML += "<h3 style='color:#137a01'><span class='material-icons md-36'>event</span> Il tuo abbonamento scadr&agrave; tra " + differenza + " giorni<strong></strong></h3>"
+
+    }
+
+  })
+
+
+  var attd = data.attendibilità
+
   dbRef.child("Utenti").child(user.uid).child("Impostazioni").get().then((snapshot) => {
     if (snapshot.exists()) {
       var impostazioni = snapshot.val();
@@ -894,7 +964,7 @@ function post(){
   nonèimpostazioni()
   mostraononmostrapallinocomm()
     document.getElementById("pallinonews").style.display = "none"
-  $("#previsioni").click(function(){
+//  $("#previsioni").click(function(){
       var user = firebase.auth().currentUser;
     var contaquantipost = document.getElementsByClassName("notizia").length;
     console.log(contaquantipost)
@@ -902,7 +972,7 @@ function post(){
     firebase.database().ref("Utenti/" + user.uid + '/Notifiche').update({
       notificapost: contaquantipost
  });
-  })
+  //})
   document.getElementById("news").style.display = "block"
   $("#previsioniimg").attr("src", "menumeteomarco/descriptionnoselect.svg")
   $("#datiimg").attr("src", "menumeteomarco/pollnoselect.svg")
@@ -1052,9 +1122,11 @@ dbRef.child("Utenti").child(user.uid).get().then((snapshot) => {
   console.log(piusette)
 
   var soldidainviare = soldiattuali - 0.65
+  var sol = soldidainviare.toFixed(2)
+  var inviaa = Number(sol);
   firebase.database().ref('Utenti/' + user.uid).update({
     Abbonamento: "Attivo",
-    Soldi: soldidainviare,
+    Soldi: inviaa,
     Scadenza: invia
   }).then(function(){
     //Fatto
@@ -1145,9 +1217,11 @@ dbRef.child("Utenti").child(user.uid).get().then((snapshot) => {
   console.log(piusette)
 
   var soldidainviare = soldiattuali - 1.3
+  var sol = soldidainviare.toFixed(2)
+  var inviaaa = Number(sol);
   firebase.database().ref('Utenti/' + user.uid).update({
     Abbonamento: "Attivo",
-    Soldi: soldidainviare,
+    Soldi: inviaaa,
     Scadenza: invia
   }).then(function(){
     //Fatto
@@ -1241,9 +1315,14 @@ function mostraononmostrapallino(){
         }
        } else {
          console.log("No data available");
+         var descrivierrore = "Non ci sono i dati necessari nell'account. Errore 1B<br>Momentaneamente non possiamo farti accedere al sito. "
+         verificatoerrore(descrivierrore , error)
+
        }
      }).catch((error) => {
        console.error(error);
+       var descrivierrore = "Si &egrave; verificato un problema nel caricamento delle informazioni secondarie. Errore 0B<br>Momentaneamente non possiamo farti accedere al sito. "
+       verificatoerrore(descrivierrore , error)
      });
 
   }
@@ -1287,9 +1366,13 @@ dbRef.child("Utenti").child(user.uid).get().then((snapshot) => {
         }, 0)
   } else {
     console.log("No data available");
+    var descrivierrore = "Nel nostro server non sono presenti le informazioni necessarie per accedere all'abbonamento Meteo Marco. Errore 1A.<br>Momentaneamente non possiamo farti accedere al sito. "
+    verificatoerrore(descrivierrore , error)
   }
 }).catch((error) => {
   console.error(error);
+  var descrivierrore = "Non siamo riusciti a ricavare la tua data di scadenza dell'abbonamento. Errore 0A. <br>Momentaneamente non possiamo farti accedere al sito. "
+  verificatoerrore(descrivierrore , error)
 });
 }
 
@@ -1323,8 +1406,8 @@ dbRef.child("Utenti").child(user.uid).get().then((snapshot) => {
   document.getElementById("comprameteomarco").style.display = "none"
 }
 }).catch((error) => {
-  document.getElementById("1niente").innerHTML = "Si &egrave; verificato un errore"
-  document.getElementById("2niente").innerHTML = "Non &egrave; stato possibile rinnovare l'abbonamento, Ci scusiamo per il disagio."
+  var descrivierrore = "Non &egrave; stato possibile rinnovare automaticamente l'abbonamento. Errore 0A. <br>Momentaneamente non possiamo farti accedere al sito. "
+  verificatoerrore(descrivierrore , error)
 });
 
   }else{
@@ -1338,12 +1421,18 @@ dbRef.child("Utenti").child(user.uid).get().then((snapshot) => {
   }
 }).catch((error) => {
   console.error(error);
+  var descrivierrore = "Si &egrave; verificato un problema nel caricamento delle informazioni basi del tuo account. Esse sono basilari per il caricamento della pagina.<br>Momentaneamente non possiamo farti accedere al sito. "
+  verificatoerrore(descrivierrore , error)
 });
 
 }
 
 document.getElementById("comprameteomarco").style.display = "none"
 document.getElementById("nientesoldi").style.display = "none"
+
+function verificatoerrore(descrivierrore , error){
+  //dacompletare
+}
 </script>
 
 <style>
