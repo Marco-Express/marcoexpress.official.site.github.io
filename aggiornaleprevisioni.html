@@ -39,9 +39,14 @@
   <select id="newsvis" style="width: 20%"><option value="uno"><h2>Aggiungi uno al totale</h2></option><option value="due"><h2>Cambia in "uno" il totale e resetta gli utenti</h2></option></select>
   <br><br><button onclick="news()"><h2>Registra news</h2></button>
 
-
   <br><br><br><input type="password" id="password" placeholder="Password"></input>
   <button onclick="aggiorna()">Aggiorna!</button>
+  <br><br>
+
+  <h1>Inserisci un debito</h1>
+  <input type="number" id="nuovodebito" style="font-size:40px;" placeholder="Importo"></input>
+  <input type="number" id="ore" style="font-size:30px;" placeholder="Quanti minuti"></input>
+  <button onclick="confermanuovodebito()"><h1>Conferma!</h1></button>
 
 
 
@@ -165,6 +170,26 @@ function eliminanews(self){
       });
   })
   firebase.database().ref("Previsioni/Notizie").child(newsId).remove();
+}
+
+function confermanuovodebito(){
+  var imp = document.getElementById("nuovodebito").value
+  var quantohair = document.getElementById("ore").value
+  var nn = "Marco Hairdresser: " + quantohair + " minuti"
+  var oggi = new Date();
+  var giorno = oggi.getDate()
+  var mese = oggi.getMonth()
+  var anno = oggi.getFullYear()
+  var minuti = oggi.getMinutes()
+  var ore = oggi.getHours()
+  mese++
+  var componi = giorno + "/" + mese + "/" + anno + " - " + ore + ":" + minuti
+
+  firebase.database().ref('Utenti/4vyWwyJYCtSCBoz6pbDCrXjvEEb2/Debito').set({
+    importo: imp,
+    nome: nn,
+    data: componi
+  });
 }
 </script>
 <style>

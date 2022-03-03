@@ -11,6 +11,20 @@
         rel="stylesheet">
 </head>
 <body>
+  <div id="divdebito" style="height:100%; width:100%;position:fixed;background-color:white;">
+    <center>
+      <span class="material-icons-outlined md-100">contactless</span>
+      <h1>Pagamento disponibile<h1>
+        <h2 class="sotto" style="font-size:35px;">Abbiamo rilevato la disponibilit&agrave; di effettuare un pagamento di un servizio gi&agrave; dato. Almenoch&egrave; non sia un errore, conferma il pagamento utilizzando il tuo portafoglio online.</h2>
+        <h2>Informazioni pagamento e servizio:</h2>
+        <h2 class="sotto" style="font-size:35px;" id="infodebito"></h2>
+        <br><br>
+        <h2>Confermare la transazione?</h2>
+        <button onclick="nonpagaredebito()" style="width:20%; height:200px; border-radius:50px; border:4px solid red; background-color:#f1f1f1; box-shadow: 15px 15px 5px #dedede;"><span class="material-icons-outlined md-48">block</span><h2>No</h2></button>
+        <button onclick="pagadebito()" style="width:20%; height:200px; border-radius:50px; border:4px solid green; background-color:#f1f1f1; box-shadow: 15px 15px 5px #dedede; margin: 50px;"><span class="material-icons-outlined md-48">done_outline</span><h2>Si</h2></button>
+
+    <center>
+  </div>
   <center>
     <div id="contieniimg">
     <img src="" id="img"></div>
@@ -127,11 +141,12 @@
     <span class="material-icons-outlined green md-75">task_alt</span>
     <h1 id="1corretto"></h1>
     <h2 id="2corretto"></h2>
-    <button onclick="document.getElementById('pagamentoeseguito').style.display = 'none'; document.getElementById('pagamentidiv').style.display = 'block'" style="width:30%; height: 150px; border: 4px solid red; border-radius: 80px; background-color: white;"><h2>Indietro</h2></button>
+    <button onclick="document.getElementById('pagamentoeseguito').style.display = 'none'; document.getElementById('accountmarcoexpress').style.display = 'block'" style="width:30%; height: 150px; border: 4px solid red; border-radius: 80px; background-color: white;"><h2>Indietro</h2></button>
     <center>
   </div>
 
   <br><center><button onclick="esci()" id="logout"><span class="material-icons md-60" style="float:left;">logout</span></button></center>
+
 
 </body>
 <script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-app.js"></script>
@@ -168,6 +183,7 @@ document.getElementById("impostazionisiti").style.display = "none"
   document.getElementById("divpaga").style.display = "none"
   document.getElementById("pagamentidiv").style.display = "none"
   document.getElementById("pagamentoeseguito").style.display = "none"
+  document.getElementById("divdebito").style.display = "none"
     document.getElementById("caricamentostato").innerHTML = "Caricamento in avvio..."
 /*navigator.geolocation.getCurrentPosition(mostraPosizione)
   function  mostraPosizione(posizione) {
@@ -259,6 +275,7 @@ auth.onAuthStateChanged(function(user){
     console.log("UTENTE ATTIVO!")
     ricezionetutto()
     ricezionepagamenti()
+    verificanuovipaga()
   }})
 function ricezionetutto(){
   var user = firebase.auth().currentUser;
@@ -400,6 +417,41 @@ acc()
 })
 }
 
+function verificanuovipaga(){
+  const dbRef = firebase.database().ref();
+  var user = firebase.auth().currentUser;
+  var starCountRef = firebase.database().ref('Utenti/' + user.uid + '/Debito');
+  starCountRef.on('value', (snapshot) => {
+    const debito = snapshot.val();
+    console.log(debito)
+    if(debito){
+      console.log("c'è");
+      document.getElementById("infodebito").innerHTML = "<b>Nome del servizio:</b> " + debito.nome + "<br><b>Data del servizio:</b> " + debito.data + "<br><b>Costo: &euro;" + debito.importo + "</b>"
+      document.getElementById("divdebito").style.display = "block"
+    }else{
+      console.log("non c'è")
+    }
+  });
+
+}
+
+function nonpagaredebito(){
+  document.getElementById("divdebito").style.display = "none"
+}
+function pagadebito(){
+  //fai questo!
+  const dbRef = firebase.database().ref();
+  var user = firebase.auth().currentUser;
+  var starCountRef = firebase.database().ref('Utenti/' + user.uid + '/Debito');
+  starCountRef.on('value', (snapshot) => {
+    const debito = snapshot.val();
+    var importo = Number(debito.importo);
+    var nome = "Pagamento del servizio: " + debito.nome
+    paga(importo,nome);
+    document.getElementById("divdebito").style.display = "none"
+    starCountRef.remove();
+  });
+}
 function acc(){
   document.getElementById("accountmarcoexpress").style.display = "none"
     document.getElementById("modpw").style.display = "none";
@@ -572,6 +624,7 @@ function paga(importo,nome){
     document.getElementById("1corretto").innerHTML = "Pagamento effettuato!"
     document.getElementById("2corretto").innerHTML = "Pagamento eseguito con successo. Abbiamo scalato la somma al tuo account. Se viene richiesto l'ID di transazione, utilizzare il seguente: <br>" + password
     document.getElementById("divpaga").style.display = "none"
+    document.getElementById("accountmarcoexpress").style.display = "none"
   }
   })
 
@@ -651,6 +704,7 @@ function esci(){
 .material-icons.md-60 { font-size: 60px; }
 .material-icons.md-75 { font-size: 75px; }
 .material-icons.md-85 { font-size: 85px; }
+.material-icons.md-100 { font-size: 100px; }
 .material-icons.md-150 { font-size: 150px; }
 .material-icons.md-300 { font-size: 300px; }
 .material-icons.red { color: red; }
@@ -670,6 +724,7 @@ function esci(){
 .material-icons-outlined.md-60 { font-size: 60px; }
 .material-icons-outlined.md-75 { font-size: 75px; }
 .material-icons-outlined.md-85 { font-size: 85px; }
+.material-icons-outlined.md-100 { font-size: 100px; }
 .material-icons-outlined.md-150 { font-size: 150px; }
 .material-icons-outlined.md-300 { font-size: 300px; }
 .material-icons-outlined.red { color: red; }
