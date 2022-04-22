@@ -7,6 +7,7 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
 
+<<<<<<< Updated upstream
       <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
@@ -111,6 +112,27 @@ gtag('config', 'G-1EFHH3K88D');
     <h1>Tendenza</h1>
     <h2 style="font-size: 39px;">Una notizia con questo simbolo verde indica una tendenza, cio&egrave; delle previsioni a lungo termine. Esse, tuttavia, non sono molto affidabili.</h2>
     <h2 style="font-size: 35px;"><i>Esempio: Previsioni fornite luned&igrave; per 5 giorni dopo.</i></h2>
+=======
+  </head>
+  <body onload="iniziobody()">
+
+    <div id="loading_screen">
+      <center><h1>Caricamento...</h1>
+        <h1 id='lo'></h1>
+      <img src='https://lh3.googleusercontent.com/4C_-jJfQzD8FECrYDyvi34N8spXBHIr26IPH-9njn7dYmImreD3zfIFm-4bDSwxYJJrWFPgA3nCgGhHj82Q8orUE_Iqh2dpaYRqg14HGi_QRJZ03f8-MzgfGbDo0zxDbLXMRnKCxe1Z8s4x9c1Rg0m6MTqgS3wh70_fRa9BfiimsFXbKVuOb5x0i9SDOvm7qUZdkhEghP9wHXNi70knLwEh-1LiXGLNV2mSqd-wcamtpgNXfoHJB_Xr4Obn_zb7vqCke4pO7MF9lWMBkFz3vhncIsiBgdbmWytphchLc_I9Z9pE76tmFcyXazY8pSOcRdWSnxdR2rX67GddqbfcQQCLTEDgdLOP2K8zk1LGYfC3y_ZdRUI81TmP46zWTPRzl1CNuROo7sPkk6dV_wGorS1RN9f56qGz-gwuoNh6E1fIO_oHVO6HOuZ0oWldGFeZ-gZ9yn6Iacq2pqM7Vqxp--Bq_PT-uqHUwCxYlMTJ4YaU-oL8l-ZLIB5-jsFdfCvKD91PPNdZWC-Qm67EXbG5kg4_BiPN0EEDgtNz0Ob4JfEhXQPT40MO18e5lKS9D8wljuqi1Ir1XE_NBpuVxisiA3HdqKg4PXkLMgM0qj9Sy_y4aG-kzA26mN9wNXZSwK8CX27J7WfSxqNqBjHLDtTW0IX-hVovPWVIlntsF0UR-CAgS7FTAvw-aw5DgUbFpJbp2VN-pvAafKFUYC3OCcNETNDg=s400-no?authuser=0'></img>
+    </center>
+    </div>
+
+
+    <div id='accessoc'>
+      <span id='acc'></span>
+    </div>
+    <br><br><br><br><br><br><br>
+    <center><img src='https://lh3.googleusercontent.com/pw/ACtC-3d6_e7jSouNpO3LWtGjFmerZVfma28jS-j7WxYCDY8FLknR8tNhLrowpPKmzODeX8sLARB9YbG6uuOr7harzHiU2rUNaYBf8c8O2GLOYhnaDmK3TwykuNjZSTJnP1ZabfgmpIvlCiFebB4MmJJ8g4Rt=s366-no?authuser=0' id='inizio'></img></center>
+
+    <center><h1 id='textuno'>Accedi col tuo account Marco Express per visualizzare dati, prevsioni e altro ancora! Se hai gi&agrave; effettuato l'accesso in questo dispositivo senza disconnetterlo, attendi qualche istante....</h1>
+
+>>>>>>> Stashed changes
     <br>
     <span class="material-icons gray md-85">info</span>
     <h1>Informazione</h1>
@@ -215,6 +237,7 @@ writerr
 }
 
 </script>
+<<<<<<< Updated upstream
 <script>
 var firebaseConfig = {
   apiKey: "AIzaSyCIw0-w1C3zDjoGgVpLKsFYm2TFXqJr9yw",
@@ -243,6 +266,80 @@ document.getElementsByClassName("pulsantiera")[3].disabled = true*/
 $("#messaggio").keyup(function(event) {
     if (event.keyCode === 13) {
         $("#inviamess").click();
+=======
+
+    <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-app.js" onload="document.getElementById('lo').innerHTML = 'Caricamento libreria Firebase app in corso...'"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-auth.js" onload="document.getElementById('lo').innerHTML = 'Caricamento libreria Firebase auth in corso...'"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-database.js" onload="document.getElementById('lo').innerHTML = 'Caricamento libreria Firebase DB in corso...'"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"onload="document.getElementById('lo').innerHTML = 'Caricamento libreria pdf creator in corso...'"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js" onload="document.getElementById('lo').innerHTML = 'Caricamento libreria jQuery in corso...'"></script>
+    <script src="meteomarco.js"></script>
+
+    <script>
+      var firebaseConfig = {
+        apiKey: "AIzaSyCIw0-w1C3zDjoGgVpLKsFYm2TFXqJr9yw",
+        authDomain: "marco-express-d30c8.firebaseapp.com",
+        projectId: "marco-express-d30c8",
+        storageBucket: "marco-express-d30c8.appspot.com",
+        messagingSenderId: "764621319758",
+        appId: "1:764621319758:web:9390a4a994df27cda4dd1f",
+        measurementId: "G-3ZK6NW0G3F"
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+
+     const auth = firebase.auth();
+
+document.addEventListener('contextmenu', event => event.preventDefault(
+
+      document.getElementById('display').innerHTML = "<div id='hh'><center><h1>EHI! NON CERCARE D'IMBROGLIARE!</h1><h2>Secondo la politica sul corretto utilizzo dei siti Marco Express, &egrave; severamente vietato l'utilizzo della console ai non autorizzati. <br> Abbiamo segnalato il fatto che tu hai provato a barare. Nonostante ci&ograve; potrebbe essere che tu l'abbia fatto involontariamente. <b>Ora sai che non devi farlo</b>. La prossima volta ricordati che, se ci proverai di nuovo, verrai bannato dal sito e non avrai pi&ugrave; la possibilit&agrave; di usufruire degli abbonamenti e dei servizi.<br><br><br><button onclick='prosegui()'><h1>Prosegui l'utilizzo del sito</h1></button></center></div>"
+
+   ));
+
+     function prosegui() {
+       document.getElementById("hh").style.display="none";
+
+     }
+
+     function jj() {
+       var ok = $("#feed")
+       ok.animate({
+         height: "80px",
+         width: "80px"
+       }, 900)
+       document.getElementById('fte').innerHTML = '<img src="https://lh3.googleusercontent.com/pw/AM-JKLVbVOJs-bg9c5p-4RMYN1rU3WwYceo4sCH6vFdmujR1tz3xxcOHHNGecU4GVq8PFT8uDJ7hmTkmfHnxNOzGdLVcLT39HE-ptKkf0kkNM1SOgezDTYY5TyBPUPYkN4i0jXdn2yoAPrSNVdoS8N2o6S2z=s24-no?authuser=0" height= "39px" width="39px"></img>'
+       $('#feed').css('border-radius', '40px');
+
+
+       var ook = $("#due")
+       ook.animate({
+         height: "80px",
+         width: "80px"
+       }, 900, jjj)
+       document.getElementById('tdue').innerHTML = '<img src="donazione.png" height= "39px" width="39px"></img>'
+       $('#due').css('border-radius', '40px');
+     }
+
+     function jjj() {
+        $('#due').animate({
+          right: "100px"
+        }, 750)
+     }
+
+     function iniziobody() {
+       setTimeout(jj, 7000)
+      controllaabb()
+    }
+
+    function feed() {
+      location.href = 'https://docs.google.com/forms/d/e/1FAIpQLSdtuUKjayKMK4yypsgnN0ftwQNLXYO_SGX-yTO4ocf4reLPBA/viewform?usp=sf_link'
+    }
+
+    function due(){
+      alert('Ora ti reindrizzeremo sulla pagina dei pagamenti. Cliccare "Nuova Spesa", selezionare "Donazione", scrivere l\'importo e cliccare nuovamente su "Acquista". Ti ringraziamo di cuore dell\'aiuto che ci darai donando una qualsiasi cifra. (Clicca su "ok" per continuare)')
+      location.href = 'gestionepagamenti.html'
+
+>>>>>>> Stashed changes
     }
 });
 
@@ -335,9 +432,36 @@ dbRef.child("Messaggi community").child(Idmessaggio).get().then((snapshot) => {
 });
 }
 
+<<<<<<< Updated upstream
 function noinfomess(){
   document.getElementById('infomessdiv').style.display = 'none'
 }
+=======
+   	function signIn(){
+      if(navigator.onLine){
+   		var email = document.getElementById("email");
+   		var password = document.getElementById("password");
+   		const promise = auth.signInWithEmailAndPassword(email.value, password.value);
+   		promise.catch(e => alert('Combinazione utente/password errata'));
+
+   	}else{
+      document.getElementById('display').innerHTML = '<h1>Impossibile connetersi al server</h1>'
+    }}
+
+
+   	function signOut(){
+   		auth.signOut();
+   		alert("Disconnessione completata!");
+      window.location.reload()
+
+   	}
+
+     auth.onAuthStateChanged(function(user){
+        document.title = "Meteo Marco - Previsioni";
+         var email = user.email;
+         alert("Uttente attivo:" + " " + email);
+         console.warn('Utente attivo.')
+>>>>>>> Stashed changes
 
 
  auth.onAuthStateChanged(function(user){
@@ -467,6 +591,7 @@ dbRef.child("Utenti").child(user.uid).get().then(function (snapshot) {
           console.log("mosso")
       });
 
+<<<<<<< Updated upstream
         }else{
           console.log("ll")
           document.getElementById("dati").style.display = "none"
@@ -480,6 +605,85 @@ dbRef.child("Utenti").child(user.uid).get().then(function (snapshot) {
           document.getElementsByClassName("pulsantiera")[3].disabled = "true"
           document.getElementsByClassName("pulsantiera")[4].disabled = "true"
         }
+=======
+
+           })
+
+           function selezionaabb() {
+             document.getElementById('display').innerHTML = ""
+
+          }
+
+
+           function ppabbn(){
+             var user = firebase.auth().currentUser;
+             var datadue = new Date();
+             orad = datadue.getHours();
+             min = datadue.getMinutes();
+             dataduen = datadue.getDate();
+             mesed = datadue.getMonth();
+             annodue = datadue.getFullYear();
+             mesed++
+
+
+
+             var aa = "Ha acquistato Premium Plus " +  dataduen + "/" + mesed + "/" + annodue  + " alle ore " + orad + ":" + min
+             user.updateProfile({
+               photoURL: "Meteo Marco Premium Plus"
+             }).then(function() {
+               firebase.database().ref("MMPPacqtt").push().set({
+                   "sender": user.email,
+                   "message": aa,
+               });
+               document.getElementById('display').innerHTML = '<h1>Grazie! Acquisto effettuato!<br>Aggiorna la pagina e accedi, potrai visualizzare le info destinate agli utenti PP.</h1>'
+
+               return false;
+             }).catch(function(error) {
+               document.getElementById('display').innerHTML = '<h1>Si &egrave; verificato un\'errore, riprova tra qualche minuto</h1>'
+          });
+           }
+
+       function premiumplus() {
+         document.title = "Meteo Marco - Previsioni";
+       console.log('PremiumPlus')
+       document.getElementById("password").style.display="none";
+       document.getElementById("email").style.display="none";
+       document.getElementById("signIn").style.display="none";
+       document.getElementById("button").style.display="none";
+       document.getElementById("textuno").style.display="none";
+       document.getElementById("reiu").style.display="none";
+       controllaabb();
+       if(window.innerWidth > 1000){
+         console.log('Computer')
+         document.getElementById("acc").innerHTML = "<button id='previsioni' onclick='previsionipp()'><h1>Previsioni</h1></button> <button id='dati' onclick='datipp()'><h1>Dati</h1></button>"
+         document.getElementById("acc").innerHTML += "<button onclick='tuoacc()' id='tuoacc'><h1>Gestisci account</h1></button>"
+
+       }else{
+         document.getElementById("acc").innerHTML = "<button id='previsioni' onclick='previsionipp()'><h1>Previsioni</h1><img src='https://lh3.googleusercontent.com/pw/ACtC-3cLkionUiv3xtdP-4kmN-FG5QlhsM-42OvQmh9iTzMY6I741J5755CwlmsDLVVuVt0qA1fsrODz3LoDrma9BFr-EiUzGiDXOJp3IvtVhwhc3u6LWfZb3arU4DXOAqjNXScK5hn6LpLdOvULAzMexN13=s24-no?authuser=0' height='50px' id='pimg'></img></button> <button id='dati' onclick='datipp()'><h1>Dati</h1><img id='dimg'src='https://lh3.googleusercontent.com/pw/ACtC-3c9TuUjBRQbuGEAnY9mcbpqp9BcsfsFhnt1EjeGwbpICAhiJ6Hov-PnkzSnNv0aBravVxPomEu8HALbnkzeC6sXRirtzHCiQKd-CryzqzS3Uf2YGNj4c1sz6E1wuscNZaRWEobXs7qN9SZpwBRzIWwb=s24-no?authuser=0' height='50px' id='taimg'></img></button>"
+         document.getElementById("acc").innerHTML += "<button onclick='tuoacc()' id='tuoacc'><h1>Gestisci account</h1><img src='https://lh3.googleusercontent.com/pw/ACtC-3dJoh0N46z2acGjddlrQJ0C9pfjWoRp328LI1Z6fVvtvy2tqbRJtHhdqM_dqwczy-eLsPYrTDX-YR96k9pwzRqWAwC--KCJ91RpscpvyRjaorNoa7dA4CmJ_GJwm3NVeWNv1VXMwD2Y1mnoLVLkTEuS=s24-no?authuser=0' height='60px'></img></button>"
+
+         console.log('Dispositivo mobile')
+       }
+
+
+        document.getElementById("display").innerHTML = "<center><h2>Caricamento delle previsioni...</h2></center>"
+        document.getElementById("display").innerHTML += "<center><h3>Connessione al server...</h3></center>"
+        document.getElementById("display").innerHTML += "<center><br><img width='150px' src='https://lh3.googleusercontent.com/pw/ACtC-3cqK5HaPD1DJzuJsNl1G2Pa-1hWvH87lpVYGv2BL5Wz8rpuBN4f-L9lTwFVE0VdgL5FjpEumgkfOMAyutTQu2--Sjd_5xfj1ir-qLu3EKoqsZb-WJS5N3SH21wUyd2e1MoQW6YjVkh0IgFfuYrmTt8R=w64-h22-no?authuser=0'></img></center>"
+        verificaprevisioni = setTimeout(noprevisioni, 10000)
+
+         firebase.database().ref("Meteo Marco Premium Plus").on("child_added", function (snapshot) {
+           var testo = snapshot.val().message;
+           var titolo = snapshot.val().sender;
+           var disp = document.getElementById('display')
+           disp.innerHTML = '<div id="prova"><p id="ttext" class="anime"><img id="simboloo"style="float:left; width: 100px; padding: 15px;" src="imgnot.png"></img>' + titolo + '<button onclick="aggiornaprevisioni()" id="aggprevisioni"><span class="material-icons md-48" id="aggiornato">update</span><span class="material-icons md-48" id="aggiornato2"></span></button></p>' + '<hr align="left" size="1" width="750" color="#919191" noshade><button onclick="ascolta()" id="ascolta"><img src="https://lh3.googleusercontent.com/pw/ACtC-3fUB_LXWYYOOLYD8sp07_c1AVbIbD4yuQ4lSuf0fqeLNxWIZTRq_1oMp4vOty24HL7A_4gTZqwZpWLljZzpcvtRh3Z9URrxzfgqnA67oxSP5JJu5cAZF1A2gsuVWhwD1uXY6BIOS2FnvL28onR7hEPc=s48-no?authuser=0"></img></button>' + '<p id="ntext">' + testo + '</p><br></div>'
+           disp.innerHTML += '<div class="dettaglipre" id="matt" style="float: left;"><img id="mattinaa"style="float: left;"></img><center><p id="mattt">Mattina</p></center><br><p class="dettore" id="descrivimattina"></p></div>'
+           disp.innerHTML += '<div id="pomeriggio"><img id="pomeriggioo" style="float: left;"></img><center><p id="pomet" class="cambia">Pomeriggio</p></center><br><p class="dettore" id="descrivipomeriggio"></p></div><br><br><br><br><br>'
+            clearTimeout(verificaprevisioni);
+           var matt = $("#mattinaa")
+           matt.attr("src","https://ssl.gstatic.com/onebox/weather/48/partly_cloudy.png");
+          $("#pomeriggioo").attr("src","https://ssl.gstatic.com/onebox/weather/48/partly_cloudy.png");
+           setTimeout(animatutto , 1000)
+>>>>>>> Stashed changes
      })
 
    }else{
@@ -794,6 +998,7 @@ dbRef.child("Previsioni/Orainora").get().then((snapshot) => {
           break;
     }
 
+<<<<<<< Updated upstream
     document.getElementById("orainora").innerHTML += "<div class='oraino'><center><h3>Dalle 12:00 alle 15:00</h3><img src='' id='da12a15'></img></center></div>"
     switch(snapshot.val().da12a15){
       case "Soleggiato":
@@ -812,6 +1017,31 @@ dbRef.child("Previsioni/Orainora").get().then((snapshot) => {
           $("#da12a15").attr("src","https://ssl.gstatic.com/onebox/weather/48/thunderstorms.png");
           break;
     }
+=======
+     function tuoacc(){
+       document.title = "Meteo Marco - Account ME";
+       document.getElementById("display").innerHTML =" ";
+
+       document.getElementById('display').innerHTML = "<p id='ttext'>Informazioni Account</p>" + '<hr align="left" size="1" width="600" color="#919191" noshade>'
+
+       var user = firebase.auth().currentUser;
+       if (user != null) {
+         user.providerData.forEach(function (profile) {
+          console.log("Sign-in provider: " + profile.providerId);
+          console.log("  Provider-specific UID: " + profile.uid);
+
+          console.log("  Name: " + profile.displayName);
+          //document.getElementById('display').innerHTML += "<p id='ntext'>" + "Nome: <span id='nome'>" + profile.displayName + "</span>&nbsp;&nbsp;&nbsp;&nbsp;<button onclick='modnome()' id='modnome'><img src='https://lh3.googleusercontent.com/pw/ACtC-3da3hW4dsZX5PbU-tHhQjjutzLdZalnhafSWjPTYDusOcQpV3Q0GM7lXsa2wmAomFEv0RBE500H8EbisBrcBCTUZ3lO5ZtkKWkdc95ZEYTHvIR_gKFKkrk0EfPacCbUN10t1_bkr11qZ5A-kSep27Yf=s24-no?authuser=0' width='40px'/></button>"
+          console.log("  Email: " + profile.email);
+          document.getElementById('display').innerHTML += "<p id='ntext'>" + "Email: " + profile.email
+          console.log("  Photo URL: " + profile.photoURL);
+          document.getElementById('display').innerHTML += "<p id='ntext'>" + "Password: <span id='passwordo'>" + "**************" + "</span>&nbsp;&nbsp;&nbsp;&nbsp;<button onclick='modpw()' id='modnome'><img src='https://lh3.googleusercontent.com/pw/ACtC-3da3hW4dsZX5PbU-tHhQjjutzLdZalnhafSWjPTYDusOcQpV3Q0GM7lXsa2wmAomFEv0RBE500H8EbisBrcBCTUZ3lO5ZtkKWkdc95ZEYTHvIR_gKFKkrk0EfPacCbUN10t1_bkr11qZ5A-kSep27Yf=s24-no?authuser=0' width='40px'/></button>"
+          document.getElementById('display').innerHTML += "<p id='ntext'>" + "Scadenza dell'abbonamento:  " + profile.photoURL
+          document.getElementById('display').innerHTML += '<br>' + '<button onclick="signOut()" id="signOut"><h1>Logout</h1><img src="https://lh3.googleusercontent.com/pw/ACtC-3fxEqyRV4Kgd6Zq9ZYJSi8aBG4TOp5qqBYOGl7OnRZUogm68jgxH4UIwV2rIi1pIUDv62xzfK4Cwbj_xIQyKVdqMtGtecPJa3t36jMGNe4bS_7_5h8QrdJH6lMSlc-9vmqzvKUcR5tGcj7zNqJpY_la=s24-no?authuser=0" height="50px"></img></button>'
+          document.getElementById('display').innerHTML +='&nbsp;&nbsp;&nbsp;<button onclick="elimabb()" id="signOut"><h1>Elimina l\'abbonamento*</h1><h2><br>Attenzione! L\'eliminazione dell\'abbonamento non comporta NESSUN rimborso.</h2></button><br><p id="ntext">Gestisci i tuoi pagamenti accedentdo al portale ufficiale <a href="gestionepagamenti.html">cliccando qui</a>.</p><h2>Quando hai creato il tuo account, hai accettato le <a href="https://docs.google.com/document/d/19Mgx9IHb-IxL0nMT4j_Le_YNjQQFHJBy2KwLtY4yCa8/preview"  target="_blank">Condizioni d\'uso</a>. Per visualizzarle, <a href="https://docs.google.com/document/d/19Mgx9IHb-IxL0nMT4j_Le_YNjQQFHJBy2KwLtY4yCa8/preview" target="_blank">CLICCA QUI</a>'
+        });
+      }
+>>>>>>> Stashed changes
 
     document.getElementById("orainora").innerHTML += "<div class='oraino'><center><h3>Dalle 15:00 alle 18:00</h3><img src='' id='da15a18'></img></center></div>"
     switch(snapshot.val().da15a18){
@@ -1083,6 +1313,21 @@ dbRef.get().then((snapshot) => {
   });
 });
 
+<<<<<<< Updated upstream
+=======
+     }
+
+     function previsionipp() {
+       premiumplus();
+     }
+
+     function datipp() {
+       document.title = "Meteo Marco - Dati meteo";
+       console.log('datipp');
+       document.getElementById('display').innerHTML = '<button onclick="datireal()" id="datidue"><h1>Richiedi dati real time</h1></button>';
+       document.getElementById('display').innerHTML += '<br><button onclick="datiipp()" id="datidue"><h1>Visualizza documento intero</h1></button>';
+       document.getElementById('display').innerHTML += '<br><br><center><iframe height="90%" src="https://drive.google.com/file/d/1DCtSum9FyM9JTNZ00ONTRVuhGo5ro1Jp/preview" width="90%"><h1>Caricamento...</h1></iframe></center>'
+>>>>>>> Stashed changes
 
 var timerstop = setTimeout(mostraononmostrapallinocomm , 1000)
 $("#communityyy").click(function(){
