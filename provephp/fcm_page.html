@@ -1,0 +1,67 @@
+<html>
+    <head>
+    </head>
+    <body>
+        <h2>Firebase prove push</h2>
+        <p id="token"></p>
+        <script src="https://www.gstatic.com/firebasejs/7.14.6/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.14.6/firebase-messaging.js"></script>
+        <script>
+            //firebase deploy --only hosting
+            //firebase serve
+            const firebaseConfig = {
+            apiKey: "AIzaSyCIw0-w1C3zDjoGgVpLKsFYm2TFXqJr9yw",
+            authDomain: "marco-express-d30c8.firebaseapp.com",
+            databaseURL: "https://marco-express-d30c8-default-rtdb.firebaseio.com",
+            projectId: "marco-express-d30c8",
+            storageBucket: "marco-express-d30c8.appspot.com",
+            messagingSenderId: "764621319758",
+            appId: "1:764621319758:web:9390a4a994df27cda4dd1f",
+            measurementId: "G-3ZK6NW0G3F"
+};
+
+            const app = firebase.initializeApp(firebaseConfig);
+            const messaging=firebase.messaging();
+
+            
+            function IntitalizeFireBaseMessaging(){
+                messaging
+                    .requestPermission()
+                    .then(function (value) {
+                        console.log("notifiche permesse")
+                        messaging.getToken({ vapidKey: 'BC5LBlla6072_Ws14g-ljlP3LF_OeCp5CJh0ojIbmoxNNGCHmFiPxsrf_14teDGlR46kCejHEOMZyZpmRewz_SA' }).then((currentToken) => {
+                    if (currentToken) {
+                        document.getElementById("token").innerHTML = currentToken
+                    } else {
+                        console.log('No registration token available. Request permission to generate one.');
+                
+                    }
+                    }).catch((err) => {
+                        console.log('An error occurred while retrieving token. ', err);
+  
+                    });
+                    })
+                    
+            }
+
+            messaging.onMessage(function (payload) {
+                console.log(payload);
+            })
+            messaging.onTokenRefresh(function () {
+                messaging.getToken({ vapidKey: 'BC5LBlla6072_Ws14g-ljlP3LF_OeCp5CJh0ojIbmoxNNGCHmFiPxsrf_14teDGlR46kCejHEOMZyZpmRewz_SA' }).then((currentToken) => {
+                    if (currentToken) {
+                        document.getElementById("token").innerHTML = "New: " + currentToken
+                    } else {
+                        console.log('No registration token available. Request permission to generate one.');
+                
+                    }
+                    }).catch((err) => {
+                        console.log('An error occurred while retrieving token. ', err);
+  
+                    });
+            })
+
+            IntitalizeFireBaseMessaging();
+        </script>
+    </body>
+</html>
